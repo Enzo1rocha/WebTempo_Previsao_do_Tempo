@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 import datetime
-
 # Functions
 
 def get_week_day(year, month, day):
@@ -13,6 +12,13 @@ def get_week_day(year, month, day):
     data = data.weekday()
     weekday_name = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'][data]
     return weekday_name
+
+
+def get_machine_hour(UTC_ISO_8601):
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    hour_utc_obj = datetime.fromisoformat(UTC_ISO_8601.replace('Z', "+00:00"))
+    return f'{hour_utc_obj.astimezone()}'
 
 
 
@@ -95,8 +101,8 @@ class WeatherLocationView(APIView):
 
                             'weatherCodeMax': day['values'].get('weatherCodeMax',0),
 
-                            'sunriseTime': (day['values'].get('sunriseTime',0))[-9:-1],
-                            'sunsetTime': (day['values'].get('sunsetTime',0))[-9:-1],
+                            'sunriseTime': (get_machine_hour(day['values'].get('sunriseTime', 0)))[-14:-6],
+                            'sunsetTime': (get_machine_hour(day['values'].get('sunsetTime', 0)))[-14:-6],
 
                             'pressureSeaLevelMax': day['values'].get('pressureSeaLevelMax',0),
                             'pressureSeaLevelMin': day['values'].get('pressureSeaLevelMin',0),
@@ -112,7 +118,26 @@ class WeatherLocationView(APIView):
                         json_of_each_day['hours_of_day'] = []
 
                         while index < list_lenght and list_of_hours[index]['time'][:10] == date:
-                            json_of_each_day['hours_of_day'].append(list_of_hours[index])
+                            time = {}
+                            time_data = {
+                                'temperature': list_of_hours[index]['values'].get('temperature',0),
+                                'temperatureApparent': list_of_hours[index]['values'].get('temperatureApparent', 0),
+                                'humidity': list_of_hours[index]['values'].get('humidity', 0),
+                                'visibilty': list_of_hours[index]['values'].get('visibility', 0),
+                                'uvIndex': list_of_hours[index]['values'].get('uvIndex', 0),
+                                'dewPoint': list_of_hours[index]['values'].get('dewPoint', 0),
+                                'precipitationProbability': list_of_hours[index]['values'].get('precipitationProbability'),
+                                'cloudCover': list_of_hours[index]['values'].get('cloudCover', 0),
+                                'rainAccumulation': list_of_hours[index]['values'].get('rainAccumulation', 0),
+                                'pressureSeaLevel': list_of_hours[index]['values'].get('pressureSeaLevel', 0),
+                                'windSpeed': list_of_hours[index]['values'].get('windSpeed', 0),
+                                'windDirection': list_of_hours[index]['values'].get('windDirection', 0),
+                                'weatherCode': list_of_hours[index]['values'].get('weatherCode', 0) 
+                            }
+
+                            time[(list_of_hours[index]['time'])[-9:-1]] = time_data
+
+                            json_of_each_day['hours_of_day'].append(time)
                             index+=1
 
                         days_to_be_shown_by_the_api.append(json_of_each_day)
