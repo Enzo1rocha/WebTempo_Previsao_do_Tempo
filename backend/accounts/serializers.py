@@ -50,21 +50,20 @@ class CustomRegisterSerializer(RegisterSerializer):
         if favorite_location_location_name and favorite_location_lat and favorite_location_long:
             from .models import FavoriteLocations
             favorite_location = FavoriteLocations.objects.create(
+                username=user,
                 location_name=favorite_location_location_name,
                 lat=favorite_location_lat,
-                long=favorite_location_long
+                long=favorite_location_long,
             )
-            user.favorite_locations = favorite_location
         
         if boot_location_location_name and boot_location_lat and boot_location_long:
             from .models import BootLocation
             boot_locationOBJ = BootLocation.objects.create(
+                username=user,
                 location_name=boot_location_location_name,
                 lat=boot_location_lat,
-                long=boot_location_long
+                long=boot_location_long,
             ) 
-            print(f'BOOT LOCATION: {boot_locationOBJ}')
-            user.boot_location = boot_locationOBJ
 
 
         user.save()
@@ -73,12 +72,6 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 
 # o que fazer amanhã ver como vai reagir ao criar o get e verificar por que não esta sendo salvo no banco de dados tudo isso a url do stackoverflou é essa: https://stackoverflow.com/questions/64498554/how-to-add-custom-user-fields-of-dj-rest-auth-package
-
-
-class CustomUserDetailsSerializer(UserDetailsSerializer):
-    class Meta(UserDetailsSerializer.Meta):
-        fields = UserDetailsSerializer.Meta.fields + ('favorite_locations', 'boot_location'),
-
 
 
 
@@ -95,9 +88,9 @@ class BootLocationSerializer(serializers.ModelSerializer):
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
-    favorite_locations = FavoriteLocationsSerializer(read_only=True)
+    favorite_locations = FavoriteLocationsSerializer(many=True, read_only=True)
     boot_location = BootLocationSerializer(read_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = UserDetailsSerializer.Meta.fields + ('favorite_locations', 'boot_location')
+        fields = tuple(UserDetailsSerializer.Meta.fields + ('favorite_locations', 'boot_location'))

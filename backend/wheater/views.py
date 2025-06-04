@@ -41,7 +41,6 @@ class WeatherLocationView(APIView):
             'q': city,
             'format': 'json'
         }
-
         
         location_response = requests.get(nomination_url, headers=headers_nomination_url, params=params_nomination_url)
 
@@ -142,11 +141,6 @@ class WeatherLocationView(APIView):
 
                         days_to_be_shown_by_the_api.append(json_of_each_day)
 
-                    
-                # É NECESSÁRIO COLOCAR OS DADOS DE CADA HORA DE CADA DIA... PARA SER RETORNADO...
-
-                #terminar de construir a api... 
-
                     return_JSON = {
                         'name': location_data[0]['name'],
                         'display_name': location_data[0]['display_name'],
@@ -161,4 +155,3 @@ class WeatherLocationView(APIView):
                 return Response({'error': 'Erro ao decodificar json',}, status=500)
         else:
             return Response({'error': f'erro na requisição {location_response.status_code}'}, status=location_response.status_code)
-        #amanha 28/05 verificar o motivo do erro na linha 32

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from wheater.views import WeatherLocationView
+from accounts.views import UserFavoriteLocationsView, UserBootLocationView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +26,8 @@ urlpatterns = [
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('accounts/', include('allauth.urls')),
-    path('search-city/', WeatherLocationView.as_view(), name='Search_City')
+    path('search-city/', WeatherLocationView.as_view(), name='Search_City'),
+    path('favorite_locations/', UserFavoriteLocationsView.as_view(), name='user_favorite_locations'),
+    path('boot_location/', UserBootLocationView.as_view(), name='user_boot_location')
 ]
  
