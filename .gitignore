@@ -1,3 +1,21 @@
+# Python
+*.pyc
+__pycache__/
+.env
+db.sqlite3
+
+# Django
+backend/app/settings.py
+
+
+# react
+.vite/
+.env.local
+.env.development
+.env.production
+
+
+
 # Logs
 logs
 *.log
