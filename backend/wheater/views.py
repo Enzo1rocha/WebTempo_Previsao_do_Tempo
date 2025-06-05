@@ -1,9 +1,8 @@
-from django.shortcuts import render
 import requests
-from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from decouple import config
 import datetime
 # Functions
 
@@ -35,7 +34,7 @@ class WeatherLocationView(APIView):
         
         nomination_url = f'https://nominatim.openstreetmap.org/search'
         headers_nomination_url = {
-            'User-Agent': 'MeuAppClima/1.0 (email@exemplo.com)'
+            'User-Agent': config('USER_AGENT')
         }
         params_nomination_url = {
             'q': city,
@@ -46,19 +45,18 @@ class WeatherLocationView(APIView):
 
         if location_response.status_code == 200:
             try:
-
                 location_data = location_response.json()
 
                 params_tomorrow_url = {
                     'location': f'{location_data[0]['lat']},{location_data[0]['lon']}',
-                    'apikey': 'HvcYXEmeMPd6FPJWEGxhZAcbzGMCgcuo',
+                    'apikey': config('TOMORROW_API_KEY'),
                     'timesteps': '1d',
                     'units': 'metric'
                 }
 
                 params_tomorrow_url_1h = {
                     'location': f'{location_data[0]['lat']},{location_data[0]['lon']}',
-                    'apikey': 'HvcYXEmeMPd6FPJWEGxhZAcbzGMCgcuo',
+                    'apikey': config('TOMORROW_API_KEY'),
                     'timesteps': '1h',
                     'units': 'metric'
                 }
@@ -148,10 +146,10 @@ class WeatherLocationView(APIView):
                     }
                     return Response({'message': return_JSON})
                 else:
-                    return Response({'error': 'Erro ao decodificar json tomorrow data'}, status=tomorrow_response_1d.status_code)
+                    return Response({'error': 'None value'}, status=tomorrow_response_1d.status_code)
                 
             except Exception as error:
                 print(f'ESSE ERRO ESTA LIGADO A {error}')
-                return Response({'error': 'Erro ao decodificar json',}, status=500)
+                return Response({'error': 'None value',}, status=500)
         else:
-            return Response({'error': f'erro na requisição {location_response.status_code}'}, status=location_response.status_code)
+            return Response({'error': 'erro na requisição'}, status=location_response.status_code)

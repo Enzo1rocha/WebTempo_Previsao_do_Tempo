@@ -1,8 +1,3 @@
-from django.shortcuts import render
-from django.conf import settings
-from django.shortcuts import render
-import requests
-from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -20,30 +15,23 @@ class UserFavoriteLocationsView(APIView):
             return Response({'message': serializer.data})
         else:
             print('Não existe')
-            return Response({'message': 'não existe favorite locations'})
+            return Response({'message': 'Favorite Locations Not Found'}, status=404)
     
 
     def post(self, req):
         try:
             user = self.request.user
-            data = req.data
+            data = req.data.copy()
+            data['username'] = user.id
+            serializer = FavoriteLocationsSerializer(data=data, context={'request': req})
 
-            location_name = data.get('location_name')
-            long = data.get('long')
-            lat = data.get('lat')
-
-            if not all((location_name, long, lat)):
-                return Response({'message': "the values: location_name, long, lat. are mandatory"}, status=404)
+            if serializer.is_valid():
+                serializer.save()
+                print(f'The User {user.username} has added a favorite location')
+                return Response({'message': 'Favorite Location has been added with sucess'}, status=201)
+            else:
+                return Response(serializer.errors, status=400)
             
-            try:
-                FavoriteLocations.objects.create(username=user, location_name=location_name, long=long, lat=lat)
-                print(f"The User {user.username} the user has had a new favorite location added")
-                return Response({'message', 'the user has had a new favorite location added'}, status=201)
-            
-            except Exception as error:
-                print(f'ERROR AS {error}')
-                return Response({'message': 'error creating favorite location'}, status=500)
-
         except Exception as e:
             print(f'ERROR AS {e}')
             return Response({'error': 'error'}, status=404)
@@ -83,9 +71,12 @@ class UserBootLocationView(APIView):
 
 
     def post(self, req):
+
+        # terminar post dia 05/06/2025
+
         try:
             user = self.request.user
-            data = req.data
+            data = req.data.copy()
 
             location_name = data.get('location_name')
             long = data.get('long')

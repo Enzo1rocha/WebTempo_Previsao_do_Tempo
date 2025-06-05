@@ -78,13 +78,53 @@ class CustomRegisterSerializer(RegisterSerializer):
 class FavoriteLocationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteLocations
-        fields = '__all__'
+        fields = ['id', 'location_name', 'lat', 'long']
+
+
+    def validate_lat(self, value):
+        try:
+            float(value)
+        except ValueError:
+            raise serializers.ValidationError('lat must be a rational number')
+        return value
+        
+    
+    def validate_long(self, value):
+        try:
+            float(value)
+        except ValueError:
+            raise serializers.ValidationError('Long must be a rational number')
+        return value
+    
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return FavoriteLocations.objects.create(username=user, **validated_data)
 
 
 class BootLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = BootLocation
-        fields = '__all__'
+        fields = ['location_name', 'lat', 'long']
+
+    
+    def validate_lat(self, value):
+        try:
+            float(value)
+        except ValueError:
+            raise serializers.ValidationError('lat must be a rational number')
+    
+
+    def validate_long(self, value):
+        try:
+            float(value)
+        except ValueError:
+            raise serializers.ValidationError('long must be a rational number')
+        
+    
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return BootLocation.objects.create(username=user, **validated_data)
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
