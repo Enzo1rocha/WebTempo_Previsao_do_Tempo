@@ -124,7 +124,11 @@ class BootLocationSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         user = self.context['request'].user
-        return BootLocation.objects.create(username=user, **validated_data)
+        instance, created = BootLocation.objects.update_or_create(
+            username=user,
+            defaults=validated_data
+        )
+        return instance
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):

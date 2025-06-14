@@ -77,6 +77,7 @@ class UserBootLocationView(APIView):
         try:
             user = self.request.user
             data = req.data.copy()
+            is_data_long_lat_validated = False
 
             location_name = data.get('location_name')
             long = data.get('long')
@@ -84,21 +85,32 @@ class UserBootLocationView(APIView):
 
             if not all((location_name, long, lat)):
                 return Response({'error': f'the values: location_name, long, lat. are mandatory'}, status=404)
-            
-            boot_location = getattr(user, 'boot_location', None)
 
-            if boot_location:
-                boot_location.location_name = location_name
-                boot_location.long = long
-                boot_location.lat = lat
-                boot_location.save()
-                print(f'O USUÁRIO {user.username} TEVE SEU BOOT_LOCATION ATUALIZADO COM SUCESSO')
-                return Response({'message': f'Boot_location atualizado com sucesso'}, status=204)
-            else:
-                BootLocation.objects.create(username=user, location_name=location_name, long=long, lat=lat)
-                print(f'O USUÁRIO {user.username} TEVE SEU BOOT_LOCATION CRIADO COM SUCESSO')
-                return Response({'message': 'Boot_location criado com sucesso'}, status=201)
-            ...
+            
+            try:
+                if float(long) and float(lat):
+                    is_data_long_lat_validated = True
+
+            except Exception as error_Validate_lat_long:
+                print('ERRO AO VALIDAR DADOS', error_Validate_lat_long)
+                return Response({"error": 'DADOS INVÁLIDOS'})
+            
+
+            if is_data_long_lat_validated:
+                boot_location = getattr(user, 'boot_location', None)
+
+                if boot_location:
+                    boot_location.location_name = location_name
+                    boot_location.long = long
+                    boot_location.lat = lat
+                    boot_location.save()
+                    print(f'O USUÁRIO {user.username} TEVE SEU BOOT_LOCATION ATUALIZADO COM SUCESSO')
+                    return Response({'message': f'Boot_location atualizado com sucesso'}, status=204)
+                else:
+                    BootLocation.objects.create(username=user, location_name=location_name, long=long, lat=lat)
+                    print(f'O USUÁRIO {user.username} TEVE SEU BOOT_LOCATION CRIADO COM SUCESSO')
+                    return Response({'message': 'Boot_location criado com sucesso'}, status=201)
+                
         except Exception as e:
             print(e)
             return Response({'message': f'{e}'})
