@@ -1,14 +1,14 @@
-import * as s from './style'
+import * as S from './style'
 import RightArrow from '../../assets/authPageIMGS/RightArrow.svg'
 
 function Sign_Container({LabelText}) {
     return (
-        <s.Container>
-            <s.LabelForButton htmlFor="input">{LabelText}</s.LabelForButton>
-            <s.Button type="button" id="input" name="input">
-                <s.SignImage src={RightArrow} />
-            </s.Button>
-        </s.Container>
+        <S.Container>
+            <S.LabelForButton htmlFor="input">{LabelText}</S.LabelForButton>
+            <S.Button type="button" id="input" name="input">
+                <S.SignImage src={RightArrow} />
+            </S.Button>
+        </S.Container>
     )
 }
 

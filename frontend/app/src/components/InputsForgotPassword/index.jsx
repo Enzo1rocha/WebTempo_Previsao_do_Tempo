@@ -1,11 +1,11 @@
-import * as s from './style'
+import * as S from './style'
 
 function ForgotInput() {
     return (
-        <s.containerInput>
-            <s.label>Email Address: </s.label>
-            <s.inputField type='email'></s.inputField>
-        </s.containerInput>
+        <S.containerInput>
+            <S.label>Email Address: </S.label>
+            <S.inputField type='email'></S.inputField>
+        </S.containerInput>
     )
 }
 

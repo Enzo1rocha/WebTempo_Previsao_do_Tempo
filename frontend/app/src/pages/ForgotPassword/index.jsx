@@ -1,4 +1,4 @@
-import * as s from './style'
+import * as S from './style'
 import forgotPassword from '../../assets/authPageIMGS/forgotPassword.svg'
 import ForgotInput from '../../components/InputsForgotPassword'
 
@@ -6,29 +6,25 @@ import Button from '../../components/Button'
 import Background from '../../components/Background'
 import BackToLink from '../../components/BackToLink'
 
-import { Link, useNavigate } from "react-router-dom";
-
 function ForgotPassword() {
-
-    const navigate = useNavigate( )
 
     return ( 
         <Background>
-            <s.Container>
-                <s.ContainerWithImage>
-                    <s.image src={forgotPassword}></s.image>
-                </s.ContainerWithImage>
-                <s.FormContainer>
-                    <s.Title>Forgot <br></br> Your Password?</s.Title>
+            <S.Container>
+                <S.ContainerWithImage>
+                    <S.image src={forgotPassword}></S.image>
+                </S.ContainerWithImage>
+                <S.FormContainer>
+                    <S.Title>Forgot <br></br> Your Password?</S.Title>
 
-                    <s.containerInput_Button>
+                    <S.containerInput_Button>
                         <ForgotInput></ForgotInput>
                         <Button value={"Reset Password"}></Button>
                         <BackToLink value={'Back to Signin'} href={'/login'}></BackToLink>
-                    </s.containerInput_Button>
+                    </S.containerInput_Button>
 
-                </s.FormContainer>
-            </s.Container>
+                </S.FormContainer>
+            </S.Container>
         </Background>
     )
 }

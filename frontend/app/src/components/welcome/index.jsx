@@ -1,4 +1,5 @@
-import * as s from './style'
+import * as S from './style'
+
 import SignUp from '../../assets/authPageIMGS/SignUp.png'
 
 import InputComponent from '../Inputs'
@@ -7,40 +8,39 @@ import Sign_Container from '../ConfirmAuth'
 
 import ForgoutAccount from '../forgoutAccount'
 
-import { useNavigate } from "react-router-dom";
 
 
 function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navigateTo}) {
 
     return (
-        <s.Container>
+        <S.Container>
 
-            <s.ContainerWithImage>
-                <s.PictureContainer>
-                    <s.SignUpImage src={img} $isLogin={isLogin}>
-                    </s.SignUpImage>
-                </s.PictureContainer>
-            </s.ContainerWithImage>
+            <S.ContainerWithImage>
+                <S.PictureContainer>
+                    <S.SignUpImage src={img} $isLogin={isLogin}>
+                    </S.SignUpImage>
+                </S.PictureContainer>
+            </S.ContainerWithImage>
 
-            <s.ContainerWithForm>
-                <s.FormContainer>
+            <S.ContainerWithForm>
+                <S.FormContainer>
 
-                    <s.FormTitle>{FormTitle}</s.FormTitle>
+                    <S.FormTitle>{FormTitle}</S.FormTitle>
 
 
-                    <s.ContainerWithInputs>
+                    <S.ContainerWithInputs>
                         {ShowNameInput && <InputComponent type={'text'} LabelText="Name" />}
                         <InputComponent type={'email'} LabelText="Email" />
                         <InputComponent type={'password'} LabelText="Password" />
-                    </s.ContainerWithInputs>
+                    </S.ContainerWithInputs>
                     
                     <Sign_Container LabelText={LabelText} />
 
                     <ForgoutAccount Text={Text} navigateTo={navigateTo} isLogin={isLogin}/>
    
-                </s.FormContainer>
-            </s.ContainerWithForm>
-        </s.Container>
+                </S.FormContainer>
+            </S.ContainerWithForm>
+        </S.Container>
     )
 }
 

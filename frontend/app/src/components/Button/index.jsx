@@ -1,5 +1,4 @@
-import { faUnlock } from '@fortawesome/free-solid-svg-icons';
-import * as s from './style.js'
+import * as S from './style.js'
 
 function Button({value, IsLink = false, href='', className, ...rest}) {
 
@@ -12,9 +11,9 @@ function Button({value, IsLink = false, href='', className, ...rest}) {
     }
 
     return (
-        <s.Button onClick={checkOptions} className={className} {...rest} >
+        <S.Button onClick={checkOptions} className={className} {...rest} >
             {value}
-        </s.Button>
+        </S.Button>
     )
 } 
 

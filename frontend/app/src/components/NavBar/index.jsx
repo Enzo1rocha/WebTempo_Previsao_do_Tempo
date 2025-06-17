@@ -1,7 +1,7 @@
-import * as s from './style';
+import * as S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../../assets/icons/icons.js';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../assets/icons/icons.js';
 
 function NavBar({ isLoggedIn }) {
@@ -29,9 +29,9 @@ function NavBar({ isLoggedIn }) {
 
     function mobileDesign() {
         return (
-            <s.Container>
+            <S.Container>
 
-            <s.NavMobile onClick={() => {
+            <S.NavMobile onClick={() => {
                 if (isMenuClicked) {
                     setIsMenuClicked(false);
                 }
@@ -40,75 +40,75 @@ function NavBar({ isLoggedIn }) {
                 }
             }}>
                 <FontAwesomeIcon icon="fa-solid fa-bars" />
-            </s.NavMobile>
+            </S.NavMobile>
             {isMenuClicked && 
-                <s.NavItems>
+                <S.NavItems>
                     {!isLoggedIn && 
                      <>
-                        <s.NavItemMobile href="/">Home</s.NavItemMobile>
-                        <s.NavItemMobile href="/forecast">Forecast</s.NavItemMobile>
-                        <s.NavItemMobile href="/login">Login</s.NavItemMobile>
-                        <s.NavItemMobile href="/about">About</s.NavItemMobile>
-                        <s.NavItemMobile href="/contact">Contact</s.NavItemMobile>
+                        <S.NavItemMobile href="/">Home</S.NavItemMobile>
+                        <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
+                        <S.NavItemMobile href="/login">Login</S.NavItemMobile>
+                        <S.NavItemMobile href="/about">About</S.NavItemMobile>
+                        <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
                      </>
                     }
                     {isLoggedIn && 
                      <>
-                        <s.NavItemMobile href="/">Home</s.NavItemMobile>
-                        <s.NavItemMobile href="/forecast">Forecast</s.NavItemMobile>
-                        <s.NavItemMobile href="/about">About</s.NavItemMobile>
-                        <s.NavItemMobile href="/logout">Logout</s.NavItemMobile>
-                        <s.NavItemMobile href="/contact">Contact</s.NavItemMobile>
-                        <s.NavItemMobile href="/profile">Profile</s.NavItemMobile>
+                        <S.NavItemMobile href="/">Home</S.NavItemMobile>
+                        <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
+                        <S.NavItemMobile href="/about">About</S.NavItemMobile>
+                        <S.NavItemMobile href="/logout">Logout</S.NavItemMobile>
+                        <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
+                        <S.NavItemMobile href="/profile">Profile</S.NavItemMobile>
                      </>
                     }
-                </s.NavItems>}
+                </S.NavItems>}
 
-            <s.Logo href='/'>WebForecast</s.Logo>
+            <S.Logo href='/'>WebForecast</S.Logo>
 
-            <s.SearchBar>
-                {isWideScreen && <s.InputSearchBar type="text" placeholder="Search Forecast" />}
+            <S.SearchBar>
+                {isWideScreen && <S.InputSearchBar type="text" placeholder="Search Forecast" />}
                 <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-            </s.SearchBar>
+            </S.SearchBar>
 
 
-        </s.Container>
+        </S.Container>
         )
     }
 
     function desktopDesign() {
         return (
-            <s.Container>
-            <s.Logo href='/'>WebForecast</s.Logo>
-            <s.Nav>
+            <S.Container>
+            <S.Logo href='/'>WebForecast</S.Logo>
+            <S.Nav>
                 {!isLoggedIn && 
                  <>
-                    <s.NavItem href="/">Home</s.NavItem>
-                    <s.NavItem href="/forecast">Forecast</s.NavItem>
-                    <s.NavItem href="/login">Login</s.NavItem>
-                    <s.NavItem href="/about">About</s.NavItem>
-                    <s.NavItem href="/contact">Contact</s.NavItem>
+                    <S.NavItem href="/">Home</S.NavItem>
+                    <S.NavItem href="/forecast">Forecast</S.NavItem>
+                    <S.NavItem href="/login">Login</S.NavItem>
+                    <S.NavItem href="/about">About</S.NavItem>
+                    <S.NavItem href="/contact">Contact</S.NavItem>
                  </>
                 }
                 {isLoggedIn && 
                  <>
-                    <s.NavItem href="/">Home</s.NavItem>
-                    <s.NavItem href="/forecast">Forecast</s.NavItem>
-                    <s.NavItem href="/about">About</s.NavItem>
-                    <s.NavItem href="/logout">Logout</s.NavItem>
-                    <s.NavItem href="/contact">Contact</s.NavItem>
-                    <s.NavItem href="/profile">Profile</s.NavItem>
+                    <S.NavItem href="/">Home</S.NavItem>
+                    <S.NavItem href="/forecast">Forecast</S.NavItem>
+                    <S.NavItem href="/about">About</S.NavItem>
+                    <S.NavItem href="/logout">Logout</S.NavItem>
+                    <S.NavItem href="/contact">Contact</S.NavItem>
+                    <S.NavItem href="/profile">Profile</S.NavItem>
                  </>
                 }
-            </s.Nav> 
+            </S.Nav> 
 
-            <s.SearchBar>
-                {isWideScreen && <s.InputSearchBar type="text" placeholder="Search Forecast" />}
+            <S.SearchBar>
+                {isWideScreen && <S.InputSearchBar type="text" placeholder="Search Forecast" />}
                 <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-            </s.SearchBar>
+            </S.SearchBar>
 
 
-        </s.Container>
+        </S.Container>
         )
     }
     
