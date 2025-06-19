@@ -1,4 +1,4 @@
-import * as s from './style';
+import * as S from './style';
 import { useNavigate } from 'react-router-dom';
 
 function ForgoutAccount({Text, navigateTo, isLogin}) {
@@ -6,14 +6,14 @@ function ForgoutAccount({Text, navigateTo, isLogin}) {
      const navigate = useNavigate( )
     
     return (
-        <s.Container>
-            <s.Link onClick={() => {navigate(navigateTo)}}>
+        <S.Container>
+            <S.Link onClick={() => {navigate(navigateTo)}}>
                 {Text}
-            </s.Link>
-            {isLogin && <s.Link onClick={() => navigate('/forgot')}>
+            </S.Link>
+            {isLogin && <S.Link onClick={() => navigate('/forgot')}>
                 {'Forgot Password'}
-            </s.Link>}
-        </s.Container>
+            </S.Link>}
+        </S.Container>
     )
 }
 

@@ -1,11 +1,11 @@
-import * as s from './style'
+import * as S from './style'
 
-function InputComponent({LabelText, type, updatePassword=false}) {
+function InputComponent({LabelText, type, }) {
     return (
-        <s.Container>
-            <s.Label htmlFor="input">{LabelText}</s.Label>
-            <s.Field type={type} id="input" name="input" />
-        </s.Container>
+        <S.Container>
+            <S.Label htmlFor="input">{LabelText}</S.Label>
+            <S.Field type={type} id="input" name="input" />
+        </S.Container>
     )
 }
 

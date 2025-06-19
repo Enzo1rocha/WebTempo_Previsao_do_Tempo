@@ -1,10 +1,10 @@
-import * as s from './style';
+import * as S from './style';
 
 function BackToLink({ href, value }) {
     return (
-        <s.BackToLink href={href}>
+        <S.BackToLink href={href}>
             {value}
-        </s.BackToLink>
+        </S.BackToLink>
     )
 }
 

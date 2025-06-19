@@ -1,4 +1,4 @@
-import * as s from './style';
+import * as S from './style';
 import elementAbstract from '../../assets/authPageIMGS/elementAbstract.png';
 import NavBar from '../NavBar';
 import { Nav } from '../NavBar/style';
@@ -6,11 +6,11 @@ import { Nav } from '../NavBar/style';
 function Background({ children }) {
     return (
         <div>
-            <s.Container>
-            <s.TopRight src={elementAbstract}></s.TopRight>
-            <s.BottomLeft src={elementAbstract}></s.BottomLeft>
+            <S.Container>
+            <S.TopRight src={elementAbstract}></S.TopRight>
+            <S.BottomLeft src={elementAbstract}></S.BottomLeft>
             {children}
-            </s.Container>
+            </S.Container>
         </div>
     )
 }
