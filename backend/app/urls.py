@@ -34,15 +34,18 @@ Faça logout se o refresh também expirar
 """
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    path('api-auth/', include('rest_framework.urls')),
-    path('accounts/', include('allauth.urls')),
     path('search-city/', WeatherLocationView.as_view(), name='Search_City'),
     path('favorite_locations/', UserFavoriteLocationsView.as_view(), name='user_favorite_locations'),
     path('boot_location/', UserBootLocationView.as_view(), name='user_boot_location'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        path('admin/', admin.site.urls),
+        path('api-auth/', include('rest_framework.urls')),
+    ]
  
