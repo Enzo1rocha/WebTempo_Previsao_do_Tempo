@@ -4,9 +4,9 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import FavoriteLocations, BootLocation
-
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer
+import re
 
 
 class CustomLoginSerializer(LoginSerializer):
@@ -80,6 +80,14 @@ class FavoriteLocationsSerializer(serializers.ModelSerializer):
         model = FavoriteLocations
         fields = ['id', 'location_name', 'lat', 'long']
 
+    
+    def validate_location_name(self, value):
+        if not re.fullmatch(r"[A-Za-zÀ-ÿ\s]+", value):
+            raise serializers.ValidationError("Location name must contain only letters and spaces")
+        if len(value) > 50:
+            raise serializers.ValidationError("Location name must be at most 50 characters long")
+        return value
+
 
     def validate_lat(self, value):
         try:
@@ -107,12 +115,21 @@ class BootLocationSerializer(serializers.ModelSerializer):
         model = BootLocation
         fields = ['location_name', 'lat', 'long']
 
+
+    def validate_location_name(self, value):
+        if not re.fullmatch(r"[A-Za-zÀ-ÿ\s]+", value):
+            raise serializers.ValidationError("Location name must contain only letters and spaces")
+        if len(value) > 50:
+            raise serializers.ValidationError("Location name must be at most 50 characters long")
+        return value
+
     
     def validate_lat(self, value):
         try:
             float(value)
         except ValueError:
             raise serializers.ValidationError('lat must be a rational number')
+        return value
     
 
     def validate_long(self, value):
@@ -120,6 +137,7 @@ class BootLocationSerializer(serializers.ModelSerializer):
             float(value)
         except ValueError:
             raise serializers.ValidationError('long must be a rational number')
+        return value
         
     
     def create(self, validated_data):
