@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import FavoriteLocationsSerializer, BootLocationSerializer
 from .models import BootLocation, FavoriteLocations
+from django.utils.decorators import method_decorator
+from django_ratelimit.decorators import ratelimit
 
 class UserFavoriteLocationsView(APIView):
     permission_classes = [IsAuthenticated]
@@ -17,8 +19,10 @@ class UserFavoriteLocationsView(APIView):
             print('Não existe')
             return Response({'message': 'Favorite Locations Not Found'}, status=404)
     
-
+    @method_decorator(ratelimit(key='user', rate='3/m', method='POST', block=False))
     def post(self, req):
+        if getattr(req, 'limited', False):
+            return Response({"message": 'Voce está adicionando muitos locais favoritos, aguarde um pouco!'}, status=429)
         try:
             user = self.request.user
             data = req.data.copy()
@@ -69,7 +73,7 @@ class UserBootLocationView(APIView):
             return Response({'message': f'{user.username} favorite_lcoations has not found'}, status=404)
     
 
-
+    @method_decorator(ratelimit(key='user', rate='5/m', method='POST', block=True))
     def post(self, req):
 
         # terminar post dia 05/06/2025
@@ -102,3 +106,78 @@ class UserBootLocationView(APIView):
             return Response({'message': f'{user.username} boot_location has not found'}, status=404)
 
 
+from dj_rest_auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, UserDetailsView, LogoutView
+from dj_rest_auth.registration.views import RegisterView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
+
+@method_decorator(ratelimit(key='user', rate='10/m', method='POST', block=False), name='dispatch')
+class CustomTokenRefreshView(TokenRefreshView):
+    def post(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando atualizar o token muitas vezes, aguarde um pouco!'}, status=429)
+        return super().post(request, *args, **kwargs)
+
+
+@method_decorator(ratelimit(key='user', rate='60/m', method='POST', block=False), name='dispatch')
+class CustomTokenVerifyView(TokenVerifyView):
+    def post(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando verificar o token muitas vezes, aguarde um pouco!'}, status=429)
+        return super().post(request, *args, **kwargs)
+
+
+@method_decorator(ratelimit(key='user_or_ip', rate='10/d', method='POST', block=False), name='dispatch')
+class CustomRegisterView(RegisterView):
+    def post(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando se registrar muitas vezes, aguarde um pouco!'}, status=429)
+        return super().post(request, *args, **kwargs)
+
+
+@method_decorator(ratelimit(key='user_or_ip', rate='5/m', method='POST', block=False), name='dispatch')
+class CustomLoginView(LoginView):
+    def post(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando fazer login muitas vezes, aguarde um pouco!'}, status=429)
+        return super().post(request, *args, **kwargs)
+    
+
+@method_decorator(ratelimit(key='user', rate='3/h', method='POST', block=False), name='dispatch')
+class CustomPasswordChangeView(PasswordChangeView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando mudar a senha muitas vezes, aguarde ate as proximas horas!'}, status=429)
+        return super().post(request, *args, **kwargs)
+
+
+@method_decorator(ratelimit(key='user_or_ip', rate='3/h', method='POST', block=False), name='dispatch')
+class CustomPasswordResetView(PasswordResetView):
+    def post(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando redefinir a senha muitas vezes, aguarde um pouco!'}, status=429)
+        return super().post(request, *args, **kwargs)
+    
+
+@method_decorator(ratelimit(key='user_or_ip', rate='3/h', method='POST', block=False), name='dispatch')
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    def post(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando redefinir a senha muitas vezes, aguarde um pouco!'}, status=429)
+        return super().post(request, *args, **kwargs)
+
+
+@method_decorator(ratelimit(key='user', rate='60/m', method='GET', block=True), name='dispatch')
+class CustomUserDetailsView(UserDetailsView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'Você está tentando acessar os detalhes do usuário muitas vezes, aguarde um pouco!'}, status=429)
+        return super().get(request, *args, **kwargs)
+
+
+@method_decorator(ratelimit(key='user', rate='60/m', method='POST', block=True), name='dispatch')
+class CustomLogoutView(LogoutView):
+    permission_classes = [IsAuthenticated]
+    pass

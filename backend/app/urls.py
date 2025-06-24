@@ -17,12 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from wheater.views import WeatherLocationView
-from accounts.views import UserFavoriteLocationsView, UserBootLocationView
-from rest_framework_simplejwt.views import (
-    TokenRefreshView,
-    TokenVerifyView,
-)
+from wheater.views import WeatherLocationView #, TestView
+from accounts.views import UserFavoriteLocationsView, UserBootLocationView, CustomLoginView, CustomPasswordResetConfirmView, CustomPasswordResetView, CustomPasswordChangeView, CustomRegisterView, CustomTokenRefreshView, CustomTokenVerifyView, CustomUserDetailsView, CustomLogoutView
 
 """
 Armazene o access token (com cuidado!) e o refresh token
@@ -39,13 +35,22 @@ urlpatterns = [
     path('search-city/', WeatherLocationView.as_view(), name='Search_City'),
     path('favorite_locations/', UserFavoriteLocationsView.as_view(), name='user_favorite_locations'),
     path('boot_location/', UserBootLocationView.as_view(), name='user_boot_location'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/auth/login/', CustomLoginView.as_view(), name='rest_login'),
+    path('api/auth/registration/', CustomRegisterView.as_view(), name='rest_registration'),
+    path('api/auth/logout/', CustomLogoutView.as_view(), name='rest_logout'),
+    path('api/auth/user', CustomUserDetailsView.as_view(), name='rest_user_details'),
+    path('api/auth/password/change/', CustomPasswordChangeView.as_view(), name='rest_password_change'),
+    path('api/auth/password/reset/', CustomPasswordResetView.as_view(), name='rest_password_reset'),
+    path('api/auth/password/reset/confirm/', CustomPasswordResetConfirmView.as_view(), name='rest_password_reset_confirm'),
+    path('api/auth//token/verify/', CustomTokenVerifyView.as_view(), name='custom_token_verify'),
+    path('api/auth/token/refresh/', CustomTokenRefreshView.as_view(), name='custom_token_refresh'),
+    
 ]
 
 if settings.DEBUG:
     urlpatterns += [
         path('admin/', admin.site.urls),
         path('api-auth/', include('rest_framework.urls')),
+        #path('test/', TestView.as_view(), name='test_view'),
     ]
  

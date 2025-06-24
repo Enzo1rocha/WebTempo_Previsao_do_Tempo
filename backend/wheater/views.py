@@ -2,6 +2,8 @@ import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.utils.decorators import method_decorator
+from django_ratelimit.decorators import ratelimit
 from decouple import config
 import datetime
 # Functions
@@ -22,9 +24,21 @@ def get_machine_hour(UTC_ISO_8601):
 
 
 # Create your views here.
+
+
+"""
+class TestView(APIView):
+    @method_decorator(ratelimit(key='user', rate='5/m', method='GET', block=False))
+    def get(self, request):
+        if getattr(request, 'limited', False):
+            return Response({"message": 'API FUNCIONANDO, VOCE ESTÁ SENDO LIMITADO!'}, status=429)
+        return Response({"message": "API ESTÁ FUNCIONANDO!"})
+"""
+
 class WeatherLocationView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @method_decorator(ratelimit(key='user', rate='10/m', method='GET', block=True))
     def get(self, request):
         city = request.query_params.get('city')
         if not city:
