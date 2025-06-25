@@ -8,6 +8,8 @@ from .models import BootLocation, FavoriteLocations
 
 from django.utils.decorators import method_decorator
 from django_ratelimit.decorators import ratelimit
+from rest_framework.decorators import api_view
+
 
 class UserFavoriteLocationsView(APIView):
     permission_classes = [IsAuthenticated]
@@ -112,6 +114,13 @@ class UserBootLocationView(APIView):
 from dj_rest_auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, UserDetailsView, LogoutView
 from dj_rest_auth.registration.views import RegisterView
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+
+@ensure_csrf_cookie
+@api_view(['GET'])
+def get_csrf_token(request):
+    return Response({'csrfToken': 'CSRF token set'}, status=status.HTTP_200_OK)
 
 @method_decorator(ratelimit(key='user', rate='10/m', method='POST', block=False), name='dispatch')
 class CustomTokenRefreshView(TokenRefreshView):
@@ -132,6 +141,7 @@ class CustomTokenVerifyView(TokenVerifyView):
 
 
 @method_decorator(ratelimit(key='user_or_ip', rate='10/d', method='POST', block=False), name='dispatch')
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class CustomRegisterView(RegisterView):
 
     #essa view fica responsável pelo registro de usuários e alocação dos JWT em http only
@@ -217,6 +227,12 @@ class CustomLoginView(LoginView):
             path='/api/auth/token/refresh/'  # Adjust the path as needed
         )
 
+        del data['access']
+        del data['refresh']
+        del data['user']['pk']
+        del data['user']['first_name']
+        del data['user']['last_name']
+
         return response
 
 
@@ -256,12 +272,24 @@ class CustomUserDetailsView(UserDetailsView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
+
+        original_response = super().get(request, *args, **kwargs)
+        data = original_response.data
+        del data['pk']
+        del data['first_name']
+        del data['last_name']
+
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando acessar os detalhes do usuário muitas vezes, aguarde um pouco!'}, status=429)
-        return super().get(request, *args, **kwargs)
+        return Response(data, status=status.HTTP_200_OK)
 
 
 @method_decorator(ratelimit(key='user', rate='60/m', method='POST', block=True), name='dispatch')
 class CustomLogoutView(LogoutView):
     permission_classes = [IsAuthenticated]
-    pass
+
+    def post(self, request, *args, **kwargs):
+        response = Response({'message': 'Logout realizado com sucesso'}, status=status.HTTP_200_OK)
+        response.delete_cookie('access_token', path='/')
+        response.delete_cookie('refresh_token', path='/api/auth/token/refresh/')
+        return response
