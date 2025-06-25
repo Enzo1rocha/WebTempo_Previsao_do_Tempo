@@ -1,8 +1,11 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import FavoriteLocationsSerializer, BootLocationSerializer
 from .models import BootLocation, FavoriteLocations
+
 from django.utils.decorators import method_decorator
 from django_ratelimit.decorators import ratelimit
 
@@ -112,6 +115,7 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 @method_decorator(ratelimit(key='user', rate='10/m', method='POST', block=False), name='dispatch')
 class CustomTokenRefreshView(TokenRefreshView):
+    permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando atualizar o token muitas vezes, aguarde um pouco!'}, status=429)
@@ -120,6 +124,7 @@ class CustomTokenRefreshView(TokenRefreshView):
 
 @method_decorator(ratelimit(key='user', rate='60/m', method='POST', block=False), name='dispatch')
 class CustomTokenVerifyView(TokenVerifyView):
+    permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando verificar o token muitas vezes, aguarde um pouco!'}, status=429)
@@ -128,6 +133,48 @@ class CustomTokenVerifyView(TokenVerifyView):
 
 @method_decorator(ratelimit(key='user_or_ip', rate='10/d', method='POST', block=False), name='dispatch')
 class CustomRegisterView(RegisterView):
+
+    #essa view fica responsável pelo registro de usuários e alocação dos JWT em http only
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save(self.request)
+
+
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
+        refresh_token = str(refresh)
+
+        response = Response(
+            {"detail": 'Usuário criado com sucesso.'}, status=201
+        )
+
+        # set cookies
+
+        response.set_cookie(
+            key='access_token',
+            value=access_token,
+            httponly=True,
+            secure=False,
+            samesite='Lax',
+            max_age=60*15,
+            path='/'
+        )
+        response.set_cookie(
+            key='refresh_token', 
+            value=refresh_token,
+            httponly=True,
+            secure=False,
+            samesite='Lax',
+            max_age=60*60*24*7,
+            path='/api/auth/token/refresh'
+        )
+
+
+        return response
+
+
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando se registrar muitas vezes, aguarde um pouco!'}, status=429)
@@ -136,6 +183,43 @@ class CustomRegisterView(RegisterView):
 
 @method_decorator(ratelimit(key='user_or_ip', rate='5/m', method='POST', block=False), name='dispatch')
 class CustomLoginView(LoginView):
+
+    #essa view fica responsável pelo login de usuários e alocação dos JWT em http only
+
+    def get_response(self):
+        original_response = super().get_response()
+        user = self.user
+        
+        data = original_response.data
+
+        refresh = RefreshToken.for_user(user)
+        access_token = data.get('access')
+
+        response = Response(data, status=status.HTTP_200_OK)
+
+        response.set_cookie(
+            key='access_token',
+            value=access_token,
+            httponly=True,
+            secure=False,
+            samesite='Lax',
+            max_age=60*15,
+            path='/'  # Adjust the path as needed
+        )
+
+        response.set_cookie(
+            key='refresh_token',
+            value=refresh,
+            httponly=True,
+            secure=False,
+            samesite='Lax',
+            max_age=60*60*24*7,  # 7 days
+            path='/api/auth/token/refresh/'  # Adjust the path as needed
+        )
+
+        return response
+
+
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando fazer login muitas vezes, aguarde um pouco!'}, status=429)

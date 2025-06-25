@@ -5,9 +5,16 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import FavoriteLocations, BootLocation
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from dj_rest_auth.serializers import LoginSerializer
+from dj_rest_auth.serializers import LoginSerializer, JWTSerializerWithExpiration
 import re
 
+
+
+class CustomJWTSerializer(JWTSerializerWithExpiration):
+    def to_representation(self, instance):
+        return {
+            "user": self.context['request'].user.email,
+        }
 
 class CustomLoginSerializer(LoginSerializer):
     username = None
