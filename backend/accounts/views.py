@@ -251,7 +251,7 @@ class CustomPasswordChangeView(PasswordChangeView):
         return super().post(request, *args, **kwargs)
 
 
-@method_decorator(ratelimit(key='user_or_ip', rate='3/h', method='POST', block=False), name='dispatch')
+@method_decorator(ratelimit(key='user_or_ip', rate='10/h', method='POST', block=False), name='dispatch')
 class CustomPasswordResetView(PasswordResetView):
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
