@@ -140,7 +140,7 @@ class CustomTokenVerifyView(TokenVerifyView):
         return super().post(request, *args, **kwargs)
 
 
-@method_decorator(ratelimit(key='user_or_ip', rate='10/d', method='POST', block=False), name='dispatch')
+@method_decorator(ratelimit(key='user_or_ip', rate='100/d', method='POST', block=False), name='dispatch')
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class CustomRegisterView(RegisterView):
 

@@ -10,6 +10,9 @@ import re
 from decouple import config
 
 
+User = get_user_model()
+
+
 class CustomJWTSerializer(JWTSerializerWithExpiration):
     def to_representation(self, instance):
         return {
@@ -31,6 +34,14 @@ class CustomRegisterSerializer(RegisterSerializer):
     lat_boot_location = serializers.CharField(required=False)
     long_boot_location = serializers.CharField(required=False)
 
+
+    def validate_email(self, value):
+        value = super().validate_email(value)
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Esse email já esta em uso.")
+        return value
+
+
     def get_cleaned_data(self):
         data = super().get_cleaned_data()
 
@@ -43,7 +54,7 @@ class CustomRegisterSerializer(RegisterSerializer):
 
         return data
     
-    
+
     def save(self, request):
         user = super().save(request)
 
