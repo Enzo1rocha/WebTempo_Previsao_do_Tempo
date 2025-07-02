@@ -60,6 +60,7 @@ class WeatherLocationView(APIView):
         if location_response.status_code == 200:
             try:
                 location_data = location_response.json()
+                print(location_data)
 
                 params_tomorrow_url = {
                     'location': f'{location_data[0]['lat']},{location_data[0]['lon']}',

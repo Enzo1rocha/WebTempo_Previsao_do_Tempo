@@ -7,7 +7,7 @@ from .models import FavoriteLocations, BootLocation
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer, JWTSerializerWithExpiration
 import re
-
+from decouple import config
 
 
 class CustomJWTSerializer(JWTSerializerWithExpiration):
@@ -121,14 +121,9 @@ class BootLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = BootLocation
         fields = ['location_name', 'lat', 'long']
-
-
-    def validate_location_name(self, value):
-        if not re.fullmatch(r"[A-Za-zÀ-ÿ\s]+", value):
-            raise serializers.ValidationError("Location name must contain only letters and spaces")
-        if len(value) > 50:
-            raise serializers.ValidationError("Location name must be at most 50 characters long")
-        return value
+        extra_kwargs = {
+            'location_name': {'required': False}
+        }
 
     
     def validate_lat(self, value):
@@ -149,11 +144,47 @@ class BootLocationSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         user = self.context['request'].user
+        lat = validated_data.get('lat')
+        long = validated_data.get('long')
+        location_name = self.get_location_name_from_nominatim(lat,long)
+        validated_data['location_name'] = location_name
+
+
         instance, created = BootLocation.objects.update_or_create(
             username=user,
             defaults=validated_data
         )
+
         return instance
+    
+
+    def get_location_name_from_nominatim(self, lat, lon):
+        import requests
+
+        try:
+            response = requests.get(
+                'https://nominatim.openstreetmap.org/reverse',
+                params={
+                    'lat': lat,
+                    'lon': lon,
+                    'format':'json',
+                    'addressdetails': 1
+                },
+                headers={
+                    'User-Agent': config('USER_AGENT'),
+                }
+            )
+            data = response.json()
+            address = data.get('address', {})
+            options = ['city', 'town', 'village', 'municipality']
+            for i in options:
+                if address.get(i):
+                    return address.get(i)
+            print('BOOT LOCATION: LOCALIZAÇÃO NÃO IDENTIFICADA.')
+            return 'Localização não identificada'
+        except Exception as e:
+            print(f'Erro ao buscar cidade: {e}')
+            return 'Erro ao identificar local'
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
