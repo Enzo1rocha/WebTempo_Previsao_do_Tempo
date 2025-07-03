@@ -30,7 +30,6 @@ class CustomRegisterSerializer(RegisterSerializer):
     lat_favorite_location = serializers.CharField(required=False)
     long_favorite_location = serializers.CharField(required=False)
 
-    boot_location_name = serializers.CharField(required=False)
     lat_boot_location = serializers.CharField(required=False)
     long_boot_location = serializers.CharField(required=False)
 
@@ -48,7 +47,6 @@ class CustomRegisterSerializer(RegisterSerializer):
         data['favorite_location_name'] = self.validated_data.get('favorite_location_name')
         data['favorite_location_lat'] = self.validated_data.get('lat_favorite_location')
         data['favorite_location_long'] = self.validated_data.get('long_favorite_location')
-        data['boot_location_name'] = self.validated_data.get('boot_location_name')
         data['boot_location_lat'] = self.validated_data.get('lat_boot_location')
         data['boot_location_long'] = self.validated_data.get('long_boot_location')
 
@@ -61,27 +59,26 @@ class CustomRegisterSerializer(RegisterSerializer):
         favorite_location_location_name = self.validated_data.get('favorite_location_name')
         favorite_location_lat = self.validated_data.get('lat_favorite_location')
         favorite_location_long = self.validated_data.get('long_favorite_location')
-        boot_location_location_name = self.validated_data.get('boot_location_name')
+
         boot_location_lat = self.validated_data.get('lat_boot_location')
         boot_location_long = self.validated_data.get('long_boot_location')
 
         if favorite_location_location_name and favorite_location_lat and favorite_location_long:
             from .models import FavoriteLocations
-            favorite_location = FavoriteLocations.objects.create(
+            FavoriteLocations.objects.create(
                 username=user,
                 location_name=favorite_location_location_name,
                 lat=favorite_location_lat,
                 long=favorite_location_long,
             )
         
-        if boot_location_location_name and boot_location_lat and boot_location_long:
-            from .models import BootLocation
-            boot_locationOBJ = BootLocation.objects.create(
-                username=user,
-                location_name=boot_location_location_name,
-                lat=boot_location_lat,
-                long=boot_location_long,
-            ) 
+        if boot_location_lat and boot_location_long:
+            serializer = BootLocationSerializer(data={
+                'lat': boot_location_lat,
+                'long': boot_location_long
+            }, context={'user': user})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
 
 
         user.save()
@@ -154,7 +151,9 @@ class BootLocationSerializer(serializers.ModelSerializer):
         
     
     def create(self, validated_data):
-        user = self.context['request'].user
+        user = self.context.get('user')
+        if not user or user.is_anonymous:
+            raise serializers.ValidationError('usuário inválido')
         lat = validated_data.get('lat')
         long = validated_data.get('long')
         location_name = self.get_location_name_from_nominatim(lat,long)
