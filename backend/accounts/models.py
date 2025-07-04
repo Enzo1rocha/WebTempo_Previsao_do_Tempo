@@ -17,4 +17,4 @@ class FavoriteLocations(models.Model):
     
 
 class CustomUser(AbstractUser):
-    ...
+    email = models.EmailField(unique=True)
