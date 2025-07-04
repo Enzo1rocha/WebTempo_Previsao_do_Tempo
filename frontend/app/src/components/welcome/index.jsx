@@ -17,8 +17,21 @@ function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navig
     const [password, setPassword] = useState('');
 
     const handleSubmit = () => {
-        const formData = {name, email, password};
-        onSubmit(formData)
+        if (isLogin) {
+            const formData = {
+                'email': email,
+                'password': password
+            }
+            onSubmit(formData)
+        } else {
+            const formData = {
+                'username': name.trim(),
+                'email': email.trim(),
+                'password1': password,
+                'password2': password,
+            }
+            onSubmit(formData)
+        }
     }
 
     return (
