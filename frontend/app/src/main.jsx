@@ -10,6 +10,9 @@ import WelcomePage from './pages/WelcomePage'
 import NavBar from './components/NavBar'
 import Layout from './components/layout/layout'
 import PageNotFound from './pages/PageNotFound'
+import { AuthProvider } from './context/authContext'
+import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
+import ProtectedRoute from './components/authentications/Protectedroute'
 
 
 const router = createBrowserRouter([
@@ -18,10 +21,22 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: '/', element: <WelcomePage /> },
-      { path: '/register', element: <Register />},
+      { path: '/register', element:(
+        <PublicOnlyRoute>
+          <Register />
+        </PublicOnlyRoute>
+      )},
       { path: '/navbar', element: <NavBar /> },
-      { path: '/login', element: <Login /> },
-      { path: '/forgot', element: <ForgotPassword /> },
+      { path: '/login', element: (
+        <PublicOnlyRoute>
+          <Login />
+        </PublicOnlyRoute>
+      )},
+      { path: '/forgot', element: (
+        <ProtectedRoute>
+          <ForgotPassword />
+        </ProtectedRoute>
+      )},
       { path: '/forgot/updatePassword', element: <UpdatePassword /> },
     ]
   },
@@ -30,7 +45,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
  

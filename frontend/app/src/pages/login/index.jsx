@@ -3,9 +3,10 @@ import SignIn from '../../assets/authPageIMGS/SignIn.png'
 import { use, useRef, useState } from "react";
 import { Form } from "react-router-dom";
 import AuthService from "../../services/authService";
+import { useAuth } from "../../context/authContext";
 
 function Login() {
-
+    const { login } = useAuth();
     const [FormTitle, setFormTitle] = useState("Welcome Back")
 
     const [LabelText, setLabelText] = useState('Sign In')
@@ -14,11 +15,12 @@ function Login() {
 
     const handleLogin = async (data) => {
         try {
-            const request = await AuthService.login(data);
-            console.log(request);
+            console.log(data);
+            
+            login(data);
             
         } catch (error) {
-            console.log('Erro ao fazer login'.error)
+            console.log('Erro ao fazer login', error)
         }
     }
 

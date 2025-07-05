@@ -3,12 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../../assets/icons/icons.js';
 import { useEffect, useState } from 'react';
 import '../../assets/icons/icons.js';
+import { useAuth } from '../../context/authContext.jsx';
 
-function NavBar({ isLoggedIn }) {
+function NavBar() {
 
     const [isMobileDesign, setIsMobileDesign] = useState(false)
     const [isMenuClicked, setIsMenuClicked] = useState(false)
     const [isWideScreen, setIsWideScreen] = useState(true)
+    const user = useAuth();
+    
 
     if (isWideScreen === true && window.innerWidth <= 1024) {
         setIsWideScreen(false);
@@ -43,7 +46,7 @@ function NavBar({ isLoggedIn }) {
             </S.NavMobile>
             {isMenuClicked && 
                 <S.NavItems>
-                    {!isLoggedIn && 
+                    {!user && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
                         <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
@@ -52,7 +55,7 @@ function NavBar({ isLoggedIn }) {
                         <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
                      </>
                     }
-                    {isLoggedIn && 
+                    {user && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
                         <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
@@ -81,7 +84,7 @@ function NavBar({ isLoggedIn }) {
             <S.Container>
             <S.Logo href='/'>WebForecast</S.Logo>
             <S.Nav>
-                {!isLoggedIn && 
+                {!user && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
                     <S.NavItem href="/forecast">Forecast</S.NavItem>
@@ -90,7 +93,7 @@ function NavBar({ isLoggedIn }) {
                     <S.NavItem href="/contact">Contact</S.NavItem>
                  </>
                 }
-                {isLoggedIn && 
+                {user && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
                     <S.NavItem href="/forecast">Forecast</S.NavItem>

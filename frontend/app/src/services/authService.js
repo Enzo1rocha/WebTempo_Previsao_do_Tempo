@@ -7,8 +7,9 @@ const AuthService = {
     },
 
     async login(credentials) {
-        const response = await api.post('api/auth/login/', credentials);
-        console.log(response);
+        const response = await api.post('api/auth/login/', credentials, {
+            withCredentials: true
+        });
         return response.data
     },
 
@@ -30,9 +31,11 @@ const AuthService = {
             });
             console.log(response.status);
             console.log(response.data);
+            return response.data;
             
         } catch (error) {
-            console.log('erro ao receber dados do usuário', error);
+            console.log('erro ao receber dados do usuário getUser', error);
+            throw error;
             
         }
     }

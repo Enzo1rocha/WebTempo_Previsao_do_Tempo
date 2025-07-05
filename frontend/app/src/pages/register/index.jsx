@@ -31,7 +31,6 @@ function Register() {
                         case 'prompt':
                             try {
                                 const location = await geolocationService();
-                                console.log(location);
                                 setLocation(location)
                             } catch (error) {
                                 console.log('Erro ao obter localização', error);
