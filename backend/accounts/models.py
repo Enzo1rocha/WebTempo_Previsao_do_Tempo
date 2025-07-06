@@ -7,6 +7,9 @@ class BootLocation(models.Model):
     location_name = models.CharField(max_length=58, blank=False, null=False)
     long = models.CharField(max_length=20, blank=False, null=False)
     lat = models.CharField(max_length=20, blank=False, null=False)
+    country = models.CharField(max_length=80, blank=False, null=False, default='br')
+    country_code = models.CharField(max_length=5, blank=False, null=False, default='br')
+    state = models.CharField(max_length=80, blank=False, null=False, default='br')
 
 
 class FavoriteLocations(models.Model):
@@ -14,6 +17,9 @@ class FavoriteLocations(models.Model):
     location_name = models.CharField(max_length=58, blank=False, null=False)
     long = models.CharField(max_length=20, blank=False, null=False)
     lat = models.CharField(max_length=20, blank=False, null=False)
+    country = models.CharField(max_length=80, blank=False, null=False, default='br')
+    country_code = models.CharField(max_length=5, blank=False, null=False, default='br')
+    state = models.CharField(max_length=80, blank=False, null=False, default='br')
     
 
 class CustomUser(AbstractUser):
