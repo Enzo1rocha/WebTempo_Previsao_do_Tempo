@@ -76,7 +76,7 @@ class CustomRegisterSerializer(RegisterSerializer):
             serializer = BootLocationSerializer(data={
                 'lat': boot_location_lat,
                 'long': boot_location_long
-            }, context={'user': user})
+            }, context={'request': request, 'user': user})
             serializer.is_valid(raise_exception=True)
             serializer.save()
 
@@ -203,8 +203,9 @@ class BootLocationSerializer(serializers.ModelSerializer):
         
     
     def create(self, validated_data):
-        user = self.context.get('user') or self.context.get('request').user if self.context.get('request') else None
+        user = self.context.get('user')
         if not user or user.is_anonymous:
+            print(user)
             raise serializers.ValidationError('usuário inválido')
         lat = validated_data.get('lat')
         long = validated_data.get('long')
@@ -239,52 +240,38 @@ class BootLocationSerializer(serializers.ModelSerializer):
                     'User-Agent': config('USER_AGENT'),
                 }
             )
-            boot_location_data = {}
+            boot_location_data = {
+                'location_name': None,
+                'country': None,
+                'country_code': None,
+                'state': None,
+            }
             data = response.json()
-            print(data)
 
             address = data.get('address', {})
             options_location_name = ['city', 'town', 'village', 'municipality']
-            options_country = ['country']
-            options_country_code = ['country_code']
-            options_state = ['state']
 
-            try:
-                for i in options_location_name:
-                    if address.get(i):
-                        boot_location_data['location_name'] = address.get(i)
-                        print('location_name: OK')
-                        break
+            for i in options_location_name:
+                if address.get(i):
+                    boot_location_data['location_name'] = address.get(i)
+                    print('location_name: OK')
+                    break
+                
+            boot_location_data['country'] = address.get('country')
+            boot_location_data['country_code'] = address.get('country_code')
+            boot_location_data['state'] = address.get('state')
+            print(f'BOOT LOCATIOON DATA \n {boot_location_data}')
 
-                for i in options_country:
-                    if address.get(i):
-                        boot_location_data['country'] = address.get(i)
-                        print('country: OK')
-                        break
 
-                for i in options_country_code:
-                    if address.get(i):
-                        boot_location_data['country_code'] = address.get(i)
-                        print('country_code: OK')
-                        break
-
-                for i in options_state:
-                    if address.get(i):
-                        boot_location_data['state'] = address.get(i)
-                        print('state: OK')
-                        break
-            except Exception as e:
-                print('Erro ao pegar dados para a BOOT_LOCATION_DATA', e)
-            
+            if all(boot_location_data.values()):
+                print('BOOT_LOCATION_DATA EXTRAIDO COM SUCESSO: OK')
+                return boot_location_data
             else:
-                if boot_location_data['location_name'] and boot_location_data['country'] and boot_location_data['country_code'] and boot_location_data['state']:
-                    return boot_location_data
-                else:
-                    print('Erro os dados não estão completos em boot_location_data')
-                    raise serializers.ValidationError('os dados estão incompletos em boot_location_data')
+                raise serializers.ValidationError('DADOS INCOMPLETOS RECEBIDOS NA NOMINATIM')
+
         except Exception as e:
             print(f'Erro ao buscar cidade: {e}')
-            return 'Erro ao identificar local'
+            raise serializers.ValidationError('Erro ao buscar cidade')
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
