@@ -7,6 +7,7 @@ import Login from './pages/login'
 import ForgotPassword from './pages/ForgotPassword'
 import UpdatePassword from './pages/updatePassword'
 import WelcomePage from './pages/WelcomePage'
+import PasswordChange from './pages/PasswordChange'
 import NavBar from './components/NavBar'
 import Layout from './components/layout/layout'
 import PageNotFound from './pages/PageNotFound'
@@ -33,11 +34,16 @@ const router = createBrowserRouter([
         </PublicOnlyRoute>
       )},
       { path: '/forgot', element: (
-        <ProtectedRoute>
+        <PublicOnlyRoute>
           <ForgotPassword />
-        </ProtectedRoute>
+        </PublicOnlyRoute>
       )},
-      { path: '/forgot/updatePassword', element: <UpdatePassword /> },
+      { path: '/forgot/updatePassword', element: (
+        <PublicOnlyRoute>
+          <UpdatePassword />
+        </PublicOnlyRoute>
+      )},
+      { path: '/password/change', element: <PasswordChange />}
     ]
   },
   { path: '*', element: <PageNotFound />}

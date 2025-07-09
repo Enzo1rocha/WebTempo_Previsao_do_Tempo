@@ -11,6 +11,13 @@ function NavBar() {
     const [isMenuClicked, setIsMenuClicked] = useState(false)
     const [isWideScreen, setIsWideScreen] = useState(true)
     const user = useAuth();
+    if (user.user) {
+        const isUserLogged = true;
+        
+    } else {
+        const isUserLogged = false;
+    }
+    
     
 
     if (isWideScreen === true && window.innerWidth <= 1024) {
@@ -46,7 +53,7 @@ function NavBar() {
             </S.NavMobile>
             {isMenuClicked && 
                 <S.NavItems>
-                    {!user && 
+                    {(user.user == null) && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
                         <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
@@ -55,7 +62,7 @@ function NavBar() {
                         <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
                      </>
                     }
-                    {user && 
+                    {(user.user) && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
                         <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
@@ -84,7 +91,7 @@ function NavBar() {
             <S.Container>
             <S.Logo href='/'>WebForecast</S.Logo>
             <S.Nav>
-                {!user && 
+                {(user.user == null) && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
                     <S.NavItem href="/forecast">Forecast</S.NavItem>
@@ -93,7 +100,7 @@ function NavBar() {
                     <S.NavItem href="/contact">Contact</S.NavItem>
                  </>
                 }
-                {user && 
+                {(user.user) && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
                     <S.NavItem href="/forecast">Forecast</S.NavItem>

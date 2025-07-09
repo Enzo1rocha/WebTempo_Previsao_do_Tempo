@@ -13,7 +13,7 @@ function UpdatePassword() {
                     <s.ImageContent src={UpdatePasswordImage}></s.ImageContent>
                 </s.ContainerWithImage>
                 <s.FormPasswordUpdate>
-                    <s.FormTitle>Enter <br /> New Password</s.FormTitle>
+                    <s.FormTitle>Enter <br /> New password</s.FormTitle>
                     <s.ContainerInput>
                         <InputComponent type={'password'} LabelText="New Password" />
                         <InputComponent type={'password'} LabelText="Confirm Password" />
