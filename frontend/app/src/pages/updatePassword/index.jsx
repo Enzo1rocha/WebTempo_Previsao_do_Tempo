@@ -12,15 +12,17 @@ function UpdatePassword() {
                 <s.ContainerWithImage>
                     <s.ImageContent src={UpdatePasswordImage}></s.ImageContent>
                 </s.ContainerWithImage>
-                <s.FormPasswordUpdate>
-                    <s.FormTitle>Enter <br /> New password</s.FormTitle>
-                    <s.ContainerInput>
-                        <InputComponent type={'password'} LabelText="New Password" />
-                        <InputComponent type={'password'} LabelText="Confirm Password" />
-                        <Button value={"Update Password"}/> 
-                    </s.ContainerInput>
-                    <BackToLink value={'Back to Login'} href={'/login'}></BackToLink>
-                </s.FormPasswordUpdate>
+                <s.container_with_form>
+                    <s.FormPasswordUpdate>
+                        <s.FormTitle>Enter <br /> New password</s.FormTitle> 
+                        <s.ContainerInput>
+                            <InputComponent type={'password'} LabelText="New Password" />
+                            <InputComponent type={'password'} LabelText="Confirm Password" />
+                            <Button value={"Update Password"}/> 
+                        </s.ContainerInput>
+                        <BackToLink value={'Back to Login'} href={'/login'}></BackToLink>
+                    </s.FormPasswordUpdate>
+                </s.container_with_form>
             </s.Container>
         </Background>
     )

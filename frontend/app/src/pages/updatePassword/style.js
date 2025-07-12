@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     display: grid;
-    grid-template-columns: 55% 45%;
+    grid-template-columns: 56% 32%;
     width: 100vw;
     height: 100vh;
     align-items: center;
@@ -13,23 +13,30 @@ export const ContainerWithImage = styled.div`
     justify-content: center;
     align-items: center;
 
-    min-height: 100vh;
-    width: auto;
+    height: auto;
+    z-index: 1;
 `
 
 export const ImageContent = styled.img`
-    z-index: 1;
+    width: auto;
     height: 72vh;
+`
+
+export const container_with_form = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 `
 
 export const FormPasswordUpdate = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     flex-wrap: nowrap;
     gap: 35px;
-    width: 34vw;
-    z-index: 1;
 `
 
 export const FormTitle = styled.h1`
@@ -38,7 +45,10 @@ export const FormTitle = styled.h1`
     font-weight: 700;
     letter-spacing: 0.5px;
     line-height: 48px;
+    white-space: nowrap;
     color: var(--Primary-Color);
+    display: flex;
+    align-self: flex-start;
 `
 
 export const ContainerInput = styled.div`

@@ -43,7 +43,7 @@ const router = createBrowserRouter([
           <UpdatePassword />
         </PublicOnlyRoute>
       )},
-      { path: '/password/change', element: <PasswordChange />}
+      { path: '/user/password/change', element: <PasswordChange />}
     ]
   },
   { path: '*', element: <PageNotFound />}
