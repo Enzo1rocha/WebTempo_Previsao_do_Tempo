@@ -14,6 +14,7 @@ import PageNotFound from './pages/PageNotFound'
 import { AuthProvider } from './context/authContext'
 import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
 import ProtectedRoute from './components/authentications/Protectedroute'
+import LogoutPage from './pages/LogoutPage'
 
 
 const router = createBrowserRouter([
@@ -43,7 +44,8 @@ const router = createBrowserRouter([
           <UpdatePassword />
         </PublicOnlyRoute>
       )},
-      { path: '/user/password/change', element: <PasswordChange />}
+      { path: '/user/password/change', element: <PasswordChange />},
+      { path: '/user/logout', element: <LogoutPage />}
     ]
   },
   { path: '*', element: <PageNotFound />}
