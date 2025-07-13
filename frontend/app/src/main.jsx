@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './assets/icons/icons'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Register from './pages/register'
 import Login from './pages/login'
@@ -15,6 +16,7 @@ import { AuthProvider } from './context/authContext'
 import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
 import ProtectedRoute from './components/authentications/Protectedroute'
 import LogoutPage from './pages/LogoutPage'
+import LocationsPage from './pages/LocationsPage'
 
 
 const router = createBrowserRouter([
@@ -45,7 +47,8 @@ const router = createBrowserRouter([
         </PublicOnlyRoute>
       )},
       { path: '/user/password/change', element: <PasswordChange />},
-      { path: '/user/logout', element: <LogoutPage />}
+      { path: '/user/logout', element: <LogoutPage />},
+      { path: '/locations', element: <LocationsPage /> }
     ]
   },
   { path: '*', element: <PageNotFound />}
