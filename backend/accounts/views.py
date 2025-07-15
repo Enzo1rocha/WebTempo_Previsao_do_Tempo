@@ -56,7 +56,7 @@ class UserFavoriteLocationsView(APIView):
         try:
             location = user.favorite_locations.get(id=location_id)
             location.delete()
-            return Response({'message': 'Localização removida com sucesso'}, status=200)
+            return Response(status=204)
         except Exception as e:
             print(f'ERRO: {e}')
             return Response({'error': 'Localização não encontrada'}, status=404)
