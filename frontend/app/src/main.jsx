@@ -17,6 +17,7 @@ import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
 import ProtectedRoute from './components/authentications/Protectedroute'
 import LogoutPage from './pages/LogoutPage'
 import LocationsPage from './pages/LocationsPage'
+import TestPage from './pages/testpage'
 
 
 const router = createBrowserRouter([
@@ -48,7 +49,8 @@ const router = createBrowserRouter([
       )},
       { path: '/user/password/change', element: <PasswordChange />},
       { path: '/user/logout', element: <LogoutPage />},
-      { path: '/locations', element: <LocationsPage /> }
+      { path: '/locations', element: <LocationsPage /> },
+      { path: '/test', element: <TestPage /> },
     ]
   },
   { path: '*', element: <PageNotFound />}

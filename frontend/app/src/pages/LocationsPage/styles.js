@@ -21,7 +21,7 @@ export const Container_Locations = styled.div `
 
 export const Container_Boot_Location = styled.div `
     display: flex;
-    width: 25%;
+    width: 100%;
     flex-direction: column;
     gap: 15px;
 
@@ -31,6 +31,13 @@ export const Container_Boot_Location = styled.div `
         font-family: var(--Primary-Font);
         font-weight: 700;
            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    > div {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(4,1fr);
+        gap: 5px;
     }
 
 `
@@ -57,20 +64,21 @@ export const container_favorite_locations = styled.div `
     gap: 5px;
 `
 
-export const Container_add_favorite_locations = styled.div `
-    width: 100%;
+export const Container_add_favorite_locations = styled.div ` // verificar width ao fazer responsividade
+    width: auto;
     height: 120px;
     background-color: var(--Secundary-Color);
     display: flex;
     border-radius: 5px;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
     cursor: pointer;
 
     &:hover {
         outline: 3px solid var(--Secundary-Color);
         transition: 90ms ease-in-out;
-        border: 3px solid var(--Background-Color);
+        border: 2px solid var(--Background-Color);
     }
 
     svg {
