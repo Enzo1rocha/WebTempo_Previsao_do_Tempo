@@ -22,14 +22,15 @@ export const Container = styled.div `
     }
 
     h1 {
-     font-size: 30px;
+     font-size: 27px;
      font-weight: bolder;
      color: var(--Background-Color);
     }
     p { 
-     font-size: 18px;
+     font-size: 16px;
      color: var(--Background-Color);
      font-weight: bolder;
+     text-align: center;
     }
     div {
         position:  absolute;
@@ -38,10 +39,10 @@ export const Container = styled.div `
         top: 10px;
         > svg {
             color: var(--Background-Color);
-            font-size: 29px;
+            font-size: 28px;
 
             &:hover {
-                font-size: 31px;
+                font-size: 30px;
             }
         }
     }

@@ -60,13 +60,18 @@ function LocationsPage() {
     const CallCityWeather = (e, DATA) => {
         const CITY_DATA = DATA
         // {city, state, country, lat, lon}
-        console.log(`City: ${CITY_DATA.city}, State: ${CITY_DATA.state}, Country: ${CITY_DATA.country}, Lat: ${CITY_DATA.lat}, Lon: ${CITY_DATA.lon}`);
+        console.log(CITY_DATA);
         
     }
 
     if (loading) {
         return (<div>Loading...</div>);
     }
+
+    console.log(favoriteLocations);
+    console.log(bootLocation);
+    
+    
 
     return (
         <S.Location_Page_Container>
@@ -84,18 +89,21 @@ function LocationsPage() {
                             const DATA_ID = e.currentTarget.getAttribute('data-id');
                             console.log(`Location Clicked with ID: ${DATA_ID}`);
                         }} 
-                        City={bootLocation.location_name} Country_Code={(bootLocation.country_code).toUpperCase()}  State={bootLocation.state} Icon={'bars'} lat={bootLocation.lat} lon={bootLocation.long} />
+                        City={bootLocation.city || null} Country_Code={(bootLocation.country_code).toUpperCase()} Country={bootLocation.country}  State={bootLocation.state} Icon={'bars'} lat={bootLocation.lat} lon={bootLocation.long} Location_Name={bootLocation.location_name} />
                     </div>
                 </S.Container_Boot_Location>
                 <S.Container_Favorite_Locations>
                     <h1>Favorite Locations</h1>
                     <S.container_favorite_locations>
                         {favoriteLocations.map(location => (
+                            
                             <LocationsLayout key={location.id}
                             onClick={(e, DATA) => CallCityWeather(e, DATA)} 
                             Icon_OnClick={RemoveFavoriteLocation} 
-                            City={location.location_name} 
-                            Country_Code={location.country_code.toUpperCase()} 
+                            Location_Name={location.location_name} 
+                            City={location.city || null}
+                            Country_Code={location.country_code} 
+                            Country={location.country}
                             State={location.state} 
                             lat={location.lat} 
                             lon={location.long} 
