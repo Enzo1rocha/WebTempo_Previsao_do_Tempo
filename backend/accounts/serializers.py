@@ -93,11 +93,9 @@ class CustomRegisterSerializer(RegisterSerializer):
 class FavoriteLocationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteLocations
-        fields = ['id', 'location_name', 'lat', 'long', 'country', 'country_code', 'state']
+        fields = ['id', 'location_name', 'lat', 'long', 'country', 'country_code', 'state', 'city']
         extra_kwargs = {
-            'lat': {'required': False},
-            'long': {'required': False},
-            'country_code': {'required': False}
+            'city': {'required': False},
         }
 
     
@@ -127,20 +125,19 @@ class FavoriteLocationsSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = self.context['request'].user
-
-        location_name = validated_data.get('location_name')
-        state = validated_data.get('state')
-        country = validated_data.get('country')
-
-        query = f"{location_name}, {state}, {country}"
+        
+        city = validated_data.get('city')
+        lat = validated_data.get('lat')
+        lon = validated_data.get('long')
 
         import requests
 
         try:
             response = requests.get(
-                'https://nominatim.openstreetmap.org/search',
+                'https://nominatim.openstreetmap.org/reverse',
                 params={
-                    'q': query,
+                    'lat': lat,
+                    'lon': lon,
                     'format': 'json',
                     'addressdetails': 1,
                     'limit': 1,
@@ -153,20 +150,10 @@ class FavoriteLocationsSerializer(serializers.ModelSerializer):
 
             if not data:
                 raise serializers.ValidationError('Localização não encontrada')
-            print(data)    
 
-            place = data[0]
-
-            validated_data['lat'] = place['lat']
-            validated_data['long'] = place['lon']
-
-            address = place.get('address', {})
-
-            validated_data['country_code'] = address.get('country_code', '').upper()
-            validated_data['location_name'] = location_name or address.get('city') or address.get('town') or address.get('village')
-            validated_data['state'] = state or address.get('state')
-            validated_data['country'] = country or address.get('country')
-
+            address = data.get('address', {})
+            
+            validated_data['city'] = city or address.get('city') or address.get('town')    
 
         except Exception as e:
             raise serializers.ValidationError(f'Erro ao identificar localização: {e}')
@@ -177,12 +164,9 @@ class FavoriteLocationsSerializer(serializers.ModelSerializer):
 class BootLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = BootLocation
-        fields = ['location_name', 'lat', 'long', 'country', 'country_code', 'state']
+        fields = ['location_name', 'lat', 'long', 'country', 'country_code', 'state', 'city']
         extra_kwargs = {
-            'location_name': {'required': False},
-            'country': {'required': False},
-            'country_code': {'required': False},
-            'state': {'required': False},
+            'city': {'required': False}
         }
 
     
@@ -203,18 +187,14 @@ class BootLocationSerializer(serializers.ModelSerializer):
         
     
     def create(self, validated_data):
-        user = self.context.get('user')
+        user = self.context['request'].user
         if not user or user.is_anonymous:
             print(user)
             raise serializers.ValidationError('usuário inválido')
         lat = validated_data.get('lat')
         long = validated_data.get('long')
-        boot_location_data = self.get_boot_location_data_from_nominatim(lat,long)
-        validated_data['location_name'] = boot_location_data['location_name']
-        validated_data['country'] = boot_location_data['country']
-        validated_data['country_code'] = boot_location_data['country_code']
-        validated_data['state'] = boot_location_data['state']
-
+        boot_location_data = self.get_boot_location_city_from_nominatim(lat,long)
+        validated_data['city'] = boot_location_data['city']
 
         instance, created = BootLocation.objects.update_or_create(
             username=user,
@@ -224,7 +204,7 @@ class BootLocationSerializer(serializers.ModelSerializer):
         return instance
     
 
-    def get_boot_location_data_from_nominatim(self, lat, lon):
+    def get_boot_location_city_from_nominatim(self, lat, lon):
         import requests
 
         try:
@@ -241,33 +221,14 @@ class BootLocationSerializer(serializers.ModelSerializer):
                 }
             )
             boot_location_data = {
-                'location_name': None,
-                'country': None,
-                'country_code': None,
-                'state': None,
+                'city': None
             }
             data = response.json()
 
             address = data.get('address', {})
-            options_location_name = ['city', 'town', 'village', 'municipality']
-
-            for i in options_location_name:
-                if address.get(i):
-                    boot_location_data['location_name'] = address.get(i)
-                    print('location_name: OK')
-                    break
-                
-            boot_location_data['country'] = address.get('country')
-            boot_location_data['country_code'] = address.get('country_code')
-            boot_location_data['state'] = address.get('state')
-            print(f'BOOT LOCATIOON DATA \n {boot_location_data}')
-
-
-            if all(boot_location_data.values()):
-                print('BOOT_LOCATION_DATA EXTRAIDO COM SUCESSO: OK')
-                return boot_location_data
-            else:
-                raise serializers.ValidationError('DADOS INCOMPLETOS RECEBIDOS NA NOMINATIM')
+            boot_location_data['city'] = address.get('city') or address.get('town')
+            
+            return boot_location_data
 
         except Exception as e:
             print(f'Erro ao buscar cidade: {e}')

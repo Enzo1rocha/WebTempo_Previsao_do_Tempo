@@ -41,6 +41,7 @@ class WeatherLocationView(APIView):
     @method_decorator(ratelimit(key='user', rate='10/m', method='GET', block=True))
     def get(self, request):
         query_params = {
+            'name': request.query_params.get('name'),
             'city': request.query_params.get('city'),
             'country': request.query_params.get('country'),
             'state': request.query_params.get('state'),
@@ -147,6 +148,7 @@ class WeatherLocationView(APIView):
                     days_to_be_shown_by_the_api.append(json_of_each_day)
 
                 return_JSON = {
+                    'location_name': query_params['name'],
                     'city': query_params['city'],
                     'country': query_params['country'],
                     'state': query_params['state'],
