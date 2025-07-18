@@ -1,66 +1,75 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function SearchBar() {
     const [inputValue, setInputValue] = useState('');
-
+    const [cities, setCities] = useState([])
     console.log('renderizou');
+    console.log(cities);
     
+    
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (inputValue.length >= 0) {
+                SearchSugestions(inputValue)
+                    .then(cities => {
+                        setCities(cities);
+                    })
+                    .catch(() => {
+                        setCities([]);
+                    })
+            } else {
+                setCities([]);
+            }
+        }, 500);
 
-    const handleSearch = (e) => {
+        return () => clearTimeout(timeoutId);
+    }, [inputValue])
+
+
+
+
+    const handleSearch = async (e) => {
         setInputValue(e.target.value);
     }
 
-    const SearchCities = async (query) => {
+    const SearchSugestions = async (query) => {
         try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${query}&format=json&addressdetails=1`);
+            const response = await fetch(
+            `http://api.geonames.org/searchJSON?` +
+            `q=${query}&` +
+            `featureClass=P&` +
+            `maxRows=5&` +
+            `orderby=population&` + // Ordena por população
+            `username=enzo1rocha`
+            );
             const data = await response.json();
             console.log(data);
             
             const filteredData = [];
-
-            for (const item of data) {
-                if (!item.address) continue;
-
-                const { suburb, municipality, city, town, state, country, city_district, country_code} = item.address;
-                
-                const name = item.name
-
-                const isValidLocation = (!city_district && name === suburb) || (!city_district && name === municipality);
-
-                if (isValidLocation) {
-                    let filteredItem = {
-                        location_name: name,
-                        state: state || null,
-                        country: country || null,
-                        lat: item.lat,
-                        lon: item.lon,
-                        country_code: country_code.toUpperCase()
-                    };
-                    if (city || town) {
-                        filteredItem['city'] = city || town
+            const validFeatureCodes = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLX'];
+            
+            for (const city of data.geonames) {
+                if (validFeatureCodes.includes(city.fcode)) {
+                    const {name, lat, lng, adminName1, countryName} = city
+                    let filteredCity = {
+                        name: name,
+                        state: adminName1 || null,
+                        country: countryName || null,
+                        lat: lat,
+                        lon: lng
                     }
-                    filteredData.push(filteredItem)
+                    filteredData.push(filteredCity)
                 }
             }
             return filteredData
-
         } catch (error) {
-            console.error('Erro ao buscar cidades', error);
-            throw error;
+            console.log('Erro ao buscar sugestões', error);
+            throw error
+            
         }
     }
-
-    const Dadosteste = async () => {
-        try {
-            const resultado = await SearchCities('Brasilandia');
-            console.log('Resultado da busca:', resultado);
-        } catch (error) {
-            console.error('Erro na busca:', error);
-        }
-    }
-    
 
 
     return (
@@ -72,45 +81,19 @@ export default function SearchBar() {
                 {inputValue && (
                     <FontAwesomeIcon icon="x" onClick={() => setInputValue('')} />
                 )}
-                <FontAwesomeIcon onClick={Dadosteste} icon="magnifying-glass" />
+                <FontAwesomeIcon icon="magnifying-glass" />
             </S.SearchBarContainer>
-            {inputValue && (
+            {cities.length > 0 && (
                 <S.Containerlocations>
-                    <S.LocationItem>
-                        <div>
-                            <h1>São Paulo</h1>
-                            <p>São Paulo, brasil</p>
-                        </div>
-                        <FontAwesomeIcon icon={"map-location-dot"} />
-                    </S.LocationItem>
-                    <S.LocationItem>
-                        <div>
-                            <h1>São Paulo</h1>
-                            <p>São Paulo, brasil</p>
-                        </div>
-                        <FontAwesomeIcon icon={"map-location-dot"} />
-                    </S.LocationItem>
-                    <S.LocationItem>
-                        <div>
-                            <h1>São Paulo</h1>
-                            <p>São Paulo, brasil</p>
-                        </div>
-                        <FontAwesomeIcon icon={"map-location-dot"} />
-                    </S.LocationItem>
-                    <S.LocationItem>
-                        <div>
-                            <h1>São Paulo</h1>
-                            <p>São Paulo, brasil</p>
-                        </div>
-                        <FontAwesomeIcon icon={"map-location-dot"} />
-                    </S.LocationItem>
-                    <S.LocationItem>
-                        <div>
-                            <h1>São Paulo</h1>
-                            <p>São Paulo, brasil</p>
-                        </div>
-                        <FontAwesomeIcon icon={"map-location-dot"} />
-                    </S.LocationItem>
+                    {cities.map(city => (
+                        <S.LocationItem data-lat={city.lat} data-lon={city.lon}>
+                            <div>
+                                <h1>{city.name}</h1>
+                                <p>{city.state}, {city.country}</p>
+                            </div>
+                            <FontAwesomeIcon icon={"map-location-dot"} />
+                        </S.LocationItem>
+                    ))}
                 </S.Containerlocations>
             )}
         </S.Container>

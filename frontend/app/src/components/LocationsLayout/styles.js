@@ -11,7 +11,7 @@ export const Container = styled.div `
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
-    gap: 10px;
+    gap: 7px;
     white-space: nowrap;
     cursor: pointer;
 
