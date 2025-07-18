@@ -42,7 +42,6 @@ class WeatherLocationView(APIView):
     def get(self, request):
         query_params = {
             'name': request.query_params.get('name'),
-            'city': request.query_params.get('city'),
             'country': request.query_params.get('country'),
             'state': request.query_params.get('state'),
             'lon': request.query_params.get('lon'),
@@ -149,7 +148,6 @@ class WeatherLocationView(APIView):
 
                 return_JSON = {
                     'location_name': query_params['name'],
-                    'city': query_params['city'],
                     'country': query_params['country'],
                     'state': query_params['state'],
                     'days': days_to_be_shown_by_the_api,

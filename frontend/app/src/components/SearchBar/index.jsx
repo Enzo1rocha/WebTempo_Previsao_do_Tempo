@@ -1,18 +1,78 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback} from 'react';
+import LocationsPageService from '../../services/LocationsPageService';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function SearchBar() {
+export default function SearchBar({ option } ) {
     const [inputValue, setInputValue] = useState('');
     const [cities, setCities] = useState([])
-    console.log('renderizou');
-    console.log(cities);
+    const abortControllerRef = useRef(null);
+    const cacheRef = useRef(new Map());
+
+    const SearchSugestions = useCallback(async (query) => {
+
+        if (cacheRef.current.has(query)) {
+            console.log('cache funcionando');
+            
+            return cacheRef.current.get(query)
+        }
+
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+        }
+
+        abortControllerRef.current = new AbortController();
+
+        try {
+            const response = await fetch(
+            `http://api.geonames.org/searchJSON?` +
+            `q=${encodeURIComponent(query)}&` +
+            `featureClass=P&` +
+            `maxRows=5&` +
+            `orderby=population&` + // Ordena por população
+            `username=enzo1rocha`,
+            { signal: abortControllerRef.current.signal }
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`)
+            }
+
+            const data = await response.json();
+            const validFeatureCodes = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLX'];
+            const filteredData = data.geonames
+                ?.filter(city => validFeatureCodes.includes(city.fcode))
+                .map((city, index) => ({
+                    id: index,
+                    name: city.name,
+                    state: city.adminName1 || null,
+                    country: city.countryName || null,
+                    lat: city.lat,
+                    lon: city.lng
+                })) || [];
+
+            if (cacheRef.current.size > 50) {
+                const firstKey = cacheRef.current.keys().next().value;
+                cacheRef.current.delete(firstKey);
+            }
+
+            cacheRef.current.set(query, filteredData);
+            return filteredData
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                console.log('Requisição cancelada');
+                return [];
+            }
+            console.log('Erro ao buscar sugestões:', error);
+            throw error;
+        }
+    }, []);
     
     
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            if (inputValue.length >= 0) {
-                SearchSugestions(inputValue)
+            if (inputValue.trim().length > 0) {
+                SearchSugestions(inputValue.trim())
                     .then(cities => {
                         setCities(cities);
                     })
@@ -22,54 +82,63 @@ export default function SearchBar() {
             } else {
                 setCities([]);
             }
-        }, 500);
+        }, 300);
 
-        return () => clearTimeout(timeoutId);
-    }, [inputValue])
+        return () => {
+            clearTimeout(timeoutId);
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort();
+            };
+        };
+    }, [inputValue, SearchSugestions])
 
-
-
-
-    const handleSearch = async (e) => {
+    const handleSearch = useCallback((e) => {
         setInputValue(e.target.value);
-    }
+    }, []);
 
-    const SearchSugestions = async (query) => {
-        try {
-            const response = await fetch(
-            `http://api.geonames.org/searchJSON?` +
-            `q=${query}&` +
-            `featureClass=P&` +
-            `maxRows=5&` +
-            `orderby=population&` + // Ordena por população
-            `username=enzo1rocha`
-            );
-            const data = await response.json();
-            console.log(data);
-            
-            const filteredData = [];
-            const validFeatureCodes = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLX'];
-            
-            for (const city of data.geonames) {
-                if (validFeatureCodes.includes(city.fcode)) {
-                    const {name, lat, lng, adminName1, countryName} = city
-                    let filteredCity = {
-                        name: name,
-                        state: adminName1 || null,
-                        country: countryName || null,
-                        lat: lat,
-                        lon: lng
-                    }
-                    filteredData.push(filteredCity)
-                }
-            }
-            return filteredData
-        } catch (error) {
-            console.log('Erro ao buscar sugestões', error);
-            throw error
-            
+    const handleCitySelect = useCallback((city) => {
+        const resp = CitySelectOptions(option, city)
+        return resp
+    }, [option])
+
+    const CitySelectOptions = async (option, city) => {
+        switch (option) {
+            case 'boot_location':
+                LocationsPageService.addNewBootLocation({
+                    location_name: city.name,
+                    state: city.state,
+                    country: city.country,
+                    lat: city.lat,
+                    long: city.lon
+                })
+                return true
+            case 'favorite_location':
+                LocationsPageService.addFavoriteLocations({
+                    location_name: city.name,
+                    state: city.state,
+                    country: city.country,
+                    lat: city.lat,
+                    long: city.lon
+                })
+                return true
+            default:
+                return await LocationsPageService.getForecast({
+                    location_name: city.name,
+                    state: city.state,
+                    country: city.country,
+                    lat: city.lat,
+                    lon: city.lon
+                })  
         }
     }
+
+    const handleClear = useCallback(() => {
+        setCities([])
+        setInputValue('');
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+        }
+    }, []);
 
 
     return (
@@ -79,14 +148,17 @@ export default function SearchBar() {
                     !inputValue ? 'Pesquisar por local' : ''
                 } />
                 {inputValue && (
-                    <FontAwesomeIcon icon="x" onClick={() => setInputValue('')} />
+                    <FontAwesomeIcon icon="x" onClick={handleClear} />
                 )}
                 <FontAwesomeIcon icon="magnifying-glass" />
             </S.SearchBarContainer>
             {cities.length > 0 && (
                 <S.Containerlocations>
                     {cities.map(city => (
-                        <S.LocationItem data-lat={city.lat} data-lon={city.lon}>
+                        <S.LocationItem onClick={ async () => {
+                            const resp = await handleCitySelect(city)
+                            console.log(resp);  
+                        }} key={city.id} data-lat={city.lat} data-lon={city.lon}>
                             <div>
                                 <h1>{city.name}</h1>
                                 <p>{city.state}, {city.country}</p>

@@ -75,6 +75,29 @@ const LocationsPageService = {
             console.log('Erro ao remover local favorito', error);
             throw error;
         }   
+    },
+
+    async getForecast(params) {
+        try {
+            const response = await api.get(`search-city/`, {
+                params: {
+                    name: params.location_name,
+                    country: params.country,
+                    state: params.state,
+                    lon: params.lon,
+                    lat: params.lat
+                },
+
+                withCredentials: true
+            })
+            if (response.status == 200) {
+                return response.data
+            }
+            throw new Error('falha ao pegar a previsão do tempo')
+        } catch (error) {
+            console.log('Erro ao pegar a previsão do tempo');
+            throw error
+        }
     }
 }
 

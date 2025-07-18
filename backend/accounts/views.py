@@ -63,7 +63,7 @@ class UserFavoriteLocationsView(APIView):
         
         # Verificar se ta funcionando amanha a def delete e fazer a def post
 
-
+ 
 
 class UserBootLocationView(APIView):
     permission_classes = [IsAuthenticated]

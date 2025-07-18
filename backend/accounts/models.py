@@ -8,10 +8,8 @@ class BootLocation(models.Model):
     long = models.CharField(max_length=20, blank=False, null=False)
     lat = models.CharField(max_length=20, blank=False, null=False)
     country = models.CharField(max_length=80, blank=False, null=False, default='br')
-    country_code = models.CharField(max_length=5, blank=False, null=False, default='br')
     state = models.CharField(max_length=80, blank=False, null=False, default='br')
-    city = models.CharField(max_length=50, blank=True, null=True, default=None)
-
+ 
 
 class FavoriteLocations(models.Model):
     username = models.ForeignKey('CustomUser', on_delete=models.CASCADE, related_name='favorite_locations')
@@ -19,9 +17,7 @@ class FavoriteLocations(models.Model):
     long = models.CharField(max_length=20, blank=False, null=False)
     lat = models.CharField(max_length=20, blank=False, null=False)
     country = models.CharField(max_length=80, blank=False, null=False, default='br')
-    country_code = models.CharField(max_length=5, blank=False, null=False, default='br')
     state = models.CharField(max_length=80, blank=False, null=False, default='br')
-    city = models.CharField(max_length=50, blank=True, null=True, default=None)
     
 
 class CustomUser(AbstractUser):

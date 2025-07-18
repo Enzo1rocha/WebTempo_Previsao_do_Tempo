@@ -93,20 +93,8 @@ class CustomRegisterSerializer(RegisterSerializer):
 class FavoriteLocationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteLocations
-        fields = ['id', 'location_name', 'lat', 'long', 'country', 'country_code', 'state', 'city']
-        extra_kwargs = {
-            'city': {'required': False},
-        }
-
-    
-    def validate_location_name(self, value):
-        if not re.fullmatch(r"[A-Za-zÀ-ÿ\s]+", value):
-            raise serializers.ValidationError("Location name must contain only letters and spaces")
-        if len(value) > 50:
-            raise serializers.ValidationError("Location name must be at most 50 characters long")
-        return value
-
-
+        fields = ['id', 'location_name', 'lat', 'long', 'country', 'state']
+        
     def validate_lat(self, value):
         try:
             float(value)
@@ -125,49 +113,13 @@ class FavoriteLocationsSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = self.context['request'].user
-        
-        city = validated_data.get('city')
-        lat = validated_data.get('lat')
-        lon = validated_data.get('long')
-
-        import requests
-
-        try:
-            response = requests.get(
-                'https://nominatim.openstreetmap.org/reverse',
-                params={
-                    'lat': lat,
-                    'lon': lon,
-                    'format': 'json',
-                    'addressdetails': 1,
-                    'limit': 1,
-                },
-                headers={
-                    'User-Agent': config('USER_AGENT')
-                }
-            )
-            data = response.json()
-
-            if not data:
-                raise serializers.ValidationError('Localização não encontrada')
-
-            address = data.get('address', {})
-            
-            validated_data['city'] = city or address.get('city') or address.get('town')    
-
-        except Exception as e:
-            raise serializers.ValidationError(f'Erro ao identificar localização: {e}')
-        
         return FavoriteLocations.objects.create(username=user, **validated_data)
-
+    
 
 class BootLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = BootLocation
-        fields = ['location_name', 'lat', 'long', 'country', 'country_code', 'state', 'city']
-        extra_kwargs = {
-            'city': {'required': False}
-        }
+        fields = ['location_name', 'lat', 'long', 'country', 'state']
 
     
     def validate_lat(self, value):
@@ -191,48 +143,11 @@ class BootLocationSerializer(serializers.ModelSerializer):
         if not user or user.is_anonymous:
             print(user)
             raise serializers.ValidationError('usuário inválido')
-        lat = validated_data.get('lat')
-        long = validated_data.get('long')
-        boot_location_data = self.get_boot_location_city_from_nominatim(lat,long)
-        validated_data['city'] = boot_location_data['city']
-
         instance, created = BootLocation.objects.update_or_create(
             username=user,
             defaults=validated_data
         )
-
         return instance
-    
-
-    def get_boot_location_city_from_nominatim(self, lat, lon):
-        import requests
-
-        try:
-            response = requests.get(
-                'https://nominatim.openstreetmap.org/reverse',
-                params={
-                    'lat': lat,
-                    'lon': lon,
-                    'format':'json',
-                    'addressdetails': 1
-                },
-                headers={
-                    'User-Agent': config('USER_AGENT'),
-                }
-            )
-            boot_location_data = {
-                'city': None
-            }
-            data = response.json()
-
-            address = data.get('address', {})
-            boot_location_data['city'] = address.get('city') or address.get('town')
-            
-            return boot_location_data
-
-        except Exception as e:
-            print(f'Erro ao buscar cidade: {e}')
-            raise serializers.ValidationError('Erro ao buscar cidade')
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
