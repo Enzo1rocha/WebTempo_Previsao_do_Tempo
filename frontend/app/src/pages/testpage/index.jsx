@@ -4,7 +4,7 @@ import SearchBar from '../../components/SearchBar';
 export default function TestPage() {
     return (
         <S.ContainerPage>
-            <SearchBar />
+            <SearchBar option={'favorite_location'} />
         </S.ContainerPage>
     )
 }

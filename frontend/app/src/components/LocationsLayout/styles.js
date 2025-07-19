@@ -39,11 +39,7 @@ export const Container = styled.div `
         top: 10px;
         > svg {
             color: var(--Background-Color);
-            font-size: 28px;
-
-            &:hover {
-                font-size: 30px;
-            }
+            font-size: 26px;
         }
     }
 `;

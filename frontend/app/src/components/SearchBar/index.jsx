@@ -4,6 +4,7 @@ import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function SearchBar({ option } ) {
+
     const [inputValue, setInputValue] = useState('');
     const [cities, setCities] = useState([])
     const abortControllerRef = useRef(null);
@@ -82,7 +83,7 @@ export default function SearchBar({ option } ) {
             } else {
                 setCities([]);
             }
-        }, 300);
+        }, 200);
 
         return () => {
             clearTimeout(timeoutId);
@@ -111,6 +112,7 @@ export default function SearchBar({ option } ) {
                     lat: city.lat,
                     long: city.lon
                 })
+                window.location.reload();
                 return true
             case 'favorite_location':
                 LocationsPageService.addFavoriteLocations({
@@ -128,7 +130,7 @@ export default function SearchBar({ option } ) {
                     country: city.country,
                     lat: city.lat,
                     lon: city.lon
-                })  
+                })   
         }
     }
 
@@ -139,7 +141,6 @@ export default function SearchBar({ option } ) {
             abortControllerRef.current.abort();
         }
     }, []);
-
 
     return (
         <S.Container>

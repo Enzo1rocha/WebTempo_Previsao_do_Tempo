@@ -3,6 +3,8 @@ import LocationsLayout from '../../components/LocationsLayout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LocationsPageService from '../../services/LocationsPageService';
 import {useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ChangeBootLocation from '../../components/ChangeBootLocation';
 
 
 function LocationsPage() {
@@ -10,6 +12,8 @@ function LocationsPage() {
     const [favoriteLocations, setFavoriteLocations] = useState([]);
     const [bootLocation, setBootLocation] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [mostrarChangeBootLocation, setMostrarChangeBootLocation] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         RenderFavoriteLocationsAndBootLocation()
@@ -48,13 +52,14 @@ function LocationsPage() {
         }
     }
 
-    const ChangeBootLocation = () => {
-        console.log('Change Boot Location');
+    const HandleBootLocationClick= () => {
+        console.log('cliquei');
+        
+        setMostrarChangeBootLocation(!mostrarChangeBootLocation)
         }
 
-
     const AddFavoriteLocation = () => {
-        console.log('Add Favorite Location');
+        navigate('/user/favorite/add')
     }
 
     const CallCityWeather = (e, DATA) => {
@@ -75,6 +80,7 @@ function LocationsPage() {
 
     return (
         <S.Location_Page_Container>
+            {mostrarChangeBootLocation ? <ChangeBootLocation ReturnClick={HandleBootLocationClick} /> : null}
             <S.Container_Locations>
                 <S.Container_Boot_Location>
                     <h1>Boot Location</h1>
@@ -85,11 +91,8 @@ function LocationsPage() {
                             console.log(`Location Clicked: ${layoutData}`);
                         }} 
 
-                        Icon_OnClick={(e) => {
-                            const DATA_ID = e.currentTarget.getAttribute('data-id');
-                            console.log(`Location Clicked with ID: ${DATA_ID}`);
-                        }} 
-                        City={bootLocation.city || null} Country_Code={(bootLocation.country_code).toUpperCase()} Country={bootLocation.country}  State={bootLocation.state} Icon={'bars'} lat={bootLocation.lat} lon={bootLocation.long} Location_Name={bootLocation.location_name} />
+                        Icon_OnClick={HandleBootLocationClick} 
+                        Country={bootLocation.country}  State={bootLocation.state} Icon={'pen-to-square'} lat={bootLocation.lat} lon={bootLocation.long} Location_Name={bootLocation.location_name} />
                     </div>
                 </S.Container_Boot_Location>
                 <S.Container_Favorite_Locations>
@@ -101,8 +104,6 @@ function LocationsPage() {
                             onClick={(e, DATA) => CallCityWeather(e, DATA)} 
                             Icon_OnClick={RemoveFavoriteLocation} 
                             Location_Name={location.location_name} 
-                            City={location.city || null}
-                            Country_Code={location.country_code} 
                             Country={location.country}
                             State={location.state} 
                             lat={location.lat} 

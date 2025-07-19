@@ -9,7 +9,6 @@ import ForgotPassword from './pages/ForgotPassword'
 import UpdatePassword from './pages/updatePassword'
 import WelcomePage from './pages/WelcomePage'
 import PasswordChange from './pages/PasswordChange'
-import NavBar from './components/NavBar'
 import Layout from './components/layout/layout'
 import PageNotFound from './pages/PageNotFound'
 import { AuthProvider } from './context/authContext'
@@ -17,7 +16,8 @@ import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
 import ProtectedRoute from './components/authentications/Protectedroute'
 import LogoutPage from './pages/LogoutPage'
 import LocationsPage from './pages/LocationsPage'
-import TestPage from './pages/testpage'
+import SearchFavoriteLocation from './pages/SearchFavoriteLocation'
+import ChangeBootLocation from './components/ChangeBootLocation'
 
 
 const router = createBrowserRouter([
@@ -31,7 +31,6 @@ const router = createBrowserRouter([
           <Register />
         </PublicOnlyRoute>
       )},
-      { path: '/navbar', element: <NavBar /> },
       { path: '/login', element: (
         <PublicOnlyRoute>
           <Login />
@@ -47,10 +46,29 @@ const router = createBrowserRouter([
           <UpdatePassword />
         </PublicOnlyRoute>
       )},
-      { path: '/user/password/change', element: <PasswordChange />},
-      { path: '/user/logout', element: <LogoutPage />},
-      { path: '/locations', element: <LocationsPage /> },
-      { path: '/test', element: <TestPage /> },
+
+      { path: '/user/password/change', element: (
+        <ProtectedRoute>
+          <PasswordChange />
+        </ProtectedRoute>
+      )},
+      { path: '/user/logout', element: (
+        <ProtectedRoute>
+          <LogoutPage />
+        </ProtectedRoute>
+      )},
+
+      { path: '/user/favorite', element: (
+       <ProtectedRoute>
+        <LocationsPage />
+      </ProtectedRoute>
+      )},
+      { path: 'user/favorite/add', element: (
+        <ProtectedRoute>
+          <SearchFavoriteLocation />
+        </ProtectedRoute>
+      )},
+      { path: '/test', element: <ChangeBootLocation />}
     ]
   },
   { path: '*', element: <PageNotFound />}
