@@ -8,6 +8,7 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer, JWTSerializerWithExpiration
 import re
 from decouple import config
+import requests
 
 
 User = get_user_model()
@@ -26,10 +27,6 @@ class CustomLoginSerializer(LoginSerializer):
 
 
 class CustomRegisterSerializer(RegisterSerializer):
-    favorite_location_name = serializers.CharField(required=False)
-    lat_favorite_location = serializers.CharField(required=False)
-    long_favorite_location = serializers.CharField(required=False)
-
     lat_boot_location = serializers.CharField(required=False)
     long_boot_location = serializers.CharField(required=False)
 
@@ -44,38 +41,47 @@ class CustomRegisterSerializer(RegisterSerializer):
     def get_cleaned_data(self):
         data = super().get_cleaned_data()
 
-        data['favorite_location_name'] = self.validated_data.get('favorite_location_name')
-        data['favorite_location_lat'] = self.validated_data.get('lat_favorite_location')
-        data['favorite_location_long'] = self.validated_data.get('long_favorite_location')
         data['boot_location_lat'] = self.validated_data.get('lat_boot_location')
         data['boot_location_long'] = self.validated_data.get('long_boot_location')
 
         return data
     
+    
+    def get_data_of_boot_location(self, lat, lon):
+        try:
+            response = requests.get('http://api.geonames.org/findNearbyJSON?', params={
+                "lat": lat,
+                "lng": lon,
+                "username": config('GEONAMES_USERNAME')
+            })
+            data = response.json()['geonames'][0]
+            
+            return {
+                "location_name": data['name'],
+                "country": data['countryName'],
+                "state": data['adminName1']
+            }
+            
+        except Exception as e:
+            print("Erro ao pegar os dados da boot location: ", e)
+            raise serializers.ValidationError('Erro ao pegar os dados da boot location ')
+            
+    
 
     def save(self, request):
         user = super().save(request)
 
-        favorite_location_location_name = self.validated_data.get('favorite_location_name')
-        favorite_location_lat = self.validated_data.get('lat_favorite_location')
-        favorite_location_long = self.validated_data.get('long_favorite_location')
-
         boot_location_lat = self.validated_data.get('lat_boot_location')
         boot_location_long = self.validated_data.get('long_boot_location')
-
-        if favorite_location_location_name and favorite_location_lat and favorite_location_long:
-            from .models import FavoriteLocations
-            FavoriteLocations.objects.create(
-                username=user,
-                location_name=favorite_location_location_name,
-                lat=favorite_location_lat,
-                long=favorite_location_long,
-            )
+        boot_location_data = self.get_data_of_boot_location(lat=boot_location_lat, lon=boot_location_long)
         
         if boot_location_lat and boot_location_long:
             serializer = BootLocationSerializer(data={
+                'location_name': boot_location_data['location_name'],
                 'lat': boot_location_lat,
-                'long': boot_location_long
+                'long': boot_location_long,
+                'state': boot_location_data['state'],
+                'country': boot_location_data['country']
             }, context={'request': request, 'user': user})
             serializer.is_valid(raise_exception=True)
             serializer.save()
@@ -139,7 +145,7 @@ class BootLocationSerializer(serializers.ModelSerializer):
         
     
     def create(self, validated_data):
-        user = self.context['request'].user
+        user = self.context.get('user') or self.context.get('request').user
         if not user or user.is_anonymous:
             print(user)
             raise serializers.ValidationError('usuário inválido')
