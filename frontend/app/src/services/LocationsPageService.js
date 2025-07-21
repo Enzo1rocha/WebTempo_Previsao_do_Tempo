@@ -9,7 +9,7 @@ const LocationsPageService = {
             if (response.status === 200) {
                 return response.data;
             }
-            throw new Error('Failed to fetch boot location'); 
+            throw new Error(`Failed to fetch boot location. Status: ${response.status}`); 
         } catch (error) {
             console.log('Erro ao obter localização inicial', error);
             throw error;
@@ -24,6 +24,8 @@ const LocationsPageService = {
             if (response.status === 200) {
                 return response.data;
             }
+
+            throw new Error(`falha ao pegar as favorites locations. Status: ${response.status}`)
         } catch (error) {
             console.log('Erro ao obter locais favoritos', error);
             throw error;

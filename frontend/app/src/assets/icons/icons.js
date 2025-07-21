@@ -6,5 +6,6 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faMagnifyingGlass, faBars, faDeleteLeft, faPlus, faX, faMapLocationDot, faPenToSquare);
+library.add(faMagnifyingGlass, faBars, faDeleteLeft, faPlus, faX, faMapLocationDot, faPenToSquare, faPencil);

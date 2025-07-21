@@ -3,9 +3,12 @@ import Background from '../../components/Background';
 import Button from '../../components/Button';
 import WelcomeImage from '../../assets/authPageIMGS/Welcome.svg';
 import NavBar from '../../components/NavBar';
+import { useAuth } from '../../context/authContext';
+
 
 function WelcomePage() {
 
+    const user = useAuth();
 
     return (
         <Background>
@@ -17,7 +20,7 @@ function WelcomePage() {
                         <s.title_buttonContainer>
                             <s.SubTitle>Stay ahead of the weather with our intelligent and easy-to-use forecasting app. Whether you're planning your day, preparing for a trip, or just curious about what’s coming, we provide real-time updates, hourly forecasts, and detailed climate information tailored to your location.
                             </s.SubTitle>
-                        <Button IsLink={true} href='/login' value={'Create Your Account'} />
+                        <Button IsLink={true} href={user.user ? '/user/favorite' : '/login'} value={user.user ? 'Search City' : 'Create Your Account'} />
                         </s.title_buttonContainer>
                     </s.Content>    
                 </s.ContainerContent>

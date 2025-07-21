@@ -7,7 +7,7 @@ const PublicOnlyRoute = ({ children }) => {
     if (loading) return <p>Carregando...</p>
 
     if (user) {
-        return <Navigate to='/' replace />
+        return <Navigate to='/user/favorite' replace />
     }
 
     return children

@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback} from 'react';
 import LocationsPageService from '../../services/LocationsPageService';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchBar({ option } ) {
 
@@ -9,6 +10,7 @@ export default function SearchBar({ option } ) {
     const [cities, setCities] = useState([])
     const abortControllerRef = useRef(null);
     const cacheRef = useRef(new Map());
+    const navigate = new useNavigate();
 
     const SearchSugestions = useCallback(async (query) => {
 
@@ -122,7 +124,8 @@ export default function SearchBar({ option } ) {
                     lat: city.lat,
                     long: city.lon
                 })
-                return true
+                navigate('/user/favorite')
+                break;
             default:
                 return await LocationsPageService.getForecast({
                     location_name: city.name,

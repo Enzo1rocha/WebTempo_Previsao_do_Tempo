@@ -15,6 +15,12 @@
     --Dark-Blue: #1E40AF;
     --Light-Blue: #93C5FD;
 
+    --Telas-Grandes: 1536px;
+    --Desktop: 1280px;
+    --Notebook: 1024px;
+    --Tablet: 768px;
+    --Mobile: 640px;
+
     --Primary-Font: 'Poppins', sans-serif;
 }
 

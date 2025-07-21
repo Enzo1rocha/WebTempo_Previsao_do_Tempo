@@ -25,6 +25,20 @@ export const AuthProvider = ({ children }) => {
         
     };
 
+    const register = async (userData) => {
+        try {
+            await AuthService.register(userData);
+
+            const userResponse = await AuthService.getUser();
+            setUser(userResponse);
+            console.log('registrado e logado automaticamente');
+            return true
+        } catch (error) {
+            console.log('registrado mas, não logado');
+            throw error;
+        }
+    }
+
     const logout = async () => {
         await AuthService.logout();
         setUser(null);
@@ -32,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{user, login, logout, loading}}>
+        <AuthContext.Provider value={{user, login, register, logout, loading}}>
             {children}
         </AuthContext.Provider>
     );

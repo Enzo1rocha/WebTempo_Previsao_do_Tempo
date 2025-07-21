@@ -15,10 +15,7 @@ function Login() {
 
     const handleLogin = async (data) => {
         try {
-            console.log(data);
-            
-            login(data);
-            
+            await login(data);
         } catch (error) {
             console.log('Erro ao fazer login', error)
         }

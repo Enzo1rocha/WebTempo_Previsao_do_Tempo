@@ -4,14 +4,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export const Container = styled.div `
     position: relative;
     top: 0;
-    z-index: 999;
+    z-index:999;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding: 10px 50px;
     align-items: center;
     width: 100%;
+    max-width: 1600px;
+    margin: auto;
     background-color: var(--Secundary-Color);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 1280px) {
+        padding: 10px 30px;
+    }
+
+    @media (max-width: 1024px) {
+        padding: 10px 20px;
+    }
+
+    @media (max-width: 640px) {
+
+    }
+    
 `
 
 export const Logo = styled.a `
@@ -20,6 +36,17 @@ export const Logo = styled.a `
     font-weight:600;
     text-decoration: none;
     cursor: pointer;
+
+    @media (max-width: 1280px) {
+        font-size: 25px;
+    }
+
+    @media (max-width: 1024px) {
+        font-size: 20px;
+    }
+    @media (max-width: 768px) {
+        font-size: 19px;
+    }
 `
 
 export const Nav = styled.div `
@@ -27,6 +54,13 @@ export const Nav = styled.div `
     align-items: center;
     flex-direction: row;
     gap: 10px;
+
+    @media (max-width: 1280px) {
+        gap: 7px;
+    }
+    @media (max-width: 1024px) {
+        gap: 4px;
+    }
 `
 
 
@@ -43,6 +77,14 @@ export const NavMobile = styled.div `
     svg {
         color: var(--Secundary-Color);
         font-size: 17px;
+    }
+
+    @media (max-width: 768px) {
+        width: 35px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 `
 
@@ -85,6 +127,17 @@ export const NavItem = styled.a `
         color: var(--Secundary-Color);
         border-radius: 5px;
     }
+
+
+    @media (max-width: 1280px) {
+        font-size: 16px;
+        padding: 4px 6px;
+    }
+
+    @media (max-width: 1024px) {
+        font-size: 14px;
+        padding: 4px 4px;;
+    }
 `
 
 export const NavItemMobile = styled.a `
@@ -103,48 +156,19 @@ export const NavItemMobile = styled.a `
     }
 `
 
-
-export const SearchBar = styled.div `
+export const SearchBarContainer = styled.div `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    gap: 5px;
-    width: 250px;
-    height: 30px;
-    padding: 14px;
-    border-radius: 50px;
-    cursor: pointer;
+    width: 390px;
 
-    transition: 0.1s ease-out;
-
-    svg {
-        color: var(--Secundary-Color);
-        font-size: 17px;
+    @media (max-width: 1280px) {
+        width: 310px;
     }
-
     @media (max-width: 1024px) {
-        width: 40px;
-        height: 30px;
-        padding: 5px;
-
-        &:hover {
-                background-color: var(--Secundary-Color);
-                border: 2px solid var(--Background-Color);
-
-            svg {
-                color: var(--Background-Color);
-            }
-        }
+        width: 270px;
     }
-`
-
-export const InputSearchBar = styled.input `
-    width: 100%;
-    font-size: 14px;
-    border: none;
-
-    &:focus {
-        outline: none;
+    @media (max-width: 768px) {
+        width: 250px;
     }
 `

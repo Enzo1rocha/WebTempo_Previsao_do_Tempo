@@ -5,36 +5,33 @@ import LocationsPageService from '../../services/LocationsPageService';
 import {useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChangeBootLocation from '../../components/ChangeBootLocation';
+import { useAuth } from '../../context/authContext';
 
 
 function LocationsPage() {
 
+    const { user } = useAuth();
     const [favoriteLocations, setFavoriteLocations] = useState([]);
-    const [bootLocation, setBootLocation] = useState(null);
+    const [bootLocation, setBootLocation] = useState(null);;
+    
     const [loading, setLoading] = useState(true);
     const [mostrarChangeBootLocation, setMostrarChangeBootLocation] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {
-        RenderFavoriteLocationsAndBootLocation()
-    }, []);
+        if (user && user.message) {
+            setBootLocation(user.message.boot_location || []);
+            setFavoriteLocations(user.message.favorite_locations || []);
+            setLoading(false);
+        } else {
+            setBootLocation(user.boot_location || []);
+            setFavoriteLocations(user.favorite_locations || []);
+            setLoading(false);
+        }
+    }, [user]);
 
 
     console.log('renderizou');
-
-    const RenderFavoriteLocationsAndBootLocation = async () => {
-        try {
-            const FavoriteLocations = await LocationsPageService.getFavoriteLocations();
-            const BootLocation = await LocationsPageService.getBootLocation();
-            setFavoriteLocations(FavoriteLocations.message);
-            setBootLocation(BootLocation.message); 
-        } catch (error) {
-            console.log('Erro ao renderizar localizações favoritas e localização inicial', error);
-            throw error;
-        } finally {
-            setLoading(false);
-        }
-    }
 
     const RemoveFavoriteLocation = (e) => {
         const DATA_ID = e.currentTarget.getAttribute('data-id');
@@ -92,7 +89,7 @@ function LocationsPage() {
                         }} 
 
                         Icon_OnClick={HandleBootLocationClick} 
-                        Country={bootLocation.country}  State={bootLocation.state} Icon={'pen-to-square'} lat={bootLocation.lat} lon={bootLocation.long} Location_Name={bootLocation.location_name} />
+                        Country={bootLocation.country}  State={bootLocation.state} Icon={'pencil'} lat={bootLocation.lat} lon={bootLocation.long} Location_Name={bootLocation.location_name} />
                     </div>
                 </S.Container_Boot_Location>
                 <S.Container_Favorite_Locations>
@@ -108,7 +105,7 @@ function LocationsPage() {
                             State={location.state} 
                             lat={location.lat} 
                             lon={location.long} 
-                            Icon={'delete-left'} ID={location.id} />
+                            Icon={'x'} ID={location.id} />
                         ))}
                         <S.Container_add_favorite_locations onClick={AddFavoriteLocation}>
                             <FontAwesomeIcon icon={'plus'} />

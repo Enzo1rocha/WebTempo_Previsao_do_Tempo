@@ -27,7 +27,7 @@ function LocationsLayout ({Location_Name, State, ID, Country, Icon, lat, lon, Ic
     return (
         <S.Container data-state={State} data-country={Country} data-lat={lat} data-long={lon} data-id={ID} onClick={handleClick}>
             <h1>{Location_Name}</h1>
-            <p>{State} <br /> {Country}</p>
+            <p>{State}, {Country}</p>
             <div data-id={ID} onClick={handleIconClick}>
                 <FontAwesomeIcon icon={Icon} />
             </div>

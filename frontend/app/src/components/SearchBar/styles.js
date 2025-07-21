@@ -10,6 +10,7 @@ export const Container = styled.div `
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 999;
     font-family: var(--Primary-Font);
 `
 
@@ -57,7 +58,18 @@ export const SearchBarContainer = styled.div `
     }
     
     > svg[data-icon='magnifying-glass'] {
-        border-radius: 0px 8px 0px 0px;
+        border-radius: 0px 5px 5px 0px;
+    }
+
+
+    @media (max-width: 1280px) {
+        height: 39px;
+        > input {
+            font-size: 14px;
+        }
+        > svg {
+            height: 73%;
+        }
     }
 `
 
@@ -68,9 +80,12 @@ export const Containerlocations = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: center;
+    // esse e o componente dentro da searchbar componente que esta dentro da nav bar componente
+    z-index: 999;
     align-items: center;
     border: 2px solid var(--Secundary-Color);
     border-radius: 0px 0px 8px 8px;
+    background-color: var(--Background-Color);
     
 `
 
@@ -109,5 +124,20 @@ export const LocationItem = styled.div `
     > svg {
         color: var(--Secundary-Color);
         height: 30px;
+    }
+
+
+    @media (max-width: 1280px) {
+        > div {
+            > h1 {
+                font-size: 16px;
+            }
+            > p {
+                font-size: 11px;
+            }
+        }
+        > svg {
+            height: 28px;
+        }
     }
 `

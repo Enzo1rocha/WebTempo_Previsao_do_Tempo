@@ -45,6 +45,7 @@ export const cancel_button = styled.button `
     min-width: 200px;
     padding: 7px 2px;
     border-radius: 10px;
+    cursor: pointer;
     `
 
 export const confirm_button = styled.button `
@@ -56,4 +57,5 @@ export const confirm_button = styled.button `
     min-width: 200px;
     padding: 7px 2px;
     border-radius: 10px;
+    cursor: pointer;
 `

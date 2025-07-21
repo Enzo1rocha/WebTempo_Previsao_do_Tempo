@@ -4,7 +4,8 @@ export const Container = styled.div `
     font-family: var(--Primary-Font);
     background-color: var(--Background-Color);
     min-height: 100vh;
-    max-width: 100vw;
+    max-width: 1600px;
+    margin: auto;
 `;
 
 export const Container_Search = styled.div `

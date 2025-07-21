@@ -3,15 +3,19 @@ import SignUp from '../../assets/authPageIMGS/SignUp.png'
 import { useRef, useState, useEffect } from "react";
 import geolocationService from '../../services/geolocationService';
 import AuthService from "../../services/authService";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 
 function Register() {
-
-    const [Title, setTitle] = useState("Create Account")
-    const [LabelText, setLabelText] = useState("Sign Up")
-    const [Text, setText] = useState("Sign In")
+    const titulo = 'Create Account';
+    const labelText = 'Sign Up';
+    const texto = 'Sign In';
     const [Location, setLocation] = useState({})
+
+    const { register } = useAuth();
+    const navigate = useNavigate();
+
     const errorMessages = {
     "This password is too common.": "Senha muito fraca",
     "This field may not be blank.": "Campo obrigatório",
@@ -55,8 +59,16 @@ function Register() {
         console.log(fullData);
 
         try {
-            const request = await AuthService.register(fullData)  
-            console.log(request)
+            const request = await register(fullData);
+            
+            if (request) {
+                console.log('usuario registrado com sucesso');
+                navigate('/user/favorite')
+            } else {
+                navigate('/login', {
+                    state: { message: 'Conta criada com sucesso, faça login'}
+                })
+            }
         } catch (error) {
             if (error.response && error.response.data) {
                 const erros = error.response.data
@@ -70,6 +82,10 @@ function Register() {
                 console.log(mensagem);
                 
                 alert(mensagem)
+            } else {
+                console.error('Erro no registro: ', error);
+                alert('Erro ao criar conta, tente novamente.')
+                
             }
         }
         
@@ -77,7 +93,7 @@ function Register() {
     
 
     return (
-        <Welcome img={SignUp} FormTitle={Title} LabelText={LabelText} Text={Text} ShowNameInput={true} isLogin={false} navigateTo={'/login'} onSubmit={handleRegister} />
+        <Welcome img={SignUp} FormTitle={titulo} LabelText={labelText} Text={texto} ShowNameInput={true} isLogin={false} navigateTo={'/login'} onSubmit={handleRegister} />
     )
 }
 

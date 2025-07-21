@@ -2,7 +2,9 @@ import api from "./api";
 
 const AuthService = {
     async register(userData) {
-        const response = await api.post('api/auth/registration/', userData);
+        const response = await api.post('api/auth/registration/', userData, {
+            withCredentials: true
+        });
         return response.data
     },
 
@@ -21,6 +23,7 @@ const AuthService = {
             return response.data
         } catch (error) {
             console.log('erro ao fazer logout', error);
+            throw error
         }
     },
 
@@ -37,6 +40,32 @@ const AuthService = {
             console.log('erro ao receber dados do usuário getUser', error);
             throw error;
             
+        }
+    },
+
+    async isAuthenticated() {
+        try {
+            await this.getUser();
+            return true
+        } catch (error) {
+            return false
+        }
+    },
+
+    async checkAuthStatus() {
+        try {
+            const response = await api.get('api/auth/user/', {
+                withCredentials: true
+            })
+            return {
+                isAuthenticated: true,
+                user: response.data
+            };
+        } catch (error) {
+            return {
+                isAuthenticated: false,
+                user: null
+            };
         }
     }
 }

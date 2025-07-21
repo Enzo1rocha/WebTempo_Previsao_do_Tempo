@@ -5,6 +5,8 @@ export const Container = styled.div `
     background-color: var(--Background-Color);
     justify-content: center;
     align-items: center;
+    margin: auto;
+    max-width: 1600px;
     display: grid;
     grid-template-columns: 59% 41%;
 `
