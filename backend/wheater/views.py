@@ -48,19 +48,28 @@ class WeatherLocationView(APIView):
             'lat': request.query_params.get('lat'),
         }
         for key, value in query_params.items():
+            parametros_faltando = []
             if not value:
-                return Response({'error': f'Parâmetro {key} é obrigatório'}, status=400)
+                parametros_faltando.append(key)
+            if len(parametros_faltando) != 0:
+                return Response({'error': f'Parâmetro {parametros_faltando} é obrigatório'}, status=400)
         
         tomorrow_url = f'https://api.tomorrow.io/v4/weather/forecast'
+        tomorrow_current_url = f'https://api.tomorrow.io/v4/weather/realtime'
 
         try:
+            
+            params_tomorrow_current = {
+                'location': f'{query_params["lat"]},{query_params["lon"]}',
+                'apikey': config('TOMORROW_API_KEY'),
+                'units': 'metric'
+            }
             params_tomorrow_url = {
                 'location': f'{query_params['lat']},{query_params['lon']}',
                 'apikey': config('TOMORROW_API_KEY'),
                 'timesteps': '1d',
                 'units': 'metric'
             }
-
             params_tomorrow_url_1h = {
                 'location': f'{query_params['lat']},{query_params['lon']}',
                 'apikey': config('TOMORROW_API_KEY'),
@@ -68,23 +77,50 @@ class WeatherLocationView(APIView):
                 'units': 'metric'
             }
 
+            tomorrow_response_current = requests.get(tomorrow_current_url, params=params_tomorrow_current)
             tomorrow_response_1d = requests.get(tomorrow_url, params=params_tomorrow_url)
             tomorrow_response_1h = requests.get(tomorrow_url, params=params_tomorrow_url_1h)
             
 
-            if tomorrow_response_1d.status_code == 200 and tomorrow_response_1h.status_code == 200:
+            if tomorrow_response_1d.status_code == 200 and tomorrow_response_1h.status_code == 200 and tomorrow_response_current.status_code == 200:
                 tomorrow_data_days = tomorrow_response_1d.json()
-                tomorrow_data_current = tomorrow_response_1h.json()
+                tomorrow_data_hours = tomorrow_response_1h.json()
+                tomorrow_data_current = tomorrow_response_current.json()['data']
+                
+                
+                previsao_atual = {
+                    "time": tomorrow_data_current['time'][-9:-1],
+                    "values": {
+                        'temperature': tomorrow_data_current['values'].get('temperature', 0),
+                        'temperatureApparent': tomorrow_data_current['values'].get('temperatureApparent', 0),
+                        'humidity': tomorrow_data_current['values'].get('humidity', 0),
+                        'visibility': tomorrow_data_current['values'].get('visibility', 0),
+                        'uvIndex': tomorrow_data_current['values'].get('uvIndex', 0),
+                        'dewPoint': tomorrow_data_current['values'].get('dewPoint', 0),
+                        'precipitationProbability': tomorrow_data_current['values'].get('precipitationProbability', 0),
+                        'rainIntensity': tomorrow_data_current['values'].get('rainIntensity', 0),
+                        'cloudCover': tomorrow_data_current['values'].get('cloudCover', 0),
+                        'pressureSeaLevel': tomorrow_data_current['values'].get('pressureSeaLevel', 0),
+                        'windSpeed': tomorrow_data_current['values'].get('windSpeed', 0)*3.6,
+                        'windDirection': tomorrow_data_current['values'].get('windDirection', 0),          
+                    }
+                }
 
                 days_to_be_shown_by_the_api = [] 
+        
                 index = 0
-                list_of_hours = tomorrow_data_current['timelines']['hourly']
+                list_of_hours = tomorrow_data_hours['timelines']['hourly']
                 list_lenght = len(list_of_hours)
+                
+                
+                
+                
 
                 for day in tomorrow_data_days['timelines']['daily']:
                     json_of_each_day = {}
 
                     date = day['time'][:10]
+                    print(date)
                     date_list = date.split('-')
                     week_Day = get_week_day(int(date_list[0]), int(date_list[1]), int(date_list[2]))
 
@@ -127,14 +163,14 @@ class WeatherLocationView(APIView):
                             'temperature': list_of_hours[index]['values'].get('temperature',0),
                             'temperatureApparent': list_of_hours[index]['values'].get('temperatureApparent', 0),
                             'humidity': list_of_hours[index]['values'].get('humidity', 0),
-                            'visibilty': list_of_hours[index]['values'].get('visibility', 0),
+                            'visibility': list_of_hours[index]['values'].get('visibility', 0),
                             'uvIndex': list_of_hours[index]['values'].get('uvIndex', 0),
                             'dewPoint': list_of_hours[index]['values'].get('dewPoint', 0),
                             'precipitationProbability': list_of_hours[index]['values'].get('precipitationProbability'),
                             'cloudCover': list_of_hours[index]['values'].get('cloudCover', 0),
                             'rainAccumulation': list_of_hours[index]['values'].get('rainAccumulation', 0),
                             'pressureSeaLevel': list_of_hours[index]['values'].get('pressureSeaLevel', 0),
-                            'windSpeed': list_of_hours[index]['values'].get('windSpeed', 0),
+                            'windSpeed': list_of_hours[index]['values'].get('windSpeed', 0)*3.6,
                             'windDirection': list_of_hours[index]['values'].get('windDirection', 0),
                             'weatherCode': list_of_hours[index]['values'].get('weatherCode', 0) 
                         }
@@ -150,12 +186,13 @@ class WeatherLocationView(APIView):
                     'location_name': query_params['name'],
                     'country': query_params['country'],
                     'state': query_params['state'],
+                    'current': previsao_atual,
                     'days': days_to_be_shown_by_the_api,
                 }
-                return Response({'message': return_JSON})
+                return Response({'message': return_JSON}, status=200)
             else:
-                return Response({'error': 'None value'}, status=tomorrow_response_1d.status_code)
+                return Response({'error': f'As responses retornaram um valor diferente de 200 ok \ntomorrow_response_1d: {tomorrow_response_1d.status_code}\ntomorrow_response_1h: {tomorrow_response_1h.status_code}'}, status=500)
             
         except Exception as error:
             print(f'ESSE ERRO ESTA LIGADO A {error}')
-            return Response({'error': 'None value',}, status=500)
+            return Response({'error': f'{error}',}, status=500)
