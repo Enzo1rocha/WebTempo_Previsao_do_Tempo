@@ -20,7 +20,7 @@ function WelcomePage() {
                         <s.title_buttonContainer>
                             <s.SubTitle>Stay ahead of the weather with our intelligent and easy-to-use forecasting app. Whether you're planning your day, preparing for a trip, or just curious about what’s coming, we provide real-time updates, hourly forecasts, and detailed climate information tailored to your location.
                             </s.SubTitle>
-                        <Button IsLink={true} href={user.user ? '/user/favorite' : '/login'} value={user.user ? 'Search City' : 'Create Your Account'} />
+                        <Button IsLink={true} href={user.user ? '/user/favorite' : '/register'} value={user.user ? 'Search City' : 'Create Your Account'} />
                         </s.title_buttonContainer>
                     </s.Content>    
                 </s.ContainerContent>

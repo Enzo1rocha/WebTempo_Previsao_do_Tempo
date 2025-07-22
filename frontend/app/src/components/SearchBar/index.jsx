@@ -114,7 +114,9 @@ export default function SearchBar({ option } ) {
                     lat: city.lat,
                     long: city.lon
                 })
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 400);
                 return true
             case 'favorite_location':
                 LocationsPageService.addFavoriteLocations({
@@ -125,6 +127,10 @@ export default function SearchBar({ option } ) {
                     long: city.lon
                 })
                 navigate('/user/favorite')
+                setTimeout(() => {
+                    window.location.reload();
+                }, 400);
+
                 break;
             default:
                 return await LocationsPageService.getForecast({
