@@ -191,7 +191,7 @@ class CustomRegisterView(RegisterView):
         return super().post(request, *args, **kwargs)
 
 
-@method_decorator(ratelimit(key='user_or_ip', rate='5/m', method='POST', block=False), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='5/m', method='POST', block=False), name='dispatch')
 class CustomLoginView(LoginView):
 
     #essa view fica responsável pelo login de usuários e alocação dos JWT em http only
@@ -206,6 +206,11 @@ class CustomLoginView(LoginView):
         access_token = data.get('access')
 
         response = Response(data, status=status.HTTP_200_OK)
+        
+        response.delete_cookie('access_token', path='/')
+        response.delete_cookie('refresh_token', path='/')
+        
+        
 
         response.set_cookie(
             key='access_token',
@@ -290,6 +295,6 @@ class CustomLogoutView(LogoutView):
 
     def post(self, request, *args, **kwargs):
         response = Response({'message': 'Logout realizado com sucesso'}, status=status.HTTP_200_OK)
-        response.delete_cookie('access_token', path='/')
-        response.delete_cookie('refresh_token', path='/api/auth/token/refresh/')
+        response.delete_cookie('access_token')
+        response.delete_cookie('refresh_token')
         return response
