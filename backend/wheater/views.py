@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django_ratelimit.decorators import ratelimit
 from decouple import config
 import datetime
+
 # Functions
 
 def get_week_day(year, month, day):
@@ -20,6 +21,10 @@ def get_machine_hour(UTC_ISO_8601):
     from zoneinfo import ZoneInfo
     hour_utc_obj = datetime.fromisoformat(UTC_ISO_8601.replace('Z', "+00:00"))
     return f'{hour_utc_obj.astimezone()}'
+
+
+def format_iso(dt):
+    return dt.strftime()
 
 
 
@@ -47,8 +52,8 @@ class WeatherLocationView(APIView):
             'lon': request.query_params.get('lon'),
             'lat': request.query_params.get('lat'),
         }
+        parametros_faltando = []
         for key, value in query_params.items():
-            parametros_faltando = []
             if not value:
                 parametros_faltando.append(key)
             if len(parametros_faltando) != 0:

@@ -1,5 +1,6 @@
 import * as S from './styles';
 import SearchBar from '../../components/SearchBar';
+import { WiDaySunny } from 'weather-icons-react';
 
 export default function SearchFavoriteLocation() {
     return (

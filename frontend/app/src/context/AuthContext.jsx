@@ -17,12 +17,26 @@ export const AuthProvider = ({ children }) => {
             .finally(() => setLoading(false)) 
     }, []);
 
+
+    useEffect(() => {
+        const handleAuthExpired = () => {
+            logout();
+        };
+
+        window.addEventListener('auth-expired', handleAuthExpired);
+        return () => window.removeEventListener('auth-expired', handleAuthExpired);
+    }, []);
+
     const login = async (credentials) => {
-        await AuthService.login(credentials);
-        const userData = await AuthService.getUser();
-        setUser(userData)
-        console.log('logado');
-        
+        try {
+            await AuthService.login(credentials);
+            const userData = await AuthService.getUser();
+            setUser(userData)
+            console.log('logado');
+        } catch (error) {
+            console.log('erro ao requisitar de login no AuthContext.jsx: ', error);
+            throw error
+        }
     };
 
     const register = async (userData) => {
@@ -40,9 +54,13 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        await AuthService.logout();
-        setUser(null);
-        console.log('logout');        
+        try {
+            await AuthService.logout()
+        } catch (error) {
+            console.log('Logout Falhou, mas continua');
+        } finally {
+            setUser(null)
+        }  
     };
 
     return (

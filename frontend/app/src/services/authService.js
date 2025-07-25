@@ -1,4 +1,4 @@
-import api from "./api";
+import {api, authApi } from "./api";
 
 const AuthService = {
     async register(userData) {
@@ -9,7 +9,7 @@ const AuthService = {
     },
 
     async login(credentials) {
-        const response = await api.post('api/auth/login/', credentials, {
+        const response = await authApi.post('api/auth/login/', credentials, {
             withCredentials: true
         });
         return response.data
@@ -17,7 +17,7 @@ const AuthService = {
 
     async logout() {
         try {
-            const response = await api.post('api/auth/logout/', null, {
+            const response = await authApi.post('api/auth/logout/', null, {
             withCredentials: true,
             });
             return response.data
@@ -66,6 +66,18 @@ const AuthService = {
                 isAuthenticated: false,
                 user: null
             };
+        }
+    },
+
+    async refreshToken() {
+        try {
+            const response = await authApi.post('api/auth/token/refresh/', null, {
+                withCredentials: true
+            });
+            return response.data
+        } catch (error) {
+            console.log('Erro ao renovar o token', error);
+            throw error
         }
     }
 }
