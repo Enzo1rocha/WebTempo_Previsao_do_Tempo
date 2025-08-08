@@ -31,16 +31,6 @@ def get_machine_hour(UTC_ISO_8601, timezone_name):
 
 # Create your views here.
 
-
-"""
-class TestView(APIView):
-    @method_decorator(ratelimit(key='user', rate='5/m', method='GET', block=False))
-    def get(self, request):
-        if getattr(request, 'limited', False):
-            return Response({"message": 'API FUNCIONANDO, VOCE ESTÁ SENDO LIMITADO!'}, status=429)
-        return Response({"message": "API ESTÁ FUNCIONANDO!"})
-"""
-
 class WeatherLocationView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -112,10 +102,10 @@ class WeatherLocationView(APIView):
                 tomorrow_data_hours = tomorrow_response_1h.json()['data']
                 tomorrow_data_current = tomorrow_response_current.json()['data']
                 local_tz = ZoneInfo(timezone_str)
-                tempo = datetime.datetime.now(local_tz).strftime('%Y-%m-%d %H:%M:%S %Z%z')
+                tempo = datetime.datetime.now(local_tz).isoformat()
                 
                 previsao_atual = {
-                    "time":tempo,
+                    "time":get_machine_hour(tempo, timezone_str),
                     "values": {
                         'temperature': tomorrow_data_current['values'].get('temperature', 0),
                         'temperatureApparent': tomorrow_data_current['values'].get('temperatureApparent', 0),
