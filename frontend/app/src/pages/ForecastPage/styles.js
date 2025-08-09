@@ -51,3 +51,7 @@ export const OptionContent = styled.button `
 
 export const HiddenOptionsContent = styled.button `
 `
+
+export const days = styled.div `
+    
+`
