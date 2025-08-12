@@ -2,6 +2,8 @@ import * as S from './styles';
 import moon from '../../assets/forecastPage/moon.svg'
 import rightArrow from '../../assets/authPageIMGS/RightArrow.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DetalhesClimaticosDoDia from '../../components/DetalhesClimaticosDoDIa';
+import OptionOfDays from '../../components/OptionOfDays';
 
 export default function ForecastPage() {
     return (
@@ -13,9 +15,9 @@ export default function ForecastPage() {
                 </S.localName>
                 <S.temperatureAndIconDiv>
                     <S.TemperatureDiv>
-                        <img src={moon} alt="Lua" />
+                        <FontAwesomeIcon icon={'moon'} />
                         <div>
-                            <p>17 <S.temperatureSymbol>c</S.temperatureSymbol></p>
+                            <p>17<span>c</span></p>
                         </div>
                     </S.TemperatureDiv>
                     <S.TemperatureText>
@@ -33,7 +35,7 @@ export default function ForecastPage() {
                     </div>
                     <div>
                         <p>Vento</p>
-                        <p>7km/h <span><img src={rightArrow} alt="right Arrow" /></span></p>
+                        <p>7km/h <FontAwesomeIcon icon={'arrow-right'} /></p>
                     </div>
                     <div>
                         <p>Umidade</p>
@@ -81,8 +83,38 @@ export default function ForecastPage() {
                         </S.HiddenOptionsContent>
                     </S.OptionsForGraph>
                 </S.OptionsForGraphDiv>
+                <S.visãoGeralDias>
+                    <OptionOfDays day={'10'} day_name={'Hoje'} value1={'22'} value2={'14'} icon={moon} />
 
+                    <OptionOfDays day={'11'} day_name={'Amanhã'} value1={'0'} value2={'10%'} icon={null} option={'PRECIPITAÇÃO'} />
+
+                    <OptionOfDays day={'12'} day_name={'Terça'} value1={'12'} value2={'7'} icon={null} option={'VENTO'} />
+
+                    <OptionOfDays day={'13'} day_name={'Quarta'} value1={'105'} value2={'Ruim'} icon={null} option={'QUALIDADE'} />
+                </S.visãoGeralDias>
             </S.SectionForGraph>
+            <S.Grafico>
+
+            </S.Grafico>
+            <S.DetalhesDoDia>
+                <DetalhesClimaticosDoDia Titulo={'Temperatura'} Icone={'temperature-half'} alt_Icone={'Icone Temperatura'} Valor={13} codigoValor={'°C'} subTitulo={'Teste'} />
+                
+                <DetalhesClimaticosDoDia Titulo={'Sensação Térmica'} Icone={'temperature-low'} alt_Icone={'Icone Temperatura'} Valor={13} codigoValor={'°C'} subTitulo={'Teste'} />
+
+                <DetalhesClimaticosDoDia Titulo={'Precipitação'} Icone={'droplet'} alt_Icone={'Icone Precipitação'} Valor={0} codigoValor={'mm'} subTitulo={'Teste'} />
+
+                <DetalhesClimaticosDoDia Titulo={'Vento'} Icone={'wind'} alt_Icone={'Icone Vento'} Valor={10} codigoValor={'km/h'} subTitulo={'Teste'} />
+
+                <DetalhesClimaticosDoDia Titulo={'Umidade'} Icone={'percent'} alt_Icone={'Icone Umidade'} Valor={75} codigoValor={'%'} subTitulo={'Teste'} />
+
+                <DetalhesClimaticosDoDia Titulo={'Visibilidade'} Icone={'eye'} alt_Icone={'Icone Visibilidade'} Valor={7} codigoValor={'km'} subTitulo={'Teste'} />
+                <DetalhesClimaticosDoDia Titulo={'Pressão'} Icone={'gauge-simple-high'} alt_Icone={'Icone Pressão'} Valor={1024} codigoValor={'mb'} subTitulo={'Teste'} />
+
+                <DetalhesClimaticosDoDia Titulo={'UV'} Icone={'circle-exclamation'} alt_Icone={'Icone UV'} Valor={3} codigoValor={'Moderado'} subTitulo={'Teste'} />
+
+                <DetalhesClimaticosDoDia Titulo={'AQI'} Icone={'triangle-exclamation'} alt_Icone={'Icone Qualidade do Ar'} Valor={58} subTitulo={'Teste'} />
+
+            </S.DetalhesDoDia>
 
         </S.Main>
     )

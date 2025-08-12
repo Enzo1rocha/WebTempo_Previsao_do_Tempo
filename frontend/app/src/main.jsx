@@ -18,6 +18,7 @@ import LogoutPage from './pages/LogoutPage'
 import LocationsPage from './pages/LocationsPage'
 import SearchFavoriteLocation from './pages/SearchFavoriteLocation'
 import ChangeBootLocation from './components/ChangeBootLocation'
+import ForecastPage from './pages/ForecastPage'
 
 
 const router = createBrowserRouter([
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
           <SearchFavoriteLocation />
         </ProtectedRoute>
       )},
-      { path: '/test', element: <ChangeBootLocation />}
+      { path: '/test', element: <ForecastPage />}
     ]
   },
   { path: '*', element: <PageNotFound />}

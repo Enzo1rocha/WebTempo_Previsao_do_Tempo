@@ -8,5 +8,16 @@ import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faTemperatureHalf } from "@fortawesome/free-solid-svg-icons";
+import { faTemperatureLow } from "@fortawesome/free-solid-svg-icons";
+import { faDroplet } from "@fortawesome/free-solid-svg-icons";
+import { faWind } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faGaugeSimpleHigh } from "@fortawesome/free-solid-svg-icons";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faPercent } from "@fortawesome/free-solid-svg-icons";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faMagnifyingGlass, faBars, faDeleteLeft, faPlus, faX, faMapLocationDot, faPenToSquare, faPencil, faEllipsis);
+library.add(faMagnifyingGlass, faBars, faDeleteLeft, faPlus, faX, faMapLocationDot, faPenToSquare, faPencil, faEllipsis, faTemperatureHalf, faTemperatureLow, faDroplet, faWind, faEye, faGaugeSimpleHigh, faCircleExclamation, faTriangleExclamation, faPercent, faMoon, faArrowRight);
