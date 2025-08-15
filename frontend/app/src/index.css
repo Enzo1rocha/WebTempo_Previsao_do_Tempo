@@ -4,7 +4,8 @@
 
 :root {
     --Primary-Color: #1F2937;
-    --Secundary-Color: #374151;
+    --Secundary-Color: rgb(55, 65, 81);
+    --Secundary-Color-50-transparent: rgb(55, 65, 81, 0.5);
     --Secundary-Color-Change-Boot-Location: rgba(55, 65, 81, 0.900);
     --Background-Color: #F3F4F6;
 

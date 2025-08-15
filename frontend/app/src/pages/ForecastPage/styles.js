@@ -8,6 +8,7 @@ export const Main = styled.main `
     flex-direction: column;
     margin: auto;
 
+    background-color: var(--Background-Color);
     color: var(--Secundary-Color);
     padding: 40px;
 `
@@ -199,6 +200,7 @@ export const HiddenOptionsContent = styled.button `
 export const visãoGeralDias = styled.div `
     display: flex;
     flex-direction: row;
+    gap: 10px;
     
 `
 

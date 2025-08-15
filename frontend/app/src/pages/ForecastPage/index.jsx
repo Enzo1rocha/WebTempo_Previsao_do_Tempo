@@ -4,8 +4,58 @@ import rightArrow from '../../assets/authPageIMGS/RightArrow.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DetalhesClimaticosDoDia from '../../components/DetalhesClimaticosDoDIa';
 import OptionOfDays from '../../components/OptionOfDays';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+    plugins,
+} from 'chart.js'
+import { Line } from 'react-chartjs-2';
+import { text } from '@fortawesome/fontawesome-svg-core';
+
+ChartJS.register(
+        CategoryScale,
+        LinearScale,
+        PointElement,
+        LineElement,
+        Title,
+        Tooltip,
+        Legend
+    );
+
+
 
 export default function ForecastPage() {
+
+    const options = {
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: false,
+                text: 'Clima',
+            },
+        },
+    };
+
+    const labels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00']
+
+    const data = {
+        labels,
+        datasets : [{
+            label: 'Temperatura',
+            data: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+            borderColor: 'rgb(55, 65, 81)',
+            backgroundColor: 'rgba(55, 65, 81, 0.5)',
+        }],
+    }
+
     return (
         <S.Main>
             <S.textSection>
@@ -84,9 +134,9 @@ export default function ForecastPage() {
                     </S.OptionsForGraph>
                 </S.OptionsForGraphDiv>
                 <S.visãoGeralDias>
-                    <OptionOfDays day={'10'} day_name={'Hoje'} value1={'22'} value2={'14'} icon={moon} />
+                    <OptionOfDays day={'10'} day_name={'Hoje'} value1={'22'} value2={'14'} icon={'moon'} />
 
-                    <OptionOfDays day={'11'} day_name={'Amanhã'} value1={'0'} value2={'10%'} icon={null} option={'PRECIPITAÇÃO'} />
+                    <OptionOfDays day={'11'} day_name={'Amanhã'} value1={'0'} value2={'10'} icon={null} option={'PRECIPITAÇÃO'} />
 
                     <OptionOfDays day={'12'} day_name={'Terça'} value1={'12'} value2={'7'} icon={null} option={'VENTO'} />
 
@@ -94,6 +144,8 @@ export default function ForecastPage() {
                 </S.visãoGeralDias>
             </S.SectionForGraph>
             <S.Grafico>
+
+                <Line options={options} data={data} />
 
             </S.Grafico>
             <S.DetalhesDoDia>

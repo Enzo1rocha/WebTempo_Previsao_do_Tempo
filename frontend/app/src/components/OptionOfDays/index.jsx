@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as S from "./styles"
 
 export default function OptionOfDays({day, day_name, value1, value2, icon, option}) {
@@ -13,8 +14,8 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                 return (
                     <S.conteudo_com_dados>
                         <S.valor_a_esquerda>
-                            <p>{value1}mm</p>
-                            <p>{value2}%</p>
+                            <p>{value1}<span>mm</span></p>
+                            <p>{value2}<span>%</span></p>
                         </S.valor_a_esquerda>
                         <S.encher>
                             <S.valor altura_percentual={altura_percentual}></S.valor>
@@ -30,8 +31,8 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                 return (
                     <S.conteudo_com_dados>
                         <S.valor_a_esquerda>
-                            <p>{value1}Km/h</p>
-                            <p>{value2}Km/h</p>
+                            <p>{value1}<span>Km/h</span></p>
+                            <p>{value2}<span>Km/h</span></p>
                         </S.valor_a_esquerda>
                         <S.encher>
                             <S.valor altura_percentual={altura_percentual}>
@@ -50,7 +51,7 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                     <S.conteudo_com_dados>
                         <S.valor_a_esquerda>
                             <p>{value1}</p>
-                            <p>{value2}</p>
+                            <p className="qualidade">{value2}</p>
                         </S.valor_a_esquerda>
                         <S.encher>
                             <S.valor altura_percentual={altura_percentual}>
@@ -65,8 +66,8 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                 return (
                     <S.conteudo_com_dados>
                         <S.valor_a_esquerda>
-                            <p>{value1}%</p>
-                            <p>{value2}%</p>
+                            <p>{value1}<span>%</span></p>
+                            <p>{value2}<span>%</span></p>
                         </S.valor_a_esquerda>
                         <S.encher>
                             <S.valor altura_percentual={value1}>
@@ -82,8 +83,8 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                 return (
                     <S.conteudo_com_dados>
                         <S.valor_a_esquerda>
-                            <p>{value1}Km</p>
-                            <p>{value2}Km</p>
+                            <p>{value1}<span>Km</span></p>
+                            <p>{value2}<span>Km</span></p>
                         </S.valor_a_esquerda>
                         <S.encher>
                             <S.valor altura_percentual={altura_percentual}>
@@ -101,8 +102,8 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                 return (
                     <S.conteudo_com_dados>
                         <S.valor_a_esquerda>
-                            <p>{value1}mb</p>
-                            <p>{value2}mb</p>
+                            <p>{value1}<span>mb</span></p>
+                            <p>{value2}<span>mb</span></p>
                         </S.valor_a_esquerda>
                         <S.encher>
                             <S.valor altura_percentual={altura_percentual}>
@@ -135,8 +136,8 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                 return (
                     <S.conteudo_com_dados>
                         <S.valor_a_esquerda>
-                            <p>{value1}°</p>
-                            <p>{value2}°</p>
+                            <p>{value1}<span>°</span></p>
+                            <p>{value2}<span>°</span></p>
                         </S.valor_a_esquerda>
                         <S.encher>
                             <S.valor altura_percentual={altura_percentual}></S.valor>
@@ -150,7 +151,7 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
                 return (
                     <S.conteudo_com_dados>
                         <S.icone>
-                            <img src={icon} alt='Icone climatico' />
+                            <FontAwesomeIcon icon={icon}/>
                         </S.icone>
                         <S.valor_a_direita>
                             <p>{value1}°</p>
