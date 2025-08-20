@@ -9,6 +9,7 @@ import datetime
 import pytz
 from timezonefinderL import TimezoneFinder
 from zoneinfo import ZoneInfo
+from django.core.cache import cache
 
 # Functions
 
@@ -50,6 +51,18 @@ class WeatherLocationView(APIView):
         if len(parametros_faltando) != 0:
             return Response({'error': f'Parâmetro {parametros_faltando} é obrigatório'}, status=400)
         
+        
+        cache_key = f"weather_data_zone_{query_params['name']}_{query_params['country']}_{query_params['state']}_{query_params['lon']}_{query_params['lat']}"
+        
+        cached_data = cache.get(cache_key)
+        
+        
+        if cached_data:
+            print('CACHE HIT: ', cache_key)
+            return Response({'message': cached_data}, status=200)
+        
+        print(f'CACHE MISS: {cache_key}')
+        
         tomorrow_url = f'https://api.tomorrow.io/v4/weather/forecast'
         tomorrow_current_url = f'https://api.tomorrow.io/v4/weather/realtime'
         tomorrow_hours_url = f'https://api.tomorrow.io/v4/timelines'
@@ -58,7 +71,7 @@ class WeatherLocationView(APIView):
         timezone_str = timezone.timezone_at(lng=float(query_params['lon']), lat=float(query_params['lat']))
         
         if not timezone_str:
-            return Response({'error': 'NÃO FOI POSSIVEL DETERMINAR O FUSO HORÁRIO'}, status=500)
+            timezone_str = 'UTC'
         
         local_timezone = pytz.timezone(timezone_str)
         
@@ -101,6 +114,8 @@ class WeatherLocationView(APIView):
                 tomorrow_data_days = tomorrow_response_1d.json()
                 tomorrow_data_hours = tomorrow_response_1h.json()['data']
                 tomorrow_data_current = tomorrow_response_current.json()['data']
+    
+                
                 local_tz = ZoneInfo(timezone_str)
                 tempo = datetime.datetime.now(local_tz).isoformat()
                 
@@ -118,7 +133,7 @@ class WeatherLocationView(APIView):
                         'cloudCover': tomorrow_data_current['values'].get('cloudCover', 0),
                         'pressureSeaLevel': tomorrow_data_current['values'].get('pressureSeaLevel', 0),
                         'windSpeed': tomorrow_data_current['values'].get('windSpeed', 0)*3.6,
-                        'windDirection': tomorrow_data_current['values'].get('windDirection', 0),          
+                        'windDirection': tomorrow_data_current['values'].get('windDirection', 0),         
                     }
                 }
 
@@ -147,6 +162,9 @@ class WeatherLocationView(APIView):
                         'temperatureMin': day['values'].get('temperatureMin',0),
 
                         'humidityAvg': day['values'].get('humidityAvg',0),
+                        
+                        'humidityMax': day['values'].get('humidityMax',0),
+                        'humidityMin': day['values'].get('humidityMin',0),
 
                         'windSpeedMax': (day['values'].get('windSpeedMax',0))*3.6,
                         'windSpeedMin': (day['values'].get('windSpeedMin',0))*3.6,
@@ -213,9 +231,12 @@ class WeatherLocationView(APIView):
                     'current': previsao_atual,
                     'days': days_to_be_shown_by_the_api,
                 }
+                
+                cache.set(cache_key, return_JSON, timeout=1800)
+                
                 return Response({'message': return_JSON}, status=200)
             else:
-                return Response({'error': f'As responses retornaram um valor diferente de 200 ok \ntomorrow_response_1d: {tomorrow_response_1d.status_code}\ntomorrow_response_1h: {tomorrow_response_1h.status_code}'}, status=500)
+                return Response({'error': f'As responses retornaram um valor diferente de 200 ok \ntomorrow_response_1d: {tomorrow_response_1d.status_code} tomorrow_response_1h: {tomorrow_response_1h.status_code}'}, status=500)
             
         except Exception as error:
             print(f'ESSE ERRO ESTA LIGADO A {error}')

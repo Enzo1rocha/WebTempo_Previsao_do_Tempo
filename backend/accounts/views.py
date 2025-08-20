@@ -122,7 +122,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def get_csrf_token(request):
     return Response({'csrfToken': 'CSRF token set'}, status=status.HTTP_200_OK)
 
-@method_decorator(ratelimit(key='user', rate='10/m', method='POST', block=False), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='20/m', method='POST', block=False), name='dispatch')
 class CustomTokenRefreshView(TokenRefreshView):
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
@@ -131,7 +131,7 @@ class CustomTokenRefreshView(TokenRefreshView):
         return super().post(request, *args, **kwargs)
 
 
-@method_decorator(ratelimit(key='user', rate='60/m', method='POST', block=False), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='80/m', method='POST', block=False), name='dispatch')
 class CustomTokenVerifyView(TokenVerifyView):
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
