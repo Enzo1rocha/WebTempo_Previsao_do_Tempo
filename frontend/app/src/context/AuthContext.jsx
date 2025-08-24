@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react"; 
 import AuthService from "../services/authService";
 const AuthContext = createContext(null);
 
@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+
     useEffect(() => {
         AuthService.getUser()
             .then((data) => setUser(data))
@@ -17,6 +18,15 @@ export const AuthProvider = ({ children }) => {
             .finally(() => setLoading(false)) 
     }, []);
 
+    const logout = useCallback(async () => {
+        try {
+            await AuthService.logout()
+        } catch (error) {
+            console.log('Logout Falhou, mas continua');
+        } finally {
+            setUser(null)
+        }  
+    }, []);
 
     useEffect(() => {
         const handleAuthExpired = () => {
@@ -25,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
         window.addEventListener('auth-expired', handleAuthExpired);
         return () => window.removeEventListener('auth-expired', handleAuthExpired);
-    }, []);
+    }, [logout]);
 
     const login = async (credentials) => {
         try {
@@ -52,16 +62,6 @@ export const AuthProvider = ({ children }) => {
             throw error;
         }
     }
-
-    const logout = async () => {
-        try {
-            await AuthService.logout()
-        } catch (error) {
-            console.log('Logout Falhou, mas continua');
-        } finally {
-            setUser(null)
-        }  
-    };
 
     return (
         <AuthContext.Provider value={{user, login, register, logout, loading}}>

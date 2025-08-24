@@ -1,6 +1,5 @@
 // api.js
 import axios from 'axios';
-import AuthService from './authService';
 
 export const authApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -12,57 +11,62 @@ export const api = axios.create({
   timeout: 10000,
 });
 
-// interceptor no api, mas refresh/logout no authApi:
 let isRefreshing = false;
 let failedQueue = [];
 
-const processQueue = (error, token = true) => {
-  failedQueue.forEach(p => (error ? p.reject(error) : p.resolve(token)));
+const processQueue = (error, token = null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
   failedQueue = [];
 };
 
 api.interceptors.response.use(
-  res => res,
+  response => response,
   async error => {
-    const req = error.config;
+    const originalRequest = error.config;
 
-    // ignora refresh e logout
-    if (
-      req.url.includes('/api/auth/token/refresh') ||
-      req.url.includes('/api/auth/logout')
-    ) {
+    // Se o erro não for 401, ou já for uma tentativa, ou for na rota de refresh, rejeita.
+    if (error.response?.status !== 401 || originalRequest._retry || originalRequest.url.includes('/api/auth/token/refresh')) {
       return Promise.reject(error);
     }
 
-    if (error.response?.status === 401 && !req._retry && error.response.data?.code === 'invalid_token') {
-      window.dispatchEvent(new CustomEvent('auth-expired'))
+    if (isRefreshing) {
+      return new Promise((resolve, reject) => {
+        // CORREÇÃO: Usando 'resolve' e 'reject' consistentemente
+        failedQueue.push({ resolve, reject });
+      })
+        .then(() => api(originalRequest))
+        .catch(err => Promise.reject(err));
+    };
+
+    originalRequest._retry = true;
+    isRefreshing = true;
+
+    try {
+      console.log("Access Token expirado. Tentando renovar...");
+      const response = await authApi.post('/api/auth/token/refresh/', null);
+      
+      console.log("SUCESSO na chamada de refresh!");
+      
+      // Processa a fila com sucesso. O token não é necessário aqui,
+      // pois o novo cookie de acesso já foi definido pelo backend.
+      processQueue(null); 
+      
+      console.log("Fila de requisições processada. Refazendo a requisição original:", originalRequest.url);
+      return api(originalRequest);
+
+    } catch (err) {
+      console.error("FALHA ao tentar renovar o token. Disparando auth-expired.");
+      processQueue(err);
+      window.dispatchEvent(new CustomEvent('auth-expired'));
+      return Promise.reject(err);
+    } finally {
+      isRefreshing = false;
     }
-
-    if (error.response?.status === 401 && !req._retry) {
-      if (isRefreshing) {
-        return new Promise((res, rej) => failedQueue.push({ res, rej }))
-          .then(() => api(req))
-          .catch(err => Promise.reject(err));
-      }
-
-      req._retry = true;
-      isRefreshing = true;
-      try {
-        // usa authApi aqui
-        await authApi.post('/api/auth/token/refresh/', null, {
-          withCredentials: true,
-        });
-        processQueue(null);
-        return api(req);
-      } catch (err) {
-        processQueue(err);
-        window.dispatchEvent(new CustomEvent('auth-expired'));
-        return Promise.reject(err);
-      } finally {
-        isRefreshing = false;
-      }
-    }
-
-    return Promise.reject(error);
   }
 );

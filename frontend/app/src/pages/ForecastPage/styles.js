@@ -179,6 +179,7 @@ export const OptionContent = styled.button `
     font-size: 17px;
     font-weight: 700;
     border-radius: 15px;
+    border: none;
 
 
 
@@ -191,9 +192,37 @@ export const HiddenOptionsContent = styled.button `
     color: var(--Background-Color);
     padding: 0px 13px;
     border-radius: 15px;
+    justify-content: center;
+    align-items: center;
 
     > svg {
         font-size: 33px;
+    }
+
+    border: none;
+    position: relative;
+`
+
+export const hiddenOptions = styled.div `
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translate(-50%, 25px);
+    background-color: var(--Secundary-Color-50-transparent);
+    backdrop-filter: blur(10px);
+    color: var(--Background-Color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+
+    > div {
+        cursor: pointer;
+        > p {
+            font-size: 17px;
+            font-weight: 700;
+        }
     }
 `
 
@@ -205,8 +234,16 @@ export const visãoGeralDias = styled.div `
 `
 
 export const Grafico = styled.div `
+    margin-top: 40px;
+    position: relative;
+    height: 280px;
+    width: 80%;
 `
 
 export const DetalhesDoDia = styled.div `
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 400px);
+    gap: 20px;
 `
 

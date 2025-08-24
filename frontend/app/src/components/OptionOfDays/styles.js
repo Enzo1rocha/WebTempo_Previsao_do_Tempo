@@ -6,10 +6,16 @@ export const Container = styled.div `
     padding: 8px 12px;
 
     border-radius: 12px;
+    cursor: pointer;
 
 
     height: 130px;
     width: 180px;
+    transition-duration: 300ms;
+
+    &:hover {
+        box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.4);
+    }
 `
 
 export const Content = styled.div `
@@ -54,8 +60,12 @@ export const valor_a_esquerda = styled.div `
         font-weight: 700;
         color: var(--Secundary-Color);
 
-        &.qualidade {
-            font-size: 20px;
+        &.uv {
+            font-size: 19px;
+        }
+
+        &.precipitação {
+            font-size: 18px;
         }
 
         > span {
@@ -84,8 +94,8 @@ export const icone = styled.div `
 
 export const encher = styled.div `
     display: flex;
+    align-items: flex-end;
     justify-content: center;
-    align-items: end;
     background-color: gray;
     height: 75px;
     width: 26px;
@@ -96,6 +106,6 @@ export const encher = styled.div `
 export const valor = styled.div `
     background-color: var(--Secundary-Color);
     width: 100%;
-    height: 50px;
-    border-radius: 15px;
+    height: ${props => props.altura_percentual}%;
+    border-radius: 15px 15px 15px 15px;
 `

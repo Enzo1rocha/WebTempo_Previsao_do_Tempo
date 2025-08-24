@@ -83,7 +83,7 @@ const LocationsPageService = {
         try {
             const response = await api.get(`search-city/`, {
                 params: {
-                    name: params.location_name,
+                    name: params.name,
                     country: params.country,
                     state: params.state,
                     lon: params.lon,
@@ -93,7 +93,7 @@ const LocationsPageService = {
                 withCredentials: true
             })
             if (response.status == 200) {
-                return response.data
+                return response.data.message;
             }
             throw new Error('falha ao pegar a previsão do tempo')
         } catch (error) {

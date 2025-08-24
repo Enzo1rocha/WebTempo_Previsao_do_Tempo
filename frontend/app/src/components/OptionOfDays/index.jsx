@@ -1,170 +1,72 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as S from "./styles"
 
-export default function OptionOfDays({day, day_name, value1, value2, icon, option}) {
+export default function OptionOfDays({day, day_name, value1, value2, icon, option, onClick}) {
 
-    const calcularPercentual = (valor, max) => Math.min((valor/max) * 100, 100)
+    const METRIC_CONFIG = {
+        'PRECIPITAÇÃO': { min: 0, max: 100, unit: '' },
+        'VENTO':        { min: 0, max: 50, unit: 'Km/h' }, 
+        'UMIDADE':      { min: 0, max: 100, unit: '%' },
+        'VISIBILIDADE': { min: 0, max: 20, unit: 'Km' },   
+        'PRESSÃO':      { min: 980, max: 1040, unit: 'mb' },
+        'UV':           { min: 0, max: 12, unit: '' }, 
+        'SENSAÇÃO':     { min: -10, max: 40, unit: '°' },
+    };
 
-    const get_option = () => {
-        switch (option) {
-            case 'PRECIPITAÇÃO': {
-
-                let altura_percentual = calcularPercentual(value2, 100);
-
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}<span>mm</span></p>
-                            <p>{value2}<span>%</span></p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={altura_percentual}></S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                )
-            }
-            
-            case 'VENTO': {
-
-                let altura_percentual = Math.min((value1 / 50) * 100, 100)
-
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}<span>Km/h</span></p>
-                            <p>{value2}<span>Km/h</span></p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={altura_percentual}>
-
-                            </S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                )
-            }
-
-            case 'QUALIDADE': {
-
-                let altura_percentual = Math.min((value1 / 301) * 100, 100)
-
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}</p>
-                            <p className="qualidade">{value2}</p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={altura_percentual}>
-
-                            </S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                )
-            }
-            
-            case 'UMIDADE':
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}<span>%</span></p>
-                            <p>{value2}<span>%</span></p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={value1}>
-                                
-                            </S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                )
-                
-            case 'VISIBILIDADE': {
-                let altura_percentual = calcularPercentual(value1, 100)
-
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}<span>Km</span></p>
-                            <p>{value2}<span>Km</span></p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={altura_percentual}>
-
-                            </S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                )
-            }
-            
-            case 'PRESSÃO': {
-
-                let altura_percentual = calcularPercentual(value1, 100)
-
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}<span>mb</span></p>
-                            <p>{value2}<span>mb</span></p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={altura_percentual}>
-
-                            </S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                )
-            }
-            
-            case 'UV':
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}</p>
-                            <p>{value2}</p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={value1*10}>
-                                
-                            </S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                )
-            
-            case 'SENSAÇÃO': {
-
-                let altura_percentual = calcularPercentual(value1, 30)
-
-                return (
-                    <S.conteudo_com_dados>
-                        <S.valor_a_esquerda>
-                            <p>{value1}<span>°</span></p>
-                            <p>{value2}<span>°</span></p>
-                        </S.valor_a_esquerda>
-                        <S.encher>
-                            <S.valor altura_percentual={altura_percentual}></S.valor>
-                        </S.encher>
-                    </S.conteudo_com_dados>
-                ) 
-            }
-        
-            default: {
-                
-                return (
-                    <S.conteudo_com_dados>
-                        <S.icone>
-                            <FontAwesomeIcon icon={icon}/>
-                        </S.icone>
-                        <S.valor_a_direita>
-                            <p>{value1}°</p>
-                            <p>{value2}°</p>
-                        </S.valor_a_direita>
-                    </S.conteudo_com_dados>
-                ) 
-            }
+    const options_class_names = (option) => {
+        if (option === 'UV') {
+            return 'uv';
+        } else if (option === 'PRECIPITAÇÃO') {
+            return 'precipitação';
+        }  
+        else {
+            return null;
         }
     }
 
+    const normalizarValor = (valor, min, max) => {
+    if (max === min) return 0;
+
+    const percentual = ((valor - min) / (max - min)) * 100;
+
+    return Math.max(0, Math.min(percentual, 100));
+    };
+
+    const get_option = () => {
+
+        const config = METRIC_CONFIG[option];
+
+        if (!config) {
+        return (
+            <S.conteudo_com_dados>
+                <S.icone>
+                    <FontAwesomeIcon icon={icon} />
+                </S.icone>
+                <S.valor_a_direita>
+                    <p>{value1}°</p>
+                    <p>{value2}°</p>
+                </S.valor_a_direita>
+            </S.conteudo_com_dados>
+            );
+        }
+
+        const altura_percentual = normalizarValor(value1, config.min, config.max);
+
+        return (
+            <S.conteudo_com_dados>
+                <S.valor_a_esquerda>
+                    <p>{value1}<span>{config.unit}</span></p>
+                    <p className={options_class_names(option)}>{value2}<span>{config.unit}</span></p>
+                </S.valor_a_esquerda>
+                <S.encher>
+                    <S.valor altura_percentual={altura_percentual}></S.valor>
+                </S.encher>
+            </S.conteudo_com_dados>
+        );
+    }
+
     return (
-        <S.Container>
+        <S.Container onClick={onClick}>
             <S.Content>
                 <S.day_content>
                     <p>{day}</p>
