@@ -6,6 +6,8 @@ from rest_framework import serializers
 from .models import FavoriteLocations, BootLocation
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer, JWTSerializerWithExpiration
+from rest_framework_simplejwt.serializers import TokenRefreshSerializer
+from rest_framework_simplejwt.exceptions import InvalidToken
 import re
 from decouple import config
 import requests
@@ -163,3 +165,15 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
     class Meta:
         model = get_user_model()
         fields = tuple(UserDetailsSerializer.Meta.fields + ('favorite_locations', 'boot_location'))
+        
+        
+class CookieTokenRefreshSerializer(TokenRefreshSerializer):
+    refresh = None
+    
+    def validate(self, attrs):
+        attrs['refresh'] = self.context['request'].COOKIES.get('refresh_token')
+        
+        if attrs['refresh']:
+            return super().validate(attrs)
+        else:
+            raise InvalidToken('nenhum refresh token válido encontrado no cookie.')

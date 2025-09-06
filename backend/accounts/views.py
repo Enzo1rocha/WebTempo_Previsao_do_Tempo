@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import FavoriteLocationsSerializer, BootLocationSerializer
+from .serializers import FavoriteLocationsSerializer, BootLocationSerializer, CookieTokenRefreshSerializer
 from .models import BootLocation, FavoriteLocations
 
 from django.utils.decorators import method_decorator
@@ -124,15 +124,35 @@ def get_csrf_token(request):
 
 @method_decorator(ratelimit(key='user', rate='20/m', method='POST', block=False), name='dispatch')
 class CustomTokenRefreshView(TokenRefreshView):
+    authentication_classes = []
     permission_classes = [AllowAny]
+    serializer_class = CookieTokenRefreshSerializer
+    
+    
+    
+    
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando atualizar o token muitas vezes, aguarde um pouco!'}, status=429)
-        return super().post(request, *args, **kwargs)
+        response = super().post(request, *args, **kwargs)
+        
+        if response.status_code == 200:
+            access_token = response.data.get('access')
+            response.set_cookie(
+                key='access_token',
+                value=access_token,
+                httponly=True,
+                secure=False,
+                samesite='Lax',
+                max_age=60*15,
+                path='/'
+            )
+        return response
 
 
 @method_decorator(ratelimit(key='user', rate='80/m', method='POST', block=False), name='dispatch')
 class CustomTokenVerifyView(TokenVerifyView):
+    authentication_classes = []
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
@@ -143,48 +163,8 @@ class CustomTokenVerifyView(TokenVerifyView):
 @method_decorator(ratelimit(key='user_or_ip', rate='100/d', method='POST', block=False), name='dispatch')
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class CustomRegisterView(RegisterView):
-
-    #essa view fica responsável pelo registro de usuários e alocação dos JWT em http only
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save(self.request)
-
-
-        refresh = RefreshToken.for_user(user)
-        access_token = str(refresh.access_token)
-        refresh_token = str(refresh)
-
-        response = Response(
-            {"detail": 'Usuário criado com sucesso.'}, status=201
-        )
-
-        # set cookies
-
-        response.set_cookie(
-            key='access_token',
-            value=access_token,
-            httponly=True,
-            secure=False,
-            samesite='Lax',
-            max_age=60*15,
-            path='/'
-        )
-        response.set_cookie(
-            key='refresh_token', 
-            value=refresh_token,
-            httponly=True,
-            secure=False,
-            samesite='Lax',
-            max_age=60*60*24*7,
-            path='/api/auth/token/refresh'
-        )
-
-
-        return response
-
-
+    authentication_classes = []
+    permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando se registrar muitas vezes, aguarde um pouco!'}, status=429)
@@ -193,58 +173,34 @@ class CustomRegisterView(RegisterView):
 
 @method_decorator(ratelimit(key='user', rate='5/m', method='POST', block=False), name='dispatch')
 class CustomLoginView(LoginView):
+    
+    authentication_classes = []
+    permission_classes = [AllowAny]
 
     #essa view fica responsável pelo login de usuários e alocação dos JWT em http only
 
     def get_response(self):
         original_response = super().get_response()
-        user = self.user
+        original_response.data.pop('access', None)
+        original_response.data.pop('refresh', None)
         
-        data = original_response.data
-
-        refresh = RefreshToken.for_user(user)
-        access_token = data.get('access')
-
-        response = Response(data, status=status.HTTP_200_OK)
+        if 'user' in original_response.data:
+            original_response.data['user'].pop('pk', None)
+            original_response.data['user'].pop('first_name', None)
+            original_response.data['user'].pop('last_name', None)
         
-        response.delete_cookie('access_token', path='/')
-        response.delete_cookie('refresh_token', path='/')
-        
-        
-
-        response.set_cookie(
-            key='access_token',
-            value=access_token,
-            httponly=True,
-            secure=False,
-            samesite='Lax',
-            max_age=60*15,
-            path='/'  # Adjust the path as needed
-        )
-
-        response.set_cookie(
-            key='refresh_token',
-            value=refresh,
-            httponly=True,
-            secure=False,
-            samesite='Lax',
-            max_age=60*60*24*7,  # 7 days
-            path='/api/auth/token/refresh/'  # Adjust the path as needed
-        )
-
-        del data['access']
-        del data['refresh']
-        del data['user']['pk']
-        del data['user']['first_name']
-        del data['user']['last_name']
-
-        return response
+        return original_response
 
 
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando fazer login muitas vezes, aguarde um pouco!'}, status=429)
-        return super().post(request, *args, **kwargs)
+    
+        self.request = request
+        self.serializer = self.get_serializer(data=self.request.data)
+        self.serializer.is_valid(raise_exception=True)
+        self.login()
+        return self.get_response()
     
 
 @method_decorator(ratelimit(key='user', rate='3/h', method='POST', block=False), name='dispatch')
@@ -258,6 +214,9 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 @method_decorator(ratelimit(key='user_or_ip', rate='10/h', method='POST', block=False), name='dispatch')
 class CustomPasswordResetView(PasswordResetView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando redefinir a senha muitas vezes, aguarde um pouco!'}, status=429)
@@ -266,6 +225,10 @@ class CustomPasswordResetView(PasswordResetView):
 
 @method_decorator(ratelimit(key='user_or_ip', rate='3/h', method='POST', block=False), name='dispatch')
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    
     def post(self, request, *args, **kwargs):
         if getattr(request, 'limited', False):
             return Response({"message": 'Você está tentando redefinir a senha muitas vezes, aguarde um pouco!'}, status=429)
