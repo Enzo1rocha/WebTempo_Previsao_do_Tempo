@@ -122,7 +122,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def get_csrf_token(request):
     return Response({'csrfToken': 'CSRF token set'}, status=status.HTTP_200_OK)
 
-@method_decorator(ratelimit(key='user', rate='20/m', method='POST', block=False), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='140/m', method='POST', block=False), name='dispatch')
 class CustomTokenRefreshView(TokenRefreshView):
     authentication_classes = []
     permission_classes = [AllowAny]
@@ -150,7 +150,7 @@ class CustomTokenRefreshView(TokenRefreshView):
         return response
 
 
-@method_decorator(ratelimit(key='user', rate='80/m', method='POST', block=False), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='160/m', method='POST', block=False), name='dispatch')
 class CustomTokenVerifyView(TokenVerifyView):
     authentication_classes = []
     permission_classes = [AllowAny]
@@ -235,7 +235,7 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         return super().post(request, *args, **kwargs)
 
 
-@method_decorator(ratelimit(key='user', rate='60/m', method='GET', block=True), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='250/m', method='GET', block=True), name='dispatch')
 class CustomUserDetailsView(UserDetailsView):
     permission_classes = [IsAuthenticated]
 
@@ -252,12 +252,13 @@ class CustomUserDetailsView(UserDetailsView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-@method_decorator(ratelimit(key='user', rate='60/m', method='POST', block=True), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='140/m', method='POST', block=True), name='dispatch')
 class CustomLogoutView(LogoutView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
+        super().logout(request)
         response = Response({'message': 'Logout realizado com sucesso'}, status=status.HTTP_200_OK)
-        response.delete_cookie('access_token')
-        response.delete_cookie('refresh_token')
+        response.delete_cookie('access_token', path='/', samesite='Lax')
+        response.delete_cookie('refresh_token', path='/', samesite='Lax')
         return response

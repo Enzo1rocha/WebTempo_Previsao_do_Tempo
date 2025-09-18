@@ -39,10 +39,9 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (credentials) => {
         try {
-            await AuthService.login(credentials);
-            const userData = await AuthService.getUser();
-            setUser(userData)
-            console.log('logado');
+            const responseData = await AuthService.login(credentials)
+            setUser(responseData.user)
+            console.log('Logado com sucesso!!!', responseData.user);
         } catch (error) {
             console.log('erro ao requisitar de login no AuthContext.jsx: ', error);
             throw error
@@ -52,9 +51,9 @@ export const AuthProvider = ({ children }) => {
     const register = async (userData) => {
         try {
             await AuthService.register(userData);
-
-            const userResponse = await AuthService.getUser();
-            setUser(userResponse);
+            const loginCredentials = { email: userData.email, password: userData.password1 };
+            await login(loginCredentials);
+            
             console.log('registrado e logado automaticamente');
             return true
         } catch (error) {

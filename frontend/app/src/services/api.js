@@ -30,14 +30,25 @@ api.interceptors.response.use(
   async error => {
     const originalRequest = error.config;
 
+    if (originalRequest.url.includes('/api/auth/token/refresh')) {
+      if (error.response?.status == 429) {
+        console.error('Muitas tentativas de renovar o token. Tente novamente mais tarde.');
+        alert('Cuidado, voce está tentando renovar um token muitas vezes, aguarde um instante...')
+        
+      }
+      console.error("A tentativa de renovar o token falhou. Deslogando...");
+      processQueue(error)
+      window.dispatchEvent(new CustomEvent('auth-expired'));
+      return Promise.reject(error);
+    }
+
     // Se o erro não for 401, ou já for uma tentativa, ou for na rota de refresh, rejeita.
-    if (error.response?.status !== 401 || originalRequest._retry || originalRequest.url.includes('/api/auth/token/refresh')) {
+    if (error.response?.status !== 401 || originalRequest._retry) {
       return Promise.reject(error);
     }
 
     if (isRefreshing) {
       return new Promise((resolve, reject) => {
-        // CORREÇÃO: Usando 'resolve' e 'reject' consistentemente
         failedQueue.push({ resolve, reject });
       })
         .then(() => api(originalRequest))

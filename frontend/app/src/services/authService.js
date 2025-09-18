@@ -2,24 +2,18 @@ import {api, authApi } from "./api";
 
 const AuthService = {
     async register(userData) {
-        const response = await api.post('api/auth/registration/', userData, {
-            withCredentials: true
-        });
+        const response = await api.post('/api/auth/registration/', userData);
         return response.data
     },
 
     async login(credentials) {
-        const response = await authApi.post('api/auth/login/', credentials, {
-            withCredentials: true
-        });
+        const response = await authApi.post('/api/auth/login/', credentials);
         return response.data
     },
 
     async logout() {
         try {
-            const response = await authApi.post('api/auth/logout/', null, {
-            withCredentials: true,
-            });
+            const response = await authApi.post('/api/auth/logout/', null,);
             return response.data
         } catch (error) {
             console.log('erro ao fazer logout', error);
@@ -29,9 +23,7 @@ const AuthService = {
 
     async getUser() {
         try {
-            const response = await api.get('api/auth/user/', {
-                withCredentials: true
-            });
+            const response = await api.get('/api/auth/user/');
             console.log(response.status);
             console.log(response.data);
             return response.data;
@@ -54,7 +46,7 @@ const AuthService = {
 
     async checkAuthStatus() {
         try {
-            const response = await api.get('api/auth/user/', {
+            const response = await api.get('/api/auth/user/', {
                 withCredentials: true
             })
             return {
@@ -71,7 +63,7 @@ const AuthService = {
 
     async refreshToken() {
         try {
-            const response = await authApi.post('api/auth/token/refresh/', null, {
+            const response = await authApi.post('/api/auth/token/refresh/', null, {
                 withCredentials: true
             });
             return response.data

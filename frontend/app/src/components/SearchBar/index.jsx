@@ -155,7 +155,7 @@ export default function SearchBar({ option } ) {
         <S.Container>
             <S.SearchBarContainer hasSearch={inputValue}>
                 <input value={inputValue} onChange={handleSearch} type="text" name="" id="" placeholder={
-                    !inputValue ? 'Pesquisar por local' : ''
+                    !inputValue ? 'Search Local' : ''
                 } />
                 {inputValue && (
                     <FontAwesomeIcon icon="x" onClick={handleClear} />

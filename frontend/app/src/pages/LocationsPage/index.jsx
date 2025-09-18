@@ -13,10 +13,9 @@ function LocationsPage() {
     const { user } = useAuth();
     const [favoriteLocations, setFavoriteLocations] = useState([]);
     const [bootLocation, setBootLocation] = useState(null);;
-    
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [mostrarChangeBootLocation, setMostrarChangeBootLocation] = useState(false)
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (user && user.message) {
@@ -59,11 +58,8 @@ function LocationsPage() {
         navigate('/user/favorite/add')
     }
 
-    const CallCityWeather = (e, DATA) => {
-        const CITY_DATA = DATA
-        // {city, state, country, lat, lon}
-        console.log(CITY_DATA);
-        
+    const CallCityWeather = (e, url) => {
+        navigate(`/${url}`)
     }
 
     if (loading) {
@@ -83,10 +79,7 @@ function LocationsPage() {
                     <h1>Boot Location</h1>
                     <div>
                         <LocationsLayout ID={1} 
-                        onClick={(e, DATA) => {
-                            const layoutData = JSON.stringify(DATA);
-                            console.log(`Location Clicked: ${layoutData}`);
-                        }} 
+                        onClick={(e, DATA) => CallCityWeather(e, DATA)} 
 
                         Icon_OnClick={HandleBootLocationClick} 
                         Country={bootLocation.country}  State={bootLocation.state} Icon={'pencil'} lat={bootLocation.lat} lon={bootLocation.long} Location_Name={bootLocation.location_name} />

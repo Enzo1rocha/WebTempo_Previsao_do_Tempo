@@ -1,7 +1,11 @@
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+
 
 function LocationsLayout ({Location_Name, State, ID, Country, Icon, lat, lon, Icon_OnClick, onClick}) {
+
+    const navigate = useNavigate()
 
     const handleIconClick = (e) => {
         e.stopPropagation();
@@ -20,7 +24,8 @@ function LocationsLayout ({Location_Name, State, ID, Country, Icon, lat, lon, Ic
         }
         if (onClick) {
             console.log('clicado');
-            onClick(e, DATA);
+            let url = `forecast/${DATA.location_name}/${DATA.country}/${DATA.state}/${DATA.lon}/${DATA.lat}`
+            onClick(e, url);
         }
     }
 

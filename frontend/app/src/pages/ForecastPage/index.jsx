@@ -23,7 +23,7 @@ import {
 
 import { Line } from 'react-chartjs-2';
 import { text } from '@fortawesome/fontawesome-svg-core';
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 ChartJS.register(
         CategoryScale,
@@ -43,6 +43,9 @@ export default function ForecastPage() {
     const [showOptions, setShowOptions] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [dataForGraph, setDataForGraph] = useState([]);
+    const [maxY, setMaxY] = useState(40);
+    const [minY, setMixY] = useState(0);
+    const [stepSize, setStepSize] = useState(10);
     const { lat, lon, name, country, state} = useParams();
     const { data: dadosClimáticos, isLoading, isError, error } = useQuery({
 
@@ -79,7 +82,7 @@ export default function ForecastPage() {
 
     
     const pointRadis = dataForGraph.map((_, index) => {
-        return index % 2 === 0 ? 6 : 0;
+        return index % 2 === 0 ? 4 : 0;
     })
     const pointColors = dataForGraph.map((_, index) => {
         return index % 2 === 0 ? 'rgb(55, 65, 81)' : 'transparent';
@@ -142,11 +145,12 @@ export default function ForecastPage() {
             },
 
             y: {
-                min: Math.floor(Math.min(...dataForGraph)) < 0 ? Math.floor(Math.min(...dataForGraph)): 0,
-                max: Math.ceil(Math.max(...dataForGraph)) > 40 ? Math.ceil(Math.max(...dataForGraph)) : 40,
+                min: minY,
+                max: maxY,
+                grace: '10%',
 
                 ticks: {
-                    stepSize: 10,
+                    stepSize: stepSize,
                     color: '#374151',
                     font: {
                         size: 14,
@@ -171,8 +175,8 @@ export default function ForecastPage() {
             data: dataForGraph,
             borderColor: 'rgb(55, 65, 81)',
             backgroundColor: 'rgba(55, 65, 81, 0.5)',
-            borderWidth: 3,
-            tension: 0.5,
+            borderWidth: 2.5,
+            tension: 0.35,
             fill: false,
             pointRadius: pointRadis,
             pointBackgroundColor: pointColors,
@@ -208,26 +212,51 @@ export default function ForecastPage() {
     }
 
     const chave_para_pegar_dados_nos_dados_climáticos_do_grafico = (opção) => {
+        console.log('MUDANDO_MAX_MIN');
+        
         switch (opção) {
             case 'PRECIPITAÇÃO':
+                setMaxY(100)
+                setMixY(0)
+                setStepSize(20)
                 return 'precipitationProbability';
             case 'VENTO':
+                setMaxY(80)
+                setMixY(0)
+                setStepSize(20)
                 return 'windSpeed';
             case 'UMIDADE':
+                setMaxY(100)
+                setMixY(0)
+                setStepSize(20)
                 return 'humidity';
             case 'VISIBILIDADE':
+                setMaxY(60)
+                setMixY(0)
+                setStepSize(15)
                 return 'visibility';
             case 'PRESSÃO':
+                setMaxY(1040)
+                setMixY(1000)
+                setStepSize(10)
                 return 'pressureSeaLevel';
             case 'UV':
+                setMaxY(12)
+                setMixY(0)
+                setStepSize(2)
                 return 'uvIndex';
             case 'SENSAÇÃO':
+                setMaxY(40)
+                setMixY(0)
+                setStepSize(10)
                 return 'temperatureApparent';
             default:
+                setMaxY(40)
+                setMixY(0)
+                setStepSize(10)
                 return 'temperature';
         }
     }
-
     const click_dados_para_o_grafico = (opção, data) => {
         const key = chave_para_pegar_dados_nos_dados_climáticos_do_grafico(opção);
         let dados = dadosClimáticos.days.find((dia) => dia.date === data);
