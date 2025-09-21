@@ -3,6 +3,7 @@ import LocationsPageService from '../../services/LocationsPageService';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export default function SearchBar({ option } ) {
 
@@ -11,8 +12,9 @@ export default function SearchBar({ option } ) {
     const abortControllerRef = useRef(null);
     const cacheRef = useRef(new Map());
     const navigate = new useNavigate();
+    const { user } = useAuth();
 
-    const SearchSugestions = useCallback(async (query) => {
+    const SearchSugestions = useCallback(async (query) => { // Função para buscar sugestões de cidades
 
         if (cacheRef.current.has(query)) {
             console.log('cache funcionando');
@@ -162,7 +164,12 @@ export default function SearchBar({ option } ) {
                 )}
                 <FontAwesomeIcon icon="magnifying-glass" />
             </S.SearchBarContainer>
-            {cities.length > 0 && (
+            {!user && inputValue && (
+                <S.Containerlocations>
+                    <S.Warning>faça login para pesquisar o clima das cidades.</S.Warning>
+                </S.Containerlocations>
+            )}
+            {user && cities.length > 0 && (
                 <S.Containerlocations>
                     {cities.map(city => (
                         <S.LocationItem onClick={ async () => {

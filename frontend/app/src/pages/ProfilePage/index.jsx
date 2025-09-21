@@ -1,14 +1,14 @@
-import * as S from './styles';
+import * as S from './styles'
 import LocationsLayout from '../../components/LocationsLayout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LocationsPageService from '../../services/LocationsPageService';
 import {useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChangeBootLocation from '../../components/ChangeBootLocation';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 
 
-function LocationsPage() {
+function ProfilePage() {
 
     const { user } = useAuth();
     const [favoriteLocations, setFavoriteLocations] = useState([]);
@@ -71,9 +71,34 @@ function LocationsPage() {
     
     
 
-    return (
+    return ( // adicionar informações do usuário aqui
         <S.Location_Page_Container>
+            <S.Container_User_Details>
+                <h1>Sua Conta</h1>
+
+                <S.content_user_details>
+                    <p>Aqui voce consegue ver algumas informações da sua conta e mudar sua senha</p>
+                    <div>
+                        <div>
+                            <p><strong>Username:</strong> {user.username}</p>
+                            <p><strong>Email:</strong> {user.email}</p>
+                        </div>
+                        <S.container_buttons>
+                            <S.change_password>
+                                <a href="/user/change-password">Mudar Senha</a>
+                                <FontAwesomeIcon icon={"shield-halved"} />
+                            </S.change_password>
+                            <S.logout>
+                                <a href="/user/logout">Logout</a>
+                                <FontAwesomeIcon icon={"right-from-bracket"} />
+                            </S.logout> 
+                        </S.container_buttons>
+                    </div>
+                </S.content_user_details>
+            </S.Container_User_Details>
+
             {mostrarChangeBootLocation ? <ChangeBootLocation ReturnClick={HandleBootLocationClick} /> : null}
+
             <S.Container_Locations>
                 <S.Container_Boot_Location>
                     <h1>Boot Location</h1>
@@ -111,4 +136,4 @@ function LocationsPage() {
     )
 }
 
-export default LocationsPage;
+export default ProfilePage;

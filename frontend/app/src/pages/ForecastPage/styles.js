@@ -39,7 +39,7 @@ export const localName = styled.div `
 
 export const temperatureAndIconDiv = styled.div `
     display: flex;
-    gap: 95px;
+    gap: 85px;
     align-items: center;
     flex-direction: row;
 `
@@ -65,8 +65,9 @@ export const TemperatureDiv = styled.div `
             > span {
                 
                 position: absolute;
-                bottom: 15px;
-                font-weight: 400;
+                font-size: 50px;
+                top: 35px;
+                font-weight: 600;
                 
             }
         }

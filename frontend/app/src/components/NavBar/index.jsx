@@ -63,7 +63,7 @@ function NavBar() {
                         <S.NavItemMobile href="/about">About</S.NavItemMobile>
                         <S.NavItemMobile href="/user/logout">Logout</S.NavItemMobile>
                         <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
-                        <S.NavItemMobile href="/user/favorite">Profile</S.NavItemMobile>
+                        <S.NavItemMobile href="/user/profile">Profile</S.NavItemMobile>
                      </>
                     }
                 </S.NavItems>}
@@ -98,7 +98,7 @@ function NavBar() {
                     <S.NavItem href="/about">About</S.NavItem>
                     <S.NavItem href="/user/logout">Logout</S.NavItem>
                     <S.NavItem href="/contact">Contact</S.NavItem>
-                    <S.NavItem href="/user/favorite">Profile</S.NavItem>
+                    <S.NavItem href="/user/profile">Profile</S.NavItem>
                  </>
                 }
             </S.Nav> 

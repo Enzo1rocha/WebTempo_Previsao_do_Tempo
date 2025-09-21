@@ -15,11 +15,11 @@ import { AuthProvider } from './context/authContext'
 import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
 import ProtectedRoute from './components/authentications/Protectedroute'
 import LogoutPage from './pages/LogoutPage'
-import LocationsPage from './pages/LocationsPage'
 import SearchFavoriteLocation from './pages/SearchFavoriteLocation'
 import ChangeBootLocation from './components/ChangeBootLocation'
-import ForecastPage from './pages/ForecastPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ProfilePage from './pages/ProfilePage'
+import ForecastPage from './pages/ForecastPage'
 
 
 const queryClient = new QueryClient()
@@ -63,9 +63,9 @@ const router = createBrowserRouter([
         </ProtectedRoute>
       )},
 
-      { path: '/user/favorite', element: (
+      { path: '/user/profile', element: (
        <ProtectedRoute>
-        <LocationsPage />
+        <ProfilePage />
       </ProtectedRoute>
       )},
       { path: 'user/favorite/add', element: (

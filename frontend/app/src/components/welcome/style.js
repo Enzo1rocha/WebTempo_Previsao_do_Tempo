@@ -25,6 +25,20 @@ export const FormContainer = styled.form `
     gap: 50px;
 `
 
+export const Container_FormTitle_Alert = styled.div `
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`
+
+export const Alert = styled.p `
+    font-size: 14px;
+    padding: 5px;
+    font-weight: 600;
+    text-align: start;
+    color: #FE3234;
+    `
+
 export const FormTitle = styled.h1 `
     color: var(--Primary-Color);
     width: 50px;

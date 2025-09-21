@@ -326,15 +326,13 @@ export default function ForecastPage() {
         }
     }
 
-    const chave_para_pegar_dados_nos_dados_climáticos_do_grafico = (opção) => {
-        console.log('MUDANDO_MAX_MIN');
-        
+    const chave_para_pegar_dados_nos_dados_climáticos_do_grafico = (opção) => {  
         switch (opção) {
             case 'PRECIPITAÇÃO':
                 setMaxY(100)
                 setMixY(0)
                 setStepSize(20)
-                setLabelStep('Precipitação')
+                setLabelStep('Probabilidade de Chuva %')
                 return 'precipitationProbability';
             case 'VENTO':
                 setMaxY(80)
@@ -358,7 +356,7 @@ export default function ForecastPage() {
                 setMaxY(1040)
                 setMixY(1000)
                 setStepSize(10)
-                setLabelStep('Pressão')
+                setLabelStep('Pressão mb')
                 return 'pressureSeaLevel';
             case 'UV':
                 setMaxY(12)
@@ -477,7 +475,7 @@ export default function ForecastPage() {
                     <S.TemperatureDiv>
                         <FontAwesomeIcon icon={'moon'} />
                         <div>
-                            <p>{Math.round(dadosClimáticos.current.values.temperature)}<span>c</span></p>
+                            <p>{Math.round(dadosClimáticos.current.values.temperature)}<span>°C</span></p>
                         </div>
                     </S.TemperatureDiv>
                     <S.TemperatureText>
@@ -579,7 +577,7 @@ export default function ForecastPage() {
                 
                 <DetalhesClimaticosDoDia Titulo={'Sensação Térmica'} Icone={'temperature-low'} alt_Icone={'Icone Temperatura'} Valor={Math.round(dadosClimáticos.current.values.temperatureApparent)} codigoValor={'°C'} subTitulo={sensação_termica(dadosClimáticos.current.values.temperatureApparent)} />
 
-                <DetalhesClimaticosDoDia Titulo={'Precipitação'} Icone={'droplet'} alt_Icone={'Icone Precipitação'} Valor={Math.round(dadosClimáticos.current.values.precipitationProbability)} codigoValor={'mm'} subTitulo={probabilidadePrecipitacao_detalhes(dadosClimáticos.current.values.precipitationProbability)} />
+                <DetalhesClimaticosDoDia Titulo={'Probabilidade de Chuva'} Icone={'droplet'} alt_Icone={'Icone Precipitação'} Valor={Math.round(dadosClimáticos.current.values.precipitationProbability)} codigoValor={'%'} subTitulo={probabilidadePrecipitacao_detalhes(dadosClimáticos.current.values.precipitationProbability)} />
 
                 <DetalhesClimaticosDoDia Titulo={'Vento'} Icone={'wind'} alt_Icone={'Icone Vento'} Valor={Math.round(dadosClimáticos.current.values.windSpeed)} codigoValor={'km/h'} subTitulo={condicaoVento_detalhes(dadosClimáticos.current.values.windSpeed)} />
 

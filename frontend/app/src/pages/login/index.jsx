@@ -10,6 +10,7 @@ function Login() {
     const [FormTitle, setFormTitle] = useState("Welcome Back")
 
     const [LabelText, setLabelText] = useState('Sign In')
+    const [LoginError, setLoginError] = useState(false)
 
     const [Text, setText] = useState('Sign Up')
 
@@ -18,11 +19,12 @@ function Login() {
             await login(data);
         } catch (error) {
             console.log('Erro ao fazer login', error)
+            setLoginError(true)
         }
     }
 
     return (
-        <Welcome img={SignIn} FormTitle={FormTitle} LabelText={LabelText} Text={Text} ShowNameInput={false} isLogin={true} navigateTo={'/register'} onSubmit={handleLogin} />
+        <Welcome img={SignIn} FormTitle={FormTitle} LabelText={LabelText} Text={Text} ShowNameInput={false} isLogin={true} navigateTo={'/register'} onSubmit={handleLogin} loginError={LoginError}/>
     )
 }
 
