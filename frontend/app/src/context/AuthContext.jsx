@@ -48,6 +48,17 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const passwordChange = async (passwords) => {
+        try {
+            await AuthService.changePassword(passwords);
+            console.log('Senha alterada com sucesso');
+            return 200;
+        } catch (error) {
+            console.log('Erro ao alterar a senha', error);
+            throw error;
+        }
+    }
+
     const register = async (userData) => {
         try {
             await AuthService.register(userData);
@@ -63,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{user, login, register, logout, loading}}>
+        <AuthContext.Provider value={{user, login, register, logout, passwordChange, loading}}>
             {children}
         </AuthContext.Provider>
     );

@@ -24,7 +24,7 @@ function Login() {
     }
 
     return (
-        <Welcome img={SignIn} FormTitle={FormTitle} LabelText={LabelText} Text={Text} ShowNameInput={false} isLogin={true} navigateTo={'/register'} onSubmit={handleLogin} loginError={LoginError}/>
+        <Welcome img={SignIn} FormTitle={FormTitle} LabelText={LabelText} Text={Text} ShowNameInput={false} isLogin={true} navigateTo={'/register'} onSubmit={handleLogin} error={LoginError}/>
     )
 }
 

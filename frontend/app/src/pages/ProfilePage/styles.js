@@ -8,6 +8,8 @@ export const Location_Page_Container =  styled.main `
     background-color: var(--Background-Color);
     padding-top: 50px;
     padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
 `
 
 export const Container_User_Details = styled.div `
@@ -17,6 +19,7 @@ export const Container_User_Details = styled.div `
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: -20px;
 
     > h1 {
         color: var(--Secundary-Color);
@@ -32,7 +35,7 @@ export const content_user_details = styled.div `
     flex-direction: column;
     gap: 5px;
     background-color: white;
-    padding: 30px 20px;
+    padding: 25px 20px;
     border-radius: 5px;
     box-shadow: 1px 2px 4px rgba(0,0,0,0.25);
 
@@ -47,6 +50,8 @@ export const content_user_details = styled.div `
         justify-content: space-between;
         align-items: center;
         margin-top: 10px;
+    } > div > div > p > strong {
+        color: var(--Secundary-Color);
     }
     `
 
@@ -110,7 +115,7 @@ export const Container_Locations = styled.div `
     height: 100%;
     display: flex;
     margin: auto;
-    gap: 20px;
+    gap: 40px;
     flex-direction: column;
     white-space: nowrap;
 `

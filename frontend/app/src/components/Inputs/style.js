@@ -27,6 +27,7 @@ export const Field = styled.input`
     font-size: 20px;
     font-weight: 600;
     color: var(--Secundary-Color-Transparent);
+    ${props => props.$error && `color: var(--Error-Color);`}
     background-color: transparent;
     
 

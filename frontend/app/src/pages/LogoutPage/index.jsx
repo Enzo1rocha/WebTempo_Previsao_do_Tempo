@@ -21,7 +21,7 @@ function LogoutPage() {
     }
 
     const cancelClick = () => {
-        navigate('/user/favorite')
+        navigate('/user/profile')
     }
 
     return (

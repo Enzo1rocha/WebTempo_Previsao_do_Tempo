@@ -58,4 +58,8 @@ export const confirm_button = styled.button `
     padding: 7px 2px;
     border-radius: 10px;
     cursor: pointer;
+
+    &:active {
+        cursor: wait;
+    }
 `

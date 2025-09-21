@@ -128,20 +128,15 @@ export default function SearchBar({ option } ) {
                     lat: city.lat,
                     long: city.lon
                 })
-                navigate('/user/favorite')
+                navigate('/user/profile')
                 setTimeout(() => {
                     window.location.reload();
                 }, 400);
 
                 break;
             default:
-                return await LocationsPageService.getForecast({
-                    location_name: city.name,
-                    state: city.state,
-                    country: city.country,
-                    lat: city.lat,
-                    lon: city.lon
-                })   
+                navigate(`/forecast/${city.name}/${city.country}/${city.state}/${city.lon}/${city.lat}`)
+                break;
         }
     }
 

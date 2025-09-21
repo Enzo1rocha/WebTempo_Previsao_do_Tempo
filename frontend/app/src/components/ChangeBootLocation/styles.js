@@ -8,8 +8,14 @@ export const Background = styled.div `
     justify-content: center;
     align-items: center;
     font-family: var(--Primary-Font);
-    position: absolute;
-    z-index: 10;
+
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
 `
 
 export const Main = styled.div `

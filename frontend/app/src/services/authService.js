@@ -35,6 +35,16 @@ const AuthService = {
         }
     },
 
+    async changePassword(passwords) {
+        try {
+            const response = await authApi.post('/api/auth/password/change/', passwords);
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao mudar a senha:', error);
+            throw error;
+        }
+    },
+
     async isAuthenticated() {
         try {
             await this.getUser();

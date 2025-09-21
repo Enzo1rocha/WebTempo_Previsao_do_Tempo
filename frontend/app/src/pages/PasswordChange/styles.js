@@ -53,6 +53,13 @@ export const h1_form = styled.h1 `
     align-self: flex-start;
 `
 
+export const error_message = styled.p `
+    font-weight: 600;
+    color: var(--Error-Color);
+    font-size: 14px;
+    align-self: flex-start;
+`
+
 export const input_container = styled.div `
     display: flex;
     flex-direction: column;

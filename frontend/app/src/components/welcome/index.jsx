@@ -11,7 +11,7 @@ import { use, useState } from 'react'
 
 
 
-function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navigateTo, onSubmit, loginError}) {
+function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navigateTo, onSubmit, error}) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -51,11 +51,11 @@ function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navig
 
 
                     <S.ContainerWithInputs>
-                        {loginError && <S.Alert>Erro ao fazer login, verifique suas credenciais.</S.Alert>}
+                        {error && <S.Alert>Erro ao fazer login, verifique suas credenciais.</S.Alert>}
                         {ShowNameInput && <InputComponent type={'text'} LabelText="Name"
-                        id={'name'} value={name} onChange={(e) => setName(e.target.value)} />}
-                        <InputComponent type={'email'} LabelText="Email" id={'email'} value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <InputComponent type={'password'} LabelText="Password" id={'password'} value={password} onChange={(e) => setPassword(e.target.value)} />
+                        id={'name'} value={name} onChange={(e) => setName(e.target.value)} $error={error} />}
+                        <InputComponent type={'email'} LabelText="Email" id={'email'} value={email} onChange={(e) => setEmail(e.target.value)} $error={error} />
+                        <InputComponent $error={error} type={'password'} LabelText="Password" id={'password'} value={password} onChange={(e) => setPassword(e.target.value)} />
                     </S.ContainerWithInputs>
                     
                     <Sign_Container LabelText={LabelText} onClick={handleSubmit} />

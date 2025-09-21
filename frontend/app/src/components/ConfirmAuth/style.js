@@ -29,6 +29,10 @@ export const Button = styled.button `
     display:  flex;
     justify-content: center;
     align-items: center;
+
+    &:active {
+        cursor: wait;
+    }
 `
 
 export const SignImage = styled.img `

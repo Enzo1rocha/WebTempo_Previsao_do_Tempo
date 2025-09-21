@@ -85,7 +85,7 @@ function ProfilePage() {
                         </div>
                         <S.container_buttons>
                             <S.change_password>
-                                <a href="/user/change-password">Mudar Senha</a>
+                                <a href="/user/password/change">Mudar Senha</a>
                                 <FontAwesomeIcon icon={"shield-halved"} />
                             </S.change_password>
                             <S.logout>

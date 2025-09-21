@@ -28,11 +28,21 @@ export const Subtitle = styled.p `
     text-align: center;
 `
 
-export const CustomButton = styled(Button) `
-    width: 400px;
+export const CustomButton = styled.a `
+    width: 300px;
     margin: auto;
     position: relative;
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 20px;
+    cursor: pointer;
     bottom: 25px;
+    text-decoration: none;
+    background-color: var(--Secundary-Color);
+    color: var(--Background-Color);
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.6px;
 `
 
 
