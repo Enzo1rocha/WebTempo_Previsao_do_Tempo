@@ -69,7 +69,7 @@ export const valor_a_esquerda = styled.div `
         }
 
         > span {
-            font-size: 15px;
+            font-size: 24px;
         }
     }
 `

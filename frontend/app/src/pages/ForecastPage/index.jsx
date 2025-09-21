@@ -45,6 +45,7 @@ export default function ForecastPage() {
     const [dataForGraph, setDataForGraph] = useState([]);
     const [maxY, setMaxY] = useState(40);
     const [minY, setMixY] = useState(0);
+    const [LabelStep, setLabelStep] = useState('Temperatura');
     const [stepSize, setStepSize] = useState(10);
     const { lat, lon, name, country, state} = useParams();
     const { data: dadosClimáticos, isLoading, isError, error } = useQuery({
@@ -171,7 +172,7 @@ export default function ForecastPage() {
     const data = {
         labels,
         datasets : [{
-            label: 'Temperatura',
+            label: LabelStep,
             data: dataForGraph,
             borderColor: 'rgb(55, 65, 81)',
             backgroundColor: 'rgba(55, 65, 81, 0.5)',
@@ -182,6 +183,32 @@ export default function ForecastPage() {
             pointBackgroundColor: pointColors,
             pointBorderColor: pointColors,
         }],
+    }
+
+    const mensagens_detalhes_do_dia = (temperature, cloudcover, precipitationProbability) => {
+        console.log("DETALHES MENSAGENS",temperature, cloudcover, precipitationProbability);
+        
+        if (temperature && precipitationProbability == 0 && cloudcover < 20) {
+            return ['Limpo', 'O dia está predominantemente limpo.'];
+        } else if (temperature && precipitationProbability == 0 && cloudcover >= 20 && cloudcover < 50) {
+            return ['Parcialmente Nublado', 'O dia está parcialmente nublado.'];
+        } else if (temperature && precipitationProbability == 0 && cloudcover >= 50) {
+            return ['Nublado', 'O dia está nublado.'];
+        } else if (temperature && cloudcover && precipitationProbability > 0 && precipitationProbability <= 30) {
+            return ['Chuva Leve', 'Há uma chance de chuva leve durante o dia.'];
+        } else if (temperature && cloudcover && precipitationProbability > 30 && precipitationProbability <= 70) {
+            return ['Chuva Moderada', 'Há uma chance de chuva moderada durante o dia.'];
+        } else if (temperature && cloudcover && precipitationProbability > 70) {
+            return ['Chuva Forte', 'Há uma alta chance de chuva forte durante o dia.'];
+        } else if (temperature <= 15 && cloudcover && precipitationProbability == 0) {
+            return ['Frio', 'O dia está frio e sem precipitação.'];
+        } else if (temperature > 15 && temperature <= 23 && cloudcover && precipitationProbability == 0) {
+            return ['Ameno', 'O dia está ameno e sem precipitação.'];
+        } else if (temperature > 23 && cloudcover && precipitationProbability == 0) {
+            return ['Quente', 'O dia está quente e sem precipitação.'];
+        } else {
+            return ['Clima Variável', 'O clima está variando ao longo do dia.'];
+        }
     }
 
     const uv_risco = (uvIndex) => {
@@ -195,6 +222,94 @@ export default function ForecastPage() {
             return 'Extremo';
         }
     }
+
+    const temperatura_detalhes = (temperature) => {
+        if (temperature <= 15) {
+            return 'Clima está frio, se agasalhe bem!';
+        } else if (temperature > 15 && temperature <= 23) {
+            return 'Clima está ameno, aproveite o dia!';
+        } else if (temperature > 23 && temperature <= 30) {
+            return 'Clima está quente, hidrate-se!';
+        } else {
+            return 'Clima está muito quente, evite exposição ao sol!';
+        }
+    }
+
+    const sensação_termica = (temperature) => {
+        if (temperature <= 15) {
+            return 'Sensação térmica está fria, cuide-se!';
+        } else if (temperature > 15 && temperature <= 23) {
+            return 'sensação térmica está amena, aproveite o dia!';
+        } else if (temperature > 23 && temperature <= 30) {
+            return 'Sensação térmica está quente, hidrate-se bem e tome cuidado!';
+        } else {
+            return 'Sensação térmica está muito quente, evite exposição ao sol e hidrate-se constantemente!';
+        }
+    }
+
+    const umidade_detalhes = (umidade) => {
+        if (umidade > 80) {
+            return 'Umidade muito alta. Sensação de abafado e pegajoso. O ar pode ficar pesado para respirar.';
+        } else if (umidade >= 60 && umidade <= 80) {
+            return 'Umidade alta. Condições de vapor. Sensação de calor e desconforto.';
+        } else if (umidade >= 40 && umidade < 60) {
+            return 'Umidade ideal. Condições confortáveis e perfeitas para o dia a dia.';
+        } else if (umidade >= 20 && umidade < 40) {
+            return 'Umidade baixa. Pode causar desconforto, ressecamento nos olhos e garganta.';
+        } else {
+            return 'Umidade muito baixa. Condições de ar seco. Beba bastante água e se hidrate!';
+        }
+    };
+
+    const condicaoVento_detalhes = (velocidade) => {
+        if (velocidade < 5) {
+            return 'Vento calmo. Perfeito para atividades ao ar livre!';
+        } else if (velocidade >= 5 && velocidade <= 20) {
+            return 'Brisa leve. Agradável para o dia!';
+        } else if (velocidade > 20 && velocidade <= 40) {
+            return 'Vento moderado. Pode ser um pouco difícil carregar objetos leves.';
+        } else {
+            return 'Vento forte. Cuidado com objetos voando e galhos de árvores!';
+        }
+    };
+
+    const visibilidade_detalhes = (distancia) => {
+        if (distancia >= 10) {
+            return 'Visibilidade excelente. O céu está limpo e a visão é panorâmica!';
+        } else if (distancia >= 4 && distancia < 10) {
+            return 'Visibilidade boa. Condições normais para dirigir e para atividades ao ar livre.';
+        } else if (distancia >= 1 && distancia < 4) {
+            return 'Visibilidade baixa. Cuidado ao dirigir.';
+        } else {
+            return 'Visibilidade muito baixa. Perigoso para dirigir. Procure um local seguro.';
+        }
+    };
+
+    const probabilidadePrecipitacao_detalhes = (probabilidade) => {
+        if (probabilidade >= 75) {
+            return 'Alta probabilidade de chuva. É quase certeza que vai chover.';
+        } else if (probabilidade >= 50 && probabilidade < 75) {
+            return 'Média probabilidade de chuva. É bom estar preparado, pois a chance é considerável.';
+        } else if (probabilidade >= 25 && probabilidade < 50) {
+            return 'Baixa probabilidade de chuva. A chance de chover é pequena';
+        } else {
+            return 'Nenhuma ou baixíssima probabilidade de chuva.';
+        }
+    };
+
+    const pressao_detalhes = (pressao) => {
+        if (pressao > 1020) {
+            return 'Pressão alta. Indica clima estável e bom tempo. Céu claro ou poucas nuvens.';
+        } else if (pressao >= 1010 && pressao <= 1020) {
+            return 'Pressão normal. Condições meteorológicas típicas, sem grandes mudanças previstas.';
+        } else if (pressao >= 990 && pressao < 1010) {
+            return 'Pressão baixa. Aumenta a chance de tempo instável, como chuvas ou tempestades.';
+        } else {
+            return 'Pressão muito baixa. Indica instabilidade severa. Fique atento a alertas de tempestades ou ventos fortes.';
+        }
+    };
+
+
 
     const precipitação_risco = (precipitação) => {
 
@@ -219,41 +334,49 @@ export default function ForecastPage() {
                 setMaxY(100)
                 setMixY(0)
                 setStepSize(20)
+                setLabelStep('Precipitação')
                 return 'precipitationProbability';
             case 'VENTO':
                 setMaxY(80)
                 setMixY(0)
                 setStepSize(20)
+                setLabelStep('Vento')
                 return 'windSpeed';
             case 'UMIDADE':
                 setMaxY(100)
                 setMixY(0)
                 setStepSize(20)
+                setLabelStep('Umidade')
                 return 'humidity';
             case 'VISIBILIDADE':
                 setMaxY(60)
                 setMixY(0)
                 setStepSize(15)
+                setLabelStep('Visibilidade')
                 return 'visibility';
             case 'PRESSÃO':
                 setMaxY(1040)
                 setMixY(1000)
                 setStepSize(10)
+                setLabelStep('Pressão')
                 return 'pressureSeaLevel';
             case 'UV':
                 setMaxY(12)
                 setMixY(0)
                 setStepSize(2)
+                setLabelStep('UV')
                 return 'uvIndex';
             case 'SENSAÇÃO':
                 setMaxY(40)
                 setMixY(0)
                 setStepSize(10)
+                setLabelStep('Sensação')
                 return 'temperatureApparent';
             default:
                 setMaxY(40)
                 setMixY(0)
                 setStepSize(10)
+                setLabelStep('Temperatura')
                 return 'temperature';
         }
     }
@@ -339,12 +462,16 @@ export default function ForecastPage() {
         }
     }
 
+    const detalhes = mensagens_detalhes_do_dia(dadosClimáticos.current.values.temperature, dadosClimáticos.current.values.cloudCover, dadosClimáticos.current.values.precipitationProbability);
+
     return (
         <S.Main>
             <S.textSection>
                 <S.localName>
                     <p>Clima Atual</p>
-                    <p>São Paulo - Brasil</p>
+                    <div>
+                        <p>{dadosClimáticos.location_name} - {dadosClimáticos.state} - {dadosClimáticos.country}</p>
+                    </div>
                 </S.localName>
                 <S.temperatureAndIconDiv>
                     <S.TemperatureDiv>
@@ -354,12 +481,12 @@ export default function ForecastPage() {
                         </div>
                     </S.TemperatureDiv>
                     <S.TemperatureText>
-                        <h2>Limpo</h2>
+                        <h2>{detalhes[0]}</h2>
                         <h3>Sensação termica de <span>{Math.round(dadosClimáticos.current.values.temperatureApparent)}</span>°</h3>
                     </S.TemperatureText>
                 </S.temperatureAndIconDiv>
                 <S.summaryOfTheDayText>
-                    <p>O Céu estará predominantemente limpo, A minima será de 12°</p>
+                    <p>{detalhes[1]}</p>
                 </S.summaryOfTheDayText>
                 <S.summaryOfTheDay>
                     <div>
@@ -448,20 +575,20 @@ export default function ForecastPage() {
 
             </S.Grafico>
             <S.DetalhesDoDia>
-                <DetalhesClimaticosDoDia Titulo={'Temperatura'} Icone={'temperature-half'} alt_Icone={'Icone Temperatura'} Valor={Math.round(dadosClimáticos.current.values.temperature)} codigoValor={'°C'} subTitulo={'Lorem ipsum dolor sit amet consectetur.'} />
+                <DetalhesClimaticosDoDia Titulo={'Temperatura'} Icone={'temperature-half'} alt_Icone={'Icone Temperatura'} Valor={Math.round(dadosClimáticos.current.values.temperature)} codigoValor={'°C'} subTitulo={temperatura_detalhes(dadosClimáticos.current.values.temperature)} />
                 
-                <DetalhesClimaticosDoDia Titulo={'Sensação Térmica'} Icone={'temperature-low'} alt_Icone={'Icone Temperatura'} Valor={Math.round(dadosClimáticos.current.values.temperatureApparent)} codigoValor={'°C'} subTitulo={'Lorem ipsum dolor sit amet consectetur.'} />
+                <DetalhesClimaticosDoDia Titulo={'Sensação Térmica'} Icone={'temperature-low'} alt_Icone={'Icone Temperatura'} Valor={Math.round(dadosClimáticos.current.values.temperatureApparent)} codigoValor={'°C'} subTitulo={sensação_termica(dadosClimáticos.current.values.temperatureApparent)} />
 
-                <DetalhesClimaticosDoDia Titulo={'Precipitação'} Icone={'droplet'} alt_Icone={'Icone Precipitação'} Valor={Math.round(dadosClimáticos.current.values.precipitationProbability)} codigoValor={'mm'} subTitulo={'Lorem ipsum dolor sit amet consectetur.'} />
+                <DetalhesClimaticosDoDia Titulo={'Precipitação'} Icone={'droplet'} alt_Icone={'Icone Precipitação'} Valor={Math.round(dadosClimáticos.current.values.precipitationProbability)} codigoValor={'mm'} subTitulo={probabilidadePrecipitacao_detalhes(dadosClimáticos.current.values.precipitationProbability)} />
 
-                <DetalhesClimaticosDoDia Titulo={'Vento'} Icone={'wind'} alt_Icone={'Icone Vento'} Valor={Math.round(dadosClimáticos.current.values.windSpeed)} codigoValor={'km/h'} subTitulo={'Lorem ipsum dolor sit amet consectetur.'} />
+                <DetalhesClimaticosDoDia Titulo={'Vento'} Icone={'wind'} alt_Icone={'Icone Vento'} Valor={Math.round(dadosClimáticos.current.values.windSpeed)} codigoValor={'km/h'} subTitulo={condicaoVento_detalhes(dadosClimáticos.current.values.windSpeed)} />
 
-                <DetalhesClimaticosDoDia Titulo={'Umidade'} Icone={'percent'} alt_Icone={'Icone Umidade'} Valor={Math.round(dadosClimáticos.current.values.humidity)} codigoValor={'%'} subTitulo={'Lorem ipsum dolor sit amet consectetur.'} />
+                <DetalhesClimaticosDoDia Titulo={'Umidade'} Icone={'percent'} alt_Icone={'Icone Umidade'} Valor={Math.round(dadosClimáticos.current.values.humidity)} codigoValor={'%'} subTitulo={umidade_detalhes(dadosClimáticos.current.values.humidity)} />
 
-                <DetalhesClimaticosDoDia Titulo={'Visibilidade'} Icone={'eye'} alt_Icone={'Icone Visibilidade'} Valor={Math.round(dadosClimáticos.current.values.visibility)} codigoValor={'km'} subTitulo={'Lorem ipsum dolor sit amet consectetur.'} />
-                <DetalhesClimaticosDoDia Titulo={'Pressão'} Icone={'gauge-simple-high'} alt_Icone={'Icone Pressão'} Valor={Math.round(dadosClimáticos.current.values.pressureSeaLevel)} codigoValor={'mb'} subTitulo={'TLorem ipsum dolor sit amet consectetur.'} />
+                <DetalhesClimaticosDoDia Titulo={'Visibilidade'} Icone={'eye'} alt_Icone={'Icone Visibilidade'} Valor={Math.round(dadosClimáticos.current.values.visibility)} codigoValor={'km'} subTitulo={visibilidade_detalhes(dadosClimáticos.current.values.visibility)} />
+                <DetalhesClimaticosDoDia Titulo={'Pressão'} Icone={'gauge-simple-high'} alt_Icone={'Icone Pressão'} Valor={Math.round(dadosClimáticos.current.values.pressureSeaLevel)} codigoValor={'mb'} subTitulo={pressao_detalhes(dadosClimáticos.current.values.pressureSeaLevel)} />
 
-                <DetalhesClimaticosDoDia Titulo={'UV'} Icone={'circle-exclamation'} alt_Icone={'Icone UV'} Valor={dadosClimáticos.current.values.uvIndex} codigoValor={'Moderado'} subTitulo={'Lorem ipsum dolor sit amet consectetur.'} />
+                <DetalhesClimaticosDoDia Titulo={'UV'} Icone={'circle-exclamation'} alt_Icone={'Icone UV'} Valor={dadosClimáticos.current.values.uvIndex} codigoValor={uv_risco(dadosClimáticos.current.values.uvIndex)} subTitulo={`O indice UV atualmente está: ${uv_risco(dadosClimáticos.current.values.uvIndex)}`} />
 
             </S.DetalhesDoDia>
 

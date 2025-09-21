@@ -23,8 +23,18 @@ export const localName = styled.div `
     justify-content: left;
     flex-direction: row;
     gap: 20px;
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
+
+    > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    > div > p {
+        font-size: 18px;
+    }
 `
 
 export const temperatureAndIconDiv = styled.div `
