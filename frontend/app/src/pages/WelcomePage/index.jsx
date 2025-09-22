@@ -15,12 +15,12 @@ function WelcomePage() {
             <s.Container>
                 <s.ContainerContent>
                     <s.Content>
-                        <s.Title>Weather <br /> Forecast</s.Title>
+                        <s.Title>Previsão do Tempo <br /> Online</s.Title>
 
                         <s.title_buttonContainer>
-                            <s.SubTitle>Stay ahead of the weather with our intelligent and easy-to-use forecasting app. Whether you're planning your day, preparing for a trip, or just curious about what’s coming, we provide real-time updates, hourly forecasts, and detailed climate information tailored to your location.
+                            <s.SubTitle>Fique por dentro das previsões meteorológicas com o <strong>WebTempo.</strong> Seja para planejar seu dia, se preparar para uma viagem ou apenas por curiosidade, oferecemos atualizações em tempo real, previsões de hora em hora e informações climáticas detalhadas.
                             </s.SubTitle>
-                        <s.Button href={user.user ? '/user/profile' : '/register'}>{user.user ? 'Search City' : 'Create Your Account'}</s.Button>
+                        <s.Button href={user.user ? '/user/profile' : '/register'}>{user.user ? 'Pesquisar Local' : 'Crie sua conta'}</s.Button>
                         </s.title_buttonContainer>
                     </s.Content>    
                 </s.ContainerContent>

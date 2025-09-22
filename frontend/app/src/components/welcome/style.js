@@ -41,7 +41,6 @@ export const Alert = styled.p `
 
 export const FormTitle = styled.h1 `
     color: var(--Primary-Color);
-    width: 50px;
     line-height: 50px;
     letter-spacing: 0.4px;
     font-weight: 700;

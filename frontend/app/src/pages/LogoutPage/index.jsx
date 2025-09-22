@@ -27,11 +27,11 @@ function LogoutPage() {
     return (
         <Background>
             <S.container>
-                <h1>Logout</h1>
-                <p>Are you sure you want to log out?</p>
+                <h1>Sair</h1>
+                <p>Você tem certeza de que deseja sair?</p>
                 <S.container_with_buttons>
-                    <S.cancel_button onClick={cancelClick}>Cancel</S.cancel_button>
-                    <S.confirm_button onClick={handleClick}>Confirm Logout</S.confirm_button>
+                    <S.cancel_button onClick={cancelClick}>Cancelar</S.cancel_button>
+                    <S.confirm_button onClick={handleClick}>Confirmar</S.confirm_button>
                 </S.container_with_buttons>
             </S.container>
         </Background>

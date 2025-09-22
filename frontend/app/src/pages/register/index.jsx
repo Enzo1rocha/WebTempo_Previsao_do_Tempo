@@ -8,9 +8,9 @@ import { useAuth } from "../../context/authContext";
 
 
 function Register() {
-    const titulo = 'Create Account';
-    const labelText = 'Sign Up';
-    const texto = 'Sign In';
+    const titulo = 'Crie sua conta!';
+    const labelText = 'Registrar';
+    const texto = 'Fazer login';
     const [Location, setLocation] = useState({})
 
     const { register } = useAuth();

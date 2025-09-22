@@ -35,12 +35,12 @@ export const title_buttonContainer = styled.div `
 `
 
 export const Title = styled.h1 `
-    font-size: 70px;
+    font-size: 60px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.13);
     font-weight: 700;
     letter-spacing: 0.1px;
     line-height: 58px;
-    color: var(--Primary-Color);
+    color: var(--Secundary-Color);
 `
 
 export const SubTitle = styled.p `

@@ -148,4 +148,5 @@ export const Warning = styled.p `
     font-weight: 600;
     color: var(--Secundary-Color);
     text-align: center;
+    cursor: pointer;
 `

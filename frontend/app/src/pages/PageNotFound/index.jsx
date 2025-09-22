@@ -13,9 +13,11 @@ function PageNotFound() {
         <Background>
             <s.Container>
                 <s.Img src={Page404}></s.Img>
-                <s.Title>Page Not Found</s.Title>
-                <s.Subtitle>This page doesn’t exist. It may have been  <br /> removed or the URL is incorrect</s.Subtitle>
-                <s.CustomButton href={user ? '/user/profile' : '/'}>Voltar</s.CustomButton>
+                <s.content_text>
+                    <s.Title>Página não encontrada</s.Title>
+                    <s.Subtitle>Está página não existe. Ela pode ter sido <br /> removida ou a URL está incorreta</s.Subtitle>
+                    <s.CustomButton href={user ? '/user/profile' : '/'}>Voltar</s.CustomButton>
+                </s.content_text>
             </s.Container>
         </Background>
     )

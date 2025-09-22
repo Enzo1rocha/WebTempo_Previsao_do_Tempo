@@ -50,25 +50,25 @@ function NavBar() {
                     {(user.user == null) && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
-                        <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
-                        <S.NavItemMobile href="/login">Login</S.NavItemMobile>
-                        <S.NavItemMobile href="/about">About</S.NavItemMobile>
-                        <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
+                        <S.NavItemMobile href="/forecast">Previsão</S.NavItemMobile>
+                        <S.NavItemMobile href="/login">Entrar</S.NavItemMobile>
+                        <S.NavItemMobile href="/about">Sobre</S.NavItemMobile>
+                        <S.NavItemMobile href="/contact">Contato</S.NavItemMobile>
                      </>
                     }
                     {(user.user) && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
-                        <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
-                        <S.NavItemMobile href="/about">About</S.NavItemMobile>
-                        <S.NavItemMobile href="/user/logout">Logout</S.NavItemMobile>
-                        <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
-                        <S.NavItemMobile href="/user/profile">Profile</S.NavItemMobile>
+                        <S.NavItemMobile href="/forecast">Previsão</S.NavItemMobile>
+                        <S.NavItemMobile href="/about">Sobre</S.NavItemMobile>
+                        <S.NavItemMobile href="/user/logout">Sair</S.NavItemMobile>
+                        <S.NavItemMobile href="/contact">Contato</S.NavItemMobile>
+                        <S.NavItemMobile href="/user/profile">Perfil</S.NavItemMobile>
                      </>
                     }
                 </S.NavItems>}
 
-            <S.Logo href='/'>WebForecast</S.Logo>
+            <S.Logo href='/'>WebTempo</S.Logo>
 
             <S.SearchBarContainer>
                 <SearchBar />
@@ -82,23 +82,23 @@ function NavBar() {
     function desktopDesign() {
         return (
             <S.Container>
-            <S.Logo href='/'>WebForecast</S.Logo>
+            <S.Logo href='/'>WebTempo</S.Logo>
             <S.Nav>
                 {(user.user == null) && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
-                    <S.NavItem href="/login">Login</S.NavItem>
-                    <S.NavItem href="/about">About</S.NavItem>
-                    <S.NavItem href="/contact">Contact</S.NavItem>
+                    <S.NavItem href="/login">Entrar</S.NavItem>
+                    <S.NavItem href="/about">Sobre</S.NavItem>
+                    <S.NavItem href="/contact">Contato</S.NavItem>
                  </>
                 }
                 {(user.user) && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
-                    <S.NavItem href="/about">About</S.NavItem>
-                    <S.NavItem href="/user/logout">Logout</S.NavItem>
-                    <S.NavItem href="/contact">Contact</S.NavItem>
-                    <S.NavItem href="/user/profile">Profile</S.NavItem>
+                    <S.NavItem href="/about">Sobre</S.NavItem>
+                    <S.NavItem href="/user/logout">Sair</S.NavItem>
+                    <S.NavItem href="/contact">Contato</S.NavItem>
+                    <S.NavItem href="/user/profile">Perfil</S.NavItem>
                  </>
                 }
             </S.Nav> 

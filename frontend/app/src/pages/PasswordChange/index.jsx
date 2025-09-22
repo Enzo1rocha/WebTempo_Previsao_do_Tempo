@@ -41,13 +41,13 @@ function PasswordChange() {
                 </S.container_with_image>
                 <S.container_with_form>
                     <S.change_password_form onSubmit={handleSubmit}>
-                        <S.h1_form>Change <br />Your Password</S.h1_form>
+                        <S.h1_form>Troque <br />Sua senha</S.h1_form>
                         <S.input_container>
-                            <InputComponent $error={error} onChange={(e) => {setPassword1(e.target.value)}} type={'password'} LabelText="New Password" />
-                            <InputComponent $error={error} onChange={(e) => {setPassword2(e.target.value)}} type={'password'} LabelText="Confirm Password" />
-                            <Button value={"Change Password"} type='submit'/> 
+                            <InputComponent $error={error} onChange={(e) => {setPassword1(e.target.value)}} type={'password'} LabelText="Nova Senha" />
+                            <InputComponent $error={error} onChange={(e) => {setPassword2(e.target.value)}} type={'password'} LabelText="Confirmar Senha" />
+                            <Button value={"Trocar senha"} type='submit'/> 
                         </S.input_container>
-                        <BackToLink value={'Cancel'} href={'/user/profile'}></BackToLink>
+                        <BackToLink value={'Cancelar'} href={'/user/profile'}></BackToLink>
                     </S.change_password_form>
                 </S.container_with_form>
             </S.container>

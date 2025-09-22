@@ -89,7 +89,7 @@ function ProfilePage() {
                                 <FontAwesomeIcon icon={"shield-halved"} />
                             </S.change_password>
                             <S.logout>
-                                <a href="/user/logout">Logout</a>
+                                <a href="/user/logout">Sair</a>
                                 <FontAwesomeIcon icon={"right-from-bracket"} />
                             </S.logout> 
                         </S.container_buttons>
@@ -101,7 +101,7 @@ function ProfilePage() {
 
             <S.Container_Locations>
                 <S.Container_Boot_Location>
-                    <h1>Boot Location</h1>
+                    <h1>Local de Inicialização</h1>
                     <div>
                         <LocationsLayout ID={1} 
                         onClick={(e, DATA) => CallCityWeather(e, DATA)} 
@@ -111,7 +111,7 @@ function ProfilePage() {
                     </div>
                 </S.Container_Boot_Location>
                 <S.Container_Favorite_Locations>
-                    <h1>Favorite Locations</h1>
+                    <h1>Locais Favoritos</h1>
                     <S.container_favorite_locations>
                         {favoriteLocations.map(location => (
                             

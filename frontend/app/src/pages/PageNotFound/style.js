@@ -3,16 +3,30 @@ import Button from "../../components/Button";
 
 
 export const Container = styled.div `
-    display: grid;
+    display: flex;
     justify-content: center;
     align-items: center;
-    grid-template-rows: 65% 0% 24% 0%;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
+    position: relative;
 `
 
+export const content_text = styled.div `
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    bottom: 70px;
+    `
+
 export const Img = styled.img `
-    height: 80vh;
+    height: 75vh;
+    position: absolute;
+    top: -20px;
 `
 
 export const Title = styled.h1 `
@@ -31,12 +45,10 @@ export const Subtitle = styled.p `
 export const CustomButton = styled.a `
     width: 300px;
     margin: auto;
-    position: relative;
     padding: 10px;
     border-radius: 15px;
     font-size: 20px;
     cursor: pointer;
-    bottom: 25px;
     text-decoration: none;
     background-color: var(--Secundary-Color);
     color: var(--Background-Color);

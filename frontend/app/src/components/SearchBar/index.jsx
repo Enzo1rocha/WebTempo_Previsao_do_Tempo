@@ -14,6 +14,12 @@ export default function SearchBar({ option } ) {
     const navigate = new useNavigate();
     const { user } = useAuth();
 
+    const handleClickLogin = () => {
+        navigate('/login')
+        setInputValue('');
+        setCities([]);
+    }
+
     const SearchSugestions = useCallback(async (query) => { // Função para buscar sugestões de cidades
 
         if (cacheRef.current.has(query)) {
@@ -152,7 +158,7 @@ export default function SearchBar({ option } ) {
         <S.Container>
             <S.SearchBarContainer hasSearch={inputValue}>
                 <input value={inputValue} onChange={handleSearch} type="text" name="" id="" placeholder={
-                    !inputValue ? 'Search Local' : ''
+                    !inputValue ? 'Pesquisar Local' : ''
                 } />
                 {inputValue && (
                     <FontAwesomeIcon icon="x" onClick={handleClear} />
@@ -161,7 +167,7 @@ export default function SearchBar({ option } ) {
             </S.SearchBarContainer>
             {!user && inputValue && (
                 <S.Containerlocations>
-                    <S.Warning>faça login para pesquisar o clima das cidades.</S.Warning>
+                    <S.Warning onClick={handleClickLogin}>faça login para pesquisar o clima das cidades.</S.Warning>
                 </S.Containerlocations>
             )}
             {user && cities.length > 0 && (

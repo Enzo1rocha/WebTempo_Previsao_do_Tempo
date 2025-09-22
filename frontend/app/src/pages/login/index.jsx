@@ -7,12 +7,12 @@ import { useAuth } from "../../context/authContext";
 
 function Login() {
     const { login } = useAuth();
-    const [FormTitle, setFormTitle] = useState("Welcome Back")
+    const [FormTitle, setFormTitle] = useState(<>Bem-vindo <br /> de volta!</>)
 
-    const [LabelText, setLabelText] = useState('Sign In')
+    const [LabelText, setLabelText] = useState('Entrar')
     const [LoginError, setLoginError] = useState(false)
 
-    const [Text, setText] = useState('Sign Up')
+    const [Text, setText] = useState('Criar conta')
 
     const handleLogin = async (data) => {
         try {
