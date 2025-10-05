@@ -1,15 +1,28 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './assets/icons/icons'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Register from './pages/register'
 import Login from './pages/login'
 import ForgotPassword from './pages/ForgotPassword'
 import UpdatePassword from './pages/updatePassword'
 import WelcomePage from './pages/WelcomePage'
-import NavBar from './components/NavBar'
+import PasswordChange from './pages/PasswordChange'
 import Layout from './components/layout/layout'
 import PageNotFound from './pages/PageNotFound'
+import { AuthProvider } from './context/authContext'
+import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
+import ProtectedRoute from './components/authentications/Protectedroute'
+import LogoutPage from './pages/LogoutPage'
+import SearchFavoriteLocation from './pages/SearchFavoriteLocation'
+import ChangeBootLocation from './components/ChangeBootLocation'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ProfilePage from './pages/ProfilePage'
+import ForecastPage from './pages/ForecastPage'
+
+
+const queryClient = new QueryClient()
 
 
 const router = createBrowserRouter([
@@ -18,11 +31,52 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: '/', element: <WelcomePage /> },
-      { path: '/register', element: <Register />},
-      { path: '/navbar', element: <NavBar /> },
-      { path: '/login', element: <Login /> },
-      { path: '/forgot', element: <ForgotPassword /> },
-      { path: '/forgot/updatePassword', element: <UpdatePassword /> },
+      { path: '/register', element:(
+        <PublicOnlyRoute>
+          <Register />
+        </PublicOnlyRoute>
+      )},
+      { path: '/login', element: (
+        <PublicOnlyRoute>
+          <Login />
+        </PublicOnlyRoute>
+      )},
+      { path: '/forgot', element: (
+        <PublicOnlyRoute>
+          <ForgotPassword />
+        </PublicOnlyRoute>
+      )},
+      { path: '/forgot/updatePassword', element: (
+        <PublicOnlyRoute>
+          <UpdatePassword />
+        </PublicOnlyRoute>
+      )},
+
+      { path: '/user/password/change', element: (
+        <ProtectedRoute>
+          <PasswordChange />
+        </ProtectedRoute>
+      )},
+      { path: '/user/logout', element: (
+        <ProtectedRoute>
+          <LogoutPage />
+        </ProtectedRoute>
+      )},
+
+      { path: '/user/profile', element: (
+       <ProtectedRoute>
+        <ProfilePage />
+      </ProtectedRoute>
+      )},
+      { path: 'user/favorite/add', element: (
+        <ProtectedRoute>
+          <SearchFavoriteLocation />
+        </ProtectedRoute>
+      )},
+      { path: '/forecast/:name/:country/:state/:lon/:lat', element: 
+      <ProtectedRoute>
+        <ForecastPage />
+      </ProtectedRoute>}
     ]
   },
   { path: '*', element: <PageNotFound />}
@@ -30,7 +84,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )
  

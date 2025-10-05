@@ -10,4 +10,8 @@ export const BackToLink = styled.a `
     &:hover {
         text-decoration: underline;
     }
+
+    &:active {
+        cursor: wait;
+    }
 `

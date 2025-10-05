@@ -1,10 +1,17 @@
 import * as S from './style'
 
-function InputComponent({LabelText, type, }) {
+function InputComponent({LabelText, type, id, value, onChange, $error}) {
     return (
         <S.Container>
-            <S.Label htmlFor="input">{LabelText}</S.Label>
-            <S.Field type={type} id="input" name="input" />
+            <S.Label htmlFor={id}>{LabelText}</S.Label>
+            <S.Field
+            $error={$error} 
+            type={type} 
+            id={id} 
+            name={id} 
+            value={value}
+            onChange={onChange}
+            />
         </S.Container>
     )
 }

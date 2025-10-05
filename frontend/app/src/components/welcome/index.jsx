@@ -7,10 +7,32 @@ import InputComponent from '../Inputs'
 import Sign_Container from '../ConfirmAuth'
 
 import ForgoutAccount from '../forgoutAccount'
+import { use, useState } from 'react'
 
 
 
-function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navigateTo}) {
+function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navigateTo, onSubmit, error}) {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = () => {
+        if (isLogin) {
+            const formData = {
+                'email': email,
+                'password': password
+            }
+            onSubmit(formData)
+        } else {
+            const formData = {
+                'username': name.trim(),
+                'email': email.trim(),
+                'password1': password,
+                'password2': password,
+            }
+            onSubmit(formData)
+        }
+    }
 
     return (
         <S.Container>
@@ -29,12 +51,14 @@ function Welcome({img, FormTitle, LabelText, Text, ShowNameInput, isLogin, navig
 
 
                     <S.ContainerWithInputs>
-                        {ShowNameInput && <InputComponent type={'text'} LabelText="Name" />}
-                        <InputComponent type={'email'} LabelText="Email" />
-                        <InputComponent type={'password'} LabelText="Password" />
+                        {error && <S.Alert>Erro ao fazer login, verifique suas credenciais.</S.Alert>}
+                        {ShowNameInput && <InputComponent type={'text'} LabelText="Nome"
+                        id={'name'} value={name} onChange={(e) => setName(e.target.value)} $error={error} />}
+                        <InputComponent type={'email'} LabelText="Email" id={'email'} value={email} onChange={(e) => setEmail(e.target.value)} $error={error} />
+                        <InputComponent $error={error} type={'password'} LabelText="Senha" id={'password'} value={password} onChange={(e) => setPassword(e.target.value)} />
                     </S.ContainerWithInputs>
                     
-                    <Sign_Container LabelText={LabelText} />
+                    <Sign_Container LabelText={LabelText} onClick={handleSubmit} />
 
                     <ForgoutAccount Text={Text} navigateTo={navigateTo} isLogin={isLogin}/>
    

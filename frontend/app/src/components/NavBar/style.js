@@ -1,17 +1,31 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { device } from "../../styles/breakpoints";
 
 export const Container = styled.div `
     position: relative;
     top: 0;
-    z-index: 999;
+    z-index:999;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding: 10px 50px;
     align-items: center;
     width: 100%;
+    max-width: 1600px;
+    margin: auto;
     background-color: var(--Secundary-Color);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+
+    @media ${device.laptopL} {
+        padding: 10px 30px;
+    }
+
+    @media ${device.laptop} {
+        padding: 10px 20px;
+    }
+
+    
 `
 
 export const Logo = styled.a `
@@ -20,6 +34,19 @@ export const Logo = styled.a `
     font-weight:600;
     text-decoration: none;
     cursor: pointer;
+
+    @media ${device.laptopL} {
+        font-size: 24px;
+    }
+
+    @media ${device.laptop} {
+        font-size: 20px;
+    }
+
+    @media ${device.mobileL} {
+        font-size: 14px
+    }
+
 `
 
 export const Nav = styled.div `
@@ -27,6 +54,15 @@ export const Nav = styled.div `
     align-items: center;
     flex-direction: row;
     gap: 10px;
+
+    @media ${device.laptopL} {
+        gap: 7px;
+    }
+
+    @media ${device.laptop} {
+        gap: 5px;
+    }
+
 `
 
 
@@ -44,6 +80,25 @@ export const NavMobile = styled.div `
         color: var(--Secundary-Color);
         font-size: 17px;
     }
+
+    @media ${device.laptopL} {
+        
+    }
+
+    @media ${device.laptop} {
+
+    }
+
+    @media ${device.mobileL} {
+        height: 25px;
+        width: 30px;
+        border-radius: 50px;
+
+        > svg {
+            font-size: 14px;
+        }
+    }
+
 `
 
 export const NavItems = styled.div`
@@ -67,6 +122,14 @@ export const NavItems = styled.div`
 
     height: 100vh;
     width: 100vw;
+
+    @media ${device.laptopL} {
+        
+    }
+
+    @media ${device.laptop} {
+        
+    }
 `
 
 export const NavItem = styled.a `
@@ -84,6 +147,14 @@ export const NavItem = styled.a `
         background-color: var(--Background-Color);
         color: var(--Secundary-Color);
         border-radius: 5px;
+    }
+
+    @media ${device.laptopL} {
+        font-size: 16px;
+    }
+
+    @media ${device.laptop} {
+        font-size: 14px;
     }
 `
 
@@ -103,48 +174,21 @@ export const NavItemMobile = styled.a `
     }
 `
 
-
-export const SearchBar = styled.div `
+export const SearchBarContainer = styled.div `
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    gap: 5px;
-    width: 250px;
-    height: 30px;
-    padding: 14px;
-    border-radius: 50px;
-    cursor: pointer;
+    width: 390px;
 
-    transition: 0.1s ease-out;
-
-    svg {
-        color: var(--Secundary-Color);
-        font-size: 17px;
+    @media ${device.laptopL} {
+        width: 380px;
     }
 
-    @media (max-width: 1024px) {
-        width: 40px;
-        height: 30px;
-        padding: 5px;
-
-        &:hover {
-                background-color: var(--Secundary-Color);
-                border: 2px solid var(--Background-Color);
-
-            svg {
-                color: var(--Background-Color);
-            }
-        }
+    @media ${device.laptop} {
+        width: 270px;
     }
-`
 
-export const InputSearchBar = styled.input `
-    width: 100%;
-    font-size: 14px;
-    border: none;
-
-    &:focus {
-        outline: none;
+    @media ${device.mobileL} {
+        width: 170px;
     }
 `

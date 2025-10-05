@@ -4,8 +4,11 @@
 
 :root {
     --Primary-Color: #1F2937;
-    --Secundary-Color: #374151;
+    --Secundary-Color: rgb(55, 65, 81);
+    --Secundary-Color-50-transparent: rgb(55, 65, 81, 0.5);
+    --Secundary-Color-Change-Boot-Location: rgba(55, 65, 81, 0.900);
     --Background-Color: #F3F4F6;
+    --Error-Color: #DC2626;
 
     --Secundary-Color-Transparent: #37415180;
     --Background-Color-Forgot-Input: #969799;
@@ -13,6 +16,12 @@
     --Primary-Blue: #3B82F6;
     --Dark-Blue: #1E40AF;
     --Light-Blue: #93C5FD;
+
+    --Telas-Grandes: 1536px;
+    --Desktop: 1280px;
+    --Notebook: 1024px;
+    --Tablet: 768px;
+    --Mobile: 640px;
 
     --Primary-Font: 'Poppins', sans-serif;
 }

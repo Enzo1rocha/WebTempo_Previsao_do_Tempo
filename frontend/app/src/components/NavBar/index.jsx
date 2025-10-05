@@ -3,12 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../../assets/icons/icons.js';
 import { useEffect, useState } from 'react';
 import '../../assets/icons/icons.js';
+import { useAuth } from '../../context/authContext.jsx';
+import SearchBar from '../SearchBar/index.jsx';
 
-function NavBar({ isLoggedIn }) {
+function NavBar() {
 
     const [isMobileDesign, setIsMobileDesign] = useState(false)
     const [isMenuClicked, setIsMenuClicked] = useState(false)
     const [isWideScreen, setIsWideScreen] = useState(true)
+    const user = useAuth();
+    
 
     if (isWideScreen === true && window.innerWidth <= 1024) {
         setIsWideScreen(false);
@@ -43,33 +47,32 @@ function NavBar({ isLoggedIn }) {
             </S.NavMobile>
             {isMenuClicked && 
                 <S.NavItems>
-                    {!isLoggedIn && 
+                    {(user.user == null) && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
-                        <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
-                        <S.NavItemMobile href="/login">Login</S.NavItemMobile>
-                        <S.NavItemMobile href="/about">About</S.NavItemMobile>
-                        <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
+                        <S.NavItemMobile href="/forecast">Previsão</S.NavItemMobile>
+                        <S.NavItemMobile href="/login">Entrar</S.NavItemMobile>
+                        <S.NavItemMobile href="/about">Sobre</S.NavItemMobile>
+                        <S.NavItemMobile href="/contact">Contato</S.NavItemMobile>
                      </>
                     }
-                    {isLoggedIn && 
+                    {(user.user) && 
                      <>
                         <S.NavItemMobile href="/">Home</S.NavItemMobile>
-                        <S.NavItemMobile href="/forecast">Forecast</S.NavItemMobile>
-                        <S.NavItemMobile href="/about">About</S.NavItemMobile>
-                        <S.NavItemMobile href="/logout">Logout</S.NavItemMobile>
-                        <S.NavItemMobile href="/contact">Contact</S.NavItemMobile>
-                        <S.NavItemMobile href="/profile">Profile</S.NavItemMobile>
+                        <S.NavItemMobile href="/forecast">Previsão</S.NavItemMobile>
+                        <S.NavItemMobile href="/about">Sobre</S.NavItemMobile>
+                        <S.NavItemMobile href="/user/logout">Sair</S.NavItemMobile>
+                        <S.NavItemMobile href="/contact">Contato</S.NavItemMobile>
+                        <S.NavItemMobile href="/user/profile">Perfil</S.NavItemMobile>
                      </>
                     }
                 </S.NavItems>}
 
-            <S.Logo href='/'>WebForecast</S.Logo>
+            <S.Logo href='/'>WebTempo</S.Logo>
 
-            <S.SearchBar>
-                {isWideScreen && <S.InputSearchBar type="text" placeholder="Search Forecast" />}
-                <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-            </S.SearchBar>
+            <S.SearchBarContainer>
+                <SearchBar />
+            </S.SearchBarContainer>
 
 
         </S.Container>
@@ -79,34 +82,30 @@ function NavBar({ isLoggedIn }) {
     function desktopDesign() {
         return (
             <S.Container>
-            <S.Logo href='/'>WebForecast</S.Logo>
+            <S.Logo href='/'>WebTempo</S.Logo>
             <S.Nav>
-                {!isLoggedIn && 
+                {(user.user == null) && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
-                    <S.NavItem href="/forecast">Forecast</S.NavItem>
-                    <S.NavItem href="/login">Login</S.NavItem>
-                    <S.NavItem href="/about">About</S.NavItem>
-                    <S.NavItem href="/contact">Contact</S.NavItem>
+                    <S.NavItem href="/login">Entrar</S.NavItem>
+                    <S.NavItem href="/about">Sobre</S.NavItem>
+                    <S.NavItem href="/contact">Contato</S.NavItem>
                  </>
                 }
-                {isLoggedIn && 
+                {(user.user) && 
                  <>
                     <S.NavItem href="/">Home</S.NavItem>
-                    <S.NavItem href="/forecast">Forecast</S.NavItem>
-                    <S.NavItem href="/about">About</S.NavItem>
-                    <S.NavItem href="/logout">Logout</S.NavItem>
-                    <S.NavItem href="/contact">Contact</S.NavItem>
-                    <S.NavItem href="/profile">Profile</S.NavItem>
+                    <S.NavItem href="/about">Sobre</S.NavItem>
+                    <S.NavItem href="/user/logout">Sair</S.NavItem>
+                    <S.NavItem href="/contact">Contato</S.NavItem>
+                    <S.NavItem href="/user/profile">Perfil</S.NavItem>
                  </>
                 }
             </S.Nav> 
 
-            <S.SearchBar>
-                {isWideScreen && <S.InputSearchBar type="text" placeholder="Search Forecast" />}
-                <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-            </S.SearchBar>
-
+            <S.SearchBarContainer>
+                <SearchBar />
+            </S.SearchBarContainer>
 
         </S.Container>
         )

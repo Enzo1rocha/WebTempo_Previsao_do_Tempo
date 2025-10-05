@@ -17,4 +17,8 @@ export const Button = styled.button `
         background-color: var(--Primary-Color);
     }
 
+    &:active {
+        cursor: wait;
+    }
+
 `
