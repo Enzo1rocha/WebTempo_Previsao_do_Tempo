@@ -5,6 +5,8 @@ export const Main = styled.main `
     max-width: 1600px;
     min-height: 100vh;
     display: flex;
+    justify-content: start;
+    align-items: start;
     flex-direction: column;
     margin: auto;
 

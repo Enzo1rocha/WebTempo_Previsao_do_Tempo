@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { device } from "../../styles/breakpoints";
 
 export const Container = styled.div `
     position: relative;
@@ -16,17 +17,14 @@ export const Container = styled.div `
     background-color: var(--Secundary-Color);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
-    @media (max-width: 1280px) {
+    @media ${device.laptopL} {
         padding: 10px 30px;
     }
 
-    @media (max-width: 1024px) {
+    @media ${device.laptop} {
         padding: 10px 20px;
     }
 
-    @media (max-width: 640px) {
-
-    }
     
 `
 
@@ -37,16 +35,18 @@ export const Logo = styled.a `
     text-decoration: none;
     cursor: pointer;
 
-    @media (max-width: 1280px) {
-        font-size: 25px;
+    @media ${device.laptopL} {
+        font-size: 24px;
     }
 
-    @media (max-width: 1024px) {
+    @media ${device.laptop} {
         font-size: 20px;
     }
-    @media (max-width: 768px) {
-        font-size: 19px;
+
+    @media ${device.mobileL} {
+        font-size: 14px
     }
+
 `
 
 export const Nav = styled.div `
@@ -55,12 +55,14 @@ export const Nav = styled.div `
     flex-direction: row;
     gap: 10px;
 
-    @media (max-width: 1280px) {
+    @media ${device.laptopL} {
         gap: 7px;
     }
-    @media (max-width: 1024px) {
-        gap: 4px;
+
+    @media ${device.laptop} {
+        gap: 5px;
     }
+
 `
 
 
@@ -79,13 +81,24 @@ export const NavMobile = styled.div `
         font-size: 17px;
     }
 
-    @media (max-width: 768px) {
-        width: 35px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    @media ${device.laptopL} {
+        
     }
+
+    @media ${device.laptop} {
+
+    }
+
+    @media ${device.mobileL} {
+        height: 25px;
+        width: 30px;
+        border-radius: 50px;
+
+        > svg {
+            font-size: 14px;
+        }
+    }
+
 `
 
 export const NavItems = styled.div`
@@ -109,6 +122,14 @@ export const NavItems = styled.div`
 
     height: 100vh;
     width: 100vw;
+
+    @media ${device.laptopL} {
+        
+    }
+
+    @media ${device.laptop} {
+        
+    }
 `
 
 export const NavItem = styled.a `
@@ -128,15 +149,12 @@ export const NavItem = styled.a `
         border-radius: 5px;
     }
 
-
-    @media (max-width: 1280px) {
+    @media ${device.laptopL} {
         font-size: 16px;
-        padding: 4px 6px;
     }
 
-    @media (max-width: 1024px) {
+    @media ${device.laptop} {
         font-size: 14px;
-        padding: 4px 4px;;
     }
 `
 
@@ -162,13 +180,15 @@ export const SearchBarContainer = styled.div `
     align-items: center;
     width: 390px;
 
-    @media (max-width: 1280px) {
-        width: 310px;
+    @media ${device.laptopL} {
+        width: 380px;
     }
-    @media (max-width: 1024px) {
+
+    @media ${device.laptop} {
         width: 270px;
     }
-    @media (max-width: 768px) {
-        width: 250px;
+
+    @media ${device.mobileL} {
+        width: 170px;
     }
 `

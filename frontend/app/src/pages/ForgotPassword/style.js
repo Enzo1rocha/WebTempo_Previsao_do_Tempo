@@ -68,3 +68,47 @@ export const BackTo = styled.a `
         text-decoration: underline;
     }
 `
+
+export const button_clicked_notification = styled.div `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    flex-direction: column;
+    text-align: center;
+
+    > p {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: var(--Text-Color);
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    > button {
+        background-color: var(--Primary-Color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+        &:hover {
+            background-color: var(--Secundary-Color);
+        }
+    }
+    `

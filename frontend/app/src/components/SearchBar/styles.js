@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { device } from "../../styles/breakpoints";
 
 
 export const Container = styled.div `
@@ -71,6 +71,18 @@ export const SearchBarContainer = styled.div `
             height: 73%;
         }
     }
+
+    @media ${device.laptop} {
+        height: 35px;
+
+        > input {
+            font-size: 12px;
+        }
+
+        > svg {
+            height: 70%;
+        }
+    }
 `
 
 export const Containerlocations = styled.div `     
@@ -80,7 +92,6 @@ export const Containerlocations = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // esse e o componente dentro da searchbar componente que esta dentro da nav bar componente
     z-index: 999;
     align-items: center;
     border: 2px solid var(--Secundary-Color);
@@ -140,6 +151,20 @@ export const LocationItem = styled.div `
             height: 28px;
         }
     }
+
+    @media ${device.laptop} {
+        > div {
+            > h1 {
+                font-size: 14px;
+            }
+            > p {
+                font-size: 11px;
+            }
+        }
+        > svg {
+            height: 22px;
+        }
+    }
 `
 
 export const Warning = styled.p `
@@ -149,4 +174,9 @@ export const Warning = styled.p `
     color: var(--Secundary-Color);
     text-align: center;
     cursor: pointer;
+
+    @media ${device.mobileL} {
+        font-size: 11.5px;
+        padding: 4px;
+    }
 `
