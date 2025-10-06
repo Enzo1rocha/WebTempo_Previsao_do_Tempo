@@ -44,7 +44,7 @@ export const Logo = styled.a `
     }
 
     @media ${device.mobileL} {
-        font-size: 14px
+        font-size: 17px
     }
 
 `
@@ -90,12 +90,12 @@ export const NavMobile = styled.div `
     }
 
     @media ${device.mobileL} {
-        height: 25px;
+        height: 30px;
         width: 30px;
-        border-radius: 50px;
+        border-radius: 50%;
 
         > svg {
-            font-size: 14px;
+            font-size: 15px;
         }
     }
 
@@ -189,6 +189,32 @@ export const SearchBarContainer = styled.div `
     }
 
     @media ${device.mobileL} {
-        width: 170px;
+        width: 80%;
+    }
+`
+
+export const isSearchClicked = styled.div `
+    background-color: var(--Secundary-Color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    gap: 5px;
+`
+
+export const Container_Search_Icon = styled.button `
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: ${props => props.clicked ? '10px' : '50px'};
+    border: 2px solid var(--Secundary-Color);
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+
+    > svg {
+        height: 18px;
+        color: var(--Secundary-Color);
     }
 `

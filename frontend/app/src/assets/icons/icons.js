@@ -21,5 +21,7 @@ import { faMoon } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faShieldHalved } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlassPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlassMinus } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faMagnifyingGlass, faBars, faDeleteLeft, faPlus, faX, faMapLocationDot, faPenToSquare, faPencil, faEllipsis, faTemperatureHalf, faTemperatureLow, faDroplet, faWind, faEye, faGaugeSimpleHigh, faCircleExclamation, faTriangleExclamation, faPercent, faMoon, faArrowRight, faShieldHalved, faRightFromBracket);
+library.add(faMagnifyingGlass, faBars, faDeleteLeft, faPlus, faX, faMapLocationDot, faPenToSquare, faPencil, faEllipsis, faTemperatureHalf, faTemperatureLow, faDroplet, faWind, faEye, faGaugeSimpleHigh, faCircleExclamation, faTriangleExclamation, faPercent, faMoon, faArrowRight, faShieldHalved, faRightFromBracket, faMagnifyingGlassPlus, faMagnifyingGlassMinus);
