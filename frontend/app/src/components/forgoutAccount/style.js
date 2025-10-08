@@ -30,24 +30,33 @@ export const Link = styled.a`
         cursor: pointer;
     }
 
-    @media ${device.laptop} {
-        font-size: 14px;
-    }
-
-    @media ${device.tablet} {
-        font-size: 14px;
-    }
-
-    @media ${device.mobileL} {
-        font-size: 14px;
+    @media ${device.mobileXS} {
+        font-size:12px;
     }
 
     @media ${device.mobileS} {
         font-size: 12px;
     }
 
-     @media ${device.mobileXS} {
-        font-size:12px;
+    @media ${device.mobileL} {
+        font-size: 14px;
+    }
+
+    @media ${device.tablet} and (orientation: landscape) {
+        font-size: 14px;
+    }
+
+    @media ${device.tablet} and (orientation: portrait) {
+        font-size: 21px;
+    }
+
+
+    @media ${device.laptop} and (orientation: landscape) {
+        font-size: 14px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        font-size: 23px;
     }
 
 

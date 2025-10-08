@@ -23,26 +23,34 @@ export const LabelForButton = styled.label `
     font-size: 24px;
     font-weight: 700;
 
-    @media ${device.laptop} {
-        font-size: 21px;
+    @media ${device.mobileXS} {
+            font-size:16px;
     }
 
-    @media ${device.tablet} {
-        font-size: 20px;
+    @media ${device.mobileS} {
+            font-size: 18px;
     }
 
     @media ${device.mobileL} {
         font-size: 20px;
     }
 
-    @media ${device.mobileS} {
-            font-size: 18px;
-        }
-    
+    @media ${device.tablet} and (orientation: landscape) {
+        font-size: 20px;
+    }
 
-     @media ${device.mobileXS} {
-            font-size:16px;
-        }
+    @media ${device.tablet} and (orientation: portrait) {
+        font-size: 27px;
+    }
+ 
+    @media ${device.laptop} and (orientation: landscape) {
+        font-size: 21px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        font-size: 32px;
+    }
+
 `
 
 export const Button = styled.button `
@@ -64,13 +72,15 @@ export const Button = styled.button `
         cursor: wait;
     }
 
-    @media ${device.laptop} {
-        width: 145px;
-        height: 40px;
+
+    @media ${device.mobileXS} {
+        width: 110px;
+        height: 35px;
     }
 
-    @media ${device.tablet} {
-        width: 150px;
+     @media ${device.mobileS} {
+        width: 120px;
+        height: 37px;
     }
 
     @media ${device.mobileL} {
@@ -78,34 +88,51 @@ export const Button = styled.button `
             height: 37px;
         }
 
-    @media ${device.mobileS} {
-        width: 120px;
-        height: 37px;
+    @media ${device.tablet} and (orientation: landscape) {
+        width: 150px;
     }
 
-     @media ${device.mobileXS} {
-        width: 110px;
-        height: 35px;
+    @media ${device.tablet} and (orientation: portrait) {
+        width: 220px;
+        height: 50px;
+    }
+
+    @media ${device.laptop} and (orientation: landscape) {
+        width: 145px;
+        height: 40px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        width: 210px;
+        height: 60px;
     }
 `
 
 export const SignImage = styled.img `
     height: 60px;
 
-    @media ${device.laptop} {
-        height: 50px;
-    }
-
-    @media ${device.mobileL} {
-        height: 40px;
+    @media ${device.mobileXS} {
+        height: 35px;
     }
 
     @media ${device.mobileS} {
         height: 38px;
     }
 
-     @media ${device.mobileXS} {
-        height: 35px;
+    @media ${device.mobileL} {
+        height: 40px;
+    }
+
+    @media ${device.tablet} and (orientation: portrait) {
+        height: 65px;
+    }
+
+    @media ${device.laptop} and (orientation: landscape) {
+        height: 50px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        height: 80px;
     }
 `
 

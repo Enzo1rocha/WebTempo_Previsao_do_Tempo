@@ -12,19 +12,28 @@ export const Container = styled.div`
     gap: 40px;
     background-color: var(--Primary-Color);
 
-    @media ${device.mobileL} {
-        gap: 80px;
-    }
-
     @media ${device.mobileXS} {
         width: 100%;
     }
 
-    @media ${device.tablet} {
+    @media ${device.mobileS} {
+        gap: 50px;
+        padding-top: 50px;
+    }
+
+    @media ${device.mobileL} {
+        gap: 40px;
+    }
+
+    @media ${device.tablet} and (orientation: landscape) {
         gap: 30px;
     }
 
-    @media ${device.laptop} {
+    @media ${device.tablet} and (orientation: portrait) {
+        gap: 32px;
+    }
+
+    @media ${device.laptop} and (orientation: landscape) {
         display: grid;
         grid-template-columns: 60% 40%;
         margin: auto;
@@ -33,11 +42,8 @@ export const Container = styled.div`
         gap: 0; /* Reset do gap do flex */
     }
 
-    @media ${device.laptopL} {
+    @media ${device.laptopL} and (orientation: landscape) {
         grid-template-columns: 58% 42%;
-        & and (orientation: landscape) {
-            grid-template-columns: 70% 30%;
-        }
     }
 `;
 
@@ -52,13 +58,23 @@ export const ContainerWithForm = styled.div`
     display: flex;
     justify-content: center;
 
-    @media ${device.tablet} {
+    @media ${device.tablet} and (orientation: landscape) {
         min-height: fit-content; /* Volta a ter altura mínima */
         border-radius: 0; /* Remove bordas arredondadas */
         padding: 20px 20px 40px 20px;
         display: block;
         border-top-left-radius: 50px;
         border-top-right-radius: 50px;
+    }
+
+    @media ${device.tablet} and (orientation: portrait) {
+        min-height: 600px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        padding-top: 40px;
+        padding-bottom: 100px;
+        min-height: 700px;
     }
 
     @media ${device.laptopL} {
@@ -78,7 +94,7 @@ export const FormContainer = styled.form`
     padding-right: 10px;
     background-color: var(--Background-Color);
 
-    @media ${device.tablet} {
+    @media ${device.tablet} and (orientation: landscape){
         gap: 30px;
         padding-bottom: 0;
         height: 100%;
@@ -86,9 +102,17 @@ export const FormContainer = styled.form`
         padding-right: 10px;
     }
 
-    @media ${device.laptop} {
+    @media ${device.tablet} and (orientation: portrait) {
+        gap: 30px;
+    }
+
+    @media ${device.laptop} and (orientation: landscape) {
         gap: 28px;
         width: auto;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        gap: 40px;
     }
 
     @media ${device.laptopL} {
@@ -142,18 +166,35 @@ export const FormTitle = styled.h1`
         line-height: 22px;
     }
 
-    @media ${device.mobileL} {
-        font-size: 32px;
-    }
-
     @media ${device.mobileS} {
         font-size: 25px;
         line-height: 25px;
     }
 
-    @media ${device.laptop} {
+    @media ${device.mobileL} {
+        font-size: 32px;
+        line-height: 32px;
+    }
+
+    @media ${device.tablet} and (orientation: landscape) {
+        font-size: 32px;
+        line-height: 31px;
+    }
+
+    @media ${device.tablet} and (orientation: portrait) {
+        font-size: 39px;
+        line-height: 40px;
+    }
+
+    @media ${device.laptop} and (orientation: landscape) {
         font-size: 33px;
         line-height: 35px;
+        margin-top: 5px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        font-size: 45px;
+        line-height: 45px;
         margin-top: 5px;
     }
     
@@ -163,10 +204,6 @@ export const FormTitle = styled.h1`
         line-height: 40px;
         margin-top: 18px;
     }
-
-    @media ${device.tablet} {
-        font-size: 32px;
-    }
 `;
 
 export const ContainerWithInputs = styled.div`
@@ -175,8 +212,16 @@ export const ContainerWithInputs = styled.div`
     flex-direction: column;
     gap: 10px;
 
-    @media ${device.laptop} {
+    @media ${device.tablet} and (orientation: portrait) {
+        gap: 20px;
+    }
+
+    @media ${device.laptop} and (orientation: landscape) {
         gap: 10px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        gap: 30px;
     }
 `;
 
@@ -190,19 +235,27 @@ export const ContainerWithImage = styled.div`
     align-items: center;
     border-radius: 0; /* Base sem bordas arredondadas */
 
-    @media ${device.tablet} {
-        min-height: 320px;
-    }
-
     @media ${device.mobileL} {
         min-height: 300px;
     }
 
-    @media ${device.laptopL} {
-        min-height: 100vh;
+    @media ${device.tablet} {
+        min-height: 320px;
+    }
+
+    @media ${device.tablet} and (orientation: portrait) {
+        min-height: 450px;
     }
 
     @media ${device.laptop} {
+        min-height: 100vh;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        min-height: 550px;
+    }
+
+    @media ${device.laptopL} {
         min-height: 100vh;
     }
 `;
@@ -218,6 +271,10 @@ export const PictureContainer = styled.picture`
 
     @media ${device.mobileL} {
         height: 250px;
+    }
+
+    @media ${device.mobileL} and (orientation: portrait) {
+        min-height: 350px;
     }
 
     @media ${device.tablet} {
@@ -237,29 +294,46 @@ export const PictureContainer = styled.picture`
 export const SignUpImage = styled.img`
     /* ESTILOS BASE (MOBILE) */
     height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-right: 15px;
-
-    @media ${device.mobileL} {
-      height: 220px;
-      padding-right: 0;
-    }
 
     @media ${device.mobileXS} {
         height: 220px;
     }
 
     @media ${device.mobileS} {
-        height: 220px;
+        height: 210px;
     }
 
-    @media ${device.tablet} {
+    @media ${device.mobileL} {
+      height: 220px;
+      padding-right: 0;
+    }
+
+    @media ${device.mobileL} and (orientation: portrait) {
+        height: 290px;
+    }
+
+
+    @media ${device.tablet} and (orientation: landscape) {
         position: static; /* Volta ao fluxo normal */
         transform: none; /* Reseta a transformação */
         height: 260px;
     }
 
-    @media ${device.laptop} {
+    @media ${device.tablet} and (orientation: portrait) {
+        height: 380px;
+    }
+
+
+    @media ${device.laptop} and (orientation: landscape) {
         height: 360px;
+    }
+
+    @media ${device.laptop} and (orientation: portrait) {
+        height: 450px;
     }
     
     @media ${device.laptopL} {

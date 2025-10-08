@@ -12,17 +12,18 @@ export const Container = styled.div `
     padding: 10px 50px;
     align-items: center;
     width: 100%;
-    max-width: 1600px;
+    width: 100%;
     margin: auto;
     background-color: var(--Secundary-Color);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
-    @media ${device.laptopL} {
-        padding: 10px 30px;
-    }
 
     @media ${device.laptop} {
         padding: 10px 20px;
+    }
+
+    @media ${device.laptopL} {
+        padding: 12px 30px;
     }
 
     
@@ -35,16 +36,17 @@ export const Logo = styled.a `
     text-decoration: none;
     cursor: pointer;
 
-    @media ${device.laptopL} {
-        font-size: 24px;
-    }
-
-    @media ${device.laptop} {
-        font-size: 20px;
-    }
 
     @media ${device.mobileL} {
         font-size: 17px
+    }
+
+    @media ${device.laptop} {
+        font-size: 25px;
+    }
+
+     @media ${device.laptopL} {
+        font-size: 30px;
     }
 
 `
@@ -55,12 +57,12 @@ export const Nav = styled.div `
     flex-direction: row;
     gap: 10px;
 
-    @media ${device.laptopL} {
-        gap: 7px;
+    @media ${device.laptop} {
+        gap: 10px;
     }
 
-    @media ${device.laptop} {
-        gap: 5px;
+    @media ${device.laptopL} {
+        gap: 17px;
     }
 
 `
@@ -81,13 +83,6 @@ export const NavMobile = styled.div `
         font-size: 17px;
     }
 
-    @media ${device.laptopL} {
-        
-    }
-
-    @media ${device.laptop} {
-
-    }
 
     @media ${device.mobileL} {
         height: 30px;
@@ -122,14 +117,6 @@ export const NavItems = styled.div`
 
     height: 100vh;
     width: 100vw;
-
-    @media ${device.laptopL} {
-        
-    }
-
-    @media ${device.laptop} {
-        
-    }
 `
 
 export const NavItem = styled.a `
@@ -149,12 +136,12 @@ export const NavItem = styled.a `
         border-radius: 5px;
     }
 
-    @media ${device.laptopL} {
-        font-size: 16px;
+    @media ${device.laptop} {
+        font-size: 17px;
     }
 
-    @media ${device.laptop} {
-        font-size: 14px;
+    @media ${device.laptopL} {
+        font-size: 19px;
     }
 `
 
@@ -180,17 +167,19 @@ export const SearchBarContainer = styled.div `
     align-items: center;
     width: 390px;
 
-    @media ${device.laptopL} {
-        width: 380px;
-    }
-
-    @media ${device.laptop} {
-        width: 270px;
-    }
-
     @media ${device.mobileL} {
         width: 80%;
     }
+
+    @media ${device.laptop} {
+        width: 420px;
+    }
+
+    @media ${device.laptopL} {
+        width: 550px;
+    }
+
+    
 `
 
 export const isSearchClicked = styled.div `
