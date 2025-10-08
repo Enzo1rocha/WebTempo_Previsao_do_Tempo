@@ -19,7 +19,7 @@ export const Container = styled.div `
 
 export const Link = styled.a`
     color: var(--Secundary-Color);
-    font-size: 19px;
+    font-size: 16px;
     font-weight: 600;
     text-decoration: none;
 
@@ -30,19 +30,25 @@ export const Link = styled.a`
         cursor: pointer;
     }
 
-    @media ${device.laptopL} {
-        font-size: 15px;
+    @media ${device.laptop} {
+        font-size: 14px;
     }
 
-    @media ${device.laptop} {
-        font-size: 13px;
+    @media ${device.tablet} {
+        font-size: 14px;
     }
 
     @media ${device.mobileL} {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     @media ${device.mobileS} {
-        font-size: 11px;
+        font-size: 12px;
     }
+
+     @media ${device.mobileXS} {
+        font-size:12px;
+    }
+
+
 `

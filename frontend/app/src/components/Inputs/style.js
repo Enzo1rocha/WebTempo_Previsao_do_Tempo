@@ -5,49 +5,48 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
     gap: 2px;
-    border-bottom: 3.2px solid var(--Secundary-Color-Transparent);
+    border-bottom: 3.6px solid var(--Secundary-Color-Transparent);
 
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     justify-content: center;
     align-items: center;
 
+
     @media ${device.laptopL} {
-        border-bottom: 3.1px solid var(--Secundary-Color-Transparent);
-        padding-bottom: 6px;
+        
     }
 
     @media ${device.laptop} {
-        border-bottom: 2.8px solid var(--Secundary-Color-Transparent);
-        padding-bottom: 3px;
+        border-bottom: 3.3px solid var(--Secundary-Color-Transparent);
     }
-
-    @media ${device.mobileL} {
-            border-bottom: 3.2px solid var(--Secundary-Color-Transparent);
-            padding-bottom: 3px;
-        }
 `
 
 export const Label = styled.label`
     color: var(--Secundary-Color-Transparent);
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 600;
     white-space: nowrap;
 
-    @media ${device.laptopL} {
-        font-size: 16.5px;
+    @media ${device.laptop} {
+        font-size: 19px;
     }
 
-    @media ${device.laptop} {
-        font-size: 14px;
+    @media ${device.tablet} {
+        font-size: 18px;
     }
 
     @media ${device.mobileL} {
-        font-size: 17px;
+        font-size: 18px;
     }
 
     @media ${device.mobileS} {
-        font-size: 15px;
+        font-size:16px;
     }
+
+     @media ${device.mobileXS} {
+        font-size:16px;
+    }
+
 `
 
 export const Field = styled.input`
@@ -56,7 +55,7 @@ export const Field = styled.input`
     padding: 10px;
     border: none;
 
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 600;
     color: var(--Secundary-Color-Transparent);
     ${props => props.$error && `color: var(--Error-Color);`}
@@ -66,17 +65,22 @@ export const Field = styled.input`
         outline: none;
     }
 
-    @media ${device.laptopL} {
-        font-size: 16.5px;
+    @media ${device.laptop} {
+        font-size: 19px;
     }
 
-    @media ${device.laptop} {
-        font-size: 14px;
+    @media ${device.tablet} {
+        font-size: 18px;
     }
+
     @media ${device.mobileL} {
-        font-size: 17px;
+        font-size: 18px;
     }
     @media ${device.mobileS} {
-        font-size: 15px;
+        font-size:16px;
+    }
+
+    @media ${device.mobileXS} {
+        font-size:16px;
     }
 `
