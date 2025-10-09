@@ -17,6 +17,18 @@ export const Container = styled.div `
     background-color: var(--Secundary-Color);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
+    @media ${device.mobileS} {
+        padding: 10px 10px;
+    }
+
+    @media ${device.mobileL} {
+        padding: 10px 10px;
+    }
+
+    @media ${device.tablet} {
+        padding: 10px 20px;
+    }
+
 
     @media ${device.laptop} {
         padding: 10px 20px;
@@ -36,9 +48,17 @@ export const Logo = styled.a `
     text-decoration: none;
     cursor: pointer;
 
+    @media ${device.mobileS} {
+        font-size: 18px;
+    }
+
 
     @media ${device.mobileL} {
-        font-size: 17px
+        font-size: 20px
+    }
+
+    @media ${device.tablet} {
+        font-size: 30px;
     }
 
     @media ${device.laptop} {
@@ -83,14 +103,35 @@ export const NavMobile = styled.div `
         font-size: 17px;
     }
 
-
-    @media ${device.mobileL} {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
+    @media ${device.mobileS} {
+        height: 28px;
+        width: 28px;
+        border-radius: 10px;
 
         > svg {
             font-size: 15px;
+        }
+    }
+
+    @media ${device.mobileL} {
+        height: 35px;
+        width: 35px;
+        border-radius: 8px;
+        border: 2px solid var(--Secundary-Color);
+
+        > svg {
+            font-size: 10px;
+        }
+    }
+
+    @media ${device.tablet} {
+        height: 45px;
+        width: 45px;
+        border-radius: 10px;
+        border: 2px solid var(--Secundary-Color);
+
+        > svg {
+            font-size: 24px;
         }
     }
 
@@ -171,6 +212,10 @@ export const SearchBarContainer = styled.div `
         width: 80%;
     }
 
+    @media ${device.tablet} {
+        width: 600px;
+    }
+
     @media ${device.laptop} {
         width: 420px;
     }
@@ -185,12 +230,16 @@ export const SearchBarContainer = styled.div `
 export const isSearchClicked = styled.div `
     background-color: var(--Secundary-Color);
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 10px 10px;
     gap: 5px;
-`
+    width: 100%;
+    margin: auto;
+
+
+
+`   
 
 export const Container_Search_Icon = styled.button `
     height: 35px;
@@ -206,4 +255,35 @@ export const Container_Search_Icon = styled.button `
         height: 18px;
         color: var(--Secundary-Color);
     }
+
+    @media ${device.mobileS} {
+        height: ${props => props.clicked ? '40px' : '31px'};
+        width: ${props => props.clicked ? '40px' : '31px'};
+        border-radius: ${props => props.clicked ? '8px' : '10px'};
+
+        > svg {
+            font-size: 15px;
+    }
+}
+
+    @media ${device.mobileL} {
+        height: ${props => props.clicked ? '40px' : '35px'};
+        width:  ${props => props.clicked ? '40px' : '35px'};
+        border-radius: 8px;
+
+        > svg {
+            font-size: ${props => props.clicked ? '20px' : '10px'};
+        }
+    }
+
+    @media ${device.tablet} {
+        height: 45px;
+        width: 45px;
+        border-radius: 10px;
+
+        > svg {
+            font-size: 24px;
+        }
+    }
+    
 `
