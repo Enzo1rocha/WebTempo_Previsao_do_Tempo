@@ -125,13 +125,13 @@ export const NavMobile = styled.div `
     }
 
     @media ${device.tablet} {
-        height: 45px;
-        width: 45px;
+        height: 41px;
+        width: 41px;
         border-radius: 10px;
-        border: 2px solid var(--Secundary-Color);
+        border: 3px solid var(--Secundary-Color);
 
         > svg {
-            font-size: 24px;
+            font-size: 20px;
         }
     }
 
@@ -277,8 +277,8 @@ export const Container_Search_Icon = styled.button `
     }
 
     @media ${device.tablet} {
-        height: 45px;
-        width: 45px;
+        height: 41px;
+        width: 41px;
         border-radius: 10px;
 
         > svg {
