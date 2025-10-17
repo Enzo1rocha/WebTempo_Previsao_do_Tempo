@@ -10,7 +10,14 @@ export const Container = styled.div`
     @media (max-width: 2060px) {
         grid-template-columns: 49% 51%;
     }
-`;
+
+    @media (max-width: ${size.laptop}) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+`
 
 export const ContainerContent = styled.div`
     display: flex;
@@ -21,6 +28,10 @@ export const ContainerContent = styled.div`
 
     @media (max-width: 2060px) {
         padding: 0px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+
     }
 `
 
@@ -45,6 +56,27 @@ export const Content = styled.div `
     @media (max-width: ${size.laptopL}) {
         margin-left: 40px;
         gap: 40px;
+    }
+
+    @media (max-width: ${size.laptop}) {
+        max-width: 650px;
+        margin: auto;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        max-width: 500px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        max-width: 355px;
+    }
+
+    @media (max-width: 376px) {
+        max-width: 320px;
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        max-width: 300px;
     }
 `
 
@@ -76,11 +108,35 @@ export const Title = styled.h1 `
     @media (max-width: 1550px) {
         font-size: 58px;
         line-height: 57px;
+        letter-spacing: -2px;
     }
 
     @media (max-width: 1440px) {
         font-size: 50px;
         line-height: 50px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 45px;
+        letter-spacing: -2px;
+        line-height: 42px;
+        text-align: left;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        text-align: center;
+        font-size: 37px;
+        line-height: 38px;
+    }
+
+    @media (max-width: 376px) {
+        font-size: 32px;
+        line-height: 34px;
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        font-size: 28px;
+        line-height: 31px;
     }
 
 
@@ -106,6 +162,28 @@ export const SubTitle = styled.p `
     @media (max-width: ${size.laptopL}) {
         font-size: 19px;
     }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 17px;
+        line-height: 24px;;
+    }
+     @media (max-width: ${size.mobileL}) {
+        font-size: 17px;
+        line-height: 24px;
+        text-align: center;
+     }
+
+     @media (max-width: 376px) {
+        font-size: 16px;
+        line-height: 23px;
+        text-align: center;
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        font-size: 13.5px;
+        line-height: 21px;
+        text-align: center;
+    }
 `
 
 
@@ -114,6 +192,10 @@ export const ContainerWithImage = styled.div `
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+
+    @media (max-width: ${size.laptop}) {
+        display: none;
+    }
 `
 
 export const ImageContent = styled.img `
@@ -156,6 +238,16 @@ export const Button = styled.a `
         padding: 12px;
         font-size: 20px;
         letter-spacing: 0.6px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        font-size: 18px;
+        padding: 13px 10px;
+    }
+
+    @media (max-width: 376px) {
+        font-size: 17px;
+        padding: 13px;
     }
 `
  

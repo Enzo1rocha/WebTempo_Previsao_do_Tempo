@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from '../../styles/breakpoints';
+import { device, size } from '../../styles/breakpoints';
 
 export const Container = styled.div `
     position: relative;
@@ -39,6 +39,24 @@ export const TopRight = styled.img `
         right: -50px;
         transform: rotate(255deg);
     }
+
+    @media (max-width: 768px) and (orientation: portrait) {
+        height: 500px;
+        top: -80px;
+        right: -45px;
+        transform: rotate(255deg);
+    }
+
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+        height: 340px;
+        top: -60px;
+        right: -40px;
+        transform: rotate(255deg);
+    }
+
+    @media (max-width: 376px) and (orientation: portrait) {
+        height: 250px;
+    }
 `
 
 export const BottomLeft = styled.img `
@@ -68,5 +86,23 @@ export const BottomLeft = styled.img `
         height: 400px;
         bottom: -40px;
         left: -20px;
+    }
+
+    @media (max-width: 768px) and (orientation:portrait) {
+        height: 350px;
+        bottom: -60px;
+        left: -30px;  
+        transform: rotate(75deg);
+    }
+
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+        height: 310px;
+        bottom: -80px;
+        left: -40px;  
+        transform: rotate(75deg);
+    }
+
+    @media (max-width: 376px) and (orientation: portrait) {
+        height: 250px;
     }
 `

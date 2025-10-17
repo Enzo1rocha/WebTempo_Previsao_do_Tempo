@@ -200,6 +200,14 @@ export const NavItemMobile = styled.a `
         background-color: var(--Background-Color);
         color: var(--Secundary-Color);
     }
+
+    @media ${device.mobileL} {
+        font-size: 18px;
+    }
+
+    @media ${device.tablet} {
+        font-size: 25px;
+    }
 `
 
 export const SearchBarContainer = styled.div `
