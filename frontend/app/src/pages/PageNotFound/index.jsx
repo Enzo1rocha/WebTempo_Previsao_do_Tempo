@@ -21,6 +21,6 @@ function PageNotFound() {
             </s.Container>
         </Background>
     )
-}
+} 
 
 export default PageNotFound;
