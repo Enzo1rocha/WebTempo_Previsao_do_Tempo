@@ -49,6 +49,19 @@ export const content_text = styled.div `
         margin-bottom: 20px;
         margin-top: -20px;
     }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        margin-top: -0px;
+    }
+
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+
+    }
+
+    @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
+        margin-bottom: 0px;
+        margin-top: -10px;
+    }
     `
 
 export const Img = styled.img `
@@ -82,6 +95,18 @@ export const Img = styled.img `
         margin-top: -50px;
         position: static;
     }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        height: 460px;
+    }
+
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+        height: 350px;
+    }
+
+    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
+        height: 280px;
+    }
 `
 
 export const Title = styled.h1 `
@@ -110,6 +135,22 @@ export const Title = styled.h1 `
     @media (max-width: ${size.laptop}) and (orientation: portrait) {
         font-size: 55px;
     }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        font-size: 40px;
+    }
+
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+        font-size: 30px;
+    }
+
+    @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
+        font-size: 25px;
+    }
+
+    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
+        font-size: 21px;
+    }
 `
 
 export const Subtitle = styled.p `
@@ -134,6 +175,22 @@ export const Subtitle = styled.p `
 
     @media (max-width: ${size.laptop}) and (orientation: portrait) {
         font-size: 28px;
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait){
+        font-size: 20px;
+    }
+    
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+        font-size: 16px;
+    }
+
+    @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
+        font-size: 14px;
+    }
+
+    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
+        font-size: 12px;
     }
 `
 
@@ -179,6 +236,30 @@ export const CustomButton = styled.a `
         width: 460px;
         padding: 15px;
         font-size: 22px;
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        width: 330px;
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+        width: 250px;
+        padding: 10px;
+        font-size: 17px;
+    }
+
+    @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
+        width: 220px;
+        padding: 8px;
+        font-size: 15px;
+    }
+
+    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
+        width: 200px;
+        padding: 8px;
+        font-size: 14px;
     }
 `
 

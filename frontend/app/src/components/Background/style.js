@@ -47,7 +47,7 @@ export const TopRight = styled.img `
         transform: rotate(255deg);
     }
 
-    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+    @media (max-width: 450px) and (orientation: portrait) {
         height: 340px;
         top: -60px;
         right: -40px;
@@ -95,7 +95,7 @@ export const BottomLeft = styled.img `
         transform: rotate(75deg);
     }
 
-    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+    @media (max-width: 450px) and (orientation: portrait) {
         height: 310px;
         bottom: -80px;
         left: -40px;  

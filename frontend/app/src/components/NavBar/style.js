@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { device } from "../../styles/breakpoints";
+import { device, size } from "../../styles/breakpoints";
 
 export const Container = styled.div `
     position: relative;
@@ -38,6 +38,11 @@ export const Container = styled.div `
         padding: 12px 30px;
     }
 
+    @media (max-width: ${size.mobileS}) {
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 12px;
+    }
     
 `
 
@@ -68,6 +73,11 @@ export const Logo = styled.a `
      @media ${device.laptopL} {
         font-size: 30px;
     }
+
+    @media (max-width: ${size.mobileS}) {
+        font-size: 18px;
+    }
+
 
 `
 
@@ -134,6 +144,16 @@ export const NavMobile = styled.div `
             font-size: 20px;
         }
     }
+
+    @media (max-width: ${size.mobileS}) {
+        height: 24px;
+        width: 26px;
+
+        > svg {
+            font-size: 13px;
+        }
+    }
+
 
 `
 
@@ -291,6 +311,16 @@ export const Container_Search_Icon = styled.button `
 
         > svg {
             font-size: 24px;
+        }
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        height: ${props => props.clicked ? '40px' : '28px'};
+        width: ${props => props.clicked ? '40px' : '30px'};
+        border-radius: ${props => props.clicked ? '8px' : '10px'};
+
+        > svg {
+            font-size: ${props => props.clicked ? '8px' : '10px'};
         }
     }
     

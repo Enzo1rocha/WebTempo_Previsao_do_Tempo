@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../styles/breakpoints";
+import { device, size } from "../../styles/breakpoints";
 
 export const Container = styled.div`
     display: flex;
@@ -22,6 +22,19 @@ export const Container = styled.div`
 
     @media ${device.laptop} and (orientation: landscape) {
         border-bottom: 3.3px solid var(--Secundary-Color-Transparent);
+    }
+
+    @media (min-width: 2000px) {
+        padding-bottom: 15px;
+        gap: 2px;
+    }
+
+    @media (max-width: 1700px) {
+        padding-bottom: 10px;
+    }
+
+    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
+        padding-bottom: 5px;
     }
 `
 
@@ -59,6 +72,35 @@ export const Label = styled.label`
 
     @media ${device.laptop} and (orientation: portrait) {
         font-size: 30px;
+    }
+
+    @media (min-width: 2000px) {
+        font-size: 25px;
+    }
+
+    @media (max-width: 1700px) {
+        font-size: 22px;
+    }
+
+    @media (max-width: 1550px) {
+        font-size: 19.5px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        font-size: 23px;
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        font-size: 19px;
+        font-weight: 600;
+    }
+
+    @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
+        font-size: 16px;
+    }
+
+    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
+        font-size: 14px;
     }
 
 `
@@ -107,4 +149,7 @@ export const Field = styled.input`
         font-size: 30px;
     }
 
+    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
+        font-size: 14px;
+    }
 `

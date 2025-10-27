@@ -135,8 +135,9 @@ export const Title = styled.h1 `
     }
 
     @media (max-width: ${size.mobileS}) {
-        font-size: 28px;
+        font-size: 30px;
         line-height: 31px;
+        margin-bottom: -10px;
     }
 
 
@@ -168,21 +169,24 @@ export const SubTitle = styled.p `
         line-height: 24px;;
     }
      @media (max-width: ${size.mobileL}) {
-        font-size: 17px;
+        font-size: 14.5px;
         line-height: 24px;
         text-align: center;
+        margin-bottom: 5px;
      }
 
      @media (max-width: 376px) {
-        font-size: 16px;
-        line-height: 23px;
+        font-size: 12px;
+        line-height: 20px;
         text-align: center;
     }
 
     @media (max-width: ${size.mobileS}) {
-        font-size: 13.5px;
-        line-height: 21px;
+        font-size: 10px;
+        line-height: 19px;
         text-align: center;
+        width: 290px;
+        margin: auto;
     }
 `
 
@@ -241,13 +245,21 @@ export const Button = styled.a `
     }
 
     @media (max-width: ${size.mobileL}) {
-        font-size: 18px;
-        padding: 13px 10px;
+        font-size: 16px;
+        padding: 13px 0px;
+        width: 260px;
     }
 
     @media (max-width: 376px) {
-        font-size: 17px;
-        padding: 13px;
+        font-size: 15px;
+        padding: 12px;
+        width: 220px;
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        font-size: 13px;
+        padding: 10px;
+        width: 190px;
     }
 `
  
