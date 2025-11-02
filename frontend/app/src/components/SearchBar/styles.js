@@ -10,7 +10,7 @@ export const Container = styled.div `
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 999;
+    z-index: 998;
     font-family: var(--Primary-Font);
 `
 

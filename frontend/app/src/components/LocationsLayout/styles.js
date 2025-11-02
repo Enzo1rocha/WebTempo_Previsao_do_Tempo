@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {device, size} from '../../styles/breakpoints';
 
 export const Container = styled.div `
     background-color: white;
@@ -54,6 +55,70 @@ export const Container = styled.div `
         > svg {
             color: var(--Secundary-Color);
             font-size: 16px;
+        }
+    }
+
+    @media (max-width: ${size.desktop}) {
+        height: 140px;
+        padding: 15px 0px 15px 20px;
+
+        h1 {
+            font-size: 28px;
+        }
+
+        p {
+            font-size: 21px;
+        }
+
+        div {
+            width: 45px;
+            height: 45px;
+
+            > svg {
+                font-size: 20px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.laptopXL}) {
+        height: 140px;
+        padding: 15px 0px 15px 20px;
+
+        h1 {
+            font-size: 25.5px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        div {
+            width: 40px;
+            height: 40px;
+            > svg {
+                font-size: 18px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.laptopXL2}) {
+        height: 130px;
+        padding: 20px 0px 15px 20px;
+
+        h1 {
+            font-size: 23.2px;
+        }
+
+        p {
+            font-size: 18.5px;
+        }
+
+        div {
+            width: 40px;
+            height: 40px;
+            > svg {
+                font-size: 20px;
+            }
         }
     }
 `;

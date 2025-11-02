@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../styles/breakpoints";
+import { device, size } from "../../styles/breakpoints";
 
 export const Container = styled.div`
     display: flex;
@@ -307,7 +307,7 @@ export const SignUpImage = styled.img`
         height: 210px;
     }
 
-    @media ${device.mobileL} {
+    @media ${device.mobileLX} {
       height: 220px;
       padding-right: 0;
     }
@@ -338,6 +338,10 @@ export const SignUpImage = styled.img`
     
     @media ${device.laptopL} {
         height: 520px;
+    }
+
+    @media (max-width:${size.mobileS}) {
+        height: 200px;;
     }
 
 `;

@@ -13,6 +13,7 @@ export const Container = styled.div `
     align-items: center;
     width: 100%;
     width: 100%;
+    position: ${props => props.$menu_clicado ? 'fixed' : 'relative'};
     margin: auto;
     background-color: var(--Secundary-Color);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
@@ -163,7 +164,7 @@ export const NavItems = styled.div`
     align-items: center;
     gap: 10px;
     position: fixed;
-    top: 55px;
+    top: 50px;
     left: 0;
     padding: 10px 0px;
 
@@ -178,6 +179,7 @@ export const NavItems = styled.div`
 
     height: 100vh;
     width: 100vw;
+    z-index: 999;
 `
 
 export const NavItem = styled.a `

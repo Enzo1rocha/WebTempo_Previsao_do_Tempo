@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../styles/breakpoints";
+import { device, size } from "../../styles/breakpoints";
 
 export const Container = styled.div `
     display: flex;
@@ -51,6 +51,9 @@ export const LabelForButton = styled.label `
         font-size: 32px;
     }
 
+    @media (max-width: ${size.mobileS}) {
+        font-size: 18px;
+    } 
 `
 
 export const Button = styled.button `
@@ -106,6 +109,11 @@ export const Button = styled.button `
         width: 210px;
         height: 60px;
     }
+
+    @media (max-width: ${size.mobileS}) {
+        width: 130px;
+        height: 37px;
+    }
 `
 
 export const SignImage = styled.img `
@@ -133,6 +141,10 @@ export const SignImage = styled.img `
 
     @media ${device.laptop} and (orientation: portrait) {
         height: 80px;
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        height: 40px;
     }
 `
 

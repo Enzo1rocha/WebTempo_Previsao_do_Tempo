@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../styles/breakpoints";
+import { device, size } from "../../styles/breakpoints";
 
 export const Container = styled.div `
     display: flex;
@@ -57,6 +57,10 @@ export const Link = styled.a`
 
     @media ${device.laptop} and (orientation: portrait) {
         font-size: 23px;
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        font-size: 13px;
     }
 
 

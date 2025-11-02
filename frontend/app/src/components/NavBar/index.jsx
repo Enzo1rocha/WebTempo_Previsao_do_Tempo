@@ -56,7 +56,7 @@ function NavBar() {
 
         function is_not_search_clicked_content() {
             return (
-                <S.Container>
+                <S.Container $menu_clicado={isMenuClicked}>
 
                 <S.NavMobile onClick={() => {
                     if (isMenuClicked) {
