@@ -102,23 +102,107 @@ export const Container = styled.div `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        height: 130px;
+        height: 120px;
         padding: 20px 0px 15px 20px;
 
         h1 {
-            font-size: 23.2px;
+            font-size: 20px;
         }
 
         p {
-            font-size: 18.5px;
+            font-size: 14px;
         }
 
         div {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             > svg {
-                font-size: 20px;
+                font-size: 12px;
             }
         }
     }
-`;
+    @media (max-width: ${size.laptopL}) {
+        height: 110px;
+        padding: 20px 0px 15px 20px;
+
+        h1 {
+            font-size: 18.5px;
+        }
+
+        p {
+            font-size: 13px;
+        }
+
+        div {
+            width: 30px;
+            height: 30px;
+            > svg {
+                font-size: 12px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        height: 110px;
+        padding: 20px 0px 15px 20px;
+
+        h1 {
+            font-size: 17.5px;
+        }
+
+        p {
+            font-size: 12px;
+        }
+
+        div {
+            width: 25px;
+            height: 25px;
+            > svg {
+                font-size: 11px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        height: 110px;
+        padding: 20px 0px 15px 20px;
+
+        h1 {
+            font-size: 18px;
+        }
+
+        p {
+            font-size: 13px;
+        }
+
+        div {
+            width: 30px;
+            height: 30px;
+            > svg {
+                font-size: 12px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        height: 100px;
+        padding: 20px 0px 15px 20px;
+
+        h1 {
+            font-size: 15px;
+        }
+
+        p {
+            font-size: 11px;
+        }
+
+        div {
+            width: 27px;
+            height: 27px;
+            > svg {
+                font-size: 11px;
+            }
+        }
+    }
+
+ `

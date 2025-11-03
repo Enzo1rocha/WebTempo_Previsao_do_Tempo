@@ -10,6 +10,11 @@ export const Location_Page_Container =  styled.main `
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        min-height: fit-content;
+        height: 1200px;
+    }
 `
 
 export const Container_User_Details = styled.div `
@@ -45,8 +50,49 @@ export const Container_User_Details = styled.div `
 
     @media (max-width: ${size.laptopXL2}) {
         > h1 {
-            font-size: 36px;
+            font-size: 30px;
             font-weight: 700;
+        }
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        > h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        > h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        margin-top: 30px;
+        margin-bottom: 0px;
+        > h1 {
+            font-size: 26px;
+            font-weight: 700;
+        }
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        margin-top: 0px;
+        > h1 {
+            font-size: 23px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        margin-top: 0px;
+        > h1 {
+            font-size: 21.5px;
+            text-align: center;
+            margin-bottom: 5px;
         }
     }
 `
@@ -105,7 +151,7 @@ export const content_user_details = styled.div `
         padding: 25px 20px;
 
         > p {
-            font-size: 24px;
+            font-size: 18px;
         }
 
         > div {
@@ -113,7 +159,82 @@ export const content_user_details = styled.div `
         }
 
         > div > div > p {
-            font-size: 24px;
+            font-size: 17px;
+        }
+    }
+    @media (max-width: ${size.laptopL}) {
+        padding: 25px 20px;
+
+        > p {
+            font-size: 14.5px;
+        }
+
+        > div {
+            margin-top: 10px;
+        }
+
+        > div > div > p {
+            font-size: 12.5px;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        padding: 20px 15px;
+
+        > p {
+            font-size: 12.5px;
+        }
+
+        > div {
+            margin-top: 10px;
+        }
+
+        > div > div > p {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        padding: 20px 15px;
+
+        > p {
+            font-size: 15.5px;
+        }
+
+        > div {
+            margin-top: 10px;
+        }
+
+        > div > div > p {
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        > p {
+            font-size: 13px;
+        }
+
+        > div {
+            margin-top: 10px;
+        }
+
+        > div > div > p {
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        > p {
+            font-size: 10.5px;
+        }
+
+        > div {
+            margin-top: 10px;
+        }
+
+        > div > div > p {
+            font-size: 10px;
         }
     }
     `
@@ -154,9 +275,55 @@ export const container_buttons = styled.div `
         gap: 15px;
 
         > div {
-            width: 300px;
-            height: 60px;
-            font-size: 21px;
+            width: 220px;
+            height: 50px;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        gap: 10px;
+
+        > div {
+            width: 200px;
+            height: 45.5px;
+            font-size: 12.5px;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        gap: 10px;
+
+        > div {
+            width: 170px;
+            height: 40px;
+            font-size: 11px;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        gap: 10px;
+
+        > div {
+            width: 190px;
+            height: 45px;
+            font-size: 12.5px;
+        }
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        > div {
+            width: 150px;
+            height: 40px;
+            font-size: 10.5px;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        > div {
+            width: 110px;
+            height: 30px;
+            font-size: 8px;
         }
     }
        
@@ -191,7 +358,27 @@ export const change_password = styled.div `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        > svg {font-size: 23px;}
+        > svg {font-size: 16px;}
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        > svg {font-size: 14px;}
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        > svg {font-size: 13px;}
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        > svg {font-size: 14px;}
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        > svg {font-size: 12px;}
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        > svg {font-size: 8px;  right: 10px;}
     }
 `
 
@@ -228,8 +415,28 @@ export const logout = styled.div `
 
     @media (max-width: ${size.laptopXL2}) {
         > svg {
-            font-size: 23px;
+            font-size: 16px;
         }
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        > svg {font-size: 14px;}
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        > svg {font-size: 13px;}
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        > svg {font-size: 14px;}
+    }
+
+     @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        > svg {font-size: 12px;}
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        > svg {font-size: 8px;  right: 10px;}
     }
 `
 
@@ -253,6 +460,10 @@ export const Container_Locations = styled.div `
     }
 
     @media (max-width: ${size.laptopXL2}) {
+        gap: 40px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
         gap: 50px;
     }
 `
@@ -302,13 +513,73 @@ export const Container_Boot_Location = styled.div `
     @media (max-width: ${size.laptopXL2}){
         gap: 20px;
         > h1 {
-            font-size: 36px;
+            font-size: 30px;
         }
 
         > div {
-            width: 360px;
+            width: 330px;
         }
 
+    }
+
+    @media (max-width: ${size.laptopL}){
+        gap: 20px;
+        > h1 {
+            font-size: 24px;
+        }
+
+        > div {
+            width: 300px;
+        }
+
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        gap: 20px;
+        > h1 {
+            font-size: 22px;
+        }
+
+        > div {
+            width: 320px;
+        }
+
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        gap: 20px;
+        > h1 {
+            font-size: 26px;
+        }
+
+        > div {
+            width: 320px;
+        }
+
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        > h1 {
+            font-size: 23px;
+            text-align: center;
+        }
+
+        > div {
+            font-size: 290px;
+            margin: auto;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        > h1 {
+            font-size: 21.5px;
+            text-align: center;
+        }
+
+        > div {
+            font-size: 240px;
+            margin: auto;
+        }
     }
 
 `
@@ -345,7 +616,44 @@ export const Container_Favorite_Locations = styled.div `
     @media (max-width: ${size.laptopXL2}) {
         gap: 20px;
         > h1 {
-            font-size: 36px;
+            font-size: 30px;
+        }
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        gap: 20px;
+        > h1 {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        gap: 20px;
+        > h1 {
+            font-size: 22px;
+        }
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        gap: 20px;
+        > h1 {
+            font-size: 26px;
+        }
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        gap: 20px;
+        > h1 {
+            font-size: 23px;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        gap: 20px;
+        > h1 {
+            font-size: 21.5px;
+            text-align: center;
         }
     }
 `
@@ -366,6 +674,30 @@ export const container_favorite_locations = styled.div `
 
     @media (max-width: ${size.laptopXL2}) {
         grid-template-columns: repeat(4, 330px);
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        grid-template-columns: repeat(3, 300px);
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        grid-template-columns: repeat(2, 320px);
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        grid-template-columns: repeat(2, 320px);
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        grid-template-columns: repeat(2, 290px);
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        grid-template-columns: repeat(2, 240px);
+        justify-content: center;
+        align-items: center;
     }
 `
 
@@ -403,5 +735,40 @@ export const Container_add_favorite_locations = styled.div `
 
     @media (max-width: ${size.laptopXL2}) {
         width: 330px;
+        height: 120px;
+    }
+    @media (max-width: ${size.laptopL}) {
+        width: 300px;
+        height: 110px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        width: 320px;
+        height: 110px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        width: 320px;
+        height: 110px;
+    }
+
+    @media (max-width: ${size.tablet}) and (orientation: portrait) {
+        width: 290px;
+        height: 110px;
+
+        > svg {
+            font-size: 35px;
+        }
+
+    }
+
+    @media (max-width: ${size.tabletS}) and (orientation: portrait) {
+        width: 240px;
+        height: 100px;
+
+        > svg {
+            font-size: 35px;
+        }
+
     }
 `
