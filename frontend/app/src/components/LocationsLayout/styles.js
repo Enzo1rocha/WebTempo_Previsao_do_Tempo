@@ -205,4 +205,70 @@ export const Container = styled.div `
         }
     }
 
+    @media (max-width: ${size.mobileL}) {
+        height: 90px;
+        padding: 20px 0px 15px 20px;
+
+        h1 {
+            font-size: 12.5px;
+            width: fit-content;
+        }
+
+        p {
+            font-size: 9.2px;
+        }
+
+        div {
+            width: 20px;
+            height: 20px;
+            > svg {
+                font-size: 9px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        height: 90px;
+        padding: 20px 0px 15px 20px;
+
+        h1 {
+            font-size: 11px;
+            width: fit-content;
+        }
+
+        p {
+            font-size: 8.5px;
+        }
+
+        div {
+            width: 18px;
+            height: 18px;
+            > svg {
+                font-size: 8px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.mobileS}) {
+        height: 90px;
+        padding: 15px 0px 10px 15px;
+
+        h1 {
+            font-size: 10.5px;
+            width: fit-content;
+        }
+
+        p {
+            font-size: 8px;
+        }
+
+        div {
+            width: 18px;
+            height: 18px;
+            > svg {
+                font-size: 8px;
+            }
+        }
+    }
+
  `
