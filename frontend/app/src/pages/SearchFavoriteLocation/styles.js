@@ -32,13 +32,13 @@ export const Container_Search = styled.div `
         max-width: 800px;
 
         > h1 {
-            font-size: 35px;
+            font-size: 31px;
         }
     }
 
     @media (max-width: ${size.laptopL}) {
         > h1 {
-            font-size: 33px;
+            font-size: 31px;
         }
     }
 
@@ -86,10 +86,10 @@ export const FavoriteSearchBar = styled(SearchBar) `
         }
 
         @media (max-width: ${size.laptopXL}) {
-            height: 58px;
+            height: 48px;
 
             > input {
-                font-size: 21px;
+                font-size: 19px;
             }
         }
 
@@ -148,20 +148,20 @@ export const FavoriteSearchBar = styled(SearchBar) `
         }
 
         @media (max-width: ${size.laptopXL}) {
-            height: 70px;
+            height: 65px;
 
             > div {
                 > h1 {
-                    font-size: 25px;
+                    font-size: 22px;
                 }
 
                 > p {
-                font-size: 20px;
+                font-size: 19px;
                 }
             }
 
             > svg {
-                height: 36px;
+                height: 35px;
             }
         }
 
