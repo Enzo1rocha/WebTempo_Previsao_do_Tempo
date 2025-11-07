@@ -47,6 +47,12 @@ export const Main = styled.div `
         max-width: 450px;
         height: 485px;
     }
+
+    @media (max-width: ${size.mobileL}) {
+        border: 6px solid var(--Secundary-Color);
+        max-width: 280px;
+        height: 390px;
+    }
 `
 
 export const SearchContent = styled.div `
@@ -87,6 +93,12 @@ export const SearchContent = styled.div `
             font-size: 20px;
         }
     }
+
+    @media (max-width: ${size.mobileL}) {
+        > h1 {
+            font-size: 14px;
+        }
+    }
 `
 
 export const Return = styled.a`
@@ -116,6 +128,12 @@ export const Return = styled.a`
         font-size: 14px;
         padding: 10px 100px;
     }
+
+    @media (max-width: ${size.mobileL}) {
+        font-size: 11px;
+        padding:8px 70px;
+        border-radius: 10px;
+    }
 `
 
 export const LocationSearchBar = styled(SearchBar) `
@@ -131,6 +149,10 @@ export const LocationSearchBar = styled(SearchBar) `
     }
 
     @media (max-width: ${size.laptop}) {
+        max-width: 300px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
         max-width: 300px;
     }
 
@@ -168,6 +190,14 @@ export const LocationSearchBar = styled(SearchBar) `
                 font-size: 15px;
             }
         }
+
+        @media (max-width: ${size.mobileL}) {
+            border: 1.8px solid var(--Secundary-Color);
+            height: 30px;
+            > input {
+                font-size: 11px;
+            }
+        }
     }
 
     ${Containerlocations} {
@@ -175,6 +205,10 @@ export const LocationSearchBar = styled(SearchBar) `
 
         @media (max-width: ${size.laptop}) {
             border: 2px solid var(--Secundary-Color);
+        }
+
+        @media (max-width: ${size.mobileL}) {
+            border: 1.8px solid var(--Secundary-Color);
         }
     }
 
@@ -246,6 +280,25 @@ export const LocationSearchBar = styled(SearchBar) `
 
             > svg {
                 height: 24px;
+            }
+        }
+
+        @media (max-width: ${size.mobileL}) {
+            height: 35px;
+            padding: 6px 5px;
+
+            > div {
+                > h1 {
+                    font-size: 12px;
+                }
+
+                > p {
+                    font-size: 8.5px;
+                }
+            }
+
+            > svg {
+                height: 19.5px;
             }
         }
     }

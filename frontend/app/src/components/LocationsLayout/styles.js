@@ -210,12 +210,12 @@ export const Container = styled.div `
         padding: 20px 0px 15px 20px;
 
         h1 {
-            font-size: 12.5px;
+            font-size: 13.5px;
             width: fit-content;
         }
 
         p {
-            font-size: 9.2px;
+            font-size: 10px;
         }
 
         div {

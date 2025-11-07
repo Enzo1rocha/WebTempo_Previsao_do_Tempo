@@ -114,7 +114,7 @@ export const Container_User_Details = styled.div `
     @media (max-width: ${size.mobileL}) {
         margin-top: 0px;
         > h1 {
-            font-size: 18px;
+            font-size: 19px;
             text-align: center;
             margin-bottom: 5px;
         }
@@ -270,8 +270,9 @@ export const content_user_details = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
+        padding: 15px 10px;
         > p {
-            font-size: 8.5px;
+            font-size: 11px;
         }
 
         > div {
@@ -279,15 +280,25 @@ export const content_user_details = styled.div `
         }
 
         > div > div > p {
-            font-size: 8.5px;
+            font-size: 10px;
+        }
+    }
+
+    @media (max-width: 385px) {
+        > h1 {
+            font-size: 10px;
+        }
+
+
+        > div > div > p {
+            font-size: 9.6px;
         }
     }
 
     @media (max-width: ${size.mobileLX}) {
-        gap: 0px;
         padding: 15px 10px;
         > p {
-            font-size: 6.5px;
+            font-size: 7.3px;
         }
 
         > div {
@@ -295,7 +306,7 @@ export const content_user_details = styled.div `
         }
 
         > div > div > p {
-            font-size: 6.5px;
+            font-size: 6.9px;
         }
     }
     `
@@ -389,19 +400,27 @@ export const container_buttons = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) { 
+        gap: 5px;
+        > div {
+            width: 93px;
+            height: 26px;
+            font-size: 7.3px;
+        }
+    }
+
+    @media (max-width: 385px) {
         > div {
             width: 90px;
-            height: 27px;
-            font-size: 6.5px;
+            font-size: 7.2px;
         }
     }
 
     @media (max-width: ${size.mobileLX}) { 
-        gap: 5px;
+        gap: 2px;
         > div {
-            width: 75px;
+            width: 77px;
             height: 22px;
-            font-size: 5.5px;
+            font-size: 6px;
         }
     }
        
@@ -414,12 +433,15 @@ export const change_password = styled.div `
     > a {
         text-decoration: none;
         color: white;
+        text-align: center;
     }
     position: relative;
     
     > svg {
         position: absolute;
         right: 15px;
+        top: 47.45%;
+        transform: translateY(-50%);
         color: white;
         font-size: 20px;
     }
@@ -460,11 +482,11 @@ export const change_password = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        > svg {font-size: 6.5px;  right: 10px;}
+        > svg {font-size: 6.9px;  right: 9px;}
     }
 
     @media (max-width: ${size.mobileLX}) {
-        > svg {font-size: 5px;  right: 10px;}
+        > svg {font-size: 5.7px;  right: 9px;}
     }
 
     
@@ -485,6 +507,8 @@ export const logout = styled.div `
     > svg {
         position: absolute;
         right: 15px;
+        top: 47.45%;
+        transform: translateY(-50%);
         font-size: 20px;
         color: #EB090B;
     }
@@ -528,11 +552,11 @@ export const logout = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        > svg {font-size: 6.5px;  right: 10px;}
+        > svg {font-size: 6.9px;  right: 9px;}
     }
 
     @media (max-width: ${size.mobileLX}) {
-        > svg {font-size: 5px;  right: 10px;}
+        > svg {font-size: 5.7px;  right: 9px;}
     }
 `
 
@@ -688,7 +712,7 @@ export const Container_Boot_Location = styled.div `
 
     @media (max-width: ${size.mobileL}) {
         > h1 {
-            font-size: 18px;
+            font-size: 19px;
             text-align: center;
         }
 
@@ -788,7 +812,7 @@ export const Container_Favorite_Locations = styled.div `
     @media (max-width: ${size.mobileL}) {
         gap: 20px;
         > h1 {
-            font-size: 18px;
+            font-size: 19px;
             text-align: center;
         }
     }
