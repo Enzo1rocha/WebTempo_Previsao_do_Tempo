@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-export default function SearchBar({ option } ) {
+export default function SearchBar({ option, className }) {
 
     const [inputValue, setInputValue] = useState('');
     const [cities, setCities] = useState([])
@@ -155,7 +155,7 @@ export default function SearchBar({ option } ) {
     }, []);
 
     return (
-        <S.Container>
+        <S.Container className={className}>
             <S.SearchBarContainer hasSearch={inputValue}>
                 <input value={inputValue} onChange={handleSearch} type="text" name="" id="" placeholder={
                     !inputValue ? 'Pesquisar Local' : ''
