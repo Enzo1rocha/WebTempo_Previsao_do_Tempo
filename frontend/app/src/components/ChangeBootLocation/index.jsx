@@ -8,7 +8,7 @@ export default function ChangeBootLocation({ ReturnClick }) {
                 <S.SearchContent>
                     <h1>Alterar Local de Inicialização</h1>
                     <div>
-                        <SearchBar option={'boot_location'}/>
+                        <S.LocationSearchBar option={'boot_location'}/>
                     </div>
                 </S.SearchContent>
                 <S.Return onClick={ReturnClick}>Voltar</S.Return>
