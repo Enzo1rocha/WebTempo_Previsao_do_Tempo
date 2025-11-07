@@ -1,8 +1,8 @@
 import * as S from './style';
 
-function BackToLink({ href, value, classname}) {
+function BackToLink({ href, value, className}) {
     return (
-        <S.BackToLink className={classname} href={href}>
+        <S.BackToLink className={className} href={href}>
             {value}
         </S.BackToLink>
     )

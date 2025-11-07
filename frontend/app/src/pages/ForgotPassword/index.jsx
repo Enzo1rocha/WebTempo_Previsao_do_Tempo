@@ -28,8 +28,8 @@ function ForgotPassword() {
 
                     <S.containerInput_Button>
                         <ForgotInput></ForgotInput>
-                        <Button value={"Enviar"}></Button>
-                        <BackToLink value={'Voltar'} href={'/login'}></BackToLink>
+                        <S.Send_button value={"Enviar"}></S.Send_button>
+                        <S.Return_button value={'Voltar'} href={'/login'}/>
                     </S.containerInput_Button>
 
                 </S.FormContainer>
