@@ -22,6 +22,26 @@ export const Container = styled.div `
     @media (max-width: ${size.laptopXL2}) {
         grid-template-columns: 48% 48%;
     }
+
+    @media (max-width: ${size.laptopL}) {
+        grid-template-columns: 48% 52%;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        display: flex;
+        grid-template-columns: none;
+        justify-content: center;
+        align-items: center;
+    }
+    
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        grid-template-columns: 50% 50%;
+    }
+
+    @media (max-width: ${size.tablet}) {
+
+    }
 `
 
 export const ContainerWithImage = styled.picture `
@@ -30,6 +50,10 @@ export const ContainerWithImage = styled.picture `
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        display: none;
+    }  
 
 `
 
@@ -52,6 +76,15 @@ export const image = styled.img `
     @media (max-width: ${size.laptopXL2}) {
         height: 620px;
     }
+
+    @media (max-width: ${size.laptopL}) {
+        height: 430px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        height: 320px;
+    }
+    
 `
 
 export const containerInput_Button = styled.div `
@@ -63,6 +96,14 @@ export const containerInput_Button = styled.div `
 
     @media (max-width: ${size.laptopXL2}) {
         gap: 22px;
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        gap: 20px;
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        gap: 13.5px;
     }
 `
 
@@ -89,6 +130,37 @@ export const FormContainer = styled.form `
         width: 620px;
         gap: 40px;
     }
+
+    @media (max-width: ${size.laptopL}) {
+        gap: 30px;
+        width: 500px;
+    }
+    
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        width: 550px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        width: 360px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        width: 470px;
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        width: 400px;
+        gap: 30px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        width: 340px;
+        gap: 20px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        width: 300px;
+    }
 `
 
 
@@ -111,9 +183,47 @@ export const Title = styled.h1 `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        font-size: 44px;
-        line-height: 48px;
+        font-size: 42px;
+        line-height: 46px;
     }
+
+    @media (max-width: ${size.laptopL}) {
+        font-size: 34px;
+        line-height: 34.5px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        font-size: 39px;
+        line-height: 45px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        font-size: 28px;
+        line-height: 30.5px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 34px;
+        line-height: 38px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.13);
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        font-size: 24px;
+        line-height: 26.5px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        font-size: 22px;
+        line-height: 22px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        font-size: 20px;
+        line-height: 22px;
+    }
+
+    
 `
 
 export const BackTo = styled.a `
@@ -128,7 +238,7 @@ export const BackTo = styled.a `
 `
 
 export const button_clicked_notification = styled.div `
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -172,9 +282,46 @@ export const button_clicked_notification = styled.div `
         }
     }
 
-    @media (max-width: ${size.desktop}) {
+    @media (max-width: ${size.laptopXL2}) {
+        > p {
+            font-size: 21px;
+            padding: 22px;
+        }
 
+        > button {
+            font-size: 20px;
+            padding: 15px;
+        }
     }
+
+    @media (max-width: ${size.laptop}) {
+        > p {
+            font-size: 18px;
+            padding: 20px;
+            max-width: 520px;
+        }
+
+        > button {
+            font-size: 18px;
+            padding: 13px;
+            max-width: 520px;
+        }
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        > p {
+            font-size: 12.5px;
+            max-width: 300px;
+            padding: 16px;
+        }
+
+        > button {
+            font-size: 12px;
+            padding: 10px;
+            max-width: 300px;
+        }
+    }
+
     `
 
 export const Send_button = styled(Button) `
@@ -192,7 +339,38 @@ export const Send_button = styled(Button) `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        font-size: 20px;
+        font-size: 17px;
+        padding: 12px;
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        font-size: 14px;
+        padding: 11px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        font-size: 19px;
+        padding: 13px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        font-size: 11px;
+        padding: 8px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        font-size: 11.5px;
+        padding: 11.5px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        font-size: 11px;
+        padding: 11px;
     }
 `
 
@@ -208,6 +386,30 @@ export const Return_button = styled(BackToLink) `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        font-size: 20px;
+        font-size: 17px;
+    }
+
+    @media (max-width: ${size.laptopL}) {
+    font-size: 14px;  
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        font-size: 19px;
+    }
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        font-size: 11px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 16px;
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        font-size: 11.5px;
+        margin-top: 5px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        font-size: 11px; 
     }
 `

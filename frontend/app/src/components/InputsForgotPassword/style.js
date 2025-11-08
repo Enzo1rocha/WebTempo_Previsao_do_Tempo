@@ -25,8 +25,32 @@ export const containerInput = styled.div `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-            padding: 18px 30px;
+            padding: 11px 20px;
         }
+
+        @media (max-width: ${size.laptopL}) {
+        padding: 10px 15px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        padding: 15px 15px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        padding: 9px 15px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        padding: 10px 15px;
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        padding: 8px 15px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        padding: 6.5px 15px;
+    }
 `
 
 export const label = styled.label `
@@ -45,7 +69,31 @@ export const label = styled.label `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        font-size: 22px;
+        font-size: 18px;
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        font-size: 16px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        font-size: 21px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        font-size: 12px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 19px;
+    }
+    
+    @media (max-width: ${size.tabletS}) {
+        font-size: 14px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        font-size: 13.5px;
     }
 `
 
@@ -67,6 +115,30 @@ export const inputField = styled.input `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        font-size: 22px;
+        font-size: 18px;
+    }
+
+    @media (max-width: ${size.laptopL}) {
+        font-size: 16px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: portrait) {
+        font-size: 21px;
+    }
+
+    @media (max-width: ${size.laptop}) and (orientation: landscape) {
+        font-size: 12px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 19px;
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        font-size: 14px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        font-size: 13.5px;
     }
 `
