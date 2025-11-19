@@ -592,7 +592,7 @@ export default function ForecastPage() {
                 <S.summaryOfTheDayText>
                     <p>{detalhes[1]}</p>
                 </S.summaryOfTheDayText>
-                <S.summaryOfTheDay>
+                <S.summaryOfTheDay rotacao_seta_vento={dadosClimáticos.current.values.windDirection}>
                     <div>
                         <p>Temperatura</p>
                         <p><span>{Math.round(dadosClimáticos.current.values.temperature)}</span>° <S.temperatureSymbol>c</S.temperatureSymbol></p>

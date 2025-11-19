@@ -45,6 +45,10 @@ export const titulo = styled.h2 `
         font-size: 14px;
     }
 
+    @media (max-width: 406px) {
+        font-size: 12px;
+    }
+
 `
 
 export const div_icone_valor = styled.div `
@@ -155,6 +159,23 @@ export const div_icone_valor = styled.div `
             }
         }
     }
+
+    @media (max-width: 406px) {
+        grid-template-columns: 10.5% 0%;
+        > svg {
+            font-size: 24px;
+        }
+
+        > div {
+            > h2 {
+                font-size: 20.5px;
+            }
+
+            > h3 {
+                font-size: 12px;
+            }
+        }
+    }
 `
 
 export const sub = styled.p `
@@ -182,5 +203,9 @@ export const sub = styled.p `
 
     @media (max-width: ${size.mobileL}) {
         font-size: 11.5px;
+    }
+
+    @media (max-width: 406px) {
+        font-size: 10px;
     }
 `

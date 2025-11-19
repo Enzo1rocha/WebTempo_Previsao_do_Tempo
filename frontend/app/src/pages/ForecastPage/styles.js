@@ -39,6 +39,10 @@ export const Main = styled.main `
     @media (max-width: ${size.mobileL}) {
         padding: 30px 15px 30px 15px;
     }
+
+    @media (max-width: 406px) {
+        padding: 20px 12.5px 30px 12.5px;
+    }
 `
 
 export const textSection = styled.section`
@@ -96,6 +100,13 @@ export const localName = styled.div `
         }
     }
 
+    @media (max-width: 406px) {
+        font-size: 12.5px;
+        > div > p {
+            font-size: 11px;
+        }
+    }
+
 `
 
 export const temperatureAndIconDiv = styled.div `
@@ -113,6 +124,10 @@ export const temperatureAndIconDiv = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
+        gap: 40px;
+    }
+
+    @media (max-width: 406px) {
         gap: 40px;
     }
 `
@@ -202,6 +217,22 @@ export const TemperatureDiv = styled.div `
         }
     }
 
+    @media (max-width: 406px) {
+        > div {
+            > p {
+                font-size: 33px;
+
+                > span {
+                    font-size: 15px;
+                }
+            }
+        }
+
+        > svg {
+            font-size: 55px;
+        }
+    }
+
 `
 
 export const TemperatureText = styled.div `
@@ -262,6 +293,13 @@ export const TemperatureText = styled.div `
         }
     }
 
+    @media (max-width: 406px) {
+        > h2 {
+            font-size: 14px;
+            margin-bottom: -2px;
+        }
+    }
+
 `
 
 export const temperatureSymbol = styled.span `
@@ -302,9 +340,16 @@ export const summaryOfTheDayText = styled.div `
 
     @media (max-width: ${size.mobileL}) {
         > p {
-            margin-top: 20px;
+            margin-top: 18px;
             font-size: 11.5px;
         }
+    }
+
+    @media (max-width: 406px) {
+        > p {
+            font-size: 11px;
+            margin-top: 15px;
+        }   
     }
 
 
@@ -334,6 +379,7 @@ export const summaryOfTheDay = styled.nav `
             > svg {
                 font-size: 22px;
                 margin-left: 5px;
+                transform: rotate(calc(-90deg + ${props => props.rotacao_seta_vento}deg));
             }
         }
     }
@@ -358,11 +404,23 @@ export const summaryOfTheDay = styled.nav `
     }
 
     @media (max-width: ${size.mobileL}) {
-        gap: 15px;
+        gap: 10px;
         div > p {
-            font-size: 9.5px;
+            font-size: 10px;
             > svg {
-                font-size: 12px;
+                font-size: 9px;
+            }
+        }
+    }
+
+    @media (max-width: 406px) {
+        gap: 8.5px;
+        margin-bottom: -5px;
+
+        div > p {
+            font-size: 9px;
+            > svg {
+                font-size: 9px;
             }
         }
     }
@@ -383,7 +441,8 @@ export const SectionForGraph = styled.section `
     }
 
     @media (max-width: ${size.mobileL}) {
-        gap: 18px;
+        gap: 10px;
+        margin-bottom: -15px;
     }
 
 `
@@ -421,14 +480,23 @@ export const OptionsForGraphDiv = styled.div `
     @media (max-width: ${size.mobileL}) {
         gap: 10px;
        > p {
-        font-size: 13px;
+        font-size: 12px;
        } 
+    }
+
+    @media (max-width: 406px) {
+        gap: 8.5px;
+        > p {
+            font-size: 10.5px;
+        }
     }
 `
 
 export const OptionsForGraph = styled.nav `
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
 
     @media (max-width: ${size.laptop}) {
@@ -474,9 +542,16 @@ export const OptionContent = styled.button `
     }
 
     @media (max-width: ${size.mobileL}) {
-        height: 32px;
-        padding: 0px 10px;
-        font-size: 9px;
+        height: 30px;
+        padding: 0px 9px;
+        font-size: 8.5px;
+    }
+
+    @media (max-width: 406px) {
+        height: 28px;
+        padding: 8.5px;
+        font-size: 8px;
+        border-radius: 10px;
     }
 
 `
@@ -514,6 +589,14 @@ export const HiddenOptionsContent = styled.button `
             font-size: 20px;
         }
     }
+
+    @media (max-width: 406px) {
+        height: 29px;
+        border-radius: 10px;
+        > svg {
+            font-size: 18px;
+        }
+    }
 `
 
 export const hiddenOptions = styled.div `
@@ -542,6 +625,15 @@ export const hiddenOptions = styled.div `
     @media (max-width: ${size.laptop}) {
         > div > p {
             font-size: 15px;
+        }
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        padding: 10px 7px;
+        top: 15px;
+        left: 20%;
+        div > p {
+            font-size:10px;
         }
     }
     
@@ -582,6 +674,12 @@ export const Grafico = styled.div `
 
     @media (max-width: ${size.mobileL}) {
         width: 380px;
+        height: 190px;
+    }
+
+    @media (max-width: 406px) {
+        width: 350px;
+        height: 175px;
     }
 `
 
@@ -617,6 +715,10 @@ export const DetalhesDoDia = styled.div `
         align-items: center;
         margin: auto;
         margin-top: 20px;
+    }
+    
+    @media (max-width: 406px) {
+        grid-template-columns: repeat(1, 320px);
     }
 
 `

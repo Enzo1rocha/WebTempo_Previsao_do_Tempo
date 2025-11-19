@@ -34,8 +34,14 @@ export const Container = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        height: 85px;
-        width: 92px;        
+        height: 82px;
+        width: 88px;        
+    }
+
+    @media (max-width: 406px) {
+        height: 76px;
+        width: 82px;
+        padding: 7.5px 11px;
     }
 `
 
@@ -79,7 +85,13 @@ export const day_content = styled.div `
 
     @media (max-width: ${size.mobileL}) {
         > p {
-            font-size: 10px;
+            font-size: 9px;
+        }
+    }
+
+    @media (max-width: 406px) {
+        > p {
+            font-size: 8.5px;
         }
     }
 `
@@ -176,21 +188,40 @@ export const valor_a_esquerda = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        grid-template-columns: 20px;
+        grid-template-columns: 15px;
 
         > p {
-            font-size: 14px;
+            font-size: 11.5px;
 
             &.uv {
-                font-size: 10px;
+                font-size: 9px;
             }
 
             &.precipitação {
-                font-size: 8.3px;
+                font-size: 8.2px;
             }
 
             > span {
-                font-size: 9px;
+                font-size: 8px;
+            }
+        }
+    }
+
+    @media (max-width: 406px) {
+        grid-template-columns: 10px;
+      > p {
+            font-size: 10px;
+
+            &.uv {
+                font-size: 8.2px;
+            }
+
+            &.precipitação {
+                font-size: 7.6px;
+            }
+
+            > span {
+                font-size: 8px;
             }
         }
     }
@@ -220,10 +251,18 @@ export const valor_a_direita = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        grid-template-columns: 24px;
+        grid-template-columns: 20px;
 
         > p {
-            font-size: 13px;
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 406px) {
+        grid-template-columns: 15px;
+
+        > p {
+            font-size: 10.5px;
         }
     }
 `
@@ -248,7 +287,13 @@ export const icone = styled.div `
 
     @media (max-width: ${size.mobileL}) {
         > svg {
-            font-size: 40px;
+            font-size: 37px;
+        }
+    }
+
+    @media (max-width: 406px) {
+        > svg {
+            font-size: 33px;
         }
     }
 `
@@ -269,8 +314,13 @@ export const encher = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        width: 14px;
-        height: 42px;
+        width: 12px;
+        height: 38px;
+    }
+
+    @media (max-width: 406px) {
+        width: 11px;
+        height: 34px;
     }
 `
 
