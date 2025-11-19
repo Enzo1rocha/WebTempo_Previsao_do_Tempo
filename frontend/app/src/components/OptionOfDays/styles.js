@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { size } from "../../styles/breakpoints";
 
 export const Container = styled.div `
     background-color: white;
@@ -15,6 +16,26 @@ export const Container = styled.div `
 
     &:hover {
         box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: ${size.laptop})  {
+        height: 120px;
+        width: 160px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        height: 105px;
+        width: 160px;
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        height: 95px;
+        width: 115px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        height: 85px;
+        width: 92px;        
     }
 `
 
@@ -36,6 +57,30 @@ export const day_content = styled.div `
     > p {
         font-size: 18px;
         font-weight: 700;
+    }
+
+    @media (max-width: ${size.laptop}) {
+        > p {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: ${size.tablet}) {
+        > p {
+            font-size: 13.5px;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        > p {
+            font-size: 11.5px;
+        }
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        > p {
+            font-size: 10px;
+        }
     }
 `
 
@@ -72,6 +117,83 @@ export const valor_a_esquerda = styled.div `
             font-size: 24px;
         }
     }
+
+    @media (max-width: ${size.laptop}) {
+        > p {
+            font-size: 21.5px;
+
+            &.uv {
+                font-size: 17px;
+            }
+
+            &.precipitação {
+                font-size: 16px;
+            }
+
+            > span {
+                font-size: 18px;
+            }
+        }
+        }
+
+    @media (max-width: ${size.tablet}) {
+        > p {
+            font-size: 18px;
+
+            &.uv {
+                font-size: 15px;
+            }
+
+            &.precipitação {
+                font-size: 14px;
+            }
+
+
+
+            > span {
+                font-size: 15px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        grid-template-rows: 28px;
+        > p {
+            font-size: 16px;
+
+            &.uv {
+                font-size: 12px;
+            }
+
+            &.precipitação {
+                font-size: 11px;
+            }
+
+            > span {
+                font-size: 11.5px;
+            }
+        }
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        grid-template-columns: 20px;
+
+        > p {
+            font-size: 14px;
+
+            &.uv {
+                font-size: 10px;
+            }
+
+            &.precipitação {
+                font-size: 8.3px;
+            }
+
+            > span {
+                font-size: 9px;
+            }
+        }
+    }
 `
 
 export const valor_a_direita = styled.div `
@@ -83,12 +205,51 @@ export const valor_a_direita = styled.div `
         font-size: 24px;
         font-weight: 700;
     }
+
+    @media (max-width: ${size.laptop}) {
+        > p {
+            font-size: 19px;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        grid-template-rows: 28px;
+        > p {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        grid-template-columns: 24px;
+
+        > p {
+            font-size: 13px;
+        }
+    }
 `
 
 export const icone = styled.div `
     > svg {
         font-size: 70px;
         color: var(--Secundary-Color);
+    }
+
+    @media (max-width: ${size.tablet}) {
+        > svg {
+            font-size: 58px;
+        }
+    }
+
+    @media (max-width: ${size.tabletS}) {
+        > svg {
+            font-size: 48px;
+        }
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        > svg {
+            font-size: 40px;
+        }
     }
 `
 
@@ -101,6 +262,16 @@ export const encher = styled.div `
     width: 26px;
     border-radius: 15px;
     background-color: var(--Secundary-Color-50-transparent);
+
+    @media (max-width: ${size.tabletS}) {
+        height: 50px;
+        width: 18px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        width: 14px;
+        height: 42px;
+    }
 `
 
 export const valor = styled.div `

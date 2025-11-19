@@ -158,20 +158,20 @@ export const h1_form = styled.h1 `
     }
 
     @media (max-width: ${size.mobileL}) and (orientation: portrait) {
-        font-size: 33px;
+        font-size: 30px;
         letter-spacing: 0.3px;
         line-height: 34px;
         margin-bottom: -5px;
     }
 
     @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
-        font-size: 30px;
-        line-height: 31px;
+        font-size: 27px;
+        line-height: 29px;
         margin-bottom: -5px;
     }
 
     @media (max-width: ${size.mobileS}) and (orientation: portrait) {
-        font-size: 28px;
+        font-size: 26px;
         line-height: 29px;
         margin-bottom: -5px;
     }
@@ -220,14 +220,14 @@ export const input_container = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) and (orientation: portrait) {
-        width: 350px;
+        width: 330px;
     }
 
     @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
-        width: 320px;
+        width: 300px;
     }
 
     @media (max-width: ${size.mobileS}) and (orientation: portrait) {
-        width: 280px;
+        width: 260px;
     }
 `

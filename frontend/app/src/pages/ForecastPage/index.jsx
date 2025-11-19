@@ -7,6 +7,7 @@ import OptionOfDays from '../../components/OptionOfDays';
 import LocationsPageService from '../../services/LocationsPageService';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import useWindowWidth from '../../services/useWindowWidth';
 
 import {
     Chart as ChartJS,
@@ -45,6 +46,7 @@ export default function ForecastPage() {
     const [dataForGraph, setDataForGraph] = useState([]);
     const [maxY, setMaxY] = useState(40);
     const [minY, setMixY] = useState(0);
+    const windowWidth = useWindowWidth();
     const [LabelStep, setLabelStep] = useState('Temperatura');
     const [stepSize, setStepSize] = useState(10);
     const { lat, lon, name, country, state} = useParams();
@@ -57,6 +59,8 @@ export default function ForecastPage() {
 
         enabled: !!name && !!country && !!state && !!lon && !!lat,
     })
+
+
 
     if (isLoading) {
         return <p>Carregando previsão</p>
@@ -105,7 +109,7 @@ export default function ForecastPage() {
                 position: 'bottom',
                 labels: {
                     font: {
-                        size: 16,
+                        size: 12,
                         weight: 'bolder',
                     },
                     color: 'rgb(55, 65, 81)',
@@ -120,8 +124,8 @@ export default function ForecastPage() {
             tooltip: {
                 enabled: true,
                 backgroundColor: 'rgb(55, 65, 81)',
-                titleFont: { size: 16 },
-                bodyFont: { size: 14 },
+                titleFont: { size: 14 },
+                bodyFont: { size: 13 },
                 displayColors: false,
             }
         },
@@ -166,7 +170,7 @@ export default function ForecastPage() {
         }
     };
 
-    const labels = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+    const labels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
 
 
     const data = {
@@ -460,10 +464,112 @@ export default function ForecastPage() {
         }
     }
 
+    const responsividade_para_as_opcoes_dos_dias = () => {
+
+        if (windowWidth > 600) {
+            return (
+                <S.OptionsForGraph>
+                        <S.OptionContent onClick={() => {setSelectedOption(''); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Visão Geral
+                        </S.OptionContent>
+                        <S.OptionContent onClick={() => {setSelectedOption('PRECIPITAÇÃO'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Precipitação
+                        </S.OptionContent>
+                        <S.OptionContent onClick={() => {setSelectedOption('VENTO'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Vento
+                        </S.OptionContent>
+                        <S.OptionContent onClick={() => {setSelectedOption('UMIDADE'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Umidade
+                        </S.OptionContent>
+
+
+                    
+                        <S.OptionContent onClick={() => {setSelectedOption('VISIBILIDADE'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Visibilidade
+                        </S.OptionContent>
+                        <S.OptionContent onClick={() => {setSelectedOption('PRESSÃO'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Pressão
+                        </S.OptionContent>
+                        <S.HiddenOptionsContent onClick={() => setShowOptions(!showOptions)}>
+                            <FontAwesomeIcon icon={'ellipsis'} />
+                            {showOptions &&
+                                <S.hiddenOptions>
+                                <div onClick={() => {setSelectedOption('UV');}}>
+                                    <p>UV</p>
+                                </div>
+                                <div onClick={() => {setSelectedOption('SENSAÇÃO');}}>
+                                    <p>Sensação</p>
+                                </div>
+                            </S.hiddenOptions>
+                            }
+                        </S.HiddenOptionsContent>
+                    </S.OptionsForGraph>
+            )
+        } else {
+            return (
+                <S.OptionsForGraph>
+                        <S.OptionContent onClick={() => {setSelectedOption(''); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Visão Geral
+                        </S.OptionContent>
+                        <S.OptionContent onClick={() => {setSelectedOption('PRECIPITAÇÃO'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Precipitação
+                        </S.OptionContent>
+                        <S.OptionContent onClick={() => {setSelectedOption('VENTO'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Vento
+                        </S.OptionContent>
+                        <S.OptionContent onClick={() => {setSelectedOption('UMIDADE'); if (showOptions == true) {
+                            setShowOptions(false);
+                        }}}>
+                            Umidade
+                        </S.OptionContent>
+                        <S.HiddenOptionsContent onClick={() => setShowOptions(!showOptions)}>
+                            <FontAwesomeIcon icon={'ellipsis'} />
+                            {showOptions &&
+                                <S.hiddenOptions>
+                                <div onClick={() => {setSelectedOption('UV');}}>
+                                    <p>UV</p>
+                                </div>
+                                <div onClick={() => {setSelectedOption('SENSAÇÃO');}}>
+                                    <p>Sensação</p>
+                                </div>
+                                <div onClick={() => {setSelectedOption('VISIBILIDADE');}}>
+                                    <p>Visibilidade</p>
+                                </div>
+                                <div onClick={() => {setSelectedOption('PRESSÃO');}}>
+                                    <p>Pressão</p>
+                                </div>
+                            </S.hiddenOptions>
+                            }
+                        </S.HiddenOptionsContent>
+                    </S.OptionsForGraph>
+            )
+        }
+    }
+
     const detalhes = mensagens_detalhes_do_dia(dadosClimáticos.current.values.temperature, dadosClimáticos.current.values.cloudCover, dadosClimáticos.current.values.precipitationProbability);
 
     return (
-        <S.Main>
+        <S.conteudo_inteiro>
+
+            <S.Main>
             <S.textSection>
                 <S.localName>
                     <p>Clima Atual</p>
@@ -517,51 +623,7 @@ export default function ForecastPage() {
             <S.SectionForGraph>
                 <S.OptionsForGraphDiv>
                     <p>Por Hora</p>
-                    <S.OptionsForGraph>
-                        <S.OptionContent onClick={() => {setSelectedOption(''); if (showOptions == true) {
-                            setShowOptions(false);
-                        }}}>
-                            Visão Geral
-                        </S.OptionContent>
-                        <S.OptionContent onClick={() => {setSelectedOption('PRECIPITAÇÃO'); if (showOptions == true) {
-                            setShowOptions(false);
-                        }}}>
-                            Precipitação
-                        </S.OptionContent>
-                        <S.OptionContent onClick={() => {setSelectedOption('VENTO'); if (showOptions == true) {
-                            setShowOptions(false);
-                        }}}>
-                            Vento
-                        </S.OptionContent>
-                        <S.OptionContent onClick={() => {setSelectedOption('UMIDADE'); if (showOptions == true) {
-                            setShowOptions(false);
-                        }}}>
-                            Umidade
-                        </S.OptionContent>
-                        <S.OptionContent onClick={() => {setSelectedOption('VISIBILIDADE'); if (showOptions == true) {
-                            setShowOptions(false);
-                        }}}>
-                            Visibilidade
-                        </S.OptionContent>
-                        <S.OptionContent onClick={() => {setSelectedOption('PRESSÃO'); if (showOptions == true) {
-                            setShowOptions(false);
-                        }}}>
-                            Pressão
-                        </S.OptionContent>
-                        <S.HiddenOptionsContent onClick={() => setShowOptions(!showOptions)}>
-                            <FontAwesomeIcon icon={'ellipsis'} />
-                            {showOptions &&
-                                <S.hiddenOptions>
-                                <div onClick={() => {setSelectedOption('UV');}}>
-                                    <p>UV</p>
-                                </div>
-                                <div onClick={() => {setSelectedOption('SENSAÇÃO');}}>
-                                    <p>Sensação</p>
-                                </div>
-                            </S.hiddenOptions>
-                            }
-                        </S.HiddenOptionsContent>
-                    </S.OptionsForGraph>
+                    {responsividade_para_as_opcoes_dos_dias()}
                 </S.OptionsForGraphDiv>
                 <S.visãoGeralDias>
                     {dados_para_opções_dos_graficos(selectedOption)}
@@ -591,5 +653,7 @@ export default function ForecastPage() {
             </S.DetalhesDoDia>
 
         </S.Main>
+
+        </S.conteudo_inteiro>
     )
 }
