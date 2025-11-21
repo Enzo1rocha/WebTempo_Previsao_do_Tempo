@@ -43,6 +43,16 @@ export const Container = styled.div `
         width: 82px;
         padding: 7.5px 11px;
     }
+
+    @media (max-width: ${size.mobileLX}) {
+        height: 71px;
+        width: 76px;
+    }
+
+    @media (max-width: 345px) {
+        height: 68px;
+        width: 72px;
+    }
 `
 
 export const Content = styled.div `
@@ -92,6 +102,18 @@ export const day_content = styled.div `
     @media (max-width: 406px) {
         > p {
             font-size: 8.5px;
+        }
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+       > p {
+        font-size: 7.8px;
+       }     
+    }
+
+    @media (max-width: 345px) {
+        > p {
+            font-size: 7.1px;
         }
     }
 `
@@ -188,7 +210,7 @@ export const valor_a_esquerda = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        grid-template-columns: 15px;
+        grid-template-rows: 25px;
 
         > p {
             font-size: 11.5px;
@@ -208,7 +230,7 @@ export const valor_a_esquerda = styled.div `
     }
 
     @media (max-width: 406px) {
-        grid-template-columns: 10px;
+        grid-template-rows: 24px;
       > p {
             font-size: 10px;
 
@@ -218,6 +240,45 @@ export const valor_a_esquerda = styled.div `
 
             &.precipitação {
                 font-size: 7.6px;
+            }
+
+            > span {
+                font-size: 8px;
+            }
+        }
+    }
+
+
+    @media (max-width: ${size.mobileLX}) {
+    grid-template-rows: 21px;
+       > p {
+        font-size: 9.5px;
+
+        &.uv {
+            font-size: 7.6px;
+        }
+
+        &.precipitação {
+            font-size: 7px;
+        }
+
+        > span {
+            font-size: 7.3px;
+        }
+       }     
+    }
+
+    @media (max-width: 345px) {
+        grid-template-rows: 20px;
+
+        > p {
+            font-size: 9.1px;
+            &.uv {
+                font-size: 7.8px;
+            }
+
+            &.precipitação {
+                font-size: 6.5px;
             }
 
             > span {
@@ -251,7 +312,7 @@ export const valor_a_direita = styled.div `
     }
 
     @media (max-width: ${size.mobileL}) {
-        grid-template-columns: 20px;
+        grid-template-rows: 25px;
 
         > p {
             font-size: 12px;
@@ -259,10 +320,22 @@ export const valor_a_direita = styled.div `
     }
 
     @media (max-width: 406px) {
-        grid-template-columns: 15px;
+        grid-template-rows: 22px;
 
         > p {
             font-size: 10.5px;
+        }
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        > p {
+            font-size: 9.5px;
+        }        
+    }
+
+    @media (max-width: 345px) {
+        > p {
+            font-size: 9.3px;
         }
     }
 `
@@ -294,6 +367,18 @@ export const icone = styled.div `
     @media (max-width: 406px) {
         > svg {
             font-size: 33px;
+        }
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        > svg {
+            font-size: 30px;
+        }    
+    }
+
+    @media (max-width: 345px) {
+        > svg {
+            font-size: 29px;
         }
     }
 `

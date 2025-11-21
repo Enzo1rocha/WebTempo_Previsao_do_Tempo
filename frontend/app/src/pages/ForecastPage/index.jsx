@@ -26,6 +26,7 @@ import { Line } from 'react-chartjs-2';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import { use, useState } from 'react';
 
+
 ChartJS.register(
         CategoryScale,
         LinearScale,
@@ -86,12 +87,46 @@ export default function ForecastPage() {
     }
 
     
-    const pointRadis = dataForGraph.map((_, index) => {
-        return index % 2 === 0 ? 4 : 0;
-    })
     const pointColors = dataForGraph.map((_, index) => {
         return index % 2 === 0 ? 'rgb(55, 65, 81)' : 'transparent';
     });
+
+
+    const tamanho_font_grafico = () => {
+        if (windowWidth > 1024) {
+            return 14
+        } else if (windowWidth <= 1024 && windowWidth > 768) {
+            return 12
+        } else if (windowWidth <= 768 && windowWidth > 480) {
+            return 10.5
+        } else {
+            return 9.5
+        }
+    }
+
+    const tamanho_da_linha_do_grafico = () => {
+        if (windowWidth > 1024) {
+            return 3
+        } else if (windowWidth <= 1024 && windowWidth > 768) {
+            return 2.5
+        } else if (windowWidth <= 768 && windowWidth > 480) {
+            return 2.3
+        } else {
+            return 1.8
+        }
+    }
+
+    const tamanho_ponto_do_grafico = () => {
+        if (windowWidth > 1024) {
+            return 5.5
+        } else if (windowWidth <= 1024 && windowWidth > 768) {
+            return 5
+        } else if (windowWidth <= 768 && windowWidth > 480) {
+            return 4.5
+        } else {
+            return 3.4
+        }
+    }
 
     const options = {
         responsive: true,
@@ -109,7 +144,7 @@ export default function ForecastPage() {
                 position: 'bottom',
                 labels: {
                     font: {
-                        size: 12,
+                        size:11,
                         weight: 'bolder',
                     },
                     color: 'rgb(55, 65, 81)',
@@ -124,8 +159,8 @@ export default function ForecastPage() {
             tooltip: {
                 enabled: true,
                 backgroundColor: 'rgb(55, 65, 81)',
-                titleFont: { size: 14 },
-                bodyFont: { size: 13 },
+                titleFont: { size: tamanho_font_grafico() },
+                bodyFont: { size: tamanho_font_grafico() },
                 displayColors: false,
             }
         },
@@ -139,7 +174,7 @@ export default function ForecastPage() {
                 ticks: {
                     color: '#374151',
                     font: {
-                        size: 15,
+                        size: tamanho_font_grafico(),
                     },
                     callback: function(value, index, ticks) {
                         return index % 2 === 0 ? this.getLabelForValue(value) : null;
@@ -158,7 +193,7 @@ export default function ForecastPage() {
                     stepSize: stepSize,
                     color: '#374151',
                     font: {
-                        size: 14,
+                        size: tamanho_font_grafico(),
                     }
                 },
 
@@ -180,10 +215,10 @@ export default function ForecastPage() {
             data: dataForGraph,
             borderColor: 'rgb(55, 65, 81)',
             backgroundColor: 'rgba(55, 65, 81, 0.5)',
-            borderWidth: 2.5,
+            borderWidth: tamanho_da_linha_do_grafico(),
             tension: 0.35,
             fill: false,
-            pointRadius: pointRadis,
+            pointRadius: tamanho_ponto_do_grafico(),
             pointBackgroundColor: pointColors,
             pointBorderColor: pointColors,
         }],
@@ -401,67 +436,58 @@ export default function ForecastPage() {
     }
 
     const dados_para_opções_dos_graficos = (opçãoSelecionada) => {
-
-        const dados = dadosClimáticos.days
-
-        switch (opçãoSelecionada) {
-            case 'PRECIPITAÇÃO':
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={Math.round(dia.values.precipitationProbability)} value2={precipitação_risco(dia.values.precipitationProbability)} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
-
-            case 'VENTO':
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={Math.round(dia.values.windSpeedMax)} value2={Math.round(dia.values.windSpeedMin)} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
-            
-            case 'UMIDADE':
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays key={dia.date} onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={dia.values.humidityMax} value2={dia.values.humidityMin} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
-
-            case 'VISIBILIDADE':
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays key={dia.date} onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={Math.round(dia.values.visibilityMax)} value2={Math.round(dia.values.visibilityMin)} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
-
-            case 'PRESSÃO':
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays key={dia.date} onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={Math.round(dia.values.pressureSeaLevelMax)} value2={Math.round(dia.values.pressureSeaLevelMin)} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
-            
-            case 'UV': {
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays key={dia.date} onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={dia.values.uvIndexMax} value2={uv_risco(dia.values.uvIndexMax)} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
-            }
-            
-            case 'SENSAÇÃO':
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays key={dia.date} onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={Math.round(dia.values.temperatureApparentMax)} value2={Math.round(dia.values.temperatureApparentMin)} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
         
-            default:
-                return (
-                    dados.map((dia) => (
-                        <OptionOfDays key={dia.date} onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)} day={dia.date.slice(-2)} day_name={dia.weekday} value1={Math.round(dia.values.temperatureMax)} value2={Math.round(dia.values.temperatureMin)} icon={'moon'} option={opçãoSelecionada} />
-                    ))
-                );
+        const dataMap = {
+        'PRECIPITAÇÃO': {
+            value1: (dia) => Math.round(dia.values.precipitationProbability),
+            value2: (dia) => precipitação_risco(dia.values.precipitationProbability),
+        },
+        'VENTO': {
+            value1: (dia) => Math.round(dia.values.windSpeedMax),
+            value2: (dia) => Math.round(dia.values.windSpeedMin),
+        },
+        'UMIDADE': {
+            value1: (dia) => dia.values.humidityMax,
+            value2: (dia) => dia.values.humidityMin,
+        },
+        'VISIBILIDADE': {
+            value1: (dia) => Math.round(dia.values.visibilityMax),
+            value2: (dia) => Math.round(dia.values.visibilityMin),
+        },
+        'PRESSÃO': {
+            value1: (dia) => Math.round(dia.values.pressureSeaLevelMax),
+            value2: (dia) => Math.round(dia.values.pressureSeaLevelMin),
+        },
+        'UV': {
+            value1: (dia) => dia.values.uvIndexMax,
+            value2: (dia) => uv_risco(dia.values.uvIndexMax), // Supondo que 'uv_risco' é uma função existente
+        },
+        'SENSAÇÃO': {
+            value1: (dia) => Math.round(dia.values.temperatureApparentMax),
+            value2: (dia) => Math.round(dia.values.temperatureApparentMin),
+        },
+        'PADRÃO': { // Usado para o default, que é a temperatura
+            value1: (dia) => Math.round(dia.values.temperatureMax),
+            value2: (dia) => Math.round(dia.values.temperatureMin),
         }
+    };
+
+    const dados = dadosClimáticos.days;
+
+    const selectedMapping = dataMap[opçãoSelecionada] || dataMap['PADRÃO'];
+
+    return dados.map((dia) => (
+        <OptionOfDays
+            key={dia.date}
+            onClick={() => click_dados_para_o_grafico(opçãoSelecionada, dia.date)}
+            day={dia.date.slice(-2)}
+            day_name={dia.weekday}
+            value1={selectedMapping.value1(dia)}
+            value2={selectedMapping.value2(dia)}
+            icon={'moon'}
+            option={opçãoSelecionada}
+        />
+    ));
     }
 
     const responsividade_para_as_opcoes_dos_dias = () => {
@@ -563,6 +589,7 @@ export default function ForecastPage() {
             )
         }
     }
+
 
     const detalhes = mensagens_detalhes_do_dia(dadosClimáticos.current.values.temperature, dadosClimáticos.current.values.cloudCover, dadosClimáticos.current.values.precipitationProbability);
 

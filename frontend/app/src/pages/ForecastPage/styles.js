@@ -43,6 +43,10 @@ export const Main = styled.main `
     @media (max-width: 406px) {
         padding: 20px 12.5px 30px 12.5px;
     }
+
+    @media (max-width: ${size.mobileLX}) {
+        padding: 20px 10px 20px 10px;
+    }
 `
 
 export const textSection = styled.section`
@@ -104,6 +108,13 @@ export const localName = styled.div `
         font-size: 12.5px;
         > div > p {
             font-size: 11px;
+        }
+    }
+
+    @media (max-width: 345px) {
+        font-size: 12px;
+        > div > p {
+            font-size: 10.5px;
         }
     }
 
@@ -233,7 +244,7 @@ export const TemperatureDiv = styled.div `
         }
     }
 
-`
+,`
 
 export const TemperatureText = styled.div `
 
@@ -353,6 +364,13 @@ export const summaryOfTheDayText = styled.div `
     }
 
 
+    @media (max-width: 345px) {
+        > p {
+            font-size: 10.5px;
+        }
+    }
+
+
 `
 
 export const summaryOfTheDay = styled.nav `
@@ -424,6 +442,29 @@ export const summaryOfTheDay = styled.nav `
             }
         }
     }
+
+    @media (max-width: ${size.mobileLX}) {
+        gap: 7px;
+        margin-bottom: -7px;
+
+        div > p {
+            font-size: 8.5px;
+            > svg {
+                font-size: 9px;
+            }
+        }
+    }
+
+    @media (max-width: 345px) {
+        gap: 6.5px;
+
+        div > p {
+            font-size: 8px;
+            > svg {
+                font-size: 9px;
+            }
+        }
+    }
 `
 
 
@@ -443,6 +484,14 @@ export const SectionForGraph = styled.section `
     @media (max-width: ${size.mobileL}) {
         gap: 10px;
         margin-bottom: -15px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+      margin-bottom: -25px;
+    }
+
+    @media (max-width: 345px) {
+        gap: 8.5px;
     }
 
 `
@@ -490,6 +539,20 @@ export const OptionsForGraphDiv = styled.div `
             font-size: 10.5px;
         }
     }
+
+    @media (max-width: ${size.mobileLX}) {
+        gap: 7px;
+        > p {
+            font-size: 10px;
+        }
+    }
+
+    @media (max-width: 345px) {
+        gap: 6.8px;
+       > p {
+        font-size: 9px;
+       } 
+    }
 `
 
 export const OptionsForGraph = styled.nav `
@@ -505,6 +568,10 @@ export const OptionsForGraph = styled.nav `
 
     @media (max-width: ${size.mobileL}) {
         gap: 6.5px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        gap: 6px;
     }
 `
 
@@ -524,6 +591,7 @@ export const OptionContent = styled.button `
     font-weight: 700;
     border-radius: 15px;
     border: none;
+    text-align: center;
 
     @media (max-width: ${size.laptop}) {
         font-size: 15px;
@@ -552,6 +620,18 @@ export const OptionContent = styled.button `
         padding: 8.5px;
         font-size: 8px;
         border-radius: 10px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        height: 25px;
+        padding: 8.5px;
+        font-size: 7.5px;
+    }
+
+    @media (max-width: 345px) {
+        font-size: 6.7px;
+        height: 24px;
+        padding: 8.5px;
     }
 
 `
@@ -597,6 +677,20 @@ export const HiddenOptionsContent = styled.button `
             font-size: 18px;
         }
     }
+
+    @media (max-width: ${size.mobileLX}) {
+        height: 25px;
+        > svg {
+            font-size: 15.5px;
+        }
+    }
+
+    @media (max-width: 345px) {
+        height: 24px;
+        > svg {
+            font-size: 14px;
+        }
+    }
 `
 
 export const hiddenOptions = styled.div `
@@ -636,6 +730,12 @@ export const hiddenOptions = styled.div `
             font-size:10px;
         }
     }
+
+    @media (max-width: 345px) {
+        div > p {
+            font-size: 9px;
+        }
+    }
     
 `
 
@@ -643,6 +743,11 @@ export const visãoGeralDias = styled.div `
     display: flex;
     flex-direction: row;
     gap: 10px;
+
+
+    @media (max-width: 345px) {
+        gap: 7.5px;
+    }
     
 `
 
@@ -680,6 +785,14 @@ export const Grafico = styled.div `
     @media (max-width: 406px) {
         width: 350px;
         height: 175px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+       width: 335px;
+    }
+
+    @media (max-width: 345px) {
+        width: 310px;
     }
 `
 
@@ -721,5 +834,12 @@ export const DetalhesDoDia = styled.div `
         grid-template-columns: repeat(1, 320px);
     }
 
-`
+    @media (max-width: ${size.mobileLX}) {
+        grid-template-columns: repeat(1, 300px);
+    }
 
+    @media (max-width: 345px) {
+        grid-template-columns: repeat(1, 290px);
+    }
+
+`

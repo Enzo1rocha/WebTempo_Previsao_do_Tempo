@@ -49,6 +49,14 @@ export const titulo = styled.h2 `
         font-size: 12px;
     }
 
+    @media (max-width: ${size.mobileLX}) {
+        font-size: 11.8px;
+    }
+
+    @media (max-width: 345px) {
+        font-size: 11px;
+    }
+
 `
 
 export const div_icone_valor = styled.div `
@@ -176,6 +184,39 @@ export const div_icone_valor = styled.div `
             }
         }
     }
+
+    @media (max-width: ${size.mobileLX}) {
+       > svg {
+        font-size: 23px;
+       }
+
+       > div {
+        > h2 {
+            font-size: 19.5px;
+        }
+
+        > h3 {
+            font-size: 11.5px;
+        }
+       }
+    }
+
+    @media (max-width: 345px) {
+        grid-template-columns: 10% 0%;
+        > svg {
+            font-size: 20px;
+        }
+
+        > div {
+            > h2 {
+                font-size: 18.5px;
+            }
+
+            > h3 {
+                font-size: 11px;
+            }
+        }
+    }
 `
 
 export const sub = styled.p `
@@ -207,5 +248,13 @@ export const sub = styled.p `
 
     @media (max-width: 406px) {
         font-size: 10px;
+    }
+
+    @media (max-width: ${size.mobileLX}) {
+        font-size: 9.8px;
+    }
+
+    @media (max-width: 345px) {
+        font-size: 9px;
     }
 `
