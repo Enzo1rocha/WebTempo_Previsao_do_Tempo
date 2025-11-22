@@ -190,7 +190,7 @@ export const ContainerInput = styled.div`
     gap: 20px;
 
     @media (max-width: 580px) {
-        gap: 8px;
+        gap: 12px;
     }
 
     @media (max-width: 321px) {
@@ -290,14 +290,15 @@ export const input = styled(InputComponent) `
     }
     @media (max-width: 580px) {
         width: 370px;
-        padding-bottom: 8px;
+        padding-bottom: 5px;
+        border-bottom-width: 2.7px;
 
         .input-field {
-            font-size: 17px;
+            font-size: 15px;
         }
 
         .input-label {
-            font-size: 17px;
+            font-size: 15px;
         }
     }
 
@@ -362,6 +363,7 @@ export const botão = styled(Button) `
     @media (max-width: 580px) {
         font-size: 14px;
         padding: 11.5px;
+        margin-top: 7px;
     }
 
     @media (max-width: 400px) {
@@ -407,7 +409,7 @@ export const voltar = styled(BackToLink) `
 
     @media (max-width: 580px) {
         font-size: 15px;
-        margin-top: -5px;
+        margin-top: 10px;
     }
 
     @media (max-width: 400px) {
