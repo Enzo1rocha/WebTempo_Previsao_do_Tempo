@@ -90,7 +90,7 @@ export const FormPasswordUpdate = styled.form`
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        gap: 25px;
+        gap: 20px;
         width: 540px;
     }
 
@@ -99,6 +99,7 @@ export const FormPasswordUpdate = styled.form`
     }
 
     @media (max-width: 1180px) {
+        gap: 15px;
         width: 430px;
     }
 
@@ -142,28 +143,28 @@ export const FormTitle = styled.h1`
     }
 
     @media (max-width: ${size.laptopXL2}) {
-     font-size: 46px;
-     line-height: 50px;
+     font-size: 35px;
+     line-height: 34px;
     }
 
     @media (max-width: ${size.laptopL}) {
-        font-size: 42px;
-        line-height: 43.5px;
+        font-size: 32px;
+        line-height: 33px;
     }
 
     @media (max-width: 1180px) {
-        font-size: 38px;
-        line-height: 42px;
+        font-size: 31px;
+        line-height: 32px;
     }
 
     @media (max-width: 1000px) {
-        font-size: 36px;
-        line-height: 40px;
+        font-size: 32px;
+        line-height: 33px;
     }
 
     @media (max-width: 650px) {
-        font-size: 32px;
-        line-height: 36px;
+        font-size: 30px;
+        line-height: 31px;
     }
 
     @media (max-width: 580px) {
@@ -226,67 +227,30 @@ export const input = styled(InputComponent) `
        width:540px;
 
        .input-field {
-        font-size: 25px;
+        font-size: 19px;
        }
 
        .input-label {
-        font-size: 25px;
+        font-size: 19px;
        }
     }
 
     @media (max-width: ${size.laptopL}) {
         width: 490px;
+        padding-bottom: 12px;
 
         .input-field {
-            font-size: 24px;
+            font-size: 19px;
         }
 
         .input-label {
-            font-size: 24px;
+            font-size: 19px;
         }
     }
 
     @media (max-width: 1180px) {
         width: 430px;
         border-bottom-width: 2.9px;
-        padding-bottom: 15px;
-
-        .input-field {
-            font-size: 21px;
-        }
-
-        .input-label {
-            font-size: 21px;
-        }
-    }
-
-    @media (max-width: 1000px) {
-        width: 600px;
-        border-bottom-width: 3.1px;
-
-        .input-field {
-            font-size: 23px;
-        }
-
-        .input-label {
-            font-size: 23px;
-        }
-    }
-
-    @media (max-width: 650px) {
-        width: 430px;
-        padding-bottom: 10px;
-
-        .input-field {
-            font-size: 21px;
-        }
-
-        .input-label {
-            font-size: 21px;
-        }
-    }
-    @media (max-width: 580px) {
-        width: 370px;
         padding-bottom: 8px;
 
         .input-field {
@@ -295,6 +259,45 @@ export const input = styled(InputComponent) `
 
         .input-label {
             font-size: 18px;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        width: 600px;
+        border-bottom-width: 3.1px;
+        padding-bottom: 8px;
+
+        .input-field {
+            font-size: 19px;
+        }
+
+        .input-label {
+            font-size: 19px;
+        }
+    }
+
+    @media (max-width: 650px) {
+        width: 430px;
+        padding-bottom: 10px;
+
+        .input-field {
+            font-size: 19px;
+        }
+
+        .input-label {
+            font-size: 19px;
+        }
+    }
+    @media (max-width: 580px) {
+        width: 370px;
+        padding-bottom: 8px;
+
+        .input-field {
+            font-size: 17px;
+        }
+
+        .input-label {
+            font-size: 17px;
         }
     }
 
@@ -333,26 +336,27 @@ export const botão = styled(Button) `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        font-size: 22px;
+        font-size: 17px;
+        padding: 13px;
     }
 
     @media (max-width: ${size.laptopL}) {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     @media (max-width: 1180px) {
-        font-size: 19px;
-        padding: 15px;
+        font-size: 15px;
+        padding: 12px;
     }
 
     @media (max-width: 1000px) {
-        font-size: 20px;
-        padding: 15px;
+        font-size: 16px;
+        padding: 12px;
     }
 
     @media (max-width: 650px) {
-        font-size: 19px;
-        padding: 14px;
+        font-size: 17px;
+        padding: 12px;
     }
 
     @media (max-width: 580px) {
@@ -381,23 +385,24 @@ export const voltar = styled(BackToLink) `
     }
 
     @media (max-width: ${size.laptopXL2}) {
-        font-size: 21px;
+        font-size: 16px;
     }
 
     @media (max-width: ${size.laptopL}) {
-       font-size:20px;
+       font-size:15px;
     }
 
     @media (max-width: 1180px) {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     @media (max-width: 1000px) {
-        font-size: 20px;
+        font-size: 15px;
     }
 
     @media (max-width: 650px) {
-        font-size: 20px;
+        font-size: 15px;
+        margin-top: 5px;
     }
 
     @media (max-width: 580px) {
