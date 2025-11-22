@@ -117,6 +117,14 @@ export const localName = styled.div `
             font-size: 10.5px;
         }
     }
+    
+    @media (max-width: 329px) {
+        font-size: 11.5px;
+        gap: 10px;
+        > div > p {
+            font-size: 10px;
+        }
+    }
 
 `
 
@@ -311,6 +319,16 @@ export const TemperatureText = styled.div `
         }
     }
 
+    @media (max-width: 329px) {
+        > h2 {
+            font-size: 13.5px;
+        }
+
+        > h3 {
+            font-size: 10.9px;
+        }
+    }
+
 `
 
 export const temperatureSymbol = styled.span `
@@ -368,6 +386,12 @@ export const summaryOfTheDayText = styled.div `
         > p {
             font-size: 10.5px;
         }
+    }
+
+    @media (max-width: 329px) {
+        > p [
+            font-size: 10px;
+        ]
     }
 
 
@@ -465,6 +489,17 @@ export const summaryOfTheDay = styled.nav `
             }
         }
     }
+
+    @media (max-width: 329px) {
+        gap: 5px;
+
+        div > p {
+            font-size: 7.7px;
+            > svg {
+                font-size: 9px;
+            }
+        }
+    }
 `
 
 
@@ -553,6 +588,13 @@ export const OptionsForGraphDiv = styled.div `
         font-size: 9px;
        } 
     }
+
+    @media (max-width: 329px) {
+        gap: 6.5px;
+        > p {
+            font-size: 8.5px;
+        }
+    }
 `
 
 export const OptionsForGraph = styled.nav `
@@ -572,6 +614,10 @@ export const OptionsForGraph = styled.nav `
 
     @media (max-width: ${size.mobileLX}) {
         gap: 6px;
+    }
+
+     @media (max-width: 329px) {
+        gap: 5px;
     }
 `
 
@@ -634,6 +680,12 @@ export const OptionContent = styled.button `
         padding: 8.5px;
     }
 
+    @media (max-width: 329px) {
+        font-family: 6px;
+        height: 23px;
+        padding: 8px;
+    }
+
 `
 
 export const HiddenOptionsContent = styled.button `
@@ -689,6 +741,13 @@ export const HiddenOptionsContent = styled.button `
         height: 24px;
         > svg {
             font-size: 14px;
+        }
+    }
+
+     @media (max-width: 329px) {
+        height: 23px;
+        > svg {
+            font-size: 13px;
         }
     }
 `
@@ -794,6 +853,10 @@ export const Grafico = styled.div `
     @media (max-width: 345px) {
         width: 310px;
     }
+
+     @media (max-width: 329px) {
+        width: 295px;
+    }
 `
 
 export const DetalhesDoDia = styled.div `
@@ -840,6 +903,10 @@ export const DetalhesDoDia = styled.div `
 
     @media (max-width: 345px) {
         grid-template-columns: repeat(1, 290px);
+    }
+
+     @media (max-width: 329px) {
+        grid-template-columns: repeat(1, 280px);
     }
 
 `

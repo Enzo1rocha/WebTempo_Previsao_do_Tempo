@@ -14,13 +14,13 @@ function UpdatePassword() {
                 </s.ContainerWithImage>
                 <s.container_with_form>
                     <s.FormPasswordUpdate>
-                        <s.FormTitle>Enter <br /> New password</s.FormTitle> 
+                        <s.FormTitle>Digite a <br />nova senha</s.FormTitle> 
                         <s.ContainerInput>
-                            <InputComponent type={'password'} LabelText="New Password" />
-                            <InputComponent type={'password'} LabelText="Confirm Password" />
-                            <Button value={"Update Password"}/> 
+                            <s.input type={'password'} LabelText="Nova Senha" />
+                            <s.input type={'password'} LabelText="Confirmar Senha" />
+                            <s.botão value={"Trocar Senha"}/> 
                         </s.ContainerInput>
-                        <BackToLink value={'Back to Login'} href={'/login'}></BackToLink>
+                        <s.voltar value={'Voltar para o login'} href={'/login'}></s.voltar>
                     </s.FormPasswordUpdate>
                 </s.container_with_form>
             </s.Container>

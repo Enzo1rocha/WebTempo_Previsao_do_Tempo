@@ -53,6 +53,11 @@ export const Container = styled.div `
         height: 68px;
         width: 72px;
     }
+
+     @media (max-width: 329px) {
+        height: 65px;
+        width: 69px;
+    }
 `
 
 export const Content = styled.div `
@@ -114,6 +119,12 @@ export const day_content = styled.div `
     @media (max-width: 345px) {
         > p {
             font-size: 7.1px;
+        }
+    }
+
+     @media (max-width: 329px) {
+        > p {
+            font-size: 7px;
         }
     }
 `
@@ -286,6 +297,26 @@ export const valor_a_esquerda = styled.div `
             }
         }
     }
+
+     @media (max-width: 329px) {
+        grid-template-rows: 18px;
+
+        > p {
+            font-size: 9px;
+
+            &.uv {
+                font-size: 6.5px;
+            }
+
+            &.precipitação {
+                font-size: 6.2px;
+            }
+
+            > span {
+                font-size: 7px;
+            }
+        }
+    }
 `
 
 export const valor_a_direita = styled.div `
@@ -338,6 +369,13 @@ export const valor_a_direita = styled.div `
             font-size: 9.3px;
         }
     }
+
+     @media (max-width: 329px) {
+        grid-template-rows: 19px;
+        > p {
+            font-size: 9px;
+        }
+    }
 `
 
 export const icone = styled.div `
@@ -381,6 +419,12 @@ export const icone = styled.div `
             font-size: 29px;
         }
     }
+
+     @media (max-width: 329px) {
+        > svg {
+            font-size: 27px;
+        }
+    }
 `
 
 export const encher = styled.div `
@@ -406,6 +450,11 @@ export const encher = styled.div `
     @media (max-width: 406px) {
         width: 11px;
         height: 34px;
+    }
+
+     @media (max-width: 329px) {
+        width: 8.5px;
+        height: 32px;
     }
 `
 
