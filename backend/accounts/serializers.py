@@ -56,17 +56,23 @@ class CustomRegisterSerializer(RegisterSerializer):
                 "lng": lon,
                 "username": config('GEONAMES_USERNAME')
             })
-            data = response.json()['geonames'][0]
+            json_response = response.json()
+            
+            if not json_response.get('geonames'):
+                print('Nenhum dado encontrado no Geonames para estas coordenadas')
+                return {}
+            
+            data = json_response['geonames'][0]
             
             return {
-                "location_name": data['name'],
-                "country": data['countryName'],
-                "state": data['adminName1']
+                "location_name": data.get('name', ''),
+                "country": data.get('countryName', ''),
+                "state": data.get('adminName1', '')
             }
             
         except Exception as e:
             print("Erro ao pegar os dados da boot location: ", e)
-            raise serializers.ValidationError('Erro ao pegar os dados da boot location ')
+            return {}
             
     
 
@@ -74,21 +80,29 @@ class CustomRegisterSerializer(RegisterSerializer):
         user = super().save(request)
 
         boot_location_lat = self.validated_data.get('lat_boot_location')
+        
         boot_location_long = self.validated_data.get('long_boot_location')
-        boot_location_data = self.get_data_of_boot_location(lat=boot_location_lat, lon=boot_location_long)
         
         if boot_location_lat and boot_location_long:
-            serializer = BootLocationSerializer(data={
-                'location_name': boot_location_data['location_name'],
-                'lat': boot_location_lat,
-                'long': boot_location_long,
-                'state': boot_location_data['state'],
-                'country': boot_location_data['country']
-            }, context={'request': request, 'user': user})
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-
-
+            boot_location_data = self.get_data_of_boot_location(lat=boot_location_lat, lon=boot_location_long)
+            
+            
+            if boot_location_data:
+                try:
+                    serializer = BootLocationSerializer(data={
+                        'location_name': boot_location_data['location_name'],
+                        'lat': boot_location_lat,
+                        'long': boot_location_long,
+                        'state': boot_location_data['state'],
+                        'country': boot_location_data['country']
+                    }, context={'request': request, 'user': user})
+                    
+                    if serializer.is_valid():
+                        serializer.save()
+                    else:
+                        print('Erro validação BootLocation: ', serializer.errors)
+                except Exception as e:
+                    print(f'Erro ao salvar BootLocation: {e}')
         user.save()
         return user
     
