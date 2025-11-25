@@ -61,14 +61,18 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (userData) => {
         try {
-            await AuthService.register(userData);
-            const loginCredentials = { email: userData.email, password: userData.password1 };
-            await login(loginCredentials);
-            
-            console.log('registrado e logado automaticamente');
-            return true
+            const request = await AuthService.register(userData);
+            if (request.data.status == 201) {
+                const loginCredentials = { email: userData.email, password: userData.password1 };
+                const request_login = await login(loginCredentials)
+                if (request_login.data.status == 200) {
+                    alert('Registrado e logado')
+                } else {
+                    alert('Registrado faça login')
+                }
+            }
         } catch (error) {
-            console.log('registrado mas, não logado');
+            console.log('Ocorreu um erro', error);
             throw error;
         }
     }

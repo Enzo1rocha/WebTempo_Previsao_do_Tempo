@@ -46,7 +46,6 @@ export const Container_User_Details = styled.div `
         font-size: 33px;
         font-family: var(--Primary-Font);
         font-weight: 600;
-           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     @media (max-width: ${size.desktop}) {
@@ -607,7 +606,6 @@ export const Container_Boot_Location = styled.div `
         font-size: 33px;
         font-family: var(--Primary-Font);
         font-weight: 600;
-           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     > div {
@@ -747,7 +745,6 @@ export const Container_Favorite_Locations = styled.div `
         font-size: 33px;
         font-family: var(--Primary-Font);
         font-weight: 600;
-           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     @media (max-width: ${size.desktop}) {

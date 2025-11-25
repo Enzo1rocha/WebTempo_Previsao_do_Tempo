@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, BootLocation, FavoriteLocations
+from .models import CustomUser, BootLocation, FavoriteLocations, ContactMessage
 from django.contrib.auth import get_user
 
 # Register your models here.
@@ -11,6 +11,12 @@ class BootLocationAdmin(admin.ModelAdmin):
     def get_user(self, obj):
         return getattr(obj, 'user_boot_location', None) or "-"
     get_user.short_description = 'Usuário'
+    
+    
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created_at', 'read')
+    list_filter = ('read', 'created_at')
+    search_fields = ('name', 'email', 'message')
 
 
 class FavoriteLocationsAdmin(admin.ModelAdmin):
@@ -23,6 +29,7 @@ class FavoriteLocationsAdmin(admin.ModelAdmin):
 
 admin.site.register(BootLocation, BootLocationAdmin)
 admin.site.register(FavoriteLocations, FavoriteLocationsAdmin)
+admin.site.register(ContactMessage, ContactMessageAdmin)
 
 
 

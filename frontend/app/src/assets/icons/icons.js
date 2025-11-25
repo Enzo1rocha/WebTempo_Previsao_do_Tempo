@@ -1,27 +1,32 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faMagnifyingGlass, faUnlock } from "@fortawesome/free-solid-svg-icons";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faX } from "@fortawesome/free-solid-svg-icons";
-import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import { faTemperatureHalf } from "@fortawesome/free-solid-svg-icons";
-import { faTemperatureLow } from "@fortawesome/free-solid-svg-icons";
-import { faDroplet } from "@fortawesome/free-solid-svg-icons";
-import { faWind } from "@fortawesome/free-solid-svg-icons";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { faGaugeSimpleHigh } from "@fortawesome/free-solid-svg-icons";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { faPercent } from "@fortawesome/free-solid-svg-icons";
-import { faMoon } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { faShieldHalved } from "@fortawesome/free-solid-svg-icons";
-import { faMagnifyingGlassPlus } from "@fortawesome/free-solid-svg-icons";
-import { faMagnifyingGlassMinus } from "@fortawesome/free-solid-svg-icons";
+import { 
+  faMagnifyingGlass, faUnlock, faBars, faDeleteLeft, faPlus, faX, 
+  faMapLocationDot, faPenToSquare, faPencil, faEllipsis, 
+  faTemperatureHalf, faTemperatureLow, faDroplet, faWind, faEye, 
+  faGaugeSimpleHigh, faCircleExclamation, faTriangleExclamation, 
+  faPercent, faMoon, faArrowRight, faRightFromBracket, faShieldHalved, 
+  faMagnifyingGlassPlus, faMagnifyingGlassMinus,
+  faServer, faCode, faUserTie, faDatabase, faBolt 
+} from "@fortawesome/free-solid-svg-icons";
+import { faLock, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { 
+  faReact, faPython, faGithub, faLinkedin, faJs 
+} from "@fortawesome/free-brands-svg-icons";
+import { faPaperPlane, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faKey } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faMagnifyingGlass, faBars, faDeleteLeft, faPlus, faX, faMapLocationDot, faPenToSquare, faPencil, faEllipsis, faTemperatureHalf, faTemperatureLow, faDroplet, faWind, faEye, faGaugeSimpleHigh, faCircleExclamation, faTriangleExclamation, faPercent, faMoon, faArrowRight, faShieldHalved, faRightFromBracket, faMagnifyingGlassPlus, faMagnifyingGlassMinus);
+library.add(
+  // Sólidos
+  faMagnifyingGlass, faUnlock, faBars, faDeleteLeft, faPlus, faX, 
+  faMapLocationDot, faPenToSquare, faPencil, faEllipsis, 
+  faTemperatureHalf, faTemperatureLow, faDroplet, faWind, faEye, 
+  faGaugeSimpleHigh, faCircleExclamation, faTriangleExclamation, 
+  faPercent, faMoon, faArrowRight, faRightFromBracket, faShieldHalved, 
+  faMagnifyingGlassPlus, faMagnifyingGlassMinus,
+  faServer, faCode, faUserTie, faDatabase, faBolt, faPaperPlane, faEnvelope, faLock, faEyeSlash, faGoogle, faUser, faArrowLeft, faCheckCircle, faKey,
+  // Marcas
+  faReact, faPython, faGithub, faLinkedin, faJs
+);

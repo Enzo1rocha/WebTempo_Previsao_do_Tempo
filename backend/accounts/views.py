@@ -1,10 +1,14 @@
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import FavoriteLocationsSerializer, BootLocationSerializer, CookieTokenRefreshSerializer
-from .models import BootLocation, FavoriteLocations
+from .serializers import FavoriteLocationsSerializer, BootLocationSerializer, CookieTokenRefreshSerializer, ContactMessageSerializer
+from .models import BootLocation, FavoriteLocations, ContactMessage
+from dj_rest_auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, UserDetailsView, LogoutView
+from dj_rest_auth.registration.views import RegisterView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from django.utils.decorators import method_decorator
 from django_ratelimit.decorators import ratelimit
@@ -110,11 +114,10 @@ class UserBootLocationView(APIView):
         else:
             return Response({'message': f'{user.username} boot_location has not found'}, status=404)
 
-
-from dj_rest_auth.views import LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, UserDetailsView, LogoutView
-from dj_rest_auth.registration.views import RegisterView
-from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
-from django.views.decorators.csrf import ensure_csrf_cookie
+class ContactCreateView(generics.CreateAPIView):
+    queryset = ContactMessage.objects.all()
+    serializer_class = ContactMessageSerializer
+    permission_classes = [AllowAny]
 
 
 @ensure_csrf_cookie

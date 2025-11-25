@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import FavoriteLocations, BootLocation
+from .models import FavoriteLocations, BootLocation, ContactMessage
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer, JWTSerializerWithExpiration
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
@@ -170,6 +170,12 @@ class BootLocationSerializer(serializers.ModelSerializer):
             defaults=validated_data
         )
         return instance
+    
+    
+class ContactMessageSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = ContactMessage
+        fields = ['id', 'name', 'email', 'message', 'created_at']
 
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):

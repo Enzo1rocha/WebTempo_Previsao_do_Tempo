@@ -140,7 +140,7 @@ function NavBar() {
             </S.Nav> 
 
             <S.SearchBarContainer>
-                <SearchBar />
+                <S.SearchBarDesign />
             </S.SearchBarContainer>
 
         </S.Container>

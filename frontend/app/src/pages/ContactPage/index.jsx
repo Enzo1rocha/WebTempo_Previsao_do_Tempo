@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ContactService from '../../services/contactService';
 
 const ContactPage = () => {
   // Estado para controlar os campos do formulário
@@ -22,6 +23,13 @@ const ContactPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const request = ContactService.sendMessage(formData)
+    if (request.status == 201) {
+      console.log('Mensagem enviada com sucesso');
+    } else {
+      console.log('Ops... Ocorreu algum problema ao enviar a mensagem ao dono da aplicação');
+      
+    }
 
     // Simulação de envio para API (espera 2 segundos)
     setTimeout(() => {
@@ -72,8 +80,8 @@ const ContactPage = () => {
               <FontAwesomeIcon icon={['fab', 'github']} style={{color: '#333'}} /> 
               GitHub
             </h3>
-            <p>Veja este e outros projetos open-source.</p>
-            <a href="https://github.com/enzo1rocha" target="_blank" rel="noreferrer">
+            <p>Veja este e outros projetos</p>
+            <a href="https://github.com/Enzo1rocha?tab=repositories" target="_blank" rel="noreferrer">
               Acessar Repositórios <FontAwesomeIcon icon="arrow-right" size="xs" />
             </a>
           </S.InfoCard>

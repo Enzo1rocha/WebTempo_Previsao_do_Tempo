@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { device, size } from "../../styles/breakpoints";
+import SearchBar from "../SearchBar";
 
 export const Container = styled.div `
     position: relative;
@@ -326,4 +327,19 @@ export const Container_Search_Icon = styled.button `
         }
     }
     
+`
+
+export const SearchBarDesign = styled(SearchBar) `
+    .searchBarContainer {
+        height: 42.5px;
+
+        > input {
+            font-size: 13.5px;
+        }
+    }
+
+    .warning {
+        font-size: 13.5px;
+        padding: 8px 5px;
+    }
 `

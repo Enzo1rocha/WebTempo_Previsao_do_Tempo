@@ -7,7 +7,7 @@
     --Secundary-Color: rgb(55, 65, 81);
     --Secundary-Color-50-transparent: rgb(55, 65, 81, 0.5);
     --Secundary-Color-Change-Boot-Location: rgba(55, 65, 81, 0.900);
-    --Background-Color: #F3F4F6;
+    --Background-Color:  #f8fafc;
     --Error-Color: #DC2626;
 
     --Secundary-Color-20-transparent: rgb(55, 65, 81, 0.20);
@@ -25,7 +25,7 @@
     --Tablet: 768px;
     --Mobile: 640px;
 
-    --Primary-Font: 'Poppins', sans-serif;
+    --Primary-Font: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 * {

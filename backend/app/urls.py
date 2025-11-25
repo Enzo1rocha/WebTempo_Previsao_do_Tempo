@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from wheater.views import WeatherLocationView #, TestView
-from accounts.views import UserFavoriteLocationsView, UserBootLocationView, CustomLoginView, CustomPasswordResetConfirmView, CustomPasswordResetView, CustomPasswordChangeView, CustomRegisterView, CustomTokenRefreshView, CustomTokenVerifyView, CustomUserDetailsView, CustomLogoutView, get_csrf_token
+from accounts.views import UserFavoriteLocationsView, UserBootLocationView, CustomLoginView, CustomPasswordResetConfirmView, CustomPasswordResetView, CustomPasswordChangeView, CustomRegisterView, CustomTokenRefreshView, CustomTokenVerifyView, CustomUserDetailsView, CustomLogoutView, get_csrf_token, ContactCreateView
 
 """
 Armazene o access token (com cuidado!) e o refresh token
@@ -45,6 +45,7 @@ urlpatterns = [
     path('api/auth/token/verify/', CustomTokenVerifyView.as_view(), name='custom_token_verify'),
     path('api/auth/token/refresh/', CustomTokenRefreshView.as_view(), name='custom_token_refresh'),
     path('api/auth/csrf/', get_csrf_token, name='get_csrf_token'),
+    path('api/contact/', ContactCreateView.as_view(), name='contact_create')
     
 ]
 

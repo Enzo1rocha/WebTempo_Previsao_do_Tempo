@@ -94,7 +94,6 @@ export const title_buttonContainer = styled.div `
 
 export const Title = styled.h1 `
     font-size: 70px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.13);
     font-weight: 700;
     letter-spacing: 0.1px;
     line-height: 58px;
@@ -144,12 +143,16 @@ export const Title = styled.h1 `
 `
 
 export const SubTitle = styled.p `
-    font-size: 23px;
+    font-size: 1.5rem;
     text-align: justify;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    line-height: 25px;
-    color: var(--Primary-Color);
+    font-weight: normal;
+    line-height: 1.6;
+    color: #64748b;
+
+
+    > strong {
+        color: var(--Secundary-Color);
+    }
 
     @media (max-width: 2060px) {
         font-size: 21px;

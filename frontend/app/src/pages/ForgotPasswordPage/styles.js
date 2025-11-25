@@ -11,12 +11,12 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8fafc; // Slate-50
+  background-color: #f8fafc;
   padding: 20px;
-  font-family: var(--Primary-Font);
+  font-family: 'Inter', sans-serif;
 `;
 
-export const RegisterCard = styled.div`
+export const Card = styled.div`
   background: white;
   width: 100%;
   max-width: 450px;
@@ -25,6 +25,7 @@ export const RegisterCard = styled.div`
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   animation: ${fadeIn} 0.6s ease-out;
   border: 1px solid #e2e8f0;
+  position: relative;
 `;
 
 export const Header = styled.div`
@@ -78,19 +79,6 @@ export const InputWrapper = styled.div`
     transition: color 0.2s;
   }
 
-  svg.toggle {
-    position: absolute;
-    right: 16px;
-    color: #94a3b8;
-    cursor: pointer;
-    transition: color 0.2s;
-    padding: 5px;
-
-    &:hover {
-      color: #475569;
-    }
-  }
-
   &:focus-within svg.icon {
     color: var(--Secundary-Color);
   }
@@ -119,19 +107,6 @@ export const Input = styled.input`
   }
 `;
 
-export const ForgotPassword = styled(Link)`
-  font-size: 0.85rem;
-  color: var(--Secundary-Color);
-  text-decoration: none;
-  font-weight: 600;
-  align-self: flex-end;
-  margin-top: 4px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 export const Button = styled.button`
   background-color: var(--Secundary-Color);
   color: white;
@@ -156,20 +131,44 @@ export const Button = styled.button`
   }
 `;
 
-export const Footer = styled.div`
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9rem;
+export const BackLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 25px;
   color: #64748b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
 
-  a {
-    color: var(--Secundary-Color);
-    font-weight: 600;
-    text-decoration: none;
-    margin-left: 5px;
+  &:hover {
+    color: #0f172a;
+  }
+`;
 
-    &:hover {
-      text-decoration: underline;
-    }
+// --- Área de Sucesso ---
+export const SuccessState = styled.div`
+  text-align: center;
+  padding: 20px 0;
+  animation: ${fadeIn} 0.5s ease-out;
+
+  .icon-success {
+    font-size: 4rem;
+    color: #10b981; // Verde Esmeralda
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: #0f172a;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 30px;
   }
 `;

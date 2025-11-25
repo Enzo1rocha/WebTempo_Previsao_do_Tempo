@@ -119,27 +119,29 @@ export const FormGroup = styled.div`
   }
 `;
 
+
 const inputStyles = css`
   padding: 12px 16px;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   background-color: #f8fafc;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--Primary-Font);
   font-size: 1rem;
   color: #0f172a;
   transition: all 0.2s;
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--Secundary-Color);
     background-color: white;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1);
   }
 
   &::placeholder {
     color: #94a3b8;
   }
 `;
+
 
 export const Input = styled.input`
   ${inputStyles}

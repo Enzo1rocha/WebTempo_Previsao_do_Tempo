@@ -12,12 +12,13 @@ export const Container = styled.div `
 
 export const TopRight = styled.img `
     position: absolute;
+    display: none;
     top: -80px;
     right: -40px;
     z-index: 0;
     height: 550px;
     transform: rotate(260deg);
-    background-color: transparent;
+    background-color: var(--Background-Color);
 
     @media (max-width: 2060px) {
         height: 390px;
@@ -64,9 +65,10 @@ export const BottomLeft = styled.img `
     bottom: -30px;
     left: -20px;
     z-index: 0;
+    display: none;
     height: 420px;
     transform: rotate(92deg);
-    background-color: transparent;
+    background-color: var(--Background-Color);
 
     @media (max-width: 2060px) {
         height: 310px;

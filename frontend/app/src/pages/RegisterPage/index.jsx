@@ -4,7 +4,7 @@ import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import geolocationService from '../../services/geolocationService';
 import AuthService from "../../services/authService";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/authContext"; 
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -12,26 +12,27 @@ const RegisterPage = () => {
   // Estados para visibilidade das senhas
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [Location, setLocation] = useState({})
-  const { register } = useAuth();
+  const [Location, setLocation] = useState({});
+  // Trocamos 'register' por 'login' do useAuth, pois faremos o registro manualmente via AuthService
+  const { login } = useAuth();
 
   const errorMessages = {
     "This password is too common.": "Senha muito fraca",
     "This field may not be blank.": "Campo obrigatório",
     "Unable to log in with provided credentials.": "Credenciais inválidas",
     "user with this email already exists.": "Este e-mail já está em uso",
-    "A user with that username already exists.": 'Um usuário com este nome ja existe.',
+    "A user with that username already exists.": 'Um usuário com este nome já existe.',
     "The password is too similar to the username.": 'A senha é muito similar ao nome de usuário',
     "This password is too short. It must contain at least 8 characters.": 'Essa senha é muito curta. (deve conter no minimo 8 caracteres)',
     'The password is too similar to the email.': 'A senha é muito similar ao email.'
-    };
+  };
 
   // Estado do formulário
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password1: '', // Alterado de 'password' para 'password1'
-    password2: '',  // Alterado de 'confirmPassword' para 'password2'
+    password1: '',
+    password2: '',
   });
 
   const handleChange = (e) => {
@@ -40,27 +41,23 @@ const RegisterPage = () => {
   };
 
   useEffect(() => {
-            if ("geolocation" in navigator) {
-                navigator.permissions.query({name: 'geolocation' }).then(async (result) => {
-                    switch (result.state) {
-                        case 'granted':
-                        case 'prompt':
-                            try {
-                                const location = await geolocationService();
-                                setLocation(location)
-                            } catch (error) {
-                                console.log('Erro ao obter localização', error);
-                            } break;
-                        default:
-                            alert("Você bloqueou o acesso à localização. Ative nas configurações do navegador.")
-                            break;
-                    }
-                }) 
-            } else {
-                console.log('GEOLOCATION IS NOT AVAILABLE');
-                
-            } 
-        }, [])
+    if ("geolocation" in navigator) {
+      navigator.permissions.query({name: 'geolocation' }).then(async (result) => {
+        if (result.state === 'granted' || result.state === 'prompt') {
+          try {
+            const location = await geolocationService();
+            setLocation(location);
+          } catch (error) {
+            console.log('Erro ao obter localização', error);
+          }
+        } else if (result.state === 'denied') {
+           console.log("Acesso à localização bloqueado.");
+        }
+      }).catch(err => {
+         console.log("Erro ao verificar permissões:", err);
+      });
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,42 +68,75 @@ const RegisterPage = () => {
       return;
     }
 
-    const fullData = {
-        ...formData,
-        'lat_boot_location': String(Location.lat),
-        'long_boot_location': String(Location.long)
-    }
+    const userData = {
+        'username': formData.name,
+        'email': formData.email,
+        'password1': formData.password1, // Django espera 'password'
+        'password2': formData.password2,
+        'lat_boot_location': Location?.lat ? String(Location.lat) : 0,
+        'long_boot_location': Location?.long ? String(Location.long) : 0,
+    };
 
     try {
-        const request = await register(fullData)
+        // 1. Tenta Registrar usando AuthService direto
+        const request = await AuthService.register(userData);
+        console.log(request.status);
+        
+        
+        // Verifica se o status é 201 (Created)
+        // Verificamos tanto request.status (padrão axios) quanto request.data.status (caso sua API encapsule)
+        if (request.status === 201) {
 
-        if (request) {
-            console.log('Usuario registrado com sucesso');
-            navigate('/user/favorite')
-        } else {
-            navigate('/login', {
-                state: {message: 'Conta criada com sucesso, faça login'}
-            })
-        }
-    } catch (error) {
-            if (error.response && error.response.data) {
-                const erros = error.response.data
-                let mensagem = '';
-
-                for (const key in erros) {
-                    const msgIngles = erros[key][0];
-                    mensagem += errorMessages[msgIngles] ? errorMessages[msgIngles] : msgIngles;
-                    mensagem += '\n';
-                 }
-                console.log(mensagem);
+          console.log('Usuário registrado com sucesso');
+          
+            
+            // 2. Tenta Logar automaticamente
+            const loginCredentials = { email: userData.email, password: formData.password1 };
+            
+            try {
+                // O login do useAuth geralmente retorna a resposta ou lança erro
+                await login(loginCredentials);
                 
-                alert(mensagem)
-            } else {
-                console.error('Erro no registro: ', error);
-                alert('Erro ao criar conta, tente novamente.')
+                // Se não deu erro no await login, assumimos sucesso
+                // alert('Registrado e logado'); // Opcional: feedback visual
+                navigate('/user/profile'); // Redireciona para Home/Dashboard
                 
+            } catch (loginError) {
+                console.log("Erro no login automático:", loginError);
+                alert('Registrado com sucesso! Por favor, faça login.');
+                navigate('/login');
             }
         }
+    } catch (error) {
+        // Lógica de tratamento de erro do Registro
+        if (error.response && error.response.data) {
+            const data = error.response.data;
+            
+            if (typeof data === 'string') {
+                alert(data);
+                return;
+            }
+
+            let mensagem = '';
+            if (data.message) {
+                mensagem += data.message + '\n';
+            }
+
+            Object.keys(data).forEach((key) => {
+                if (key === 'message') return;
+                const errorContent = data[key];
+                const msgIngles = Array.isArray(errorContent) ? errorContent[0] : errorContent;
+                const errorTranslated = errorMessages[msgIngles] || msgIngles;
+                mensagem += `${errorTranslated}\n`;
+            });
+
+            if (mensagem) alert(mensagem);
+            
+        } else {
+            console.error('Erro no registro: ', error);
+            alert('Erro ao criar conta. Tente novamente.');
+        }
+    }
   };
 
   return (
@@ -120,7 +150,6 @@ const RegisterPage = () => {
         </S.Header>
 
         <S.Form onSubmit={handleSubmit}>
-          {/* Campo de Nome */}
           <S.InputGroup>
             <label htmlFor="name">Nome Completo</label>
             <S.InputWrapper>
@@ -153,7 +182,6 @@ const RegisterPage = () => {
             </S.InputWrapper>
           </S.InputGroup>
 
-          {/* Campo de Senha (Password 1) */}
           <S.InputGroup>
             <label htmlFor="password1">Senha</label>
             <S.InputWrapper>
@@ -177,7 +205,6 @@ const RegisterPage = () => {
             </S.InputWrapper>
           </S.InputGroup>
 
-          {/* Campo de Confirmar Senha (Password 2) */}
           <S.InputGroup>
             <label htmlFor="password2">Confirmar Senha</label>
             <S.InputWrapper>

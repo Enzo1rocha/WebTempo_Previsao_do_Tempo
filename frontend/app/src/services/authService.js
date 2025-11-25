@@ -3,7 +3,7 @@ import {api, authApi } from "./api";
 const AuthService = {
     async register(userData) {
         const response = await api.post('/api/auth/registration/', userData);
-        return response.data
+        return response
     },
 
     async login(credentials) {
@@ -42,6 +42,30 @@ const AuthService = {
         } catch (error) {
             console.error('Erro ao mudar a senha:', error);
             throw error;
+        }
+    },
+
+    async passwordReset(email) {
+        try {
+            const response = await api.post('/api/auth/password/reset/', email);
+            return response
+        } catch (error) {
+            console.error('Erro ao enviar o email para reset de senha async passwordReset ', error);
+        }
+    },
+
+    async passwordResetConfirm(payload) {
+        try {
+            const request = await api.post(`/api/auth/password/reset/confirm/${payload.uid}/${payload.token}/`, payload)
+
+            if (request.status == 200) {
+                console.log('Senha alterada com sucesso');
+                return request
+            } else {
+                console.log('Problema ao alterar a senha, tente denovo');
+            }
+        } catch (error) {
+            console.error('Erro ao alterar a senha async passwordResetConfirm ', error);
         }
     },
 

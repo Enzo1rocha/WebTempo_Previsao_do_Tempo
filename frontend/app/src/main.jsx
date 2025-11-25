@@ -3,10 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import './assets/icons/icons'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Register from './pages/register'
-import Login from './pages/login'
-import ForgotPassword from './pages/ForgotPassword'
-import UpdatePassword from './pages/updatePassword'
 import WelcomePage from './pages/WelcomePage'
 import PasswordChange from './pages/PasswordChange'
 import Layout from './components/layout/layout'
@@ -16,10 +12,15 @@ import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
 import ProtectedRoute from './components/authentications/Protectedroute'
 import LogoutPage from './pages/LogoutPage'
 import SearchFavoriteLocation from './pages/SearchFavoriteLocation'
-import ChangeBootLocation from './components/ChangeBootLocation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProfilePage from './pages/ProfilePage'
 import ForecastPage from './pages/ForecastPage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import PasswordResetConfirmPage from './pages/PasswordResetConfirm'
 
 
 const queryClient = new QueryClient()
@@ -31,24 +32,26 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: '/', element: <WelcomePage /> },
+      { path: '/about', element: <AboutPage /> },
+      { path: '/contact', element: <ContactPage />},
       { path: '/register', element:(
         <PublicOnlyRoute>
-          <Register />
+          <RegisterPage />
         </PublicOnlyRoute>
       )},
       { path: '/login', element: (
         <PublicOnlyRoute>
-          <Login />
+          <LoginPage/>
         </PublicOnlyRoute>
       )},
       { path: '/forgot', element: (
         <PublicOnlyRoute>
-          <ForgotPassword />
+          <ForgotPasswordPage />
         </PublicOnlyRoute>
       )},
-      { path: '/forgot/updatePassword', element: (
+      { path: '/forgot/password/reset/confirm/:token/:uid', element: (
         <PublicOnlyRoute>
-          <UpdatePassword />
+          <PasswordResetConfirmPage />
         </PublicOnlyRoute>
       )},
 

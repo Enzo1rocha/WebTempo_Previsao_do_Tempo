@@ -156,7 +156,7 @@ export default function SearchBar({ option, className }) {
 
     return (
         <S.Container className={className}>
-            <S.SearchBarContainer hasSearch={inputValue}>
+            <S.SearchBarContainer className='searchBarContainer' hasSearch={inputValue}>
                 <input value={inputValue} onChange={handleSearch} type="text" name="" id="" placeholder={
                     !inputValue ? 'Pesquisar Local' : ''
                 } />
@@ -167,7 +167,7 @@ export default function SearchBar({ option, className }) {
             </S.SearchBarContainer>
             {!user && inputValue && (
                 <S.Containerlocations>
-                    <S.Warning onClick={handleClickLogin}>faça login para pesquisar o clima das cidades.</S.Warning>
+                    <S.Warning className='warning' onClick={handleClickLogin}>faça login para pesquisar o clima das cidades.</S.Warning>
                 </S.Containerlocations>
             )}
             {user && cities.length > 0 && (

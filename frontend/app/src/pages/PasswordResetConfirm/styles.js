@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -11,25 +10,39 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8fafc; // Slate-50
+  background-color: #f8fafc;
   padding: 20px;
   font-family: var(--Primary-Font);
 `;
 
-export const RegisterCard = styled.div`
+export const Card = styled.div`
   background: white;
   width: 100%;
   max-width: 450px;
   padding: 40px;
   border-radius: 24px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   animation: ${fadeIn} 0.6s ease-out;
   border: 1px solid #e2e8f0;
 `;
 
 export const Header = styled.div`
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
+  
+  // Ícone de chave no topo
+  .header-icon {
+    font-size: 2.5rem;
+    color: var(--Secundary-Color);
+    margin-bottom: 15px;
+    background: #efefefff;
+    width: 80px;
+    height: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
 `;
 
 export const Title = styled.h1`
@@ -119,19 +132,6 @@ export const Input = styled.input`
   }
 `;
 
-export const ForgotPassword = styled(Link)`
-  font-size: 0.85rem;
-  color: var(--Secundary-Color);
-  text-decoration: none;
-  font-weight: 600;
-  align-self: flex-end;
-  margin-top: 4px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 export const Button = styled.button`
   background-color: var(--Secundary-Color);
   color: white;
@@ -156,20 +156,19 @@ export const Button = styled.button`
   }
 `;
 
-export const Footer = styled.div`
+export const SuccessState = styled.div`
   text-align: center;
-  margin-top: 30px;
-  font-size: 0.9rem;
-  color: #64748b;
+  padding: 20px 0;
+  
+  .icon-success {
+    font-size: 4rem;
+    color: #10b981;
+    margin-bottom: 20px;
+  }
 
-  a {
-    color: var(--Secundary-Color);
-    font-weight: 600;
-    text-decoration: none;
-    margin-left: 5px;
-
-    &:hover {
-      text-decoration: underline;
-    }
+  h2 {
+    font-size: 1.5rem;
+    color: #0f172a;
+    margin-bottom: 10px;
   }
 `;
