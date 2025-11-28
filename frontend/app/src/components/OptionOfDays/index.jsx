@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as S from "./styles"
 
-export default function OptionOfDays({day, day_name, value1, value2, icon, option, onClick}) {
+export default function OptionOfDays({day, day_name, value1, value2, icon, icon_color, option, onClick}) {
 
     const METRIC_CONFIG = {
         'PRECIPITAÇÃO': { min: 0, max: 100, unit: '' },
@@ -35,12 +35,14 @@ export default function OptionOfDays({day, day_name, value1, value2, icon, optio
     const get_option = () => {
 
         const config = METRIC_CONFIG[option];
+        const WeatherIconComponent = icon
+        const IconColor = icon_color
 
         if (!config) {
         return (
             <S.conteudo_com_dados>
                 <S.icone>
-                    <FontAwesomeIcon icon={icon} />
+                    <WeatherIconComponent color={icon_color} />
                 </S.icone>
                 <S.valor_a_direita>
                     <p>{value1}°</p>

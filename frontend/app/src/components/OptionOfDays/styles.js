@@ -146,37 +146,37 @@ export const valor_a_esquerda = styled.div `
     grid-template-rows: 35px;
 
     > p {
-        font-size: 24px;
+        font-size: 21px;
         font-weight: 700;
         color: var(--Secundary-Color);
 
         &.uv {
-            font-size: 19px;
+            font-size: 16px;
         }
 
         &.precipitação {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         > span {
-            font-size: 24px;
+            font-size: 16px;
         }
     }
 
     @media (max-width: ${size.laptop}) {
         > p {
-            font-size: 21.5px;
+            font-size: 19px;
 
             &.uv {
-                font-size: 17px;
+                font-size: 14px;
             }
 
             &.precipitação {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             > span {
-                font-size: 18px;
+                font-size: 14px;
             }
         }
         }
@@ -186,17 +186,17 @@ export const valor_a_esquerda = styled.div `
             font-size: 18px;
 
             &.uv {
-                font-size: 15px;
+                font-size: 13px;
             }
 
             &.precipitação {
-                font-size: 14px;
+                font-size: 13px;
             }
 
 
 
             > span {
-                font-size: 15px;
+                font-size: 13px;
             }
         }
     }
@@ -380,7 +380,8 @@ export const valor_a_direita = styled.div `
 
 export const icone = styled.div `
     > svg {
-        font-size: 70px;
+        font-size: 65px;
+        text-align: left;
         color: var(--Secundary-Color);
     }
 
@@ -431,11 +432,19 @@ export const encher = styled.div `
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    background-color: gray;
     height: 75px;
     width: 26px;
     border-radius: 15px;
+
+    overflow: hidden; 
+    
     background-color: var(--Secundary-Color-50-transparent);
+
+
+    @media (max-width: ${size.tablet}) {
+        width: 20px;
+        height: 60px;
+    }
 
     @media (max-width: ${size.tabletS}) {
         height: 50px;
@@ -462,5 +471,5 @@ export const valor = styled.div `
     background-color: var(--Secundary-Color);
     width: 100%;
     height: ${props => props.altura_percentual}%;
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 0; 
 `

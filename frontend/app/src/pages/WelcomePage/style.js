@@ -93,8 +93,8 @@ export const title_buttonContainer = styled.div `
 `
 
 export const Title = styled.h1 `
-    font-size: 70px;
-    font-weight: 700;
+    font-size: 68px;
+    font-weight:800;
     letter-spacing: 0.1px;
     line-height: 58px;
     color: var(--Secundary-Color);

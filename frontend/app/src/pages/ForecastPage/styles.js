@@ -130,24 +130,24 @@ export const localName = styled.div `
 
 export const temperatureAndIconDiv = styled.div `
     display: flex;
-    gap: 85px;
+    gap: 50px;
     align-items: center;
     flex-direction: row;
 
     @media (max-width: ${size.tablet}) {
-        gap: 65px;
+        gap: 25px;
     }
 
     @media (max-width: ${size.tabletS}) {
-        gap: 55px;
+        gap: 22px;
     }
 
     @media (max-width: ${size.mobileL}) {
-        gap: 40px;
+        gap: 15px;
     }
 
     @media (max-width: 406px) {
-        gap: 40px;
+        gap: 10px;
     }
 `
 
@@ -156,7 +156,7 @@ export const TemperatureDiv = styled.div `
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
 
     > div {
 
@@ -166,14 +166,14 @@ export const TemperatureDiv = styled.div `
 
         > p {
             font-size: 100px;
-            font-weight: 400;
-            position: relative;
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1;
 
             > span {
-                
-                position: absolute;
                 font-size: 50px;
-                top: 35px;
+                margin-top: 7px;
                 font-weight: 600;
                 
             }
@@ -182,7 +182,7 @@ export const TemperatureDiv = styled.div `
 
     > svg {
         color: var(--Secundary-Color);
-        font-size: 100px;
+        font-size: 150px;
     }
 
     @media (max-width: ${size.laptop}) {
@@ -207,7 +207,7 @@ export const TemperatureDiv = styled.div `
         }
 
         > svg {
-            font-size: 68px;
+            font-size: 100px;
         }
     }
 
@@ -218,7 +218,6 @@ export const TemperatureDiv = styled.div `
 
                 > span {
                     font-size: 19px;
-                    top: 10px;
                 }
             }
         }
@@ -231,6 +230,7 @@ export const TemperatureDiv = styled.div `
 
                 > span {
                     font-size: 16px;
+                    margin-top: 3px;
                 }
             }
         }
@@ -252,14 +252,12 @@ export const TemperatureDiv = styled.div `
         }
     }
 
-,`
+`
 
 export const TemperatureText = styled.div `
 
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-content: center;
     line-height: 40px;
     
 
@@ -272,6 +270,7 @@ export const TemperatureText = styled.div `
     }
 
     @media (max-width: ${size.laptop}) {
+        line-height: 30px;
         > h2 {
             font-size: 33px;
         }
@@ -282,6 +281,7 @@ export const TemperatureText = styled.div `
     }
 
     @media (max-width: ${size.tablet}) {
+        line-height: 25px;
         > h2 {
             font-size: 25px;
         }
@@ -292,6 +292,7 @@ export const TemperatureText = styled.div `
     }
 
     @media (max-width: ${size.tabletS}) {
+        line-height: 24px;
         > h2 {
             font-size: 19px;
         }
@@ -355,29 +356,27 @@ export const summaryOfTheDayText = styled.div `
 
     @media (max-width: ${size.tablet}) {
         > p {
-            margin-top: 8px;
             font-size: 16.5px;
         }
     }
 
     @media (max-width: ${size.tabletS}) {
         > p {
-            margin-top: 10px;
             font-size: 13px;
         }
     }
 
     @media (max-width: ${size.mobileL}) {
+        margin-top: 0px;
         > p {
-            margin-top: 18px;
             font-size: 11.5px;
         }
     }
 
     @media (max-width: 406px) {
+        margin-top: 3px;
         > p {
             font-size: 11px;
-            margin-top: 15px;
         }   
     }
 
@@ -389,12 +388,10 @@ export const summaryOfTheDayText = styled.div `
     }
 
     @media (max-width: 329px) {
-        > p [
+        > p {
             font-size: 10px;
-        ]
+        }
     }
-
-
 `
 
 export const summaryOfTheDay = styled.nav `
@@ -403,7 +400,7 @@ export const summaryOfTheDay = styled.nav `
     justify-content: start;
     align-items: center;
 
-    margin-top: 10px;
+    margin-top: 5px;
 
     gap: 25px;
 
@@ -457,7 +454,6 @@ export const summaryOfTheDay = styled.nav `
 
     @media (max-width: 406px) {
         gap: 8.5px;
-        margin-bottom: -5px;
 
         div > p {
             font-size: 9px;
@@ -469,7 +465,6 @@ export const summaryOfTheDay = styled.nav `
 
     @media (max-width: ${size.mobileLX}) {
         gap: 7px;
-        margin-bottom: -7px;
 
         div > p {
             font-size: 8.5px;
@@ -513,6 +508,7 @@ export const SectionForGraph = styled.section `
     margin-top: 25px;
 
     @media (max-width: ${size.tabletS}) {
+        margin-top: 15px;
         gap: 20px;
     }
 

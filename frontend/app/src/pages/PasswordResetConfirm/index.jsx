@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AuthService from '../../services/authService';
+import Loading from '../../components/Loading';
 
 const PasswordResetConfirmPage = () => {
   const navigate = useNavigate();
@@ -54,6 +55,10 @@ const PasswordResetConfirmPage = () => {
       setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <Loading message="Localizando você..." />;
+  }
 
   if (isSuccess) {
     return (
@@ -108,7 +113,6 @@ const PasswordResetConfirmPage = () => {
             </S.InputWrapper>
           </S.InputGroup>
 
-          {/* Confirmar Senha */}
           <S.InputGroup>
             <label htmlFor="confirmPassword">Confirmar Nova Senha</label>
             <S.InputWrapper>

@@ -16,7 +16,7 @@ export const Container = styled.div `
     width: 100%;
     position: ${props => props.$menu_clicado ? 'fixed' : 'relative'};
     margin: auto;
-    background-color: var(--Secundary-Color);
+    background-color: var(--Primary-Color);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
     @media ${device.mobileS} {
@@ -51,29 +51,24 @@ export const Container = styled.div `
 export const Logo = styled.a `
     color: var(--Background-Color);
     font-size: 30px;
-    font-weight:600;
+    font-weight:800;
     text-decoration: none;
     cursor: pointer;
 
-    @media ${device.mobileS} {
-        font-size: 18px;
-    }
-
-
-    @media ${device.mobileL} {
-        font-size: 20px
-    }
-
-    @media ${device.tablet} {
-        font-size: 30px;
-    }
-
-    @media ${device.laptop} {
+    @media (max-width: ${size.laptopXL2}) {
         font-size: 25px;
     }
 
-     @media ${device.laptopL} {
-        font-size: 30px;
+    @media (max-width: ${size.laptopL}) {
+        font-size: 23px;
+    }
+
+    @media (max-width: ${size.laptop}) {
+        font-size: 25px;
+    }
+
+    @media (max-width: ${size.tablet}) {
+        font-size: 21px;
     }
 
     @media (max-width: ${size.mobileS}) {
@@ -111,7 +106,7 @@ export const NavMobile = styled.div `
     position: relative;
 
     svg {
-        color: var(--Secundary-Color);
+        color: var(--Primary-Color);
         font-size: 17px;
     }
 
@@ -129,7 +124,7 @@ export const NavMobile = styled.div `
         height: 35px;
         width: 35px;
         border-radius: 8px;
-        border: 2px solid var(--Secundary-Color);
+        border: 2px solid var(--Primary-Color);
 
         > svg {
             font-size: 10px;
@@ -140,7 +135,7 @@ export const NavMobile = styled.div `
         height: 41px;
         width: 41px;
         border-radius: 10px;
-        border: 3px solid var(--Secundary-Color);
+        border: 3px solid var(--Primary-Color);
 
         > svg {
             font-size: 20px;
@@ -167,13 +162,13 @@ export const NavItems = styled.div`
     position: fixed;
     top: 50px;
     left: 0;
-    padding: 10px 0px;
+    padding: 30px 0px;
 
 
     overflow: hidden;
     transition: 0.4s ease;
 
-    background-color: var(--Secundary-Color);
+    background-color: var(--Primary-Color);
 
     transition: all 0.4s ease;
 
@@ -181,13 +176,21 @@ export const NavItems = styled.div`
     height: 100vh;
     width: 100vw;
     z-index: 999;
+
+    @media (max-width: ${size.tablet}) {
+        padding: 20px 0px;
+    }
+
+    @media (max-width: ${size.mobileL}) {
+        padding: 15px 0px;
+    }
 `
 
 export const NavItem = styled.a `
     font-size: 17px;
     text-decoration: none;
     color: var(--Background-Color);
-    font-weight: 600;
+    font-weight: 700;
     padding: 4px 8px;
 
     transition: 0.2s ease-out;
@@ -196,7 +199,7 @@ export const NavItem = styled.a `
     &:hover {
         text-decoration: underline;
         background-color: var(--Background-Color);
-        color: var(--Secundary-Color);
+        color: var(--Primary-Color);
         border-radius: 5px;
     }
 
@@ -205,12 +208,12 @@ export const NavItem = styled.a `
     }
 
     @media ${device.laptopL} {
-        font-size: 19px;
+        font-size: 15px;
     }
 `
 
 export const NavItemMobile = styled.a `
-    font-size: 17px;
+    font-size: 18px;
     text-decoration: none;
     color: var(--Background-Color);
     font-weight: 600;
@@ -221,15 +224,15 @@ export const NavItemMobile = styled.a `
 
     &:hover {
         background-color: var(--Background-Color);
-        color: var(--Secundary-Color);
+        color: var(--Primary-Color);
     }
 
-    @media ${device.mobileL} {
-        font-size: 18px;
+    @media (max-width: ${size.tablet}) {
+        font-size: 16px;
     }
 
-    @media ${device.tablet} {
-        font-size: 25px;
+    @media (max-width: ${size.mobileL}) {
+        font-size: 14px;
     }
 `
 
@@ -259,7 +262,7 @@ export const SearchBarContainer = styled.div `
 `
 
 export const isSearchClicked = styled.div `
-    background-color: var(--Secundary-Color);
+    background-color: var(--Primary-Color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -279,12 +282,12 @@ export const Container_Search_Icon = styled.button `
     justify-content: center;
     align-items: center;
     border-radius: ${props => props.clicked ? '10px' : '50px'};
-    border: 2px solid var(--Secundary-Color);
+    border: 2px solid var(--Primary-Color);
     box-shadow: 0px 2px 2px rgba(0,0,0,0.5);
 
     > svg {
         height: 18px;
-        color: var(--Secundary-Color);
+        color: var(--Primary-Color);
     }
 
     @media ${device.mobileS} {

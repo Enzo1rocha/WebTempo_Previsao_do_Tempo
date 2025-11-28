@@ -39,7 +39,7 @@ const LoginPage = () => {
         <S.Header>
           <S.Title>Bem-vindo de volta</S.Title>
           <S.Subtitle>
-            Insira suas credenciais para acessar o Clima App.
+            Insira suas credenciais para acessar o WebTempo.
           </S.Subtitle>
         </S.Header>
 

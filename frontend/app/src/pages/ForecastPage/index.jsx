@@ -8,6 +8,8 @@ import LocationsPageService from '../../services/LocationsPageService';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import useWindowWidth from '../../services/useWindowWidth';
+import { getWeatherIcon, getWeatherColor } from '../../utils/weatherIcons';
+import Loading from '../../components/Loading';
 
 import {
     Chart as ChartJS,
@@ -64,7 +66,7 @@ export default function ForecastPage() {
 
 
     if (isLoading) {
-        return <p>Carregando previsão</p>
+        return <Loading message="Carregando..." />;
     }
 
     if (isError) {
@@ -484,7 +486,7 @@ export default function ForecastPage() {
             day_name={dia.weekday}
             value1={selectedMapping.value1(dia)}
             value2={selectedMapping.value2(dia)}
-            icon={'moon'}
+            icon={getWeatherIcon(dia.values.weatherCodeMax, true)} icon_color={getWeatherColor(dia.values.weatherCodeMax, true)}
             option={opçãoSelecionada}
         />
     ));
@@ -593,6 +595,9 @@ export default function ForecastPage() {
 
     const detalhes = mensagens_detalhes_do_dia(dadosClimáticos.current.values.temperature, dadosClimáticos.current.values.cloudCover, dadosClimáticos.current.values.precipitationProbability);
 
+    const WeatherIconComponent = getWeatherIcon(dadosClimáticos.current.values.weatherCode, true)
+    const Icon_color = getWeatherColor(dadosClimáticos.current.values.weatherCode, true)
+
     return (
         <S.conteudo_inteiro>
 
@@ -606,7 +611,7 @@ export default function ForecastPage() {
                 </S.localName>
                 <S.temperatureAndIconDiv>
                     <S.TemperatureDiv>
-                        <FontAwesomeIcon icon={'moon'} />
+                        <WeatherIconComponent color={Icon_color} />
                         <div>
                             <p>{Math.round(dadosClimáticos.current.values.temperature)}<span>°C</span></p>
                         </div>

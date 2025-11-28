@@ -6,6 +6,7 @@ import {useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChangeBootLocation from '../../components/ChangeBootLocation';
 import { useAuth } from '../../context/AuthContext';
+import Loading from '../../components/Loading';
 
 
 function ProfilePage() {
@@ -63,7 +64,7 @@ function ProfilePage() {
     }
 
     if (loading) {
-        return (<div>Loading...</div>);
+        return <Loading message="Localizando você..." />;
     }
 
     console.log(favoriteLocations);

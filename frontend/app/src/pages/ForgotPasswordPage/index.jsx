@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AuthService from '../../services/authService'; // Importe seu serviço
+import AuthService from '../../services/authService';
+import Loading from '../../components/Loading';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
@@ -27,6 +28,10 @@ const ForgotPasswordPage = () => {
       setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <Loading message="Carregando..." />;
+  }
 
   return (
     <S.Container>
