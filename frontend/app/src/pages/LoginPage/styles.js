@@ -41,7 +41,7 @@ export const Title = styled.h1`
 
 export const Subtitle = styled.p`
   font-size: 0.95rem;
-  color: #64748b; // Slate-500
+  color: #64748b; 
   line-height: 1.5;
 `;
 
@@ -64,37 +64,35 @@ export const InputGroup = styled.div`
   }
 `;
 
-// Wrapper para colocar o ícone dentro do input
+
 export const InputWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
 
-  // Ícone da esquerda (Email/Cadeado)
+
   svg.icon {
     position: absolute;
     left: 16px;
     color: #94a3b8;
     font-size: 1rem;
-    pointer-events: none; // Permite clicar através do ícone
+    pointer-events: none; 
     transition: color 0.2s;
   }
 
-  // Ícone da direita (Olho)
+
   svg.toggle {
     position: absolute;
     right: 16px;
     color: #94a3b8;
     cursor: pointer;
     transition: color 0.2s;
-    padding: 5px; // Aumenta a área de clique
-
+    padding: 5px;
     &:hover {
       color: #475569;
     }
   }
 
-  // Quando o input ganha foco, pinta o ícone da esquerda
   &:focus-within svg.icon {
     color: var(--Secundary-Color);
   }
@@ -102,20 +100,20 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 14px 45px 14px 45px; // Espaço para os ícones esq/dir
+  padding: 14px 45px 14px 45px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   background-color: #f8fafc;
   font-size: 1rem;
   color: #0f172a;
   transition: all 0.2s;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--Font-Primary);
 
   &:focus {
     outline: none;
     border-color: var(--Secundary-Color);
     background-color: white;
-    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1); // Anel de foco bonito
+    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1); 
   }
 
   &::placeholder {

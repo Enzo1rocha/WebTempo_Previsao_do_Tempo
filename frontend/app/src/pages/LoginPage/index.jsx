@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { data, Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Form } from "react-router-dom";
-import AuthService from "../../services/authService";
 import { useAuth } from "../../context/authContext";
+import Loading from '../../components/Loading';
 
 const LoginPage = () => {
   const { login } = useAuth()
   
-  // Estados
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     'email': '',
     'password': ''
   });
 
-  // Handlers
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -24,17 +22,20 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Dados de Login:', formData);
+    setIsLoading(true); 
     try {
         await login(formData);
-    } catch (error) {
-        console.log('Erro ao fazer login', error);
-        
+    } catch {
+        alert('Erro ao fazer login');
+    } finally {
+        setIsLoading(false);
     }
   };
 
   return (
     <S.Container>
+      {isLoading && <Loading message="Entrando..." />}
+
       <S.LoginCard>
         <S.Header>
           <S.Title>Bem-vindo de volta</S.Title>
@@ -44,7 +45,6 @@ const LoginPage = () => {
         </S.Header>
 
         <S.Form onSubmit={handleSubmit}>
-          {/* Campo de Email */}
           <S.InputGroup>
             <label htmlFor="email">E-mail</label>
             <S.InputWrapper>
@@ -61,7 +61,6 @@ const LoginPage = () => {
             </S.InputWrapper>
           </S.InputGroup>
 
-          {/* Campo de Senha */}
           <S.InputGroup>
             <label htmlFor="password">Senha</label>
             <S.InputWrapper>
@@ -87,7 +86,9 @@ const LoginPage = () => {
             </S.ForgotPassword>
           </S.InputGroup>
 
-          <S.Button type="submit">Entrar na Conta</S.Button>
+          <S.Button type="submit" disabled={isLoading}>
+            {isLoading ? 'Entrando...' : 'Entrar na Conta'}
+          </S.Button>
         </S.Form>
 
         <S.Footer>

@@ -7,7 +7,6 @@ import Loading from '../../components/Loading';
 
 const PasswordResetConfirmPage = () => {
   const navigate = useNavigate();
-  // Pega uid e token da URL (definidos na rota como /:uid/:token)
   const { token, uid } = useParams();
 
   const [password, setPassword] = useState('');
@@ -39,13 +38,11 @@ const PasswordResetConfirmPage = () => {
       
       setIsSuccess(true);
       
-      // Redireciona após 3 segundos
       setTimeout(() => {
         navigate('/login');
       }, 3000);
       
     } catch (error) {
-      console.error(error);
       if (error.response?.data?.token) {
           alert("Link inválido ou expirado. Solicite uma nova redefinição.");
       } else {
@@ -91,7 +88,6 @@ const PasswordResetConfirmPage = () => {
         </S.Header>
 
         <S.Form onSubmit={handleSubmit}>
-          {/* Nova Senha */}
           <S.InputGroup>
             <label htmlFor="password">Nova Senha</label>
             <S.InputWrapper>

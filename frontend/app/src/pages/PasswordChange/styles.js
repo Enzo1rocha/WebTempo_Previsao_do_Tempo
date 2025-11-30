@@ -1,233 +1,162 @@
-import styled from "styled-components";
-import BackToLink from "../../components/BackToLink";
-import { device, size } from "../../styles/breakpoints";
+import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const container = styled.div `
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 40% 40%;
-    justify-content: center;
-    align-items: center;
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
 
-    @media (max-width: 2100px) and (orientation: landscape) {
-        grid-template-columns: 42% 42%;
-    }
+export const Container = styled.div`
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--Background-Color);
+  padding: 20px;
+  font-family: var(--Font-Primary);
+`;
 
-    @media (max-width: 1700px) and (orientation: landscape) {
-        grid-template-columns: 41% 41%;
-    }
+export const Card = styled.div`
+  background: white;
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: ${fadeIn} 0.6s ease-out;
+  border: 1px solid #e2e8f0;
+`;
 
-    @media (max-width: ${size.laptopL}) and (orientation:landscape) {
-        grid-template-columns: 40% 40%;
-    }
+export const Header = styled.div`
+  text-align: center;
+  margin-bottom: 35px;
+`;
 
-    @media (max-width: 1280px) and (orientation: landscape) {
-        grid-template-columns: 44% 44%;
-    }
+export const Title = styled.h1`
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--Secundary-Color);
+  margin-bottom: 10px;
+`;
 
-    @media (max-width: ${size.laptop}) and (orientation: portrait) {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-    }
-`
+export const Subtitle = styled.p`
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.5;
+`;
 
-export const container_with_image = styled.div `
-    height: auto;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
-    @media (max-width: ${size.laptop}) and (orientation: portrait) {
-    display: none;
-    }
-`
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-export const image = styled.img `
-    z-index: 1;
-    width: auto;
-    height: 900px;
-
-    @media (max-width: 2100px) and (orientation: landscape) {
-        height: 700px;
-    }
-
-    @media (max-width: 1700px) and (orientation: landscape) {
-        height: 650px;
-    }
-
-    @media (max-width: 1550px) and (orientation: landscape) {
-        height: 570px;
-    }
-
-    @media (max-width: ${size.laptopL}) and (orientation:landscape) {
-        height: 530px;
-    }
-
-    @media (max-width: 1280px) and (orientation: landscape) {
-        height: 490px;
-    }
-
-    @media (max-width: ${size.laptop}) and (orientation: landscape) {
-        height: 450px;
-    }
-
-    @media (max-width: ${size.laptop}) and (orientation: portrait) {
-        height: 390px;
-    }
-`
-
-export const container_with_form = styled.div `
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-`
-
-export const change_password_form = styled.form `
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-`
-
-export const h1_form = styled.h1 `
-    font-size: 60px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.13);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    line-height: 55px;
-    color: var(--Primary-Color);
-    white-space: nowrap;
-    display: flex;
-    align-self: flex-start;
-
-    @media (max-width: 2100px) {
-        font-size: 60px;
-        letter-spacing: 0.6px;
-        line-height: 59px;
-    }
-
-    @media (max-width: 1700px) {
-        font-size: 55px;
-        letter-spacing: 0.5px;
-        line-height: 53px;
-    }
-
-    @media (max-width: 1550px) {
-        font-size: 47px;
-        letter-spacing: 0.4px;
-        line-height: 46px;
-    }
-
-    @media (max-width: ${size.laptopL}) {
-        font-size: 45px;  
-        letter-spacing: 0.4px;
-        line-height: 44px;
-    }
-
-    @media (max-width: 1280px) {
-        font-size: 40px;
-        letter-spacing: 0.4px;
-        line-height: 39px;
-    }
-
-    @media (max-width: ${size.laptop}) and (orientation: landscape) {
-        font-size: 36px;
-        line-height: 36px;
-        letter-spacing: 0.3px;
-    }
-
-    @media (max-width: ${size.laptop}) and (orientation: portrait) {
-        font-size: 53px;
-        letter-spacing: 0.5px;
-        line-height: 53px;
-    }
-
-    @media (max-width: ${size.tablet}) and (orientation: portrait) {
-        font-size: 40px;
-        letter-spacing: 0.4px;
-        line-height: 39px;
-    }
-
-    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
-        font-size: 30px;
-        letter-spacing: 0.3px;
-        line-height: 34px;
-        margin-bottom: -5px;
-    }
-
-    @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
-        font-size: 27px;
-        line-height: 29px;
-        margin-bottom: -5px;
-    }
-
-    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
-        font-size: 26px;
-        line-height: 29px;
-        margin-bottom: -5px;
-    }
-`
-
-export const error_message = styled.p `
+  label {
+    font-size: 0.9rem;
     font-weight: 600;
-    color: var(--Error-Color);
-    font-size: 16px;
-    align-self: flex-start;
-`
+    color: #334155;
+    margin-left: 4px;
+  }
+`;
 
-export const input_container = styled.div `
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
-    width: 900px;
+export const InputWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
 
-    @media (max-width: 2100px) and (orientation: landscape) {
-        width: 750px;
+  svg.icon {
+    position: absolute;
+    left: 16px;
+    color: #94a3b8;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: color 0.2s;
+  }
+
+  svg.toggle {
+    position: absolute;
+    right: 16px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 5px;
+
+    &:hover {
+      color: #475569;
     }
+  }
 
-    @media (max-width: 1700px) and (orientation: landscape) {
-        width: 550px;
-    }
+  &:focus-within svg.icon {
+    color: var(--Secundary-Color);
+  }
+`;
 
-    @media (max-width: 1550px) and (orientation: landscape) {
-        width: 500px;
-    }
+export const Input = styled.input`
+  width: 100%;
+  padding: 14px 45px 14px 45px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  font-size: 1rem;
+  color: #0f172a;
+  transition: all 0.2s;
+  font-family: var(--Primary-Font);
 
-    @media (max-width: 1280px) and (orientation: landscape) {
-        width: 460px; 
-    }
+  &:focus {
+    outline: none;
+    border-color: var(--Secundary-Color);
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1);
+  }
 
-    @media (max-width: ${size.laptop}) and (orientation: landscape) {
-        width: 400px; 
-    }
+  &::placeholder {
+    color: #cbd5e1;
+  }
+`;
 
-    @media (max-width: ${size.laptop}) and  (orientation: portrait) {
-        width: 550px;
-    }
+export const Button = styled.button`
+  background-color: var(--Secundary-Color);
+  color: white;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 10px;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
 
-    @media (max-width: ${size.tablet}) and (orientation: portrait) {
-        width: 420px;
-        gap: 15px;
-    }
+  &:hover {
+    background-color: var(--Primary-Color);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 10px -1px rgba(59, 130, 246, 0.3);
+  }
 
-    @media (max-width: ${size.mobileL}) and (orientation: portrait) {
-        width: 330px;
-    }
+  &:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+  }
+`;
 
-    @media (max-width: ${size.mobileLX}) and (orientation: portrait) {
-        width: 300px;
-    }
+export const CancelLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
 
-    @media (max-width: ${size.mobileS}) and (orientation: portrait) {
-        width: 260px;
-    }
-`
+  &:hover {
+    color: #ef4444;
+  }
+`;

@@ -12,7 +12,6 @@ const AboutPage = () => {
         </S.Subtitle>
       </S.Header>
 
-      {/* Seção 1: O Produto (Visão Geral) */}
       <S.Section>
         <S.SectionTitle><FontAwesomeIcon icon="map-location-dot" style={{marginRight: 10}}/> O Projeto</S.SectionTitle>
         <S.TextBlock>
@@ -25,7 +24,6 @@ const AboutPage = () => {
         </S.TextBlock>
       </S.Section>
 
-      {/* Seção 2: Engenharia (Tech Stack) */}
       <S.Section>
         <S.SectionTitle><FontAwesomeIcon icon="code" style={{marginRight: 10}}/> Engenharia & Arquitetura</S.SectionTitle>
         <p style={{marginBottom: '20px', color: '#64748b'}}>
@@ -33,7 +31,6 @@ const AboutPage = () => {
         </p>
         
         <S.Grid>
-          {/* Frontend */}
           <S.TechCard>
             <S.IconWrapper color="#61DAFB"><FontAwesomeIcon icon={['fab', 'react']} />
             </S.IconWrapper>
@@ -96,7 +93,6 @@ const AboutPage = () => {
         </S.Grid>
       </S.Section>
 
-      {/* Seção 3: Sobre Mim (O Desenvolvedor) */}
       <S.Section>
         <S.SectionTitle><FontAwesomeIcon icon="user-tie" style={{marginRight: 10}}/> Quem Desenvolveu</S.SectionTitle>
         <S.AuthorSection>

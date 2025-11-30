@@ -11,7 +11,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8fafc; // Slate-50
+  background-color: #f8fafc;
   padding: 20px;
   font-family: var(--Primary-Font);
 `;
@@ -98,7 +98,7 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 14px 45px 14px 45px; // Espaço para os ícones esq/dir
+  padding: 14px 45px 14px 45px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   background-color: #f8fafc;
@@ -111,7 +111,7 @@ export const Input = styled.input`
     outline: none;
     border-color: var(--Secundary-Color);
     background-color: white;
-    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1); // Anel de foco bonito
+    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1);
   }
 
   &::placeholder {

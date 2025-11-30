@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// Certifique-se de ter os ícones importados na sua library (faCloudSun, faGithub, faLinkedin, etc)
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +10,6 @@ const Footer = () => {
   return (
     <S.Container>
       <S.Content>
-        {/* Coluna 1: Marca e Descrição */}
         <S.BrandSection>
           <h2>
             <FontAwesomeIcon icon="cloud-sun" style={{ color: '#3b82f6' }} />
@@ -22,7 +21,6 @@ const Footer = () => {
           </p>
         </S.BrandSection>
 
-        {/* Coluna 2: Links Rápidos */}
         <S.LinkSection>
           <h3>Navegação</h3>
           <Link to="/">Início</Link>
@@ -31,7 +29,6 @@ const Footer = () => {
           <Link to="/login">Acessar Conta</Link>
         </S.LinkSection>
 
-        {/* Coluna 3: Redes Sociais */}
         <S.LinkSection>
           <h3>Conecte-se</h3>
           <S.SocialIcons>

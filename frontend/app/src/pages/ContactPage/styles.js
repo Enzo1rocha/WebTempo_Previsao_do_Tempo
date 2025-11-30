@@ -50,10 +50,11 @@ export const ContentWrapper = styled.div`
   gap: 40px;
   
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1.5fr; // O formulário ocupa mais espaço
+    grid-template-columns: 1fr 1.5fr; 
     gap: 60px;
   }
 `;
+
 
 // --- Lado Esquerdo: Informações ---
 export const InfoSection = styled.div`
@@ -180,8 +181,8 @@ export const Button = styled.button`
 `;
 
 export const SuccessMessage = styled.div`
-  background-color: #dcfce7; // Verde claro
-  color: #166534; // Verde escuro
+  background-color: #dcfce7;
+  color: #166534; 
   padding: 15px;
   border-radius: 8px;
   text-align: center;

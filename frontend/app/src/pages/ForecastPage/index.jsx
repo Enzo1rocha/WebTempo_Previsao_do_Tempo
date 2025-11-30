@@ -1,6 +1,4 @@
 import * as S from './styles';
-import moon from '../../assets/forecastPage/moon.svg'
-import rightArrow from '../../assets/authPageIMGS/RightArrow.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DetalhesClimaticosDoDia from '../../components/DetalhesClimaticosDoDIa';
 import OptionOfDays from '../../components/OptionOfDays';
@@ -227,7 +225,6 @@ export default function ForecastPage() {
     }
 
     const mensagens_detalhes_do_dia = (temperature, cloudcover, precipitationProbability) => {
-        console.log("DETALHES MENSAGENS",temperature, cloudcover, precipitationProbability);
         
         if (temperature && precipitationProbability == 0 && cloudcover < 20) {
             return ['Limpo', 'O dia está predominantemente limpo.'];
@@ -422,9 +419,6 @@ export default function ForecastPage() {
     const click_dados_para_o_grafico = (opção, data) => {
         const key = chave_para_pegar_dados_nos_dados_climáticos_do_grafico(opção);
         let dados = dadosClimáticos.days.find((dia) => dia.date === data);
-        if (!dados) {
-            console.error(`Dados não encontrados para a data: ${data}`);
-        }
         const dados_p_hora = []
         dados = dados.hours_of_day
         

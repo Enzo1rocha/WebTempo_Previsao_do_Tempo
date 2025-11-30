@@ -30,9 +30,6 @@ function ProfilePage() {
         }
     }, [user]);
 
-
-    console.log('renderizou');
-
     const RemoveFavoriteLocation = (e) => {
         const DATA_ID = e.currentTarget.getAttribute('data-id');
         try {
@@ -42,16 +39,13 @@ function ProfilePage() {
                         prevLocations.filter(location => location.id !== parseInt(DATA_ID))
                     );
                 });
-        } catch (error) {
-            console.log('Erro ao remover local favorito', error);
-            throw error;
+        } catch {
+            alert('Erro ao remover local favorito')
             
         }
     }
 
-    const HandleBootLocationClick= () => {
-        console.log('cliquei');
-        
+    const HandleBootLocationClick= () => {      
         setMostrarChangeBootLocation(!mostrarChangeBootLocation)
         }
 
@@ -67,12 +61,10 @@ function ProfilePage() {
         return <Loading message="Localizando você..." />;
     }
 
-    console.log(favoriteLocations);
-    console.log(bootLocation);
     
     
 
-    return ( // adicionar informações do usuário aqui
+    return (
         <S.Location_Page_Container>
             <S.Container_User_Details>
                 <h1>Sua Conta</h1>

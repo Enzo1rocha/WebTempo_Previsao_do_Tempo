@@ -11,7 +11,7 @@ const LocationsPageService = {
             }
             throw new Error(`Failed to fetch boot location. Status: ${response.status}`); 
         } catch (error) {
-            console.log('Erro ao obter localização inicial', error);
+            alert('Erro ao obter localização inicial');
             throw error;
         }
     },
@@ -27,7 +27,7 @@ const LocationsPageService = {
 
             throw new Error(`falha ao pegar as favorites locations. Status: ${response.status}`)
         } catch (error) {
-            console.log('Erro ao obter locais favoritos', error);
+            alert('Erro ao obter locais favoritos');
             throw error;
         }
     },
@@ -57,7 +57,7 @@ const LocationsPageService = {
             }
             throw new Error('Failed to add new boot location');
         } catch (error) {
-            console.log('Erro ao adicionar uma nova localização inicial', error);
+            alert('Erro ao adicionar uma nova localização inicial')
             throw error;
         }
     },
@@ -70,11 +70,11 @@ const LocationsPageService = {
             })
             
             if (response.status === 204) {
-                return true; // Successfully removed
+                return true; 
             }
             throw new Error('Failed to remove favorite location');
         } catch (error) {
-            console.log('Erro ao remover local favorito', error);
+            alert('Erro ao remover local favorito');
             throw error;
         }   
     },
@@ -97,7 +97,7 @@ const LocationsPageService = {
             }
             throw new Error('falha ao pegar a previsão do tempo')
         } catch (error) {
-            console.log('Erro ao pegar a previsão do tempo');
+            alert('Erro ao pegar a previsão do tempo');
             throw error
         }
     }

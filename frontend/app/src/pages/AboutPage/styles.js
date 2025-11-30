@@ -1,19 +1,17 @@
 import styled, { keyframes } from 'styled-components';
 import { size } from '../../styles/breakpoints';
 
-// --- Animações ---
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 `;
 
-// --- Styled Components ---
 
 export const PageContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 20px;
-  color: #334155; // Slate-700
+  color: #334155;
   font-family: var(--Primary-Font);
   animation: ${fadeIn} 0.6s ease-out;
 `;
@@ -44,7 +42,7 @@ export const Title = styled.h1`
 
 export const Subtitle = styled.p`
   font-size: 1.25rem;
-  color: #64748b; // Slate-500
+  color: #64748b;
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -145,7 +143,7 @@ export const CardContent = styled.div`
 
 export const AuthorSection = styled.div`
   display: flex;
-  flex-direction: column; // Mobile first
+  flex-direction: column;
   align-items: center;
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: white;

@@ -4,14 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ContactService from '../../services/contactService';
 
 const ContactPage = () => {
-  // Estado para controlar os campos do formulário
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
 
-  // Estados para feedback visual (Enviando / Sucesso)
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -24,20 +22,13 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     const request = ContactService.sendMessage(formData)
-    if (request.status == 201) {
-      console.log('Mensagem enviada com sucesso');
-    } else {
-      console.log('Ops... Ocorreu algum problema ao enviar a mensagem ao dono da aplicação');
-      
-    }
 
-    // Simulação de envio para API (espera 2 segundos)
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
-      setFormData({ name: '', email: '', message: '' }); // Limpa o form
+      setFormData({ name: '', email: '', message: '' });
 
-      // Remove a mensagem de sucesso após 5 segundos
+
       setTimeout(() => setIsSuccess(false), 5000);
     }, 2000);
   };
@@ -53,7 +44,6 @@ const ContactPage = () => {
       </S.Header>
 
       <S.ContentWrapper>
-        {/* Coluna da Esquerda: Infos */}
         <S.InfoSection>
           <S.InfoCard>
             <h3>
@@ -87,7 +77,6 @@ const ContactPage = () => {
           </S.InfoCard>
         </S.InfoSection>
 
-        {/* Coluna da Direita: Formulário */}
         <S.FormSection onSubmit={handleSubmit}>
           {isSuccess && (
             <S.SuccessMessage>

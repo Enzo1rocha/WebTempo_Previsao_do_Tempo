@@ -9,11 +9,11 @@ import { useAuth } from "../../context/authContext";
 const RegisterPage = () => {
   const navigate = useNavigate();
   
-  // Estados para visibilidade das senhas
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [Location, setLocation] = useState({});
-  // Trocamos 'register' por 'login' do useAuth, pois faremos o registro manualmente via AuthService
+
   const { login } = useAuth();
 
   const errorMessages = {
@@ -27,7 +27,6 @@ const RegisterPage = () => {
     'The password is too similar to the email.': 'A senha é muito similar ao email.'
   };
 
-  // Estado do formulário
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,14 +46,14 @@ const RegisterPage = () => {
           try {
             const location = await geolocationService();
             setLocation(location);
-          } catch (error) {
-            console.log('Erro ao obter localização', error);
+          } catch {
+            alert('erro ao receber localização')
           }
         } else if (result.state === 'denied') {
-           console.log("Acesso à localização bloqueado.");
+           alert("Acesso à localização bloqueado.");
         }
       }).catch(err => {
-         console.log("Erro ao verificar permissões:", err);
+         alert("Erro ao verificar permissões:");
       });
     }
   }, []);
@@ -62,7 +61,6 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validação: Verifica se as senhas são iguais
     if (formData.password1 !== formData.password2) {
       alert("As senhas não coincidem! Por favor, verifique.");
       return;
@@ -71,44 +69,29 @@ const RegisterPage = () => {
     const userData = {
         'username': formData.name,
         'email': formData.email,
-        'password1': formData.password1, // Django espera 'password'
+        'password1': formData.password1,
         'password2': formData.password2,
         'lat_boot_location': Location?.lat ? String(Location.lat) : 0,
         'long_boot_location': Location?.long ? String(Location.long) : 0,
     };
 
     try {
-        // 1. Tenta Registrar usando AuthService direto
         const request = await AuthService.register(userData);
-        console.log(request.status);
         
-        
-        // Verifica se o status é 201 (Created)
-        // Verificamos tanto request.status (padrão axios) quanto request.data.status (caso sua API encapsule)
-        if (request.status === 201) {
-
-          console.log('Usuário registrado com sucesso');
-          
-            
-            // 2. Tenta Logar automaticamente
+        if (request.status === 201) {          
+  
             const loginCredentials = { email: userData.email, password: formData.password1 };
             
             try {
-                // O login do useAuth geralmente retorna a resposta ou lança erro
                 await login(loginCredentials);
-                
-                // Se não deu erro no await login, assumimos sucesso
-                // alert('Registrado e logado'); // Opcional: feedback visual
-                navigate('/user/profile'); // Redireciona para Home/Dashboard
-                
-            } catch (loginError) {
-                console.log("Erro no login automático:", loginError);
+                navigate('/user/profile')
+            } catch {
                 alert('Registrado com sucesso! Por favor, faça login.');
                 navigate('/login');
             }
         }
     } catch (error) {
-        // Lógica de tratamento de erro do Registro
+
         if (error.response && error.response.data) {
             const data = error.response.data;
             
@@ -133,7 +116,6 @@ const RegisterPage = () => {
             if (mensagem) alert(mensagem);
             
         } else {
-            console.error('Erro no registro: ', error);
             alert('Erro ao criar conta. Tente novamente.');
         }
     }

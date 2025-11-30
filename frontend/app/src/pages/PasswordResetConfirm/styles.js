@@ -30,7 +30,6 @@ export const Header = styled.div`
   text-align: center;
   margin-bottom: 30px;
   
-  // Ícone de chave no topo
   .header-icon {
     font-size: 2.5rem;
     color: var(--Secundary-Color);
@@ -111,7 +110,7 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 14px 45px 14px 45px; // Espaço para os ícones esq/dir
+  padding: 14px 45px 14px 45px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   background-color: #f8fafc;
@@ -124,7 +123,7 @@ export const Input = styled.input`
     outline: none;
     border-color: var(--Secundary-Color);
     background-color: white;
-    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1); // Anel de foco bonito
+    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.1);
   }
 
   &::placeholder {
