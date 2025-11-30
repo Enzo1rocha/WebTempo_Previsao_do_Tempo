@@ -111,6 +111,127 @@ Tomorrow.io: Fonte de dados climáticos.
 
 Geonames: Base de dados geográfica para busca de cidades.
 
+📦 Como Rodar o Projeto Localmente
+
+Siga os passos abaixo para configurar o ambiente de desenvolvimento na sua máquina.
+
+Pré-requisitos
+
+Python 3.10+
+
+Node.js 18+
+
+MySQL Server (Rodando localmente na porta 3306)
+
+Docker (Para rodar o Redis)
+
+1. Clonar o Repositório
+
+git clone [https://github.com/Enzo1rocha/WebTempo_Previsao_do_Tempo.git](https://github.com/Enzo1rocha/WebTempo_Previsao_do_Tempo.git)
+cd WebTempo_Previsao_do_Tempo
+
+
+2. Configurar Serviços (Banco de Dados e Cache)
+
+MySQL: Crie um banco de dados local chamado webforecast.
+
+Redis: Suba um container Docker para o Redis:
+
+docker run --name redis-webtempo -p 6379:6379 -d redis
+
+
+3. Configurar o Backend (Django)
+
+Acesse a pasta do backend:
+
+cd backend
+
+
+Crie e ative um ambiente virtual:
+
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+
+Instale as dependências:
+
+pip install -r requirements.txt
+
+
+Variáveis de Ambiente (.env): Crie um arquivo .env na raiz da pasta backend preenchendo conforme abaixo:
+
+# Configurações Gerais
+SECRET_KEY=sua_chave_secreta_segura_aqui
+DEBUG=True
+
+# Hosts Permitidos (Para rodar local e na rede Wi-Fi)
+ALLOWED_HOST1=127.0.0.1
+ALLOWED_HOST2=localhost
+ALLOWED_HOST3=192.168.0.X # Coloque seu IP local aqui se for testar no celular
+
+# URLs do Frontend (CORS)
+FRONTEND_URL=http://localhost:5173
+FRONTEND_URL2=[http://127.0.0.1:5173](http://127.0.0.1:5173)
+ORIGEM_URL=[http://192.168.0.](http://192.168.0.)X:5173 # Seu IP local
+
+# Banco de Dados (MySQL)
+DB_NAME=webforecast
+DB_USER=root
+DB_PASSWORD=sua_senha_mysql
+DB_HOST=localhost
+DB_PORT=3306
+
+# Cache (Redis)
+REDIS_URL=redis://127.0.0.1:6379/1
+
+# Email (Gmail SMTP App Password)
+EMAIL_HOST_USER=seu_email@gmail.com
+EMAIL_PASSWORD=sua_senha_de_app_google
+
+# APIs Externas
+TOMORROW_API_KEY=sua_chave_tomorrow_io
+GEONAMES_USERNAME=seu_usuario_geonames
+
+
+Execute as migrações e rode o servidor:
+
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
+
+
+(O 0.0.0.0:8000 permite que o servidor seja acessado por outros dispositivos na sua rede).
+
+4. Configurar o Frontend (React)
+
+Acesse a pasta do frontend (em um novo terminal):
+
+cd frontend
+
+
+Instale as dependências:
+
+npm install
+
+
+Variáveis de Ambiente (.env): Crie um arquivo .env na raiz da pasta frontend:
+
+# API Backend (Use seu IP local se for testar via celular)
+VITE_API_URL=[http://192.168.0.](http://192.168.0.)X:8000
+
+# Usuário do Geonames (para autocomplete de cidades)
+GEONAMES_USER=seu_usuario_geonames
+
+
+Rode o projeto:
+
+npm run dev -- --host
+
+
+(A flag --host libera o acesso via IP da rede).
+
 🚀 Status do Projeto
 
 ✅ Versão 1.0: Funcionalidades principais implementadas (Auth, Clima em Tempo Real, Favoritos).
