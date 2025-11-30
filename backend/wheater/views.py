@@ -87,7 +87,22 @@ class WeatherLocationView(APIView):
             params_tomorrow_current = {
                 'location': f"{query_params['lat']},{query_params['lon']}",
                 'apikey': config('TOMORROW_API_KEY'),
-                'units': 'metric'
+                'units': 'metric',
+                'fields': [
+                    "temperature",
+                    "temperatureApparent",
+                    "humidity",
+                    "visibility",
+                    "uvIndex",
+                    "dewPoint",
+                    "precipitationProbability",
+                    "rainIntensity",
+                    "cloudCover",
+                    "pressureSeaLevel",
+                    "windSpeed",
+                    "windDirection",
+                    "weatherCode" 
+                ]
             }
             params_tomorrow_url = {
                 'location': f"{query_params['lat']},{query_params['lon']}",
@@ -133,7 +148,8 @@ class WeatherLocationView(APIView):
                         'cloudCover': tomorrow_data_current['values'].get('cloudCover', 0),
                         'pressureSeaLevel': tomorrow_data_current['values'].get('pressureSeaLevel', 0),
                         'windSpeed': tomorrow_data_current['values'].get('windSpeed', 0)*3.6,
-                        'windDirection': tomorrow_data_current['values'].get('windDirection', 0),         
+                        'windDirection': tomorrow_data_current['values'].get('windDirection', 0), 
+                        'weatherCode': tomorrow_data_current['values'].get('weatherCode', 0)        
                     }
                 }
 
