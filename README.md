@@ -10,7 +10,8 @@ Diferente de simples apps de clima, este projeto foi arquitetado para simular um
 
 🎯 Objetivo
 
-O projeto nasceu como um desafio técnico para consolidar conhecimentos em integração de sistemas, autenticação segura (JWT), consumo de APIs externas e otimização de requisições.
+O projeto nasceu como um desafio técnico para consolidar conhecimentos em integração de sistemas, autenticação segura (JWT), consumo de APIs externas e otimização de requisições. 
+
 
 📸 Screenshots
 
