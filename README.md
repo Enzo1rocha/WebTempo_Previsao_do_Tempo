@@ -21,12 +21,12 @@ O projeto nasceu como um desafio técnico para consolidar conhecimentos em integ
 </div>
 
 <div align="center">
-<img src="assets/login.png.png" alt="Pagina de Login" width="800">
+<img src="assets/login.png" alt="Pagina de Login" width="800">
 <p><em>Página de Login do WebTempo</em></p>
 </div>
 
 <div align="center">
-<img src="assets/register.png.png" alt="Pagina de Registro" width="800">
+<img src="assets/register.png" alt="Pagina de Registro" width="800">
 <p><em>Página de Registro do WebTempo</em></p>
 </div>
 
