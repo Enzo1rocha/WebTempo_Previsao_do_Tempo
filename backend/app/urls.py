@@ -17,17 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from wheater.views import WeatherLocationView #, TestView
+from wheater.views import WeatherLocationView
 from accounts.views import UserFavoriteLocationsView, UserBootLocationView, CustomLoginView, CustomPasswordResetConfirmView, CustomPasswordResetView, CustomPasswordChangeView, CustomRegisterView, CustomTokenRefreshView, CustomTokenVerifyView, CustomUserDetailsView, CustomLogoutView, get_csrf_token, ContactCreateView
-
-"""
-Armazene o access token (com cuidado!) e o refresh token
-
-Quando o access expirar, chame api/token/refresh/ com o refresh token para pegar um novo access
-
-Faça logout se o refresh também expirar
-
-"""
 
 urlpatterns = [
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
@@ -53,6 +44,5 @@ if settings.DEBUG:
     urlpatterns += [
         path('admin/', admin.site.urls),
         path('api-auth/', include('rest_framework.urls')),
-        #path('test/', TestView.as_view(), name='test_view'),
     ]
  

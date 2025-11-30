@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import CustomUser, BootLocation, FavoriteLocations, ContactMessage
 from django.contrib.auth import get_user
 
-# Register your models here.
 
 class BootLocationAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_user','location_name','long','lat')

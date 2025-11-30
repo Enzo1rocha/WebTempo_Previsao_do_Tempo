@@ -64,8 +64,6 @@ class UserFavoriteLocationsView(APIView):
         except Exception as e:
             print(f'ERRO: {e}')
             return Response({'error': 'Localização não encontrada'}, status=404)
-        
-        # Verificar se ta funcionando amanha a def delete e fazer a def post
 
  
 
@@ -84,8 +82,6 @@ class UserBootLocationView(APIView):
 
     @method_decorator(ratelimit(key='user', rate='5/m', method='POST', block=True))
     def post(self, req):
-
-        # terminar post dia 05/06/2025
 
         try:
             user = self.request.user
@@ -179,8 +175,6 @@ class CustomLoginView(LoginView):
     
     authentication_classes = []
     permission_classes = [AllowAny]
-
-    #essa view fica responsável pelo login de usuários e alocação dos JWT em http only
 
     def get_response(self):
         original_response = super().get_response()

@@ -108,10 +108,6 @@ class CustomRegisterSerializer(RegisterSerializer):
     
 
 
-# o que fazer amanhã ver como vai reagir ao criar o get e verificar por que não esta sendo salvo no banco de dados tudo isso a url do stackoverflou é essa: https://stackoverflow.com/questions/64498554/how-to-add-custom-user-fields-of-dj-rest-auth-package
-
-
-
 class FavoriteLocationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteLocations
@@ -163,7 +159,6 @@ class BootLocationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context.get('user') or self.context.get('request').user
         if not user or user.is_anonymous:
-            print(user)
             raise serializers.ValidationError('usuário inválido')
         instance, created = BootLocation.objects.update_or_create(
             username=user,
