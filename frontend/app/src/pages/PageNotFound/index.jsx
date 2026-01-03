@@ -2,7 +2,7 @@ import * as s from './style'
 import Background from "../../components/Background";
 import Button from '../../components/Button';
 import Page404 from '../../assets/errors/Page404.svg'
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 
 
 function PageNotFound() {   

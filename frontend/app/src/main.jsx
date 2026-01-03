@@ -6,7 +6,7 @@ import WelcomePage from './pages/WelcomePage'
 import PasswordChange from './pages/PasswordChange'
 import Layout from './components/layout/layout'
 import PageNotFound from './pages/PageNotFound'
-import { AuthProvider } from './context/authContext'
+import { AuthProvider } from './context/AuthContext'
 import PublicOnlyRoute from './components/authentications/PublicOnlyRoute'
 import ProtectedRoute from './components/authentications/Protectedroute'
 import LogoutPage from './pages/LogoutPage'
@@ -25,10 +25,23 @@ import PasswordResetConfirmPage from './pages/PasswordResetConfirm'
 const queryClient = new QueryClient()
 
 
+const AppProviders = ({ children }) => (
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      {children}
+    </AuthProvider>
+  </QueryClientProvider>
+);
+
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: (
+     <AppProviders > 
+      <Layout />
+     </AppProviders>
+    ),
     children: [
       { path: '/', element: <WelcomePage /> },
       { path: '/about', element: <AboutPage /> },
@@ -85,10 +98,6 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </QueryClientProvider>
+  <RouterProvider router={router} />
 )
  

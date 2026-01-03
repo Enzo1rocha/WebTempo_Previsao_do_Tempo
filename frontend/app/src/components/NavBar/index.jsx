@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../../assets/icons/icons.js';
 import { useEffect, useState } from 'react';
 import '../../assets/icons/icons.js';
-import { useAuth } from '../../context/authContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 import SearchBar from '../SearchBar/index.jsx';
 
 const getScreenType = () => {

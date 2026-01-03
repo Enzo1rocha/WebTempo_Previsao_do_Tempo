@@ -4,7 +4,7 @@ import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import geolocationService from '../../services/geolocationService';
 import AuthService from "../../services/authService";
-import { useAuth } from "../../context/authContext"; 
+import { useAuth } from "../../context/AuthContext"; 
 
 const RegisterPage = () => {
   const navigate = useNavigate();
