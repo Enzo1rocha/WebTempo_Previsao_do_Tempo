@@ -173,9 +173,12 @@ else:
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    config('FRONTEND_URL', default='http://localhost:5173'),
-    config('ORIGEM_URL', default='http://localhost:8000'),
-    config('FRONTEND_URL2', default=''),
+    origin for origin in [
+        config('FRONTEND_URL', default=None),
+        config('ORIGEM_URL', default=None),
+        config('FRONTEND_URL2', default=None),
+    ]
+    if origin
 ]
 
 USE_MYSQL = config('USE_MYSQL', cast=bool, default=False)
