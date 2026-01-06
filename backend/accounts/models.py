@@ -26,7 +26,7 @@ class ContactMessage(models.Model):
     read = models.BooleanField(default=False)
     
     def __str__(self):
-        return f'Mensagem de {self.name} ({self.created_at.strftime('%d/%m/%Y')})'
+        return f"Mensagem de {self.name} ({self.created_at.strftime('%d/%m/%Y')})"
     
     class Meta:
         ordering = ['-created_at']

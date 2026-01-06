@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 import Loading from '../../components/Loading';
 
 const PasswordChange = () => {

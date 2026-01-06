@@ -3,7 +3,7 @@ import Background from '../../components/Background';
 import Button from '../../components/Button';
 import WelcomeImage from '../../assets/authPageIMGS/Welcome.svg';
 import NavBar from '../../components/NavBar';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 
 
 function WelcomePage() {

@@ -1,6 +1,6 @@
 import * as S from './styles';
 import Background from '../../components/Background';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 
