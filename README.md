@@ -1,241 +1,199 @@
-🌦️ WebTempo
+# 🌦️ WebTempo
 
 Precisão meteorológica aliada a uma experiência moderna.
 
-📖 Sobre o Projeto
+## 📖 Sobre o Projeto
 
 O WebTempo é uma aplicação Full Stack desenvolvida para fornecer dados meteorológicos em tempo real, previsões detalhadas e gerenciamento de localidades favoritas.
 
-Diferente de simples apps de clima, este projeto foi arquitetado para simular um ambiente de produção robusto, utilizando cache distribuído (Redis) para alta performance e uma arquitetura Headless (Desacoplada), separando a lógica de negócios no Backend da interface interativa no Frontend.
+O projeto foi arquitetado para simular um ambiente próximo de produção, utilizando:
 
-🎯 Objetivo
+Arquitetura Headless (Frontend desacoplado do Backend)
 
-O projeto nasceu como um desafio técnico para consolidar conhecimentos em integração de sistemas, autenticação segura (JWT), consumo de APIs externas e otimização de requisições. 
+Cache distribuído com Redis
 
+Autenticação segura via JWT (Cookies HttpOnly)
+
+Integração com APIs externas de clima e geolocalização
+
+Toda a aplicação é executada via Docker, garantindo reprodutibilidade, isolamento e facilidade de setup.
+ 
+## 🎯 Objetivo
+
+Este projeto nasceu como um desafio técnico e educacional, com foco em:
+
+Arquitetura de aplicações Full Stack
+
+Autenticação segura e stateless
+
+Consumo e cache de APIs externas
+
+Uso de Docker em ambiente de desenvolvimento
+
+Boas práticas de organização e configuração de projetos
 
 📸 Screenshots
+<div align="center"> <img src="assets/home.png" alt="Página Inicial" width="800"> <p><em>Página Inicial do WebTempo</em></p> </div> <div align="center"> <img src="assets/login.png" alt="Página de Login" width="800"> <p><em>Página de Login</em></p> </div> <div align="center"> <img src="assets/register.png" alt="Página de Registro" width="800"> <p><em>Página de Registro</em></p> </div> <div align="center"> <img src="assets/profile.png" alt="Página de Perfil" width="800"> <p><em>Página de Perfil</em></p> </div> <div align="center"> <img src="assets/forecast1.png" alt="Página de Previsão" width="800"> <p><em>Previsão do Tempo</em></p> </div> <div align="center"> <img src="assets/forecast2.png" alt="Página de Previsão Detalhada" width="800"> <p><em>Detalhes da Previsão</em></p> </div>
 
-<div align="center">
-<img src="assets/home.png" alt="Pagina Inicial" width="800">
-<p><em>Página Inicial do WebTempo</em></p>
-</div>
+# ✨ Funcionalidades Principais
 
-<div align="center">
-<img src="assets/login.png" alt="Pagina de Login" width="800">
-<p><em>Página de Login do WebTempo</em></p>
-</div>
+## 🌍 Geolocalização Inteligente
+Detecção automática da localização inicial do usuário.
 
-<div align="center">
-<img src="assets/register.png" alt="Pagina de Registro" width="800">
-<p><em>Página de Registro do WebTempo</em></p>
-</div>
+## 🔍 Busca Global de Cidades
+Busca otimizada com integração à API do Geonames.
 
-<div align="center">
-<img src="assets/profile.png" alt="Pagina de Perfil" width="800">
-<p><em>Página de Perfil do WebTempo</em></p>
-</div>
+## 📊 Dashboard Meteorológico
 
-<div align="center">
-<img src="assets/forecast1.png" alt="Pagina da Previsão" width="800">
-<p><em>Página da Previsão do WebTempo</em></p>
-</div>
+Temperatura atual e sensação térmica
 
-<div align="center">
-<img src="assets/forecast2.png" alt="Pagina da Previsão foto 2" width="800">
-<p><em>Página da Previsão do WebTempo</em></p>
-</div>
+Umidade, vento, UV, visibilidade e pressão
 
-<!-- Adicione mais imagens aqui futuramente, como o Dashboard ou Perfil -->
+Previsão hora a hora
 
-✨ Funcionalidades Principais
+Resumo dos próximos dias
 
-Com base na geolocalização e integração com a API da Tomorrow.io, o sistema oferece:
+## ⭐ Sistema de Favoritos
+Salve e gerencie cidades favoritas.
 
-🌍 Geolocalização Inteligente: Detecção automática da posição inicial do usuário ao se cadastrar para entregar o clima local imediatamente.
+## 🔐 Autenticação Completa
 
-🔍 Busca Global: Algoritmo de busca otimizado para encontrar cidades e localidades em todo o mundo (integração Geonames).
+* Registro
 
-📊 Dashboard Meteorológico:
+* Login
 
-Temperatura atual e Sensação Térmica.
+* Logout
 
-Métricas detalhadas: Umidade, Vento, UV, Visibilidade e Pressão.
+* Recuperação e alteração de senha via e-mail
 
-Previsão hora a hora (24h) com gráficos intuitivos.
+* JWT via Cookies HttpOnly
 
-Resumo da previsão para os próximos dias.
+# 🛠️ Tecnologias e Arquitetura
+## 💻 Frontend
 
-⭐ Sistema de Favoritos: Usuários autenticados podem salvar suas cidades preferidas para acesso rápido.
+* React + Vite
 
-🔐 Autenticação Completa: Sistema seguro de Registro, Login, Recuperação de Senha (via E-mail) e Alteração de Senha.
+* Styled Components
 
-🛠️ Tecnologias e Arquitetura
+* TanStack Query (React Query)
 
-O projeto segue uma arquitetura RESTful API, onde o Frontend consome dados JSON fornecidos pelo Backend.
+* Axios
 
-💻 Frontend (Client-Side)
+* Chart.js
 
-Construído para ser reativo e performático.
+* Weather Icons React
 
-React + Vite: Core da aplicação (SPA).
+⚙️ Backend
 
-Styled Components: Estilização modular e dinâmica (CSS-in-JS).
+* Python + Django
 
-TanStack Query (React Query): Gerenciamento de estado do servidor e cache no cliente.
+* Django REST Framework
 
-Axios: Cliente HTTP otimizado.
+* MySQL
 
-Chart.js: Visualização de dados em gráficos.
+* Redis
 
-Weather Icons React: Ícones dinâmicos baseados nas condições climáticas.
+* JWT (SimpleJWT + dj-rest-auth)
 
-⚙️ Backend (Server-Side)
+* Whitenoise
 
-Focado em segurança e performance.
+## ☁️ APIs Externas
 
-Python + Django: Framework principal.
+* Tomorrow.io – Dados meteorológicos
 
-Django REST Framework (DRF): Construção da API.
+* Geonames – Busca e geolocalização de cidades
 
-MySQL: Banco de dados relacional para persistência de usuários e preferências.
 
-Redis: Sistema de Cache para armazenar respostas da API externa (reduz latência e custos de API).
+# 🐳 Como Rodar o Projeto (Docker)
+## ✅ Pré-requisitos
 
-JWT (JSON Web Tokens): Autenticação segura e stateless.
+* Docker
 
-Gunicorn & Whitenoise: Preparação para ambiente de produção.
+* Docker Compose
 
-☁️ APIs Externas
+Não é necessário instalar Python, Node.js, MySQL ou Redis localmente.
 
-Tomorrow.io: Fonte de dados climáticos.
+## 📥 1. Clonar o Repositório
 
-Geonames: Base de dados geográfica para busca de cidades.
-
-📦 Como Rodar o Projeto Localmente
-
-Siga os passos abaixo para configurar o ambiente de desenvolvimento na sua máquina.
-
-Pré-requisitos
-
-Python 3.10+
-
-Node.js 18+
-
-MySQL Server (Rodando localmente na porta 3306)
-
-Docker (Para rodar o Redis)
-
-1. Clonar o Repositório
-
-git clone [https://github.com/Enzo1rocha/WebTempo_Previsao_do_Tempo.git](https://github.com/Enzo1rocha/WebTempo_Previsao_do_Tempo.git)
+```
+git clone https://github.com/Enzo1rocha/WebTempo_Previsao_do_Tempo.git
 cd WebTempo_Previsao_do_Tempo
+```
+
+## ⚙️ 2. Configurar Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do projeto (ou conforme definido no docker-compose.yml):
+
+### Django
+* DEBUG=True
+* SECRET_KEY=django-insecure-change-me
+
+### Banco de Dados (MySQL)
+* USE_MYSQL=True
+* DB_NAME=webforecast
+* DB_USER=root
+* DB_PASSWORD=12345678
+* DB_HOST=mysql
+* DB_PORT=3306
+
+### Redis
+* REDIS_URL=redis://redis:6379/1
+
+### CORS / Frontend
+* FRONTEND_URL=http://localhost:5173
+* ORIGEM_URL=http://localhost:8001
+* ALLOWED_HOSTS=backend,localhost,127.0.0.1
+
+### APIs Externas
+* TOMORROW_API_KEY=sua_chave_tomorrow_io
+* GEONAMES_USERNAME=seu_usuario_geonames
+
+### Email (Gmail - App Password)
+* EMAIL_HOST_USER=seu_email@gmail.com
+* EMAIL_PASSWORD=sua_senha_de_app_google
+
+## ▶️ 3. Subir a Aplicação
+```
+docker compose --profile db up --build
+```
+
+Isso irá subir automaticamente:
+
+* Backend (Django)
+
+* Frontend (React)
+
+* MySQL
+
+* Redis
+
+## 🧱 4. Rodar as Migrações
+
+Em outro terminal:
+
+```
+docker compose exec backend python manage.py migrate
+```
+
+## 🌐 Acessos
+
+* Frontend: http://localhost:5173
+
+* Backend (API): http://localhost:8001
 
 
-2. Configurar Serviços (Banco de Dados e Cache)
+# 🚀 Status do Projeto
 
-MySQL: Crie um banco de dados local chamado webforecast.
+## ✅ Versão 1.0
 
-Redis: Suba um container Docker para o Redis:
+* Autenticação completa
 
-docker run --name redis-webtempo -p 6379:6379 -d redis
+* Clima em tempo real
 
+* Favoritos
 
-3. Configurar o Backend (Django)
+* Cache com Redis
 
-Acesse a pasta do backend:
+* Dockerizado
 
-cd backend
-
-
-Crie e ative um ambiente virtual:
-
-python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-
-
-Instale as dependências:
-
-pip install -r requirements.txt
-
-
-Variáveis de Ambiente (.env): Crie um arquivo .env na raiz da pasta backend preenchendo conforme abaixo:
-
-# Configurações Gerais
-SECRET_KEY=sua_chave_secreta_segura_aqui
-DEBUG=True
-
-# Hosts Permitidos (Para rodar local e na rede Wi-Fi)
-ALLOWED_HOST1=127.0.0.1
-ALLOWED_HOST2=localhost
-ALLOWED_HOST3=192.168.0.X # Coloque seu IP local aqui se for testar no celular
-
-# URLs do Frontend (CORS)
-FRONTEND_URL=http://localhost:5173
-FRONTEND_URL2=[http://127.0.0.1:5173](http://127.0.0.1:5173)
-ORIGEM_URL=[http://192.168.0.](http://192.168.0.)X:5173 # Seu IP local
-
-# Banco de Dados (MySQL)
-DB_NAME=webforecast
-DB_USER=root
-DB_PASSWORD=sua_senha_mysql
-DB_HOST=localhost
-DB_PORT=3306
-
-# Cache (Redis)
-REDIS_URL=redis://127.0.0.1:6379/1
-
-# Email (Gmail SMTP App Password)
-EMAIL_HOST_USER=seu_email@gmail.com
-EMAIL_PASSWORD=sua_senha_de_app_google
-
-# APIs Externas
-TOMORROW_API_KEY=sua_chave_tomorrow_io
-GEONAMES_USERNAME=seu_usuario_geonames
-
-
-Execute as migrações e rode o servidor:
-
-python manage.py migrate
-python manage.py runserver 0.0.0.0:8000
-
-
-(O 0.0.0.0:8000 permite que o servidor seja acessado por outros dispositivos na sua rede).
-
-4. Configurar o Frontend (React)
-
-Acesse a pasta do frontend (em um novo terminal):
-
-cd frontend
-
-
-Instale as dependências:
-
-npm install
-
-
-Variáveis de Ambiente (.env): Crie um arquivo .env na raiz da pasta frontend:
-
-# API Backend (Use seu IP local se for testar via celular)
-VITE_API_URL=[http://192.168.0.](http://192.168.0.)X:8000
-
-# Usuário do Geonames (para autocomplete de cidades)
-GEONAMES_USER=seu_usuario_geonames
-
-
-Rode o projeto:
-
-npm run dev -- --host
-
-
-(A flag --host libera o acesso via IP da rede).
-
-🚀 Status do Projeto
-
-✅ Versão 1.0: Funcionalidades principais implementadas (Auth, Clima em Tempo Real, Favoritos).
-
-<p align="center">
-Feito com 💙 por <a href="https://www.google.com/search?q=https://github.com/enzo1rocha">Enzo Rocha</a>
-</p>
+<p align="center"> Feito com 💙 por <a href="https://github.com/enzo1rocha">Enzo Rocha</a> </p>
